@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Op Jezelf - Luna Rachmani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/casestudy.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+/* Map chart/methods variables to portfolio palette */
+:root {
+  --color-text-primary: var(--text);
+  --color-text-secondary: var(--text-muted);
+  --color-background-primary: var(--bg2);
+  --color-border-tertiary: var(--border);
+  --border-radius-lg: 4px;
+}
+
+/* Methods map */
+.methods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 0 0;
+}
+.phase-card {
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.phase-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.method-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin: 3px;
+  cursor: default;
+  transition: opacity 0.15s;
+}
+.method-tag:hover { opacity: 0.8; }
+.method-tag .type-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.tags-wrap { display: flex; flex-wrap: wrap; margin: 0 -3px; }
+.qual { background: #0C2B46; color: #A8CDE8; }
+.qual .type-dot { background: #2E7DC4; }
+.part { background: #083322; color: #85D4B5; }
+.part .type-dot { background: #1D9E75; }
+.sec  { background: #2C1843; color: #C9A8E8; }
+.sec  .type-dot { background: #8B4FBC; }
+.syn  { background: #3B2200; color: #F5C07A; }
+.syn  .type-dot { background: #BA7517; }
+.eval { background: #3A0A0A; color: #F0A0A0; }
+.eval .type-dot { background: #D44A4A; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 0.5rem; font-size: 11px; color: var(--text-muted); }
+.leg { display: flex; align-items: center; gap: 5px; }
+.leg-sq { width: 9px; height: 9px; border-radius: 3px; }
+.full-width { grid-column: 1 / -1; }
+
+/* Theme quote cards */
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 1.25rem;
+}
+.theme-card {
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.theme-label { font-size: 12px; font-weight: 500; color: var(--text); }
+.theme-quote { font-size: 11px; color: var(--text-muted); line-height: 1.5; font-style: italic; }
+.theme-dot { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 2px; flex-shrink: 0; }
+/* Phone screenshot gallery - constrained width, centered, no background */
+.cs-gallery-grid {
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 540px;
+  margin: 0 auto;
+}
+.cs-gallery-img {
+  aspect-ratio: 9/19;
+  background: transparent;
+}
+.cs-gallery-img img {
+  object-fit: contain;
+}
+
+
+.cs-section-label { border-top: none; }
+
+.video-wrap {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+.video-wrap video {
+  width: 100%;
+  height: 620px;
+  object-fit: cover;
+  border-radius: 14px;
+  display: block;
+}
+.video-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.video-play-btn svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.9;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+}
+.video-play-btn.hidden { opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursor"></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-hero">
+  <a href="../index.html#work" class="cs-back"><span class="cs-back-arrow">←</span> Back to work</a>
+  <div class="cs-hero-grid">
+    <div class="fade-up">
+      <p class="cs-eyebrow">UX Research & Interaction Design</p>
+      <h1 class="cs-title">Op Jezelf<br><em>Preparing teens for independent living</em></h1>
+      <p class="cs-summary">A gamified app for teenagers in Friesland aged 14-17, helping them build the practical and emotional skills needed for independent living, from budgeting and household tasks to managing anxiety about growing up.</p>
+      <div class="cs-cta-row">
+        <a href="#process" class="btn btn-ghost">Read process</a>
+      </div>
+    </div>
+    <div class="cs-meta-panel fade-up delay-2">
+      <div class="cs-meta-row"><span class="cs-meta-label">Project type</span><span class="cs-meta-val">Client project + continuation</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">7-week brief + 5-month continuation (full version March 2026)</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Team</span><span class="cs-meta-val">4 people - 1 programmer, 2 designers, 1 researcher/lead</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">My role</span><span class="cs-meta-val">Lead Researcher, Team Lead, Illustrator</span></div>
+      <div class="cs-meta-row">
+        <span class="cs-meta-label">Tools</span>
+        <span class="cs-meta-val"><div class="cs-meta-tags"><span class="tag">Figma</span><span class="tag">Usability Testing</span><span class="tag">Interviews</span><span class="tag">Co-creation</span></div></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-gallery">
+  <div class="cs-img cs-img-wide" style="aspect-ratio:unset;height:auto;"><img src="../Assets/OpJezelfBanner.webp" alt="Op Jezelf Banner" style="width:100%;height:auto;display:block;border-radius:inherit;"></div>
+</div>
+
+<div class="cs-body" id="process">
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">01  Context & problem</p>
+    <div class="cs-two-col">
+      <div class="cs-prose">
+        <h3>The gap teenagers<br><em>fall into</em></h3>
+        <p>Many teenagers in Friesland aged 14-17 lack practical preparation for independent living. They underestimate real-life costs, feel overwhelmed by daily responsibilities like chores and routines, and experience genuine anxiety about the transition to adulthood.</p>
+        <p>This gap increases the risk of financial mistakes and early debt - but it's not just practical. The emotional weight of feeling unprepared is just as significant as the knowledge gap itself.</p>
+      </div>
+      <div class="cs-prose">
+        <h3>What we were<br><em>asked to build</em></h3>
+        <p>The client brief, delivered through NHL Stenden, asked us to create a concept, visual design, and functional prototype in seven weeks. Following delivery, we were hired for a five-month continuation to develop the full version, scheduled for release in March 2026.</p>
+        <p>I took on lead researcher, team lead, and illustrator roles in a four-person team alongside two UI/UX designers and a programmer.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">02  Research</p>
+    <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 28px 28px;margin-bottom:2px;">
+      <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Research approach</p>
+      <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 20px;">Methods map - double diamond</p>
+      <div class="legend-row">
+        <div class="leg"><span class="leg-sq" style="background:#2E7DC4;"></span> Qualitative / generative</div>
+        <div class="leg"><span class="leg-sq" style="background:#1D9E75;"></span> Participatory</div>
+        <div class="leg"><span class="leg-sq" style="background:#8B4FBC;"></span> Secondary / desk research</div>
+        <div class="leg"><span class="leg-sq" style="background:#BA7517;"></span> Synthesis / framework</div>
+        <div class="leg"><span class="leg-sq" style="background:#D44A4A;"></span> Evaluative / testing</div>
+      </div>
+      <div class="methods-grid">
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#E07B72;"></div><span class="phase-label">Discover - understanding users</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag qual"><span class="type-dot"></span>Qualitative interviews (n=10)</span>
+            <span class="method-tag qual"><span class="type-dot"></span>Diary study - 7 days</span>
+            <span class="method-tag qual"><span class="type-dot"></span>Quiz / knowledge test</span>
+            <span class="method-tag part"><span class="type-dot"></span>Generative art session</span>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#E8A96A;"></div><span class="phase-label">Define - synthesising insights</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag syn"><span class="type-dot"></span>Empathy mapping</span>
+            <span class="method-tag syn"><span class="type-dot"></span>Personas</span>
+            <span class="method-tag syn"><span class="type-dot"></span>AEIOU framework</span>
+            <span class="method-tag syn"><span class="type-dot"></span>Maslow's hierarchy</span>
+            <span class="method-tag syn"><span class="type-dot"></span>Fogg behaviour model</span>
+            <span class="method-tag syn"><span class="type-dot"></span>Octalysis framework</span>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#7BAED4;"></div><span class="phase-label">Develop - exploring solutions</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag sec"><span class="type-dot"></span>Desk research</span>
+            <span class="method-tag sec"><span class="type-dot"></span>Comparative analysis</span>
+            <span class="method-tag part"><span class="type-dot"></span>Card sorting</span>
+            <span class="method-tag part"><span class="type-dot"></span>Co-creation sessions</span>
+            <span class="method-tag part"><span class="type-dot"></span>Critique feedback session</span>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#A3C99B;"></div><span class="phase-label">Deliver - testing and refining</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag eval"><span class="type-dot"></span>Usability testing (n=3)</span>
+            <span class="method-tag eval"><span class="type-dot"></span>MoSCoW prioritisation</span>
+            <span class="method-tag eval"><span class="type-dot"></span>Pilot test (19/06/2025)</span>
+          </div>
+        </div>
+        <div class="phase-card full-width">
+          <div class="phase-header"><div class="phase-dot" style="background:#B5A8D6;"></div><span class="phase-label">Across phases</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag sec"><span class="type-dot"></span>UX pattern library review</span>
+            <span class="method-tag syn"><span class="type-dot"></span>AEIOU synthesis</span>
+            <span class="method-tag qual"><span class="type-dot"></span>Secondary research</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Two bar charts side by side -->
+    <div class="cs-two-col" style="margin-top:2px;gap:2px;align-items:stretch;">
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:20px 24px 24px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Diary study + interviews - n=10</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 20px;">Unexpected expense types</p>
+        <div style="position:relative;width:100%;height:260px;">
+          <canvas id="expenses"></canvas>
+        </div>
+        <script>
+        (function() {
+          const textColor = '#c2c0b6', gridColor = 'rgba(255,255,255,0.06)', base = '#4A4A4A', accent = '#F5C842';
+          const data = [8, 7, 6, 6, 5, 3];
+          const max = Math.max(...data);
+          new Chart(document.getElementById('expenses'), {
+            type: 'bar',
+            data: {
+              labels: [['Rent /','deposits'],'Utilities',['Furniture &','appliances'],['Groceries','& basics'],['Taxes &','insurance'],['Subscriptions','& travel']],
+              datasets: [{ data, backgroundColor: data.map(v => v === max ? accent : base), borderRadius: 4, borderSkipped: false }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} mentions` } } },
+              scales: {
+                x: { ticks: { color: textColor, font: { size: 10 }, maxRotation: 0 }, grid: { display: false }, border: { display: false } },
+                y: { min: 0, max: 10, ticks: { color: textColor, font: { size: 10 }, stepSize: 2 }, grid: { color: gridColor }, border: { display: false }, title: { display: true, text: 'mentions (out of 10)', color: textColor, font: { size: 10 } } }
+              }
+            }
+          });
+        })();
+        </script>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:20px 24px 24px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Co-creation sessions - n=10</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 20px;">Most desired app features</p>
+        <div style="position:relative;width:100%;height:260px;">
+          <canvas id="features"></canvas>
+        </div>
+        <script>
+        (function() {
+          const textColor = '#c2c0b6', gridColor = 'rgba(255,255,255,0.06)', base = '#4A4A4A', accent = '#F5C842';
+          const data = [7, 5, 6, 8, 9, 6];
+          const max = Math.max(...data);
+          new Chart(document.getElementById('features'), {
+            type: 'bar',
+            data: {
+              labels: [['Budgeting','tools'],['Repair','guides'],['Routine','planning'],['Peer','advice'],['Short','tips'],['Custom','info']],
+              datasets: [{ data, backgroundColor: data.map(v => v === max ? accent : base), borderRadius: 4, borderSkipped: false }]
+            },
+            options: {
+              responsive: true, maintainAspectRatio: false,
+              plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} mentions` } } },
+              scales: {
+                x: { ticks: { color: textColor, font: { size: 10 }, maxRotation: 0 }, grid: { display: false }, border: { display: false } },
+                y: { min: 0, max: 10, ticks: { color: textColor, font: { size: 10 }, stepSize: 2 }, grid: { color: gridColor }, border: { display: false }, title: { display: true, text: 'mentions (out of 10)', color: textColor, font: { size: 10 } } }
+              }
+            }
+          });
+        })();
+        </script>
+      </div>
+
+    </div>
+
+    <!-- Donut chart + theme quotes -->
+    <div class="cs-two-col" style="margin-top:2px;gap:2px;align-items:stretch;">
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 28px;display:flex;flex-direction:column;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Qualitative interviews - n=10</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 24px;">Emotional landscape of participants</p>
+        <div style="position:relative;width:100%;flex:1;min-height:220px;">
+          <canvas id="donut"></canvas>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 20px;font-size:12px;color:var(--text-muted);margin-top:20px;">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E07B72;flex-shrink:0;"></span><span style="color:var(--text);">Overwhelmed</span><span>26.7%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#7BAED4;flex-shrink:0;"></span><span style="color:var(--text);">Curious</span><span>20.0%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E8A96A;flex-shrink:0;"></span><span style="color:var(--text);">Anxious</span><span>20.0%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#A3C99B;flex-shrink:0;"></span><span style="color:var(--text);">Lonely</span><span>13.3%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#B5A8D6;flex-shrink:0;"></span><span style="color:var(--text);">Confident</span><span>13.3%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#F0DFA0;flex-shrink:0;"></span><span style="color:var(--text);">Proud</span><span>6.7%</span></div>
+        </div>
+        <script>
+        (function() {
+          new Chart(document.getElementById('donut'), {
+            type: 'doughnut',
+            data: {
+              labels: ['Overwhelmed','Curious','Anxious','Lonely','Confident','Proud'],
+              datasets: [{ data: [26.7, 20, 20, 13.3, 13.3, 6.7], backgroundColor: ['#E07B72','#7BAED4','#E8A96A','#A3C99B','#B5A8D6','#F0DFA0'], borderWidth: 0, hoverOffset: 4 }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '62%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } } } }
+          });
+        })();
+        </script>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 28px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Interviews, diary study, generative sessions - qualitative</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0;">What teens wish they'd known</p>
+        <div class="theme-grid">
+          <div class="theme-card" style="border-left: 2px solid #F5C842;">
+            <div class="theme-dot" style="background:#F5C842;"></div>
+            <span class="theme-label">It's okay to ask for help</span>
+            <span class="theme-quote">"Independence doesn't mean doing everything alone."</span>
+          </div>
+          <div class="theme-card" style="border-left: 2px solid #E07B72;">
+            <div class="theme-dot" style="background:#E07B72;"></div>
+            <span class="theme-label">Costs are higher than expected</span>
+            <span class="theme-quote">"Rent, furniture, bills - it adds up fast and nobody told us."</span>
+          </div>
+          <div class="theme-card" style="border-left: 2px solid #7BAED4;">
+            <div class="theme-dot" style="background:#7BAED4;"></div>
+            <span class="theme-label">Daily tasks take real time</span>
+            <span class="theme-quote">"Cleaning and cooking on top of work is exhausting."</span>
+          </div>
+          <div class="theme-card" style="border-left: 2px solid #A3C99B;">
+            <div class="theme-dot" style="background:#A3C99B;"></div>
+            <span class="theme-label">Problem-solving builds confidence</span>
+            <span class="theme-quote">"Fixing things yourself is hard but rewarding."</span>
+          </div>
+          <div class="theme-card" style="border-left: 2px solid #B5A8D6;">
+            <div class="theme-dot" style="background:#B5A8D6;"></div>
+            <span class="theme-label">Taxes and benefits are confusing</span>
+            <span class="theme-quote">"Nobody explains toeslagen or income tax in school."</span>
+          </div>
+          <div class="theme-card" style="border-left: 2px solid #E8A96A;">
+            <div class="theme-dot" style="background:#E8A96A;"></div>
+            <span class="theme-label">Your space affects your mood</span>
+            <span class="theme-quote">"Making it feel like home actually helps with the stress."</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="cs-two-col" style="margin-top:48px;">
+      <div class="cs-prose">
+        <h3>Mixed methods<br><em>approach</em></h3>
+        <p>We ran interviews, diary studies, quizzes, usability tests, co-creation sessions, and desk research. The mixed-method approach was intentional - financial literacy and emotional readiness are intertwined, and single-method research would have missed half the picture.</p>
+        <p>Research showed teens most wanted: budgeting tools (9 mentions), peer advice (8 mentions), routine planning (6 mentions), and short tips (6 mentions). Emotionally, the dominant states were overwhelmed (26.7%), curious (20%), and anxious (20%).</p>
+      </div>
+      <div class="cs-prose">
+        <h3>What the data<br><em>actually said</em></h3>
+        <p>The biggest unexpected expenses teens faced were rent/deposits, utilities, and furniture - categories they had almost no mental model for. Peer support and relatable stories proved to be motivating anchors for learning.</p>
+        <p>Anxiety and uncertainty were recurring themes. Teens didn't just need information - they needed the experience to feel approachable and normalising, not daunting.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">03  Design decisions</p>
+    <div class="cs-two-col">
+      <div class="cs-prose">
+        <h3>Translating research<br><em>into features</em></h3>
+        <p>The budgeting feature used realistic everyday expenses - rent, utilities, groceries, insurance - to let teens safely practice financial planning in a consequence-free environment. Most participants had no mental model for what independent living costs, and abstract advice wasn't going to fix that.</p>
+        <p>Chores and routines were framed as small, achievable tasks supported by light gamification and rewards. Overwhelming someone with a full list of adult responsibilities produces paralysis, not preparation - breaking it into daily micro-tasks with visible progress keeps motivation intact.</p>
+        <p>Because anxiety was a recurring theme, the design leaned into peer stories and relatable scenarios rather than instructional content. Visual consequences - showing what happens when a bill goes unpaid or a budget runs out - gave decisions real weight without real risk, while humor and interactive moments kept the tone approachable throughout.</p>
+      </div>
+      <div class="cs-img cs-img-square"><img src="../Assets/poster_OpJezelf.webp" alt="Op Jezelf poster" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:inherit;"></div>
+    </div>
+    <div style="margin-top:48px; background:var(--bg2); border-radius:8px; display:flex; align-items:center; justify-content:space-between; width:100%;">
+      <div class="video-wrap">
+        <video src="../Assets/Commute.mp4" loop playsinline></video>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.45)"/><polygon points="26,20 48,32 26,44" fill="white"/></svg>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video src="../Assets/Groceries.mp4" loop playsinline></video>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.45)"/><polygon points="26,20 48,32 26,44" fill="white"/></svg>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <video src="../Assets/Inbox.mp4" loop playsinline></video>
+        <div class="video-play-btn">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.45)"/><polygon points="26,20 48,32 26,44" fill="white"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">04  Prototyping & testing</p>
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px;">
+      <img src="../Assets/Profil.jpg"       alt="Profil"       style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Quiz.png"         alt="Quiz"         style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/municipality.jpg" alt="Municipality" style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Floorplan.jpg"    alt="Floorplan"    style="width:100%;height:auto;display:block;border-radius:4px;">
+    </div>
+    <div class="cs-prose" style="max-width:640px;margin-top:48px;">
+      <h3>What testing<br><em>changed</em></h3>
+      <p>The Figma prototype was tested with teenagers in the 14-17 target group through multiple usability sessions and a classroom pilot. Testing surfaced confusion around guidance, unclear next steps, and a narrative gap - how to manage expenses without income.</p>
+      <p>These findings drove clearer onboarding, improved task structure, and more transparent feedback within the decision flow. Iterative refinement kept the experience grounded in the practical realities teens actually face.</p>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">05  Outcome & reflection</p>
+    <div class="cs-prose" style="max-width:640px;">
+      <h3>Where the<br><em>project landed</em></h3>
+      <p>The app is currently in full development, with release scheduled for March 2026. The research-informed design decisions successfully translated into a prototype that engages teens while teaching practical financial and life skills.</p>
+      <p>What worked: integrating research insights directly into design, creating relatable scenarios, and using humor and interactive feedback to reduce anxiety. What I'd improve: broader testing with a larger, more diverse group of teens to strengthen validation.</p>
+    </div>
+    <div class="cs-outcome">
+      <p class="cs-outcome-label">Reflection</p>
+      <p class="cs-outcome-text">This project reinforced that good design research isn't just about uncovering what people need - it's about understanding the emotional context those needs exist in. The financial literacy problem was also an anxiety problem, and addressing only one would have produced a worse product.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="cs-next">
+  <div></div>
+  <a href="emma.html" class="cs-next-link" style="text-align:right;">
+    <span class="cs-next-label">Next project</span>
+    <span class="cs-next-title">Emma ↗</span>
+  </a>
+</div>
+
+<footer><p>Luna Rachmani - Portfolio 2025/26</p><p>Leeuwarden, NL</p></footer>
+<script src="../js/main.js"></script>
+<script src="../js/casestudy.js"></script>
+<script>
+  document.querySelectorAll('.video-wrap').forEach(wrap => {
+    const video = wrap.querySelector('video');
+    const btn   = wrap.querySelector('.video-play-btn');
+    wrap.addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        btn.classList.add('hidden');
+      } else {
+        video.pause();
+        btn.classList.remove('hidden');
+      }
+    });
+  });
+</script>
+</body>
+</html>

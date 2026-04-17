@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Luna Rachmani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/home.css">
+<style>
+  .about-page-hero {
+    padding: 180px 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+  }
+  .about-page-hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--text);
+  }
+  .about-page-hero h1 em { font-style: italic; color: var(--text-mid); }
+  .about-page-hero-right {
+    padding-bottom: 8px;
+  }
+  .about-page-hero-right p {
+    font-size: 16px;
+    color: var(--text-muted);
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 420px;
+  }
+
+  /* Photo placeholder */
+  .photo-strip {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .photo-box {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, var(--bg) 100%);
+    pointer-events: none;
+  }
+  .photo-box-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .photo-box-sub {
+    font-size: 12px;
+    color: var(--border-hover);
+  }
+
+  /* Content blocks */
+  .about-content {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+  }
+  .about-block h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .about-block p {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  /* Editable placeholder style */
+  .placeholder-text {
+    color: var(--border-hover);
+    font-style: italic;
+  }
+
+  /* Skills list */
+  .skills-grid {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .skill-block {
+    background: var(--bg2);
+    padding: 28px 32px;
+  }
+  .skill-block-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .skill-list li {
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 300;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .skill-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  /* CV strip */
+  .cv-strip {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .cv-strip-inner {
+    border: 0.5px solid var(--border);
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cv-strip-left h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .cv-strip-left p {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .skills-section-header {
+    padding: 0 48px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .about-page-hero { grid-template-columns: 1fr; gap: 32px; padding: 140px 24px 60px; }
+    .about-content { grid-template-columns: 1fr; gap: 48px; padding: 0 24px 60px; }
+    .skills-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
+    .skills-section-header { padding-left: 24px; padding-right: 24px; }
+    .photo-strip, .cv-strip { padding-left: 24px; padding-right: 24px; }
+    .cv-strip-inner { flex-direction: column; gap: 24px; align-items: flex-start; }
+  }
+
+  @media (max-width: 480px) {
+    .about-page-hero { padding: 120px 20px 48px; gap: 24px; }
+    .about-page-hero h1 { font-size: clamp(40px, 10vw, 64px); }
+    .about-page-hero-right p { font-size: 14px; }
+    .about-content { padding: 0 20px 48px; }
+    .skills-grid { padding: 0 20px 48px; }
+    .skills-section-header { padding-left: 20px; padding-right: 20px; }
+    .photo-strip, .cv-strip { padding-left: 20px; padding-right: 20px; }
+    .cv-strip-inner { padding: 28px; }
+    .skill-block { padding: 22px 24px; }
+  }
+
+  /* T-Shaper */
+  .t-shaper-section {
+    padding: 0 48px 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .t-shaper-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .t-shaper-legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .t-legend-item { display: flex; align-items: center; gap: 7px; }
+  .t-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+  .t-shaper-grid {
+    display: grid;
+    grid-template-columns: repeat(11, minmax(76px, 1fr));
+    gap: 2px;
+    min-width: 860px;
+  }
+  .t-cell {
+    padding: 8px 10px;
+    font-size: 11px;
+    line-height: 1.35;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .t-cat { background: var(--accent); color: #1A1A18; font-weight: 500; }
+  .t-g   { background: #112B1E; color: #6DBF90; border: 0.5px solid #1E4A30; }
+  .t-o   { background: #3A1E08; color: #E8954A; border: 0.5px solid #5A3010; }
+  .t-r   { background: #381010; color: #E87070; border: 0.5px solid #581818; }
+  .t-empty { background: transparent; }
+  @media (max-width: 900px) { .t-shaper-section { padding-left: 24px; padding-right: 24px; } }
+  @media (max-width: 480px) { .t-shaper-section { padding-left: 20px; padding-right: 20px; } }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursor"></div>
+
+<nav id="nav">
+  <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="about.html" style="color:var(--accent);">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="about-page-hero">
+  <h1 class="fade-up">Designer.<br><em>Researcher.</em><br>Founder.</h1>
+  <div class="about-page-hero-right fade-up delay-1">
+    <!-- EDIT THIS: 2-3 sentence intro about yourself -->
+    <p>I'm Luna Rachmani, a third-year Communication &amp; Multimedia Design student at NHL Stenden and founder of Something Wicked, a freelance multimedia agency I've been running since 2021. I work across UX research, interaction design, visual identity, and illustration. My work tends to live at the intersection of emotional complexity and practical need.</p>
+  </div>
+</div>
+
+<!-- PHOTO -->
+<div class="photo-strip reveal">
+  <div class="photo-box">
+    <img src="../Assets/AboutMe.jpg" alt="Luna Rachmani" style="width:100%;height:100%;object-fit:cover;object-position:center center;">
+  </div>
+</div>
+
+<!-- ABOUT CONTENT -->
+<div class="about-content">
+  <div class="about-block reveal">
+    <h3>Background</h3>
+    <!-- EDIT THIS: Your background, where you're from, how you got into design -->
+    <p>I'm Greek by origin - summers spent with family there until I was about twelve - but grew up in Germany, with stretches of time in England along the way. I landed in the Netherlands for my studies at NHL Stenden in Leeuwarden. My design path started at Berufskolleg Neandertal, where I completed a vocational qualification with a focus on design and a technical assistant apprenticeship - which meant I was doing client work and using Adobe tools before I started a university programme.</p>
+    <p>Since 2021 I've been running Something Wicked alongside my studies - taking on branding, visual identity, and multimedia projects for clients. In 2025 I spent a semester on exchange at TUS Moylish in Limerick, Ireland, studying Broadcast &amp; Film Production, which expanded my practice into audio and moving image.</p>
+  </div>
+  <div class="about-block reveal">
+    <h3>How I work</h3>
+    <!-- EDIT THIS: Your design philosophy / process -->
+    <p>Research first, always. I use mixed methods - interviews, diary studies, usability testing, co-creation, desk research - and I care about keeping the trail from finding to decision visible. A design choice that can't be traced back to something real is a guess, and I'd rather have fewer decisions made with more confidence than lots of decisions made fast.</p>
+    <p>I'm drawn to projects where the problem has emotional weight - caregiver support, financial literacy for teenagers, harm reduction. These are areas where the difference between a good and a bad design isn't aesthetic, it's functional in someone's life. That raises the stakes in a way I find motivating rather than overwhelming.</p>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-header skills-section-header reveal">
+  <span class="section-label">Skills & tools</span>
+</div>
+<div class="skills-grid">
+  <div class="skill-block reveal">
+    <span class="skill-block-label">Design</span>
+    <ul class="skill-list">
+      <li>Figma</li>
+      <li>Prototyping</li>
+      <li>UI / Interaction Design</li>
+      <li>Visual Identity</li>
+      <li>Editorial Design</li>
+    </ul>
+  </div>
+  <div class="skill-block reveal">
+    <span class="skill-block-label">Research</span>
+    <ul class="skill-list">
+      <li>Usability Testing</li>
+      <li>Interviews & Diary Studies</li>
+      <li>Heuristic Evaluation</li>
+      <li>Co-creation</li>
+      <li>Desk Research</li>
+    </ul>
+  </div>
+  <div class="skill-block reveal">
+    <span class="skill-block-label">Tools & other</span>
+    <ul class="skill-list">
+      <li>Adobe Creative Cloud</li>
+      <li>DaVinci Resolve</li>
+      <li>HTML / CSS</li>
+      <li>Microsoft 365</li>
+      <!-- EDIT: add or remove as needed -->
+    </ul>
+  </div>
+</div>
+
+<!-- T-SHAPER -->
+<div class="section-header skills-section-header reveal">
+  <span class="section-label">T-shaped profile</span>
+</div>
+<div class="t-shaper-section reveal">
+  <div class="t-shaper-legend">
+    <span class="t-legend-item"><span class="t-dot" style="background:#2A7A50;"></span> Comfortable</span>
+    <span class="t-legend-item"><span class="t-dot" style="background:#C27020;"></span> Familiar, not fluent</span>
+    <span class="t-legend-item"><span class="t-dot" style="background:#B03030;"></span> Want to learn</span>
+  </div>
+  <div class="t-shaper-scroll">
+    <div class="t-shaper-grid">
+      <!-- Row 0: Category headers -->
+      <div class="t-cell t-cat">Film production</div>
+      <div class="t-cell t-cat">Audio & Music Production</div>
+      <div class="t-cell t-cat">Branding</div>
+      <div class="t-cell t-cat">Graphic Design</div>
+      <div class="t-cell t-cat">Print</div>
+      <div class="t-cell t-cat">UI</div>
+      <div class="t-cell t-cat">UX</div>
+      <div class="t-cell t-cat">Design Research</div>
+      <div class="t-cell t-cat">Illustration</div>
+      <div class="t-cell t-cat">Front-End</div>
+      <div class="t-cell t-cat">Leadership</div>
+      <!-- Row 1 -->
+      <div class="t-cell t-g">Composition</div>
+      <div class="t-cell t-g">Mixing</div>
+      <div class="t-cell t-g">Brand Guidelines</div>
+      <div class="t-cell t-g">Layouts & grids</div>
+      <div class="t-cell t-g">CMYK and print</div>
+      <div class="t-cell t-g">Design Systems</div>
+      <div class="t-cell t-g">Heuristics</div>
+      <div class="t-cell t-g">Qualitative research</div>
+      <div class="t-cell t-g">Iconography</div>
+      <div class="t-cell t-g">HTML</div>
+      <div class="t-cell t-g">Situational Leadership</div>
+      <!-- Row 2 -->
+      <div class="t-cell t-g">Film recce</div>
+      <div class="t-cell t-g">Mastering</div>
+      <div class="t-cell t-g">Dynamic Brands</div>
+      <div class="t-cell t-g">Color theory</div>
+      <div class="t-cell t-g">Zine making</div>
+      <div class="t-cell t-g">Usability</div>
+      <div class="t-cell t-g">UX Strategy</div>
+      <div class="t-cell t-g">Co-creation</div>
+      <div class="t-cell t-g">Style Guide</div>
+      <div class="t-cell t-g">CSS</div>
+      <div class="t-cell t-g">Feedback Culture</div>
+      <!-- Row 3 -->
+      <div class="t-cell t-g">Call Sheet</div>
+      <div class="t-cell t-g">Improvising</div>
+      <div class="t-cell t-g">Logo design</div>
+      <div class="t-cell t-g">Editorial</div>
+      <div class="t-cell t-g">Bleed and Margins</div>
+      <div class="t-cell t-g">Accessibility</div>
+      <div class="t-cell t-g">UX Psychology</div>
+      <div class="t-cell t-g">Usability testing</div>
+      <div class="t-cell t-g">Colour theory</div>
+      <div class="t-cell t-o">Javascript</div>
+      <div class="t-cell t-g">DISC</div>
+      <!-- Row 4 -->
+      <div class="t-cell t-g">Script Writing</div>
+      <div class="t-cell t-g">Songwriting</div>
+      <div class="t-cell t-g">Corporate Design</div>
+      <div class="t-cell t-g">Typography</div>
+      <div class="t-cell t-g">Paper Weight</div>
+      <div class="t-cell t-g">Wireframing</div>
+      <div class="t-cell t-g">Ethics</div>
+      <div class="t-cell t-g">Quantitative testing</div>
+      <div class="t-cell t-g">Motion Illustration</div>
+      <div class="t-cell t-g">Flexbox</div>
+      <div class="t-cell t-g">Decision making</div>
+      <!-- Row 5 -->
+      <div class="t-cell t-g">Script Writing</div>
+      <div class="t-cell t-o">Music Theory</div>
+      <div class="t-cell t-g">Dynamic Brands</div>
+      <div class="t-cell t-g">Composition</div>
+      <div class="t-cell t-g">Coating</div>
+      <div class="t-cell t-g">Component Library</div>
+      <div class="t-cell t-g">Prototyping</div>
+      <div class="t-cell t-g">Personas</div>
+      <div class="t-cell t-g">Brand Consistency</div>
+      <div class="t-cell t-o">State Management</div>
+      <div class="t-cell t-g">Team dynamics</div>
+      <!-- Row 6 -->
+      <div class="t-cell t-g">Compositing 2D/3D</div>
+      <div class="t-cell t-g">Beat production</div>
+      <div class="t-cell t-g">Positioning</div>
+      <div class="t-cell t-g">Design principles</div>
+      <div class="t-cell t-o">Special finishes</div>
+      <div class="t-cell t-g">Variants</div>
+      <div class="t-cell t-g">User flow</div>
+      <div class="t-cell t-g">Empathy Mapping</div>
+      <div class="t-cell t-g">Grid Alignment</div>
+      <div class="t-cell t-g">Refactoring</div>
+      <div class="t-cell t-g">Reflection</div>
+      <!-- Row 7 -->
+      <div class="t-cell t-g">Editing</div>
+      <div class="t-cell t-g">Sampling</div>
+      <div class="t-cell t-g">Brand Promise</div>
+      <div class="t-cell t-g">Creative Rationale</div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-g">Dark Mode</div>
+      <div class="t-cell t-g">Wireframes</div>
+      <div class="t-cell t-g">Double Diamond</div>
+      <div class="t-cell t-g">Animation</div>
+      <div class="t-cell t-r">Responsive Breakpoints</div>
+      <div class="t-cell t-g">Growth Mindset</div>
+      <!-- Row 8 -->
+      <div class="t-cell t-g">Camera</div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-g">Archetype</div>
+      <div class="t-cell t-g">Graphic Design history</div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-g">Responsive Design</div>
+      <div class="t-cell t-g">User Goals</div>
+      <div class="t-cell t-g">Synthesis</div>
+      <div class="t-cell t-r">3D</div>
+      <div class="t-cell t-r">Deployment</div>
+      <div class="t-cell t-g">Stakeholder alignment</div>
+      <!-- Row 9 -->
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-o">Colour Grading</div>
+      <div class="t-cell t-g">Logo design</div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-g">Interaction States</div>
+      <div class="t-cell t-g">Problem Statement</div>
+      <div class="t-cell t-g">Triangulation</div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-r">PHP</div>
+      <div class="t-cell t-g">Psychological safety</div>
+      <!-- Row 10 -->
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-empty"></div>
+      <div class="t-cell t-r">Frameworks</div>
+      <div class="t-cell t-g">Conflict Resolution</div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAILS -->
+<section id="details" style="padding-bottom:40px;">
+  <div class="section-header reveal">
+    <span class="section-label">Details</span>
+  </div>
+  <div class="about-grid">
+    <div class="about-details reveal">
+      <div class="detail-row"><span class="detail-label">Focus</span><span class="detail-val">UX / UI / Interaction Design</span></div>
+      <div class="detail-row"><span class="detail-label">Languages</span><span class="detail-val">German, Greek, English (C1)</span></div>
+      <div class="detail-row"><span class="detail-label">Agency</span><span class="detail-val">Something Wicked - Founder, 2021-present</span></div>
+      <div class="detail-row"><span class="detail-label">Available</span><span class="detail-val">Open to collaboration</span></div>
+    </div>
+    <div class="about-text reveal">
+      <!-- EDIT THIS: A personal note - optional but nice -->
+      <h2>Outside<br><em>of design.</em></h2>
+      <p>I make music under the alias SALT - writing, producing, mixing my own vocals. I read a lot, mostly fiction and philosophy. I play videogames seriously enough that I built a brand identity around one. I also draw, which feeds directly back into illustration work for clients and projects like Op Jezelf and Kokoro.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<div class="cv-strip reveal">
+  <div class="cv-strip-inner">
+    <div class="cv-strip-left">
+      <h3>Full CV</h3>
+      <p>Education, work experience, and references.</p>
+    </div>
+    <a href="https://drive.google.com/file/d/1iXUGaSRbavAMILEzByqoT4xYECmB9_8E/view?usp=sharing" target="_blank" class="btn btn-ghost">Download CV ↗</a>
+  </div>
+</div>
+
+<footer>
+  <p>Luna Rachmani - Portfolio 2025/26</p>
+  <p><a href="../index.html" style="color:var(--text-muted);text-decoration:none;">Back to work ↗</a></p>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  reveals.forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
