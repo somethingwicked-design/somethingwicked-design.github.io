@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emma - Luna Rachmani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/casestudy.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+/* Methods map - same pattern as op-jezelf */
+.methods-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 0 0;
+}
+.phase-card {
+  background: var(--bg3);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 0.5px solid var(--border);
+}
+.phase-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.phase-label { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-muted); }
+.method-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin: 3px;
+  cursor: default;
+  transition: opacity 0.15s;
+}
+.method-tag:hover { opacity: 0.8; }
+.method-tag .type-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.tags-wrap { display: flex; flex-wrap: wrap; margin: 0 -3px; }
+.qual { background: #0C2B46; color: #A8CDE8; }
+.qual .type-dot { background: #2E7DC4; }
+.sec  { background: #2C1843; color: #C9A8E8; }
+.sec  .type-dot { background: #8B4FBC; }
+.syn  { background: #3B2200; color: #F5C07A; }
+.syn  .type-dot { background: #BA7517; }
+.eval { background: #3A0A0A; color: #F0A0A0; }
+.eval .type-dot { background: #D44A4A; }
+.legend-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 0.5rem; font-size: 11px; color: var(--text-muted); }
+.leg { display: flex; align-items: center; gap: 5px; }
+.leg-sq { width: 9px; height: 9px; border-radius: 3px; }
+.full-width { grid-column: 1 / -1; }
+
+/* Persona card */
+.persona-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2px;
+}
+.persona-left {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.persona-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+}
+.persona-block {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  padding: 20px 22px;
+}
+.persona-block-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: block;
+}
+.persona-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.persona-role {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.persona-detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid var(--border);
+}
+.persona-detail-row:last-child { border-bottom: none; }
+.persona-detail-label {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.persona-detail-val {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.persona-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.persona-list li {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  padding-left: 12px;
+  position: relative;
+}
+.persona-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.persona-quote {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+  border-left: 2px solid var(--accent);
+  padding-left: 12px;
+  margin-top: 8px;
+}
+.pains-gains {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  grid-column: 1 / -1;
+}
+.pains-block {
+  background: var(--bg2);
+  border: 0.5px solid var(--border);
+  padding: 20px 22px;
+}
+
+.cs-section-label { border-top: none; }
+
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursor"></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-hero">
+  <a href="../index.html#work" class="cs-back"><span class="cs-back-arrow">←</span> Back to work</a>
+  <div class="cs-hero-grid">
+    <div class="fade-up">
+      <p class="cs-eyebrow">UX Research & App Design</p>
+      <h1 class="cs-title">Emma<br><em>Supporting dementia caregivers</em></h1>
+      <p class="cs-summary">A five-week project to design a support app for people over 40 caring for loved ones with dementia, combining mindfulness, education, and community into one accessible, calming experience.</p>
+      <div class="cs-cta-row">
+        <a href="#process" class="btn btn-ghost">Read process</a>
+      </div>
+    </div>
+    <div class="cs-meta-panel fade-up delay-2">
+      <div class="cs-meta-row"><span class="cs-meta-label">Project type</span><span class="cs-meta-val">Client project - NHL Stenden</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">5 weeks / 2025</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Team</span><span class="cs-meta-val">3 people - Greta, Lina, Luna</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">My role</span><span class="cs-meta-val">Project Manager, Lead Researcher, Illustrator</span></div>
+      <div class="cs-meta-row">
+        <span class="cs-meta-label">Tools</span>
+        <span class="cs-meta-val"><div class="cs-meta-tags"><span class="tag">Figma</span><span class="tag">Surveys</span><span class="tag">Diary Study</span><span class="tag">Usability Testing</span></div></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-gallery">
+  <div class="cs-img cs-img-wide" style="aspect-ratio:unset;height:auto;"><img src="../Assets/ShelfHelper.jpg" alt="Emma - Care with confidence" style="width:100%;height:auto;display:block;border-radius:inherit;"></div>
+</div>
+
+<div class="cs-body" id="process">
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">01  Context & problem</p>
+    <div class="cs-two-col">
+      <div class="cs-prose">
+        <h3>Who caregivers<br><em>actually are</em></h3>
+        <p>Caregivers of people with dementia face a specific and underserved problem: they're so focused on the person they're caring for that their own mental health is neglected. High stress, lack of structured guidance, and social isolation are the norm - not the exception.</p>
+        <p>When we looked at the market, nothing existed that helped caregivers take care of themselves while taking care of their loved ones. That gap was the brief.</p>
+      </div>
+      <div class="cs-prose">
+        <h3>The brief<br><em>and my role</em></h3>
+        <p>The five-week NHL Stenden brief asked us to develop a concept, visual design, and interactive prototype. I led research and project management while working alongside two UI/UX designers, with responsibility for the illustration work throughout.</p>
+        <p>The project ultimately came close to winning the award for best idea - a result of the depth of the empathise phase and how directly the research shaped our design decisions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">02  Research</p>
+
+    <!-- Methods map -->
+    <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 28px 28px;margin-bottom:2px;">
+      <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Research approach</p>
+      <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 20px;">Methods map</p>
+      <div class="legend-row">
+        <div class="leg"><span class="leg-sq" style="background:#2E7DC4;"></span> Qualitative / generative</div>
+        <div class="leg"><span class="leg-sq" style="background:#8B4FBC;"></span> Secondary / desk research</div>
+        <div class="leg"><span class="leg-sq" style="background:#BA7517;"></span> Synthesis / framework</div>
+        <div class="leg"><span class="leg-sq" style="background:#D44A4A;"></span> Evaluative / testing</div>
+      </div>
+      <div class="methods-grid">
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#2E7DC4;"></div><span class="phase-label">Discover - understanding users</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag qual"><span class="type-dot"></span>Surveys</span>
+            <span class="method-tag qual"><span class="type-dot"></span>Interviews</span>
+            <span class="method-tag qual"><span class="type-dot"></span>Diary study - 7 days</span>
+          </div>
+        </div>
+        <div class="phase-card">
+          <div class="phase-header"><div class="phase-dot" style="background:#BA7517;"></div><span class="phase-label">Define - synthesising insights</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag sec"><span class="type-dot"></span>Desk research</span>
+            <span class="method-tag syn"><span class="type-dot"></span>Benchmarking</span>
+          </div>
+        </div>
+        <div class="phase-card full-width">
+          <div class="phase-header"><div class="phase-dot" style="background:#D44A4A;"></div><span class="phase-label">Deliver - testing and refining</span></div>
+          <div class="tags-wrap">
+            <span class="method-tag eval"><span class="type-dot"></span>Usability testing</span>
+            <span class="method-tag eval"><span class="type-dot"></span>Iterative testing rounds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Three doughnut charts -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;">
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 20px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Survey</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 16px;">Challenges in caregiving</p>
+        <div style="position:relative;height:160px;"><canvas id="challengesChart"></canvas></div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--text-muted);">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#7BAED4;flex-shrink:0;"></span><span style="color:var(--text);">Mobility / physical</span><span>40.9%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#A3C99B;flex-shrink:0;"></span><span style="color:var(--text);">Emotional outbursts</span><span>27.3%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E8A96A;flex-shrink:0;"></span><span style="color:var(--text);">Other</span><span>18.2%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#B5A8D6;flex-shrink:0;"></span><span style="color:var(--text);">Managing confusion</span><span>13.6%</span></div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 20px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Survey</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 16px;">Social isolation frequency</p>
+        <div style="position:relative;height:160px;"><canvas id="isolationChart"></canvas></div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--text-muted);">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#7BAED4;flex-shrink:0;"></span><span style="color:var(--text);">Frequently</span><span>30%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#A3C99B;flex-shrink:0;"></span><span style="color:var(--text);">Always</span><span>25%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E07B72;flex-shrink:0;"></span><span style="color:var(--text);">Occasionally</span><span>20%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E8A96A;flex-shrink:0;"></span><span style="color:var(--text);">Rarely</span><span>15%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#B5A8D6;flex-shrink:0;"></span><span style="color:var(--text);">Never</span><span>10%</span></div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 20px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Survey</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 16px;">Age distribution of caregivers</p>
+        <div style="position:relative;height:160px;"><canvas id="ageChart"></canvas></div>
+        <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;font-size:11px;color:var(--text-muted);">
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#7BAED4;flex-shrink:0;"></span><span style="color:var(--text);">40-50</span><span>60%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#A3C99B;flex-shrink:0;"></span><span style="color:var(--text);">51-60</span><span>25%</span></div>
+          <div style="display:flex;align-items:center;gap:8px;"><span style="width:9px;height:9px;border-radius:50%;background:#E07B72;flex-shrink:0;"></span><span style="color:var(--text);">61-65</span><span>15%</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Persona -->
+    <div style="margin-top:2px;">
+      <div style="background:var(--bg2);border:0.5px solid var(--border);padding:16px 20px;margin-bottom:2px;">
+        <p style="font-size:11px;color:var(--text-muted);margin:0 0 2px;letter-spacing:0.08em;text-transform:uppercase;">Research synthesis</p>
+        <p style="font-size:15px;font-weight:500;color:var(--text);margin:0;">Persona - Emma Johnson</p>
+      </div>
+      <div class="persona-grid">
+
+        <div class="persona-left">
+          <div>
+            <p class="persona-name">Emma Johnson</p>
+            <p class="persona-role">Administrative Assistant (part-time)</p>
+            <div class="persona-detail-row">
+              <span class="persona-detail-label">Age</span>
+              <span class="persona-detail-val">52</span>
+            </div>
+            <div class="persona-detail-row">
+              <span class="persona-detail-label">Location</span>
+              <span class="persona-detail-val">Suburban area</span>
+            </div>
+            <div class="persona-detail-row">
+              <span class="persona-detail-label">Family</span>
+              <span class="persona-detail-val">Married, two adult children</span>
+            </div>
+            <div class="persona-detail-row">
+              <span class="persona-detail-label">Caring for</span>
+              <span class="persona-detail-val">Her 78-year-old mother, mid-stage dementia</span>
+            </div>
+            <div class="persona-detail-row">
+              <span class="persona-detail-label">Tech proficiency</span>
+              <span class="persona-detail-val">Moderate - uses apps for work and social media, prefers simple intuitive tools</span>
+            </div>
+          </div>
+          <p class="persona-quote">"I love my mom and want to do everything I can for her, but sometimes it feels overwhelming. I wish there were more hours in the day and someone to tell me I'm not alone in this."</p>
+        </div>
+
+        <div class="persona-right">
+
+          <div class="persona-block">
+            <span class="persona-block-label">Goals</span>
+            <ul class="persona-list">
+              <li>Ensure her mother feels safe, cared for, and as independent as possible</li>
+              <li>Reduce her own stress without compromising care quality</li>
+              <li>Learn practical ways to handle behavioral challenges</li>
+              <li>Feel connected to other caregivers who understand her experience</li>
+            </ul>
+          </div>
+
+          <div class="persona-block">
+            <span class="persona-block-label">Challenges</span>
+            <ul class="persona-list">
+              <li>Juggling caregiving, work, and personal responsibilities leaves little time for self-care</li>
+              <li>Frequently feels guilt, anxiety, and grief</li>
+              <li>Often unprepared for sudden behavioral changes</li>
+              <li>Struggles to align schedules with family members or healthcare providers</li>
+            </ul>
+          </div>
+
+          <div class="pains-gains">
+            <div class="pains-block">
+              <span class="persona-block-label">Pains</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                  <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Practical</p>
+                  <ul class="persona-list">
+                    <li>Time-consuming tasks</li>
+                    <li>Unpredictable challenges</li>
+                    <li>Coordination difficulties</li>
+                  </ul>
+                </div>
+                <div>
+                  <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Emotional</p>
+                  <ul class="persona-list">
+                    <li>Stress and anxiety</li>
+                    <li>Guilt</li>
+                    <li>Isolation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="pains-block">
+              <span class="persona-block-label">Gains</span>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div>
+                  <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Practical</p>
+                  <ul class="persona-list">
+                    <li>Simplified caregiving</li>
+                    <li>Better coordination</li>
+                    <li>Independence for her mother</li>
+                  </ul>
+                </div>
+                <div>
+                  <p style="font-size:11px;color:var(--text-muted);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:8px;">Emotional</p>
+                  <ul class="persona-list">
+                    <li>Stress relief</li>
+                    <li>Connection and support</li>
+                    <li>Confidence</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Prose -->
+    <div class="cs-two-col" style="margin-top:48px;">
+      <div class="cs-prose">
+        <h3>Seven days<br><em>in their life</em></h3>
+        <p>We ran surveys, interviews, and a seven-day diary study to understand caregivers' daily challenges, emotional strain, and coping strategies. Desk research and benchmarking highlighted usability patterns and effective content delivery for this age group.</p>
+        <p>Findings showed caregivers needed structured guidance, concise information, and calming design. Early testing confirmed key issues, guiding iterative improvements. This research also shaped navigation, colour palette, and layout choices.</p>
+      </div>
+      <div class="cs-prose">
+        <h3>What research<br><em>told us to build</em></h3>
+        <p>The primary age group was 40-60, with 60% in the 40-50 bracket. The most common challenges were mobility and physical assistance (40.9%), emotional outbursts (27.3%), and managing confusion (13.6%). Social isolation was frequent or always present for 55% of respondents.</p>
+        <p>Caregivers were time-poor and cognitively loaded - content had to be digestible, not comprehensive. These findings directly shaped every design decision that followed.</p>
+      </div>
+    </div>
+
+    <script>
+    (function() {
+      const sharedOpts = {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '62%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.parsed}%` } }
+        }
+      };
+
+      new Chart(document.getElementById('challengesChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Mobility / physical','Emotional outbursts','Other','Managing confusion'],
+          datasets: [{ data: [40.9, 27.3, 18.2, 13.6], backgroundColor: ['#7BAED4','#A3C99B','#E8A96A','#B5A8D6'], borderWidth: 0, hoverOffset: 4 }]
+        },
+        options: sharedOpts
+      });
+
+      new Chart(document.getElementById('isolationChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['Frequently','Always','Occasionally','Rarely','Never'],
+          datasets: [{ data: [30, 25, 20, 15, 10], backgroundColor: ['#7BAED4','#A3C99B','#E07B72','#E8A96A','#B5A8D6'], borderWidth: 0, hoverOffset: 4 }]
+        },
+        options: sharedOpts
+      });
+
+      new Chart(document.getElementById('ageChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['40-50','51-60','61-65'],
+          datasets: [{ data: [60, 25, 15], backgroundColor: ['#7BAED4','#A3C99B','#E07B72'], borderWidth: 0, hoverOffset: 4 }]
+        },
+        options: sharedOpts
+      });
+    })();
+    </script>
+
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">03  Design decisions</p>
+    <div class="cs-two-col">
+      <div class="cs-prose">
+        <h3>Three tabs,<br><em>three needs</em></h3>
+        <p>The app was structured around three core features: Education (concise, digestible guidance on dementia symptoms and caregiving strategies), Mindfulness (short structured sessions with animations and guided breathing), and Community (peer connection, shared experiences, group support).</p>
+        <p>Every feature was designed to be completable in under ten minutes. Caregivers don't have more time than that, and designing for their reality meant accepting that constraint rather than fighting it.</p>
+        <p>My role in this wasn't primarily visual design - that sat with the two UI/UX designers on the team. My contribution was the research that made those decisions defensible: understanding who caregivers are, what exhausts them, what they actually need from a tool like this, and translating that into a brief the design could follow. Every feature decision traces back to something we found in the surveys, interviews, or diary study.</p>
+      </div>
+      <div class="cs-img cs-img-square"><img src="../Assets/EmmaHand.webp" alt="Emma hand" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit;"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:32px;">
+      <img src="../Assets/education.jpg"  alt="Education screen"  style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Mindfulness.png" alt="Mindfulness screen" style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Community.png"  alt="Community screen"  style="width:100%;height:auto;display:block;border-radius:4px;">
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">04  Prototyping & testing</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px;">
+      <img src="../Assets/Profile.png"  alt="Profile screen" style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Chat.png"     alt="Chat screen"    style="width:100%;height:auto;display:block;border-radius:4px;">
+      <img src="../Assets/Anxiety.jpg"  alt="Anxiety screen" style="width:100%;height:auto;display:block;border-radius:4px;">
+    </div>
+    <div class="cs-prose" style="max-width:640px;margin-top:48px;">
+      <h3>Iterating toward<br><em>calm</em></h3>
+      <p>We built interactive Figma prototypes and tested them with caregivers, observing navigation, mindfulness engagement, and content access. Feedback highlighted font readability issues, button placement problems, and unclear instructions.</p>
+      <p>Animations and visual cues were specifically tested to support focus without adding cognitive load. Each testing round informed refinements until the app felt intuitive and calming rather than another thing to manage.</p>
+    </div>
+  </div>
+
+  <div class="cs-section reveal">
+    <p class="cs-section-label">05  Outcome & reflection</p>
+    <div class="cs-prose" style="max-width:640px;">
+      <h3>Where the<br><em>project landed</em></h3>
+      <p>Caregivers responded positively to the calming interface, clear navigation, and practical guidance. The final prototype combined structured educational content, guided mindfulness exercises, and community support into a cohesive and accessible experience.</p>
+      <p>What worked: connecting research directly to design decisions, the calming visual language, and the community tab addressing isolation. What I'd push further: broader accessibility testing, and motion design that better guides caregivers through sessions.</p>
+    </div>
+    <div class="cs-outcome">
+      <p class="cs-outcome-label">Reflection</p>
+      <p class="cs-outcome-text">Leading this project showed me that the most important design skill isn't knowing what to add - it's knowing what to leave out. Caregivers needed less, not more. Every time we considered adding a feature, the right question was whether it would increase or decrease the load on someone who was already stretched.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="cs-next">
+  <a href="op-jezelf.html" class="cs-next-link">
+    <span class="cs-next-label">Previous project</span>
+    <span class="cs-next-title">← Op Jezelf</span>
+  </a>
+  <a href="something-wicked.html" class="cs-next-link" style="text-align:right;">
+    <span class="cs-next-label">Next project</span>
+    <span class="cs-next-title">Something Wicked ↗</span>
+  </a>
+</div>
+
+<footer><p>Luna Rachmani - Portfolio 2025/26</p><p>Leeuwarden, NL</p></footer>
+<script src="../js/main.js"></script>
+<script src="../js/casestudy.js"></script>
+</body>
+</html>

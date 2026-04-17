@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Something Wicked - Luna Rachmani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/casestudy.css">
+<style>
+.cs-section-label { border-top: none; }
+.banner-wrap { position: relative; cursor: pointer; }
+.banner-wrap video { width: 100%; height: auto; display: block; }
+.banner-play-btn {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.banner-play-btn.visible { opacity: 1; pointer-events: auto; }
+.banner-play-btn svg { width: 64px; height: 64px; filter: drop-shadow(0 2px 12px rgba(0,0,0,0.6)); }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursor"></div>
+<nav id="nav">
+  <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#work">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="cs-hero">
+  <a href="../index.html#work" class="cs-back"><span class="cs-back-arrow">←</span> Back to work</a>
+  <div class="cs-hero-grid">
+    <div class="fade-up">
+      <p class="cs-eyebrow">Logo Design & Brand Identity</p>
+      <h1 class="cs-title">Something<br><em>Wicked</em></h1>
+      <p class="cs-summary">A personal logo built from the inside out, taking the traits that define me most and turning them into a mark I'd actually want to put on client work. The result is a planchette-based emblem that balances the occult with the professional.</p>
+    </div>
+    <div class="cs-meta-panel fade-up delay-2">
+      <div class="cs-meta-row"><span class="cs-meta-label">Type</span><span class="cs-meta-val">Personal brand identity</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Year</span><span class="cs-meta-val">2024</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label">Role</span><span class="cs-meta-val">Solo - concept, design, vectorisation</span></div>
+      <div class="cs-meta-row">
+        <span class="cs-meta-label">Tools</span>
+        <span class="cs-meta-val"><div class="cs-meta-tags"><span class="tag">Adobe Illustrator</span></div></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-gallery">
+  <div class="banner-wrap" id="bannerWrap">
+    <video id="bannerVideo" src="../Assets/wICKEDgLITCH.mp4" autoplay muted playsinline></video>
+    <div class="banner-play-btn" id="bannerBtn">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.45)"/><path d="M22 32a10 10 0 1 0 2.93-7.07" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/><polygon points="20,20 20,28 28,28" fill="white"/></svg>
+    </div>
+  </div>
+</div>
+
+<div class="cs-body">
+  <div class="cs-section reveal">
+    <p class="cs-section-label">Concept & process</p>
+    <div class="cs-two-col">
+      <div class="cs-prose">
+        <h3>Starting from<br><em>personal traits</em></h3>
+        <p>I needed a logo for Something Wicked - my freelance multimedia agency - that felt genuinely mine rather than generically professional. The starting point was a planchette, a shape that captures the intersection of the mysterious and the purposeful that runs through a lot of my work.</p>
+        <p>The key decision point came during vectorisation: whether to keep the embellishments on top of the planchette. I preferred it with them. The extra detail adds weight and character without tipping into chaos.</p>
+      </div>
+      <div class="cs-prose">
+        <h3>The mark<br><em>in use</em></h3>
+        <p>The final logo works in both dark and light contexts, which matters for a freelance brand that appears across digital and print deliverables. The skeleton hands framing the central eye create a symbol that's immediately legible at small sizes but rewards closer inspection.</p>
+        <p>Something Wicked has been my operational brand since 2021. The 2024 logo redesign brought the visual identity in line with where my design practice had actually developed.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;">
+      <div style="background:#ffffff;border-radius:4px;padding:40px;display:flex;align-items:center;justify-content:center;">
+        <img src="../Assets/OutlineBSW.png" alt="Outline BSW" style="width:100%;height:auto;display:block;">
+      </div>
+      <div style="background:var(--bg2);border-radius:4px;padding:40px;display:flex;align-items:center;justify-content:center;">
+        <img src="../Assets/OutlineSW.png" alt="Outline SW" style="width:100%;height:auto;display:block;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cs-next">
+  <div></div>
+  <a href="health-potion.html" class="cs-next-link" style="text-align:right;">
+    <span class="cs-next-label">Next project</span>
+    <span class="cs-next-title">Health Potion ↗</span>
+  </a>
+</div>
+
+<footer><p>Luna Rachmani - Portfolio 2025/26</p><p>Leeuwarden, NL</p></footer>
+<script src="../js/main.js"></script>
+<script src="../js/casestudy.js"></script>
+<script>
+  const video = document.getElementById('bannerVideo');
+  const btn   = document.getElementById('bannerBtn');
+  const wrap  = document.getElementById('bannerWrap');
+
+  // Play once (first 2 seconds), then stop and show play button to replay
+  let played = false;
+  video.addEventListener('timeupdate', () => {
+    if (!played && video.currentTime >= 2) {
+      played = true;
+      video.pause();
+      btn.classList.add('visible');
+    }
+  });
+
+  wrap.addEventListener('click', () => {
+    if (video.paused) {
+      played = false;
+      video.currentTime = 0;
+      video.play();
+      btn.classList.remove('visible');
+    } else {
+      video.pause();
+      btn.classList.add('visible');
+    }
+  });
+</script>
+</body>
+</html>

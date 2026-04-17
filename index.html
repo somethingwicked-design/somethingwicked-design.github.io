@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luna Rachmani - Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/home.css">
+<style>
+/* ── Work grid ── */
+.multimedia-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.mm-card {
+  display: block;
+  text-decoration: none;
+  background: var(--bg2);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 0.5px solid var(--border);
+  transition: border-color 0.3s, transform 0.3s;
+}
+.mm-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
+.mm-thumb {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.mm-thumb-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.mm-card:hover .mm-thumb-inner { transform: scale(1.04); }
+.mm-meta { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 10px; }
+.mm-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.3;
+}
+.mm-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mm-read {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.mm-card .tag { border-radius: 20px; padding: 4px 12px; }
+.mm-bg-1 { background: #1a120c; }
+.mm-bg-2 { background: #0d1610; }
+.mm-bg-3 { background: #191614; }
+.mm-bg-4 { background: #140d1a; }
+.mm-bg-5 { background: #0d1520; }
+.mm-bg-6 { background: #0c1018; }
+
+@media (max-width: 900px) {
+  .multimedia-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 540px) {
+  .multimedia-grid { grid-template-columns: 1fr; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursor"></div>
+
+<nav id="nav">
+  <a href="index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="pages/about.html">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow fade-up">Communication & Multimedia Design</p>
+  <h1 class="fade-up delay-1">Designing with<br><em>people in mind.</em></h1>
+  <p class="hero-sub fade-up delay-2">Third-year CMD student at NHL Stenden. UX research, interaction design, and visual identity, with a focus on products that are useful, honest, and well-considered.</p>
+  <div class="hero-actions fade-up delay-3">
+    <a href="#work" class="btn btn-primary">View work</a>
+    <a href="pages/about.html" class="btn btn-ghost">About me</a>
+  </div>
+</div>
+
+<!-- WORK -->
+<section id="work">
+  <div class="section-header reveal">
+    <span class="section-label">Selected work</span>
+    <span class="section-count">06 projects</span>
+  </div>
+  <div class="multimedia-grid">
+
+    <a class="mm-card reveal" href="pages/op-jezelf.html">
+      <div class="mm-thumb"><img src="Assets/MU_OpJezelf.webp" alt="Op Jezelf" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-meta">
+        <p class="mm-title">Op Jezelf</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">UX Research</span><span class="tag">Interaction Design</span><span class="tag">Gamification</span></div>
+          <span class="mm-read">≡ 4 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="mm-card reveal" href="pages/emma.html">
+      <div class="mm-thumb"><img src="Assets/MU_Emma.webp" alt="Emma" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-meta">
+        <p class="mm-title">Emma</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">UX Research</span><span class="tag">App Design</span><span class="tag">Accessibility</span></div>
+          <span class="mm-read">≡ 5 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="mm-card reveal" href="pages/something-wicked.html">
+      <div class="mm-thumb"><img src="Assets/BC_SW.webp" alt="Something Wicked" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-meta">
+        <p class="mm-title">Something Wicked</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">Logo Design</span><span class="tag">Identity</span></div>
+          <span class="mm-read">≡ 3 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="mm-card reveal" href="pages/health-potion.html">
+      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-2"><img src="Assets/HealthPotion.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Health Potion"></div></div>
+      <div class="mm-meta">
+        <p class="mm-title">Health Potion</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">Brand Manual</span><span class="tag">Typography</span></div>
+          <span class="mm-read">≡ 4 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="mm-card reveal" href="pages/de-bote.html">
+      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-3"><img src="Assets/DeBote.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="De Bote"></div></div>
+      <div class="mm-meta">
+        <p class="mm-title">De Bote</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">Editorial</span><span class="tag">Logo</span></div>
+          <span class="mm-read">≡ 3 min</span>
+        </div>
+      </div>
+    </a>
+
+    <a class="mm-card reveal" href="pages/kokoro.html">
+      <div class="mm-thumb"><img src="Assets/MU_KOKORO.webp" alt="Kokoro" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-meta">
+        <p class="mm-title">Kokoro</p>
+        <div class="mm-card-footer">
+          <div class="project-tags"><span class="tag">Poster</span><span class="tag">Mascot</span><span class="tag">Branding</span></div>
+          <span class="mm-read">≡ 3 min</span>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <span class="section-label">Contact</span>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <h2>Let's make<br>something<br><em>good.</em></h2>
+      <p>Whether it's a project, a collaboration, or just a question, feel free to reach out.</p>
+    </div>
+    <div class="contact-links reveal">
+      <a href="mailto:lurachmani@gmail.com" class="contact-link">
+        <span class="contact-link-label">lurachmani@gmail.com</span>
+        <span class="contact-link-platform">Email</span>
+      </a>
+      <a href="https://www.linkedin.com/in/somethingwicked/" target="_blank" class="contact-link">
+        <span class="contact-link-label">linkedin.com/in/somethingwicked</span>
+        <span class="contact-link-platform">LinkedIn</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Luna Rachmani - Portfolio 2025/26</p>
+  <p>Leeuwarden, NL</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/home.js"></script>
+</body>
+</html>
