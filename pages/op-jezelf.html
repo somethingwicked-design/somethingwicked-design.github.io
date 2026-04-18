@@ -142,31 +142,34 @@
 <div class="cursor-dot" id="cursor"></div>
 <nav id="nav">
   <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
-  <ul class="nav-links">
-    <li><a href="../index.html#work">Work</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="about.html" data-i18n="nav.about">About</a></li>
+      <li><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <button id="lang-toggle" class="nav-lang-toggle"><span data-lang="en">EN</span><span class="lang-sep"> | </span><span data-lang="nl">NL</span></button>
+  </div>
 </nav>
 
 <div class="cs-hero">
-  <a href="../index.html#work" class="cs-back"><span class="cs-back-arrow">←</span> Back to work</a>
+  <a href="../index.html#work" class="cs-back" data-i18n="cs.back"><span class="cs-back-arrow">←</span> Back to work</a>
   <div class="cs-hero-grid">
     <div class="fade-up">
-      <p class="cs-eyebrow">UX Research & Interaction Design</p>
-      <h1 class="cs-title">Op Jezelf<br><em>Preparing teens for independent living</em></h1>
-      <p class="cs-summary">A gamified app for teenagers in Friesland aged 14-17, helping them build the practical and emotional skills needed for independent living, from budgeting and household tasks to managing anxiety about growing up.</p>
+      <p class="cs-eyebrow" data-i18n="cs.opJezelf.eyebrow">UX Research & Interaction Design</p>
+      <h1 class="cs-title">Op Jezelf<br><em data-i18n="cs.opJezelf.titleSub">Preparing teens for independent living</em></h1>
+      <p class="cs-summary" data-i18n="cs.opJezelf.summary">A gamified app for teenagers in Friesland aged 14-17, helping them build the practical and emotional skills needed for independent living, from budgeting and household tasks to managing anxiety about growing up.</p>
       <div class="cs-cta-row">
         <a href="#process" class="btn btn-ghost">Read process</a>
       </div>
     </div>
     <div class="cs-meta-panel fade-up delay-2">
-      <div class="cs-meta-row"><span class="cs-meta-label">Project type</span><span class="cs-meta-val">Client project + continuation</span></div>
-      <div class="cs-meta-row"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">7-week brief + 5-month continuation (full version March 2026)</span></div>
-      <div class="cs-meta-row"><span class="cs-meta-label">Team</span><span class="cs-meta-val">4 people - 1 programmer, 2 designers, 1 researcher/lead</span></div>
-      <div class="cs-meta-row"><span class="cs-meta-label">My role</span><span class="cs-meta-val">Lead Researcher, Team Lead, Illustrator</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label" data-i18n="cs.type">Project type</span><span class="cs-meta-val" data-i18n="cs.opJezelf.type">Client project + continuation</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label" data-i18n="cs.opJezelf.timeline">Timeline</span><span class="cs-meta-val" data-i18n="cs.opJezelf.timelineVal">7-week brief + 5-month continuation (full version March 2026)</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label" data-i18n="cs.opJezelf.team">Team</span><span class="cs-meta-val" data-i18n="cs.opJezelf.teamVal">4 people - 1 programmer, 2 designers, 1 researcher/lead</span></div>
+      <div class="cs-meta-row"><span class="cs-meta-label" data-i18n="cs.role">My role</span><span class="cs-meta-val" data-i18n="cs.opJezelf.role">Lead Researcher, Team Lead, Illustrator</span></div>
       <div class="cs-meta-row">
-        <span class="cs-meta-label">Tools</span>
+        <span class="cs-meta-label" data-i18n="cs.tools">Tools</span>
         <span class="cs-meta-val"><div class="cs-meta-tags"><span class="tag">Figma</span><span class="tag">Usability Testing</span><span class="tag">Interviews</span><span class="tag">Co-creation</span></div></span>
       </div>
     </div>
@@ -180,23 +183,23 @@
 <div class="cs-body" id="process">
 
   <div class="cs-section reveal">
-    <p class="cs-section-label">01  Context & problem</p>
+    <p class="cs-section-label" data-i18n="cs.opJezelf.s01">01  Context & problem</p>
     <div class="cs-two-col">
       <div class="cs-prose">
-        <h3>The gap teenagers<br><em>fall into</em></h3>
-        <p>Many teenagers in Friesland aged 14-17 lack practical preparation for independent living. They underestimate real-life costs, feel overwhelmed by daily responsibilities like chores and routines, and experience genuine anxiety about the transition to adulthood.</p>
-        <p>This gap increases the risk of financial mistakes and early debt - but it's not just practical. The emotional weight of feeling unprepared is just as significant as the knowledge gap itself.</p>
+        <h3><span data-i18n="cs.opJezelf.s01h1">The gap teenagers</span><br><em data-i18n="cs.opJezelf.s01h1em">fall into</em></h3>
+        <p data-i18n="cs.opJezelf.s01p1">Many teenagers in Friesland aged 14-17 lack practical preparation for independent living. They underestimate real-life costs, feel overwhelmed by daily responsibilities like chores and routines, and experience genuine anxiety about the transition to adulthood.</p>
+        <p data-i18n="cs.opJezelf.s01p2">This gap increases the risk of financial mistakes and early debt - but it's not just practical. The emotional weight of feeling unprepared is just as significant as the knowledge gap itself.</p>
       </div>
       <div class="cs-prose">
-        <h3>What we were<br><em>asked to build</em></h3>
-        <p>The client brief, delivered through NHL Stenden, asked us to create a concept, visual design, and functional prototype in seven weeks. Following delivery, we were hired for a five-month continuation to develop the full version, scheduled for release in March 2026.</p>
-        <p>I took on lead researcher, team lead, and illustrator roles in a four-person team alongside two UI/UX designers and a programmer.</p>
+        <h3><span data-i18n="cs.opJezelf.s01h2">What we were</span><br><em data-i18n="cs.opJezelf.s01h2em">asked to build</em></h3>
+        <p data-i18n="cs.opJezelf.s01p3">The client brief, delivered through NHL Stenden, asked us to create a concept, visual design, and functional prototype in seven weeks. Following delivery, we were hired for a five-month continuation to develop the full version, scheduled for release in March 2026.</p>
+        <p data-i18n="cs.opJezelf.s01p4">I took on lead researcher, team lead, and illustrator roles in a four-person team alongside two UI/UX designers and a programmer.</p>
       </div>
     </div>
   </div>
 
   <div class="cs-section reveal">
-    <p class="cs-section-label">02  Research</p>
+    <p class="cs-section-label" data-i18n="cs.opJezelf.s02">02  Research</p>
     <div style="background:var(--bg2);border:0.5px solid var(--border);padding:24px 28px 28px;margin-bottom:2px;">
       <p style="font-size:11px;color:var(--text-muted);margin:0 0 4px;letter-spacing:0.08em;text-transform:uppercase;">Research approach</p>
       <p style="font-size:15px;font-weight:500;color:var(--text);margin:0 0 20px;">Methods map - double diamond</p>
@@ -392,26 +395,26 @@
     </div>
     <div class="cs-two-col" style="margin-top:48px;">
       <div class="cs-prose">
-        <h3>Mixed methods<br><em>approach</em></h3>
-        <p>We ran interviews, diary studies, quizzes, usability tests, co-creation sessions, and desk research. The mixed-method approach was intentional - financial literacy and emotional readiness are intertwined, and single-method research would have missed half the picture.</p>
-        <p>Research showed teens most wanted: budgeting tools (9 mentions), peer advice (8 mentions), routine planning (6 mentions), and short tips (6 mentions). Emotionally, the dominant states were overwhelmed (26.7%), curious (20%), and anxious (20%).</p>
+        <h3><span data-i18n="cs.opJezelf.s02h1">Mixed methods</span><br><em data-i18n="cs.opJezelf.s02h1em">approach</em></h3>
+        <p data-i18n="cs.opJezelf.s02p1">We ran interviews, diary studies, quizzes, usability tests, co-creation sessions, and desk research. The mixed-method approach was intentional - financial literacy and emotional readiness are intertwined, and single-method research would have missed half the picture.</p>
+        <p data-i18n="cs.opJezelf.s02p2">Research showed teens most wanted: budgeting tools (9 mentions), peer advice (8 mentions), routine planning (6 mentions), and short tips (6 mentions). Emotionally, the dominant states were overwhelmed (26.7%), curious (20%), and anxious (20%).</p>
       </div>
       <div class="cs-prose">
-        <h3>What the data<br><em>actually said</em></h3>
-        <p>The biggest unexpected expenses teens faced were rent/deposits, utilities, and furniture - categories they had almost no mental model for. Peer support and relatable stories proved to be motivating anchors for learning.</p>
-        <p>Anxiety and uncertainty were recurring themes. Teens didn't just need information - they needed the experience to feel approachable and normalising, not daunting.</p>
+        <h3><span data-i18n="cs.opJezelf.s02h2">What the data</span><br><em data-i18n="cs.opJezelf.s02h2em">actually said</em></h3>
+        <p data-i18n="cs.opJezelf.s02p3">The biggest unexpected expenses teens faced were rent/deposits, utilities, and furniture - categories they had almost no mental model for. Peer support and relatable stories proved to be motivating anchors for learning.</p>
+        <p data-i18n="cs.opJezelf.s02p4">Anxiety and uncertainty were recurring themes. Teens didn't just need information - they needed the experience to feel approachable and normalising, not daunting.</p>
       </div>
     </div>
   </div>
 
   <div class="cs-section reveal">
-    <p class="cs-section-label">03  Design decisions</p>
+    <p class="cs-section-label" data-i18n="cs.opJezelf.s03">03  Design decisions</p>
     <div class="cs-two-col">
       <div class="cs-prose">
-        <h3>Translating research<br><em>into features</em></h3>
-        <p>The budgeting feature used realistic everyday expenses - rent, utilities, groceries, insurance - to let teens safely practice financial planning in a consequence-free environment. Most participants had no mental model for what independent living costs, and abstract advice wasn't going to fix that.</p>
-        <p>Chores and routines were framed as small, achievable tasks supported by light gamification and rewards. Overwhelming someone with a full list of adult responsibilities produces paralysis, not preparation - breaking it into daily micro-tasks with visible progress keeps motivation intact.</p>
-        <p>Because anxiety was a recurring theme, the design leaned into peer stories and relatable scenarios rather than instructional content. Visual consequences - showing what happens when a bill goes unpaid or a budget runs out - gave decisions real weight without real risk, while humor and interactive moments kept the tone approachable throughout.</p>
+        <h3><span data-i18n="cs.opJezelf.s03h1">Translating research</span><br><em data-i18n="cs.opJezelf.s03h1em">into features</em></h3>
+        <p data-i18n="cs.opJezelf.s03p1">The budgeting feature used realistic everyday expenses - rent, utilities, groceries, insurance - to let teens safely practice financial planning in a consequence-free environment. Most participants had no mental model for what independent living costs, and abstract advice wasn't going to fix that.</p>
+        <p data-i18n="cs.opJezelf.s03p2">Chores and routines were framed as small, achievable tasks supported by light gamification and rewards. Overwhelming someone with a full list of adult responsibilities produces paralysis, not preparation - breaking it into daily micro-tasks with visible progress keeps motivation intact.</p>
+        <p data-i18n="cs.opJezelf.s03p3">Because anxiety was a recurring theme, the design leaned into peer stories and relatable scenarios rather than instructional content. Visual consequences - showing what happens when a bill goes unpaid or a budget runs out - gave decisions real weight without real risk, while humor and interactive moments kept the tone approachable throughout.</p>
       </div>
       <div class="cs-img cs-img-square"><img src="../assets/poster_OpJezelf.webp" alt="Op Jezelf poster" style="width:100%;height:100%;object-fit:cover;object-position:center 30%;border-radius:inherit;"></div>
     </div>
@@ -438,7 +441,7 @@
   </div>
 
   <div class="cs-section reveal">
-    <p class="cs-section-label">04  Prototyping & testing</p>
+    <p class="cs-section-label" data-i18n="cs.opJezelf.s04">04  Prototyping & testing</p>
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px;">
       <img src="../assets/Profil.jpg"       alt="Profil"       style="width:100%;height:auto;display:block;border-radius:4px;">
       <img src="../assets/Quiz.png"         alt="Quiz"         style="width:100%;height:auto;display:block;border-radius:4px;">
@@ -446,22 +449,22 @@
       <img src="../assets/Floorplan.jpg"    alt="Floorplan"    style="width:100%;height:auto;display:block;border-radius:4px;">
     </div>
     <div class="cs-prose" style="max-width:640px;margin-top:48px;">
-      <h3>What testing<br><em>changed</em></h3>
-      <p>The Figma prototype was tested with teenagers in the 14-17 target group through multiple usability sessions and a classroom pilot. Testing surfaced confusion around guidance, unclear next steps, and a narrative gap - how to manage expenses without income.</p>
-      <p>These findings drove clearer onboarding, improved task structure, and more transparent feedback within the decision flow. Iterative refinement kept the experience grounded in the practical realities teens actually face.</p>
+      <h3><span data-i18n="cs.opJezelf.s04h1">What testing</span><br><em data-i18n="cs.opJezelf.s04h1em">changed</em></h3>
+      <p data-i18n="cs.opJezelf.s04p1">The Figma prototype was tested with teenagers in the 14-17 target group through multiple usability sessions and a classroom pilot. Testing surfaced confusion around guidance, unclear next steps, and a narrative gap - how to manage expenses without income.</p>
+      <p data-i18n="cs.opJezelf.s04p2">These findings drove clearer onboarding, improved task structure, and more transparent feedback within the decision flow. Iterative refinement kept the experience grounded in the practical realities teens actually face.</p>
     </div>
   </div>
 
   <div class="cs-section reveal">
-    <p class="cs-section-label">05  Outcome & reflection</p>
+    <p class="cs-section-label" data-i18n="cs.opJezelf.s05">05  Outcome & reflection</p>
     <div class="cs-prose" style="max-width:640px;">
-      <h3>Where the<br><em>project landed</em></h3>
-      <p>The app is currently in full development, with release scheduled for March 2026. The research-informed design decisions successfully translated into a prototype that engages teens while teaching practical financial and life skills.</p>
-      <p>What worked: integrating research insights directly into design, creating relatable scenarios, and using humor and interactive feedback to reduce anxiety. What I'd improve: broader testing with a larger, more diverse group of teens to strengthen validation.</p>
+      <h3><span data-i18n="cs.opJezelf.s05h1">Where the</span><br><em data-i18n="cs.opJezelf.s05h1em">project landed</em></h3>
+      <p data-i18n="cs.opJezelf.s05p1">The app is currently in full development, with release scheduled for March 2026. The research-informed design decisions successfully translated into a prototype that engages teens while teaching practical financial and life skills.</p>
+      <p data-i18n="cs.opJezelf.s05p2">What worked: integrating research insights directly into design, creating relatable scenarios, and using humor and interactive feedback to reduce anxiety. What I'd improve: broader testing with a larger, more diverse group of teens to strengthen validation.</p>
     </div>
     <div class="cs-outcome">
-      <p class="cs-outcome-label">Reflection</p>
-      <p class="cs-outcome-text">This project reinforced that good design research isn't just about uncovering what people need - it's about understanding the emotional context those needs exist in. The financial literacy problem was also an anxiety problem, and addressing only one would have produced a worse product.</p>
+      <p class="cs-outcome-label" data-i18n="cs.opJezelf.s05reflLabel">Reflection</p>
+      <p class="cs-outcome-text" data-i18n="cs.opJezelf.s05reflText">This project reinforced that good design research isn't just about uncovering what people need - it's about understanding the emotional context those needs exist in. The financial literacy problem was also an anxiety problem, and addressing only one would have produced a worse product.</p>
     </div>
   </div>
 
@@ -470,12 +473,13 @@
 <div class="cs-next">
   <div></div>
   <a href="emma.html" class="cs-next-link" style="text-align:right;">
-    <span class="cs-next-label">Next project</span>
-    <span class="cs-next-title">Emma ↗</span>
+    <span class="cs-next-label" data-i18n="cs.next.next">Next project</span>
+    <span class="cs-next-title" data-i18n="cs.opJezelf.nextTitle">Emma ↗</span>
   </a>
 </div>
 
-<footer><p>Luna Rachmani - Portfolio 2025/26</p><p>Leeuwarden, NL</p></footer>
+<footer><p data-i18n="footer.name">Luna Rachmani - Portfolio 2025/26</p><p data-i18n="footer.back">Leeuwarden, NL</p></footer>
+<script src="../js/translations.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/casestudy.js"></script>
 <script>

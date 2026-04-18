@@ -34,3 +34,48 @@ var observer = new IntersectionObserver(function(entries) {
   });
 }, { threshold: 0.1 });
 reveals.forEach(function(el) { observer.observe(el); });
+
+// Language Toggle
+let currentLanguage = localStorage.getItem('language') || 'en';
+
+function setLanguage(lang) {
+  currentLanguage = lang;
+  localStorage.setItem('language', lang);
+  document.documentElement.lang = lang;
+  updatePageText();
+  const toggle = document.getElementById('lang-toggle');
+  if (toggle) {
+    toggle.querySelectorAll('[data-lang]').forEach(function(span) {
+      span.classList.toggle('active', span.getAttribute('data-lang') === lang);
+    });
+  }
+}
+
+function updatePageText() {
+  const elements = document.querySelectorAll('[data-i18n]');
+  elements.forEach(function(el) {
+    const key = el.getAttribute('data-i18n');
+    if (translations[currentLanguage] && translations[currentLanguage][key]) {
+      el.textContent = translations[currentLanguage][key];
+    }
+  });
+}
+
+function initLanguage() {
+  setLanguage(currentLanguage);
+  const toggle = document.getElementById('lang-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      const newLang = currentLanguage === 'en' ? 'nl' : 'en';
+      setLanguage(newLang);
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initLanguage);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLanguage);
+} else {
+  initLanguage();
+}
+
