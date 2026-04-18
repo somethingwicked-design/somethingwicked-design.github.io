@@ -78,39 +78,42 @@
 
 <nav id="nav">
   <a href="index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
-  <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="pages/about.html">About</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="pages/about.html" data-i18n="nav.about">About</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <button id="lang-toggle" class="nav-lang-toggle"><span data-lang="en">EN</span><span class="lang-sep"> | </span><span data-lang="nl">NL</span></button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
-  <p class="hero-eyebrow fade-up">Communication & Multimedia Design</p>
-  <h1 class="fade-up delay-1">Designing with<br><em>people in mind.</em></h1>
-  <p class="hero-sub fade-up delay-2">Third-year CMD student at NHL Stenden. UX research, interaction design, and visual identity, with a focus on products that are useful, honest, and well-considered.</p>
+  <p class="hero-eyebrow fade-up" data-i18n="home.hero.eyebrow">Communication & Multimedia Design</p>
+  <h1 class="fade-up delay-1"><span data-i18n="home.hero.title">Designing with</span><br><em data-i18n="home.hero.title.em">people in mind.</em></h1>
+  <p class="hero-sub fade-up delay-2" data-i18n="home.hero.subtitle">Third-year CMD student at NHL Stenden. UX research, interaction design, and visual identity, with a focus on products that are useful, honest, and well-considered.</p>
   <div class="hero-actions fade-up delay-3">
-    <a href="#work" class="btn btn-primary">View work</a>
-    <a href="pages/about.html" class="btn btn-ghost">About me</a>
+    <a href="#work" class="btn btn-primary" data-i18n="home.hero.btn.primary">View work</a>
+    <a href="pages/about.html" class="btn btn-ghost" data-i18n="home.hero.btn.ghost">About me</a>
   </div>
 </div>
 
 <!-- WORK -->
 <section id="work">
   <div class="section-header reveal">
-    <span class="section-label">Selected work</span>
-    <span class="section-count">06 projects</span>
+    <span class="section-label" data-i18n="home.work.label">Selected work</span>
+    <span class="section-count" data-i18n="home.work.count">06 projects</span>
   </div>
   <div class="multimedia-grid">
 
     <a class="mm-card reveal" href="pages/op-jezelf.html">
       <div class="mm-thumb"><img src="assets/MU_OpJezelf.webp" alt="Op Jezelf" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
       <div class="mm-meta">
-        <p class="mm-title">Op Jezelf</p>
+        <p class="mm-title" data-i18n="project.opJezelf">Op Jezelf</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">UX Research</span><span class="tag">Interaction Design</span><span class="tag">Gamification</span></div>
-          <span class="mm-read">≡ 4 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.opJezelf.tags">UX Research, Interaction Design, Gamification</span></div>
+          <span class="mm-read" data-i18n="project.opJezelf.time">≡ 4 min</span>
         </div>
       </div>
     </a>
@@ -118,10 +121,10 @@
     <a class="mm-card reveal" href="pages/emma.html">
       <div class="mm-thumb"><img src="assets/MU_Emma.webp" alt="Emma" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
       <div class="mm-meta">
-        <p class="mm-title">Emma</p>
+        <p class="mm-title" data-i18n="project.emma">Emma</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">UX Research</span><span class="tag">App Design</span><span class="tag">Accessibility</span></div>
-          <span class="mm-read">≡ 5 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.emma.tags">UX Research, App Design, Accessibility</span></div>
+          <span class="mm-read" data-i18n="project.emma.time">≡ 5 min</span>
         </div>
       </div>
     </a>
@@ -129,10 +132,10 @@
     <a class="mm-card reveal" href="pages/something-wicked.html">
       <div class="mm-thumb"><img src="assets/BC_SW.webp" alt="Something Wicked" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
       <div class="mm-meta">
-        <p class="mm-title">Something Wicked</p>
+        <p class="mm-title" data-i18n="project.somethingWicked">Something Wicked</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">Logo Design</span><span class="tag">Identity</span></div>
-          <span class="mm-read">≡ 3 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.somethingWicked.tags">Logo Design, Identity</span></div>
+          <span class="mm-read" data-i18n="project.somethingWicked.time">≡ 3 min</span>
         </div>
       </div>
     </a>
@@ -140,10 +143,10 @@
     <a class="mm-card reveal" href="pages/health-potion.html">
       <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-2"><img src="assets/HealthPotion.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Health Potion"></div></div>
       <div class="mm-meta">
-        <p class="mm-title">Health Potion</p>
+        <p class="mm-title" data-i18n="project.healthPotion">Health Potion</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">Brand Manual</span><span class="tag">Typography</span></div>
-          <span class="mm-read">≡ 4 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.healthPotion.tags">Brand Manual, Typography</span></div>
+          <span class="mm-read" data-i18n="project.healthPotion.time">≡ 4 min</span>
         </div>
       </div>
     </a>
@@ -151,10 +154,10 @@
     <a class="mm-card reveal" href="pages/de-bote.html">
       <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-3"><img src="assets/DeBote.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="De Bote"></div></div>
       <div class="mm-meta">
-        <p class="mm-title">De Bote</p>
+        <p class="mm-title" data-i18n="project.deBote">De Bote</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">Editorial</span><span class="tag">Logo</span></div>
-          <span class="mm-read">≡ 3 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.deBote.tags">Editorial, Logo</span></div>
+          <span class="mm-read" data-i18n="project.deBote.time">≡ 3 min</span>
         </div>
       </div>
     </a>
@@ -162,10 +165,10 @@
     <a class="mm-card reveal" href="pages/kokoro.html">
       <div class="mm-thumb"><img src="assets/MU_KOKORO.webp" alt="Kokoro" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
       <div class="mm-meta">
-        <p class="mm-title">Kokoro</p>
+        <p class="mm-title" data-i18n="project.kokoro">Kokoro</p>
         <div class="mm-card-footer">
-          <div class="project-tags"><span class="tag">Poster</span><span class="tag">Mascot</span><span class="tag">Branding</span></div>
-          <span class="mm-read">≡ 3 min</span>
+          <div class="project-tags"><span class="tag" data-i18n="project.kokoro.tags">Poster, Mascot, Branding</span></div>
+          <span class="mm-read" data-i18n="project.kokoro.time">≡ 3 min</span>
         </div>
       </div>
     </a>
@@ -176,31 +179,32 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-header reveal">
-    <span class="section-label">Contact</span>
+    <span class="section-label" data-i18n="home.contact.label">Contact</span>
   </div>
   <div class="contact-inner">
     <div class="contact-left reveal">
-      <h2>Let's make<br>something<br><em>good.</em></h2>
-      <p>Whether it's a project, a collaboration, or just a question, feel free to reach out.</p>
+      <h2><span data-i18n="home.contact.title">Let's make</span><br><span data-i18n="home.contact.title.em">something</span><br><em data-i18n="home.contact.title.em2">good.</em></h2>
+      <p data-i18n="home.contact.subtitle">Whether it's a project, a collaboration, or just a question, feel free to reach out.</p>
     </div>
     <div class="contact-links reveal">
       <a href="mailto:lurachmani@gmail.com" class="contact-link">
-        <span class="contact-link-label">lurachmani@gmail.com</span>
-        <span class="contact-link-platform">Email</span>
+        <span class="contact-link-label" data-i18n="home.contact.email">lurachmani@gmail.com</span>
+        <span class="contact-link-platform" data-i18n="home.contact.email.label">Email</span>
       </a>
       <a href="https://www.linkedin.com/in/somethingwicked/" target="_blank" class="contact-link">
-        <span class="contact-link-label">linkedin.com/in/somethingwicked</span>
-        <span class="contact-link-platform">LinkedIn</span>
+        <span class="contact-link-label" data-i18n="home.contact.linkedin">linkedin.com/in/somethingwicked</span>
+        <span class="contact-link-platform" data-i18n="home.contact.linkedin.label">LinkedIn</span>
       </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>Luna Rachmani - Portfolio 2025/26</p>
-  <p>Leeuwarden, NL</p>
+  <p data-i18n="footer.name">Luna Rachmani - Portfolio 2025/26</p>
+  <p data-i18n="footer.location">Leeuwarden, NL</p>
 </footer>
 
+<script src="js/translations.js"></script>
 <script src="js/main.js"></script>
 <script src="js/home.js"></script>
 </body>

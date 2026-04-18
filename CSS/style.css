@@ -79,6 +79,7 @@ nav.scrolled { border-bottom-color: var(--border); }
 }
 .nav-name:hover { opacity: 0.75; }
 
+.nav-right { display: flex; align-items: center; gap: 36px; }
 .nav-links { display: flex; gap: 36px; list-style: none; }
 .nav-links a {
   color: var(--text-muted);
@@ -90,6 +91,33 @@ nav.scrolled { border-bottom-color: var(--border); }
   transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--accent); }
+
+.nav-lang-toggle {
+  background: none;
+  border: none;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'DM Sans', sans-serif;
+  color: inherit;
+}
+.nav-lang-toggle [data-lang] {
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+.nav-lang-toggle [data-lang].active {
+  color: var(--text);
+  font-weight: 500;
+}
+.nav-lang-toggle .lang-sep {
+  color: var(--text-muted);
+  opacity: 0.4;
+}
+.nav-lang-toggle:hover [data-lang] { color: var(--text-muted); }
+.nav-lang-toggle:hover [data-lang].active { color: var(--accent); }
 
 .btn {
   display: inline-flex;
@@ -128,7 +156,7 @@ section { padding: 0 48px 120px; max-width: 1200px; margin: 0 auto; }
   justify-content: space-between;
   align-items: baseline;
   border-top: 0.5px solid var(--border);
-  padding-top: 24px;
+  padding-top: 48px;
   margin-bottom: 64px;
 }
 .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
@@ -176,6 +204,7 @@ footer p { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
   nav { padding: 20px 24px; }
   section { padding: 0 24px 80px; }
   footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+  .nav-right { gap: 20px; }
   .nav-links { gap: 20px; }
 }
 
@@ -183,6 +212,7 @@ footer p { font-size: 12px; color: var(--text-muted); letter-spacing: 0.04em; }
   nav { padding: 16px 20px; }
   .nav-something { font-size: 16px; }
   .nav-wicked { font-size: 30px; }
+  .nav-right { gap: 14px; }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 11px; letter-spacing: 0.03em; }
   section { padding: 0 20px 64px; }

@@ -33,16 +33,6 @@
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.cs-eyebrow::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 0.5px;
-  background: var(--text-muted);
 }
 
 .cs-title {

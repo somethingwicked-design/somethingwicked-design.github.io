@@ -209,9 +209,9 @@
   .t-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   .t-shaper-grid {
     display: grid;
-    grid-template-columns: repeat(11, minmax(76px, 1fr));
+    grid-template-columns: repeat(12, minmax(76px, 1fr));
     gap: 2px;
-    min-width: 860px;
+    min-width: 920px;
   }
   .t-cell {
     padding: 8px 10px;
@@ -223,13 +223,93 @@
     justify-content: center;
     text-align: center;
   }
-  .t-cat { background: var(--accent); color: #1A1A18; font-weight: 500; }
-  .t-g   { background: #112B1E; color: #6DBF90; border: 0.5px solid #1E4A30; }
-  .t-o   { background: #3A1E08; color: #E8954A; border: 0.5px solid #5A3010; }
-  .t-r   { background: #381010; color: #E87070; border: 0.5px solid #581818; }
+  .t-cat { background: var(--accent); color: #1A1A18; font-weight: 500; font-size: 11px; letter-spacing: 0.01em; }
+  .t-g   { background: #083322; color: #85D4B5; border: 0.5px solid #0E3D28; }
+  .t-o   { background: #3B2200; color: #F5C07A; border: 0.5px solid #5A3600; }
+  .t-r   { background: #3A0A0A; color: #F0A0A0; border: 0.5px solid #5A1414; }
   .t-empty { background: transparent; }
   @media (max-width: 900px) { .t-shaper-section { padding-left: 24px; padding-right: 24px; } }
   @media (max-width: 480px) { .t-shaper-section { padding-left: 20px; padding-right: 20px; } }
+
+  /* Stats Cards */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+    padding: 0;
+  }
+  .stat-card {
+    aspect-ratio: 1;
+    background: var(--bg2);
+    border: 0.5px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .stat-card:hover {
+    border-color: var(--accent);
+    background: var(--bg3);
+  }
+  .stat-card-front,
+  .stat-card-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: 12px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .stat-card-back {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.8);
+    padding: 24px;
+    pointer-events: none;
+  }
+  .stat-card:hover .stat-card-front {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  .stat-card:hover .stat-card-back {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .stat-back-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+  .stat-label {
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .stat-value {
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  @media (max-width: 900px) {
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .stats-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -237,11 +317,14 @@
 
 <nav id="nav">
   <a href="../index.html" class="nav-name"><span class="nav-something">Something</span><span class="nav-wicked">Wicked</span></a>
-  <ul class="nav-links">
-    <li><a href="../index.html#work">Work</a></li>
-    <li><a href="about.html" style="color:var(--accent);">About</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="../index.html#work" data-i18n="nav.work">Work</a></li>
+      <li><a href="about.html" style="color:var(--accent);" data-i18n="nav.about">About</a></li>
+      <li><a href="../index.html#contact" data-i18n="nav.contact">Contact</a></li>
+    </ul>
+    <button id="lang-toggle" class="nav-lang-toggle"><span data-lang="en">EN</span><span class="lang-sep"> | </span><span data-lang="nl">NL</span></button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -278,11 +361,11 @@
 
 <!-- SKILLS -->
 <div class="section-header skills-section-header reveal">
-  <span class="section-label">Skills & tools</span>
+  <span class="section-label" data-i18n="about.skills.label">Skills & tools</span>
 </div>
 <div class="skills-grid">
   <div class="skill-block reveal">
-    <span class="skill-block-label">Design</span>
+    <span class="skill-block-label" data-i18n="about.skills.design">Design</span>
     <ul class="skill-list">
       <li>Figma</li>
       <li>Prototyping</li>
@@ -292,7 +375,7 @@
     </ul>
   </div>
   <div class="skill-block reveal">
-    <span class="skill-block-label">Research</span>
+    <span class="skill-block-label" data-i18n="about.skills.research">Research</span>
     <ul class="skill-list">
       <li>Usability Testing</li>
       <li>Interviews & Diary Studies</li>
@@ -302,7 +385,7 @@
     </ul>
   </div>
   <div class="skill-block reveal">
-    <span class="skill-block-label">Tools & other</span>
+    <span class="skill-block-label" data-i18n="about.skills.tools">Tools & other</span>
     <ul class="skill-list">
       <li>Adobe Creative Cloud</li>
       <li>DaVinci Resolve</li>
@@ -313,170 +396,111 @@
   </div>
 </div>
 
-<!-- T-SHAPER -->
-<div class="section-header skills-section-header reveal">
-  <span class="section-label">T-shaped profile</span>
-</div>
-<div class="t-shaper-section reveal">
-  <div class="t-shaper-legend">
-    <span class="t-legend-item"><span class="t-dot" style="background:#2A7A50;"></span> Comfortable</span>
-    <span class="t-legend-item"><span class="t-dot" style="background:#C27020;"></span> Familiar, not fluent</span>
-    <span class="t-legend-item"><span class="t-dot" style="background:#B03030;"></span> Want to learn</span>
+
+<!-- MY STATS -->
+<section id="stats">
+  <div class="section-header reveal">
+    <span class="section-label" data-i18n="about.mystats.label">My stats</span>
   </div>
-  <div class="t-shaper-scroll">
-    <div class="t-shaper-grid">
-      <!-- Row 0: Category headers -->
-      <div class="t-cell t-cat">Film production</div>
-      <div class="t-cell t-cat">Audio & Music Production</div>
-      <div class="t-cell t-cat">Branding</div>
-      <div class="t-cell t-cat">Graphic Design</div>
-      <div class="t-cell t-cat">Print</div>
-      <div class="t-cell t-cat">UI</div>
-      <div class="t-cell t-cat">UX</div>
-      <div class="t-cell t-cat">Design Research</div>
-      <div class="t-cell t-cat">Illustration</div>
-      <div class="t-cell t-cat">Front-End</div>
-      <div class="t-cell t-cat">Leadership</div>
-      <!-- Row 1 -->
-      <div class="t-cell t-g">Composition</div>
-      <div class="t-cell t-g">Mixing</div>
-      <div class="t-cell t-g">Brand Guidelines</div>
-      <div class="t-cell t-g">Layouts & grids</div>
-      <div class="t-cell t-g">CMYK and print</div>
-      <div class="t-cell t-g">Design Systems</div>
-      <div class="t-cell t-g">Heuristics</div>
-      <div class="t-cell t-g">Qualitative research</div>
-      <div class="t-cell t-g">Iconography</div>
-      <div class="t-cell t-g">HTML</div>
-      <div class="t-cell t-g">Situational Leadership</div>
-      <!-- Row 2 -->
-      <div class="t-cell t-g">Film recce</div>
-      <div class="t-cell t-g">Mastering</div>
-      <div class="t-cell t-g">Dynamic Brands</div>
-      <div class="t-cell t-g">Color theory</div>
-      <div class="t-cell t-g">Zine making</div>
-      <div class="t-cell t-g">Usability</div>
-      <div class="t-cell t-g">UX Strategy</div>
-      <div class="t-cell t-g">Co-creation</div>
-      <div class="t-cell t-g">Style Guide</div>
-      <div class="t-cell t-g">css</div>
-      <div class="t-cell t-g">Feedback Culture</div>
-      <!-- Row 3 -->
-      <div class="t-cell t-g">Call Sheet</div>
-      <div class="t-cell t-g">Improvising</div>
-      <div class="t-cell t-g">Logo design</div>
-      <div class="t-cell t-g">Editorial</div>
-      <div class="t-cell t-g">Bleed and Margins</div>
-      <div class="t-cell t-g">Accessibility</div>
-      <div class="t-cell t-g">UX Psychology</div>
-      <div class="t-cell t-g">Usability testing</div>
-      <div class="t-cell t-g">Colour theory</div>
-      <div class="t-cell t-o">Javascript</div>
-      <div class="t-cell t-g">DISC</div>
-      <!-- Row 4 -->
-      <div class="t-cell t-g">Script Writing</div>
-      <div class="t-cell t-g">Songwriting</div>
-      <div class="t-cell t-g">Corporate Design</div>
-      <div class="t-cell t-g">Typography</div>
-      <div class="t-cell t-g">Paper Weight</div>
-      <div class="t-cell t-g">Wireframing</div>
-      <div class="t-cell t-g">Ethics</div>
-      <div class="t-cell t-g">Quantitative testing</div>
-      <div class="t-cell t-g">Motion Illustration</div>
-      <div class="t-cell t-g">Flexbox</div>
-      <div class="t-cell t-g">Decision making</div>
-      <!-- Row 5 -->
-      <div class="t-cell t-g">Script Writing</div>
-      <div class="t-cell t-o">Music Theory</div>
-      <div class="t-cell t-g">Dynamic Brands</div>
-      <div class="t-cell t-g">Composition</div>
-      <div class="t-cell t-g">Coating</div>
-      <div class="t-cell t-g">Component Library</div>
-      <div class="t-cell t-g">Prototyping</div>
-      <div class="t-cell t-g">Personas</div>
-      <div class="t-cell t-g">Brand Consistency</div>
-      <div class="t-cell t-o">State Management</div>
-      <div class="t-cell t-g">Team dynamics</div>
-      <!-- Row 6 -->
-      <div class="t-cell t-g">Compositing 2D/3D</div>
-      <div class="t-cell t-g">Beat production</div>
-      <div class="t-cell t-g">Positioning</div>
-      <div class="t-cell t-g">Design principles</div>
-      <div class="t-cell t-o">Special finishes</div>
-      <div class="t-cell t-g">Variants</div>
-      <div class="t-cell t-g">User flow</div>
-      <div class="t-cell t-g">Empathy Mapping</div>
-      <div class="t-cell t-g">Grid Alignment</div>
-      <div class="t-cell t-g">Refactoring</div>
-      <div class="t-cell t-g">Reflection</div>
-      <!-- Row 7 -->
-      <div class="t-cell t-g">Editing</div>
-      <div class="t-cell t-g">Sampling</div>
-      <div class="t-cell t-g">Brand Promise</div>
-      <div class="t-cell t-g">Creative Rationale</div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-g">Dark Mode</div>
-      <div class="t-cell t-g">Wireframes</div>
-      <div class="t-cell t-g">Double Diamond</div>
-      <div class="t-cell t-g">Animation</div>
-      <div class="t-cell t-r">Responsive Breakpoints</div>
-      <div class="t-cell t-g">Growth Mindset</div>
-      <!-- Row 8 -->
-      <div class="t-cell t-g">Camera</div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-g">Archetype</div>
-      <div class="t-cell t-g">Graphic Design history</div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-g">Responsive Design</div>
-      <div class="t-cell t-g">User Goals</div>
-      <div class="t-cell t-g">Synthesis</div>
-      <div class="t-cell t-r">3D</div>
-      <div class="t-cell t-r">Deployment</div>
-      <div class="t-cell t-g">Stakeholder alignment</div>
-      <!-- Row 9 -->
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-o">Colour Grading</div>
-      <div class="t-cell t-g">Logo design</div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-g">Interaction States</div>
-      <div class="t-cell t-g">Problem Statement</div>
-      <div class="t-cell t-g">Triangulation</div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-r">PHP</div>
-      <div class="t-cell t-g">Psychological safety</div>
-      <!-- Row 10 -->
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-empty"></div>
-      <div class="t-cell t-r">Frameworks</div>
-      <div class="t-cell t-g">Conflict Resolution</div>
+  <div class="stats-grid reveal">
+    <!-- MBTI Card -->
+    <div class="stat-card stat-card-mbti">
+      <div class="stat-card-front">
+        <div class="stat-label">MBTI</div>
+        <div class="stat-value" data-i18n="about.mystats.mbti">ENFP-T</div>
+      </div>
+      <div class="stat-card-back">
+        <div class="stat-back-content">
+          <div style="font-size:12px;line-height:1.6;color:var(--text-muted);">
+            <span style="color:var(--text);font-weight:500;" data-i18n="about.mystats.mbti.desc">The Campaigner</span><br><span data-i18n="about.mystats.mbti.full">Extroverted, Intuitive, Feeling, Perceiving</span><br><span style="font-size:11px;margin-top:8px;display:block;color:var(--text-mid);" data-i18n="about.mystats.mbti.trait">Enthusiastic, creative, people-focused visionary</span>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- DISC Card -->
+    <div class="stat-card stat-card-disc">
+      <div class="stat-card-front">
+        <div style="width:120px;height:120px;border-radius:50%;background:conic-gradient(#D44A4A 0% 30%, #2E7DC4 30% 60%, #F5C842 60% 80%, #1D9E75 80% 100%);position:relative;margin:0 auto;">
+          <div style="position:absolute;inset:24px;background:var(--bg2);border-radius:50%;display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:20px;font-weight:300;" data-i18n="about.mystats.disc">DISC</span>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card-back">
+        <div class="stat-back-content">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:11px;">
+            <div><span style="width:8px;height:8px;border-radius:2px;background:#D44A4A;display:inline-block;margin-right:6px;vertical-align:middle;"></span><span style="color:var(--text);">D</span> 30%</div>
+            <div><span style="width:8px;height:8px;border-radius:2px;background:#2E7DC4;display:inline-block;margin-right:6px;vertical-align:middle;"></span><span style="color:var(--text);">C</span> 30%</div>
+            <div><span style="width:8px;height:8px;border-radius:2px;background:#F5C842;display:inline-block;margin-right:6px;vertical-align:middle;"></span><span style="color:var(--text);">I</span> 20%</div>
+            <div><span style="width:8px;height:8px;border-radius:2px;background:#1D9E75;display:inline-block;margin-right:6px;vertical-align:middle;"></span><span style="color:var(--text);">S</span> 20%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aquarius Card -->
+    <div class="stat-card stat-card-aquarius">
+      <div class="stat-card-front">
+        <div class="stat-label" style="font-size:40px;line-height:1;">♒</div>
+        <div class="stat-value" style="font-size:16px;" data-i18n="about.mystats.aquarius">Aquarius</div>
+      </div>
+      <div class="stat-card-back">
+        <div class="stat-back-content">
+          <div style="font-size:12px;line-height:1.5;color:var(--text-muted);">
+            <span style="color:var(--text);font-weight:500;" data-i18n="about.mystats.aquarius.desc">Creative & Visionary</span><br><span data-i18n="about.mystats.aquarius.full">Independent thinker with an innovative approach to design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Left-Handed Card -->
+    <div class="stat-card stat-card-lefty">
+      <div class="stat-card-front">
+        <div class="stat-label" style="font-size:32px;">🖐️</div>
+        <div class="stat-value" style="font-size:14px;" data-i18n="about.mystats.lefty">Left-handed</div>
+      </div>
+      <div class="stat-card-back">
+        <div class="stat-back-content">
+          <div style="font-size:12px;line-height:1.5;color:var(--text-muted);">
+            <span data-i18n="about.mystats.lefty.desc">In a right-handed world, thinking differently comes naturally</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cat Button -->
+    <button id="cat-btn" class="stat-card" style="cursor:pointer;gap:12px;flex-direction:column;">
+      <div style="font-size:32px;">🐱</div>
+      <div style="font-size:14px;font-weight:400;color:var(--text);letter-spacing:-0.01em;text-align:center;">Ilio</div>
+    </button>
+  </div>
+</section>
+
+<!-- Cat Modal -->
+<div id="cat-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:1000;align-items:center;justify-content:center;">
+  <div style="position:relative;width:90%;max-width:600px;">
+    <button id="cat-close" style="position:absolute;top:-40px;right:0;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;letter-spacing:0.1em;text-transform:uppercase;">close [c]</button>
+    <img id="cat-img" src="../assets/Ilio.jpg" style="width:100%;border-radius:4px;display:block;">
   </div>
 </div>
 
 <!-- DETAILS -->
 <section id="details" style="padding-bottom:40px;">
   <div class="section-header reveal">
-    <span class="section-label">Details</span>
+    <span class="section-label" data-i18n="about.details.label">Details</span>
   </div>
   <div class="about-grid">
     <div class="about-details reveal">
-      <div class="detail-row"><span class="detail-label">Focus</span><span class="detail-val">UX / UI / Interaction Design</span></div>
-      <div class="detail-row"><span class="detail-label">Languages</span><span class="detail-val">German, Greek, English (C1)</span></div>
-      <div class="detail-row"><span class="detail-label">Agency</span><span class="detail-val">Something Wicked - Founder, 2021-present</span></div>
-      <div class="detail-row"><span class="detail-label">Available</span><span class="detail-val">Open to collaboration</span></div>
+      <div class="detail-row"><span class="detail-label" data-i18n="about.details.focus">Focus</span><span class="detail-val" data-i18n="about.details.focus.val">UX / UI / Interaction Design</span></div>
+      <div class="detail-row"><span class="detail-label" data-i18n="about.details.languages">Languages</span><span class="detail-val" data-i18n="about.details.languages.val">English (C2), German (C2), Greek (B2), Dutch (B1)</span></div>
+      <div class="detail-row"><span class="detail-label" data-i18n="about.details.agency">Agency</span><span class="detail-val" data-i18n="about.details.agency.val">Something Wicked, Founder, 2021-present</span></div>
+      <div class="detail-row"><span class="detail-label" data-i18n="about.details.available">Available</span><span class="detail-val" data-i18n="about.details.available.val">Open to collaboration</span></div>
     </div>
     <div class="about-text reveal">
       <!-- EDIT THIS: A personal note - optional but nice -->
-      <h2>Outside<br><em>of design.</em></h2>
-      <p>I make music under the alias SALT - writing, producing, mixing my own vocals. I read a lot, mostly fiction and philosophy. I play videogames seriously enough that I built a brand identity around one. I also draw, which feeds directly back into illustration work for clients and projects like Op Jezelf and Kokoro.</p>
+      <h2><span data-i18n="about.outsideDesign">Outside</span><br><em data-i18n="about.outsideDesign.em">of design.</em></h2>
+      <p data-i18n="about.outsideDesign.text">I make music under the alias SALT - writing, producing, mixing my own vocals. I read a lot, mostly fiction and philosophy. I play videogames seriously enough that I built a brand identity around one. I also draw, which feeds directly back into illustration work for clients and projects like Op Jezelf and Kokoro.</p>
     </div>
   </div>
 </section>
@@ -485,18 +509,19 @@
 <div class="cv-strip reveal">
   <div class="cv-strip-inner">
     <div class="cv-strip-left">
-      <h3>Full CV</h3>
-      <p>Education, work experience, and references.</p>
+      <h3 data-i18n="about.cv.label">Full CV</h3>
+      <p data-i18n="about.cv.desc">Education, work experience, and references.</p>
     </div>
-    <a href="https://drive.google.com/file/d/1iXUGaSRbavAMILEzByqoT4xYECmB9_8E/view?usp=sharing" target="_blank" class="btn btn-ghost">Download CV ↗</a>
+    <a href="https://drive.google.com/file/d/1iXUGaSRbavAMILEzByqoT4xYECmB9_8E/view?usp=sharing" target="_blank" class="btn btn-ghost" data-i18n="about.cv.btn">Download CV ↗</a>
   </div>
 </div>
 
 <footer>
-  <p>Luna Rachmani - Portfolio 2025/26</p>
-  <p><a href="../index.html" style="color:var(--text-muted);text-decoration:none;">Back to work ↗</a></p>
+  <p data-i18n="footer.name">Luna Rachmani - Portfolio 2025/26</p>
+  <p><a href="../index.html" style="color:var(--text-muted);text-decoration:none;" data-i18n="footer.back">Back to work ↗</a></p>
 </footer>
 
+<script src="../js/translations.js"></script>
 <script src="../js/main.js"></script>
 <script>
   var nav = document.getElementById('nav');
@@ -508,6 +533,71 @@
     entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   reveals.forEach(function(el) { observer.observe(el); });
+
+  // Cat modal and confetti
+  const catBtn = document.getElementById('cat-btn');
+  const catModal = document.getElementById('cat-modal');
+  const catClose = document.getElementById('cat-close');
+  let confettiInterval;
+
+  function openCatModal() {
+    catModal.style.display = 'flex';
+    createContinuousConfetti();
+  }
+
+  function closeCatModal() {
+    catModal.style.display = 'none';
+    clearInterval(confettiInterval);
+    const confetti = document.querySelectorAll('.cat-confetti');
+    confetti.forEach(el => el.remove());
+  }
+
+  function createContinuousConfetti() {
+    confettiInterval = setInterval(() => {
+      const confettiPiece = document.createElement('div');
+      confettiPiece.className = 'cat-confetti';
+      confettiPiece.textContent = '🐱';
+      const delay = Math.random() * 0.5;
+      const duration = 4 + Math.random() * 2;
+      const xOffset = (Math.random() - 0.5) * 200;
+      confettiPiece.style.cssText = `
+        position: fixed;
+        left: ${Math.random() * 100}%;
+        top: -30px;
+        font-size: ${18 + Math.random() * 24}px;
+        opacity: ${0.6 + Math.random() * 0.4};
+        animation: fall ${duration}s linear ${delay}s forwards;
+        z-index: 1001;
+        pointer-events: none;
+        --x-offset: ${xOffset}px;
+      `;
+      catModal.appendChild(confettiPiece);
+
+      // Remove old confetti to prevent memory issues
+      setTimeout(() => confettiPiece.remove(), (duration + delay) * 1000);
+    }, 80);
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) translateX(var(--x-offset)) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  catBtn.addEventListener('click', openCatModal);
+  catClose.addEventListener('click', closeCatModal);
+
+  // Close with 'c' key
+  document.addEventListener('keydown', function(e) {
+    if (e.key.toLowerCase() === 'c' && catModal.style.display === 'flex') {
+      closeCatModal();
+    }
+  });
 </script>
 </body>
 </html>
