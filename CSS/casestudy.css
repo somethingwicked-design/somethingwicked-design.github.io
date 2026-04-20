@@ -111,7 +111,6 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-mid);
-  border-top: 0.5px solid var(--accent);
   padding-top: 20px;
   margin-bottom: 36px;
 }

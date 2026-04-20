@@ -72,7 +72,6 @@ function initLanguage() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', initLanguage);
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initLanguage);
 } else {
