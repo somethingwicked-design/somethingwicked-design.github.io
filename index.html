@@ -58,12 +58,10 @@
   flex-shrink: 0;
 }
 .mm-card .tag { border-radius: 20px; padding: 4px 12px; }
-.mm-bg-1 { background: #1a120c; }
 .mm-bg-2 { background: #0d1610; }
 .mm-bg-3 { background: #191614; }
-.mm-bg-4 { background: #140d1a; }
-.mm-bg-5 { background: #0d1520; }
-.mm-bg-6 { background: #0c1018; }
+.mm-thumb img,
+.mm-thumb-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 @media (max-width: 900px) {
   .multimedia-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -108,7 +106,7 @@
   <div class="multimedia-grid">
 
     <a class="mm-card reveal" href="pages/op-jezelf.html">
-      <div class="mm-thumb"><img src="assets/MU_OpJezelf.webp" alt="Op Jezelf" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-thumb"><img src="assets/MU_OpJezelf.webp" alt="Op Jezelf"></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.opJezelf">Op Jezelf</p>
         <div class="mm-card-footer">
@@ -119,7 +117,7 @@
     </a>
 
     <a class="mm-card reveal" href="pages/emma.html">
-      <div class="mm-thumb"><img src="assets/MU_Emma.webp" alt="Emma" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-thumb"><img src="assets/MU_Emma.webp" alt="Emma"></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.emma">Emma</p>
         <div class="mm-card-footer">
@@ -130,7 +128,7 @@
     </a>
 
     <a class="mm-card reveal" href="pages/something-wicked.html">
-      <div class="mm-thumb"><img src="assets/BC_SW.webp" alt="Something Wicked" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-thumb"><img src="assets/BC_SW.webp" alt="Something Wicked"></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.somethingWicked">Something Wicked</p>
         <div class="mm-card-footer">
@@ -141,7 +139,7 @@
     </a>
 
     <a class="mm-card reveal" href="pages/health-potion.html">
-      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-2"><img src="assets/HealthPotion.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="Health Potion"></div></div>
+      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-2"><img src="assets/HealthPotion.webp" alt="Health Potion"></div></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.healthPotion">Health Potion</p>
         <div class="mm-card-footer">
@@ -152,7 +150,7 @@
     </a>
 
     <a class="mm-card reveal" href="pages/de-bote.html">
-      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-3"><img src="assets/DeBote.webp" style="width:100%;height:100%;object-fit:cover;display:block;" alt="De Bote"></div></div>
+      <div class="mm-thumb"><div class="mm-thumb-inner mm-bg-3"><img src="assets/DeBote.webp" alt="De Bote"></div></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.deBote">De Bote</p>
         <div class="mm-card-footer">
@@ -163,7 +161,7 @@
     </a>
 
     <a class="mm-card reveal" href="pages/kokoro.html">
-      <div class="mm-thumb"><img src="assets/MU_KOKORO.webp" alt="Kokoro" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;"></div>
+      <div class="mm-thumb"><img src="assets/MU_KOKORO.webp" alt="Kokoro"></div>
       <div class="mm-meta">
         <p class="mm-title" data-i18n="project.kokoro">Kokoro</p>
         <div class="mm-card-footer">
