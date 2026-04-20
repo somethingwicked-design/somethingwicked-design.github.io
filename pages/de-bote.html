@@ -10,6 +10,17 @@
 <link rel="stylesheet" href="../css/casestudy.css">
 <style>
 .cs-section-label { border-top: none; }
+.db-s02-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 48px;
+  align-items: stretch;
+}
+@media (max-width: 900px) {
+  .db-s02-layout { grid-template-columns: 1fr; }
+  .db-s02-layout > img { height: 400px; object-fit: cover; }
+}
 </style>
 </head>
 <body>
@@ -67,7 +78,7 @@
         <p data-i18n="cs.deBote.s01p4">The colour palette - Night Black, Anti-Flash White, and Fire Engine Red - was chosen to reflect the provocative nature of the 06 lines. Playfair Display and EB Garamond were selected for readability and historical resonance.</p>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;">
+    <div class="cs-grid-3" style="margin-top:48px;">
       <img src="../assets/Engineer.jpg"  alt="Engineer"   style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:4px;">
       <img src="../assets/Engineer2.jpg" alt="Engineer 2" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:4px;">
       <img src="../assets/Engineer3.jpg" alt="Engineer 3" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:4px;">
@@ -88,7 +99,7 @@
         <p data-i18n="cs.deBote.s02p4">The flyer used period-appropriate 90s-style advertisements to keep it authentic to the era, and a red phone icon in place of a standard graphic. At the final pop-up stand on October 22nd, over 20 students from the target demographic confirmed the telephone and poster were the most effective pieces - the interactivity and retro aesthetic were what landed.</p>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;align-items:stretch;">
+    <div class="db-s02-layout">
       <div style="display:flex;flex-direction:column;gap:24px;">
         <img src="../assets/TestSetup.jpg" alt="Test setup" style="width:100%;height:auto;display:block;border-radius:4px;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1;min-height:0;">
@@ -114,7 +125,7 @@
         <p data-i18n="cs.deBote.s03p4">The newspaper ran to seven pages plus a TLDR insert, covering the Skene brothers, Cora Emens (a voice actress for the lines), Menno Buch's documentary coverage, the De Walrus incident, and media representation through the Netflix series.</p>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px;">
+    <div class="cs-grid-3" style="gap:16px;margin-top:48px;">
       <img src="../assets/Logo.jpg"        alt="De Bote logo"    style="width:100%;height:auto;display:block;border-radius:4px;grid-column:1/-1;">
       <img src="../assets/DeBotePage2.jpg" alt="De Bote page 2" style="width:100%;height:auto;display:block;border-radius:4px;">
       <img src="../assets/DeBotePage3.jpg" alt="De Bote page 3" style="width:100%;height:auto;display:block;border-radius:4px;">

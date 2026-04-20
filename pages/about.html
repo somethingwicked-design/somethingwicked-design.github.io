@@ -71,7 +71,7 @@
 
   /* Content blocks */
   .about-content {
-    padding: 0 48px 80px;
+    padding: 0 48px 48px;
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -160,17 +160,11 @@
     color: var(--text-muted);
   }
 
-  .skills-section-header {
-    padding: 0 48px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
 
   @media (max-width: 900px) {
     .about-page-hero { grid-template-columns: 1fr; gap: 32px; padding: 140px 24px 60px; }
     .about-content { grid-template-columns: 1fr; gap: 48px; padding: 0 24px 60px; }
     .skills-grid { grid-template-columns: 1fr; padding: 0 24px 60px; }
-    .skills-section-header { padding-left: 24px; padding-right: 24px; }
     .photo-strip, .cv-strip { padding-left: 24px; padding-right: 24px; }
     .cv-strip-inner { flex-direction: column; gap: 24px; align-items: flex-start; }
   }
@@ -181,7 +175,6 @@
     .about-page-hero-right p { font-size: 14px; }
     .about-content { padding: 0 20px 48px; }
     .skills-grid { padding: 0 20px 48px; }
-    .skills-section-header { padding-left: 20px; padding-right: 20px; }
     .photo-strip, .cv-strip { padding-left: 20px; padding-right: 20px; }
     .cv-strip-inner { padding: 28px; }
     .skill-block { padding: 22px 24px; }
@@ -252,10 +245,6 @@
     overflow: hidden;
     transition: all 0.3s ease;
   }
-  .stat-card:hover {
-    border-color: var(--accent);
-    background: var(--bg3);
-  }
   .stat-card-front,
   .stat-card-back {
     display: flex;
@@ -275,13 +264,14 @@
     padding: 24px;
     pointer-events: none;
   }
-  .stat-card:hover .stat-card-front {
+  .stat-card.flipped .stat-card-front {
     opacity: 0;
     transform: scale(0.8);
   }
-  .stat-card:hover .stat-card-back {
+  .stat-card.flipped .stat-card-back {
     opacity: 1;
     transform: scale(1);
+    pointer-events: auto;
   }
   .stat-back-content {
     display: flex;
@@ -329,10 +319,9 @@
 
 <!-- HERO -->
 <div class="about-page-hero">
-  <h1 class="fade-up">Designer.<br><em>Researcher.</em><br>Founder.</h1>
+  <h1 class="fade-up"><span data-i18n="about.hero.line1">Designer.</span><br><em data-i18n="about.hero.line2">Researcher.</em><br><span data-i18n="about.hero.line3">Founder.</span></h1>
   <div class="about-page-hero-right fade-up delay-1">
-    <!-- EDIT THIS: 2-3 sentence intro about yourself -->
-    <p>I'm Luna Rachmani, a third-year Communication &amp; Multimedia Design student at NHL Stenden and founder of Something Wicked, a freelance multimedia agency I've been running since 2021. I work across UX research, interaction design, visual identity, and illustration. My work tends to live at the intersection of emotional complexity and practical need.</p>
+    <p data-i18n="about.hero.intro">I'm Luna Rachmani, a third-year Communication &amp; Multimedia Design student at NHL Stenden and founder of Something Wicked, a freelance multimedia agency I've been running since 2021. I work across UX research, interaction design, visual identity, and illustration. My work tends to live at the intersection of emotional complexity and practical need.</p>
   </div>
 </div>
 
@@ -346,23 +335,23 @@
 <!-- ABOUT CONTENT -->
 <div class="about-content">
   <div class="about-block reveal">
-    <h3>Background</h3>
-    <!-- EDIT THIS: Your background, where you're from, how you got into design -->
-    <p>I'm Greek by origin - summers spent with family there until I was about twelve - but grew up in Germany, with stretches of time in England along the way. I landed in the Netherlands for my studies at NHL Stenden in Leeuwarden. My design path started at Berufskolleg Neandertal, where I completed a vocational qualification with a focus on design and a technical assistant apprenticeship - which meant I was doing client work and using Adobe tools before I started a university programme.</p>
-    <p>Since 2021 I've been running Something Wicked alongside my studies - taking on branding, visual identity, and multimedia projects for clients. In 2025 I spent a semester on exchange at TUS Moylish in Limerick, Ireland, studying Broadcast &amp; Film Production, which expanded my practice into audio and moving image.</p>
+    <h3 data-i18n="about.background.h3">Background</h3>
+    <p data-i18n="about.background.p1">I'm Greek by origin - summers spent with family there until I was about twelve - but grew up in Germany, with stretches of time in England along the way. I landed in the Netherlands for my studies at NHL Stenden in Leeuwarden. My design path started at Berufskolleg Neandertal, where I completed a vocational qualification with a focus on design and a technical assistant apprenticeship - which meant I was doing client work and using Adobe tools before I started a university programme.</p>
+    <p data-i18n="about.background.p2">Since 2021 I've been running Something Wicked alongside my studies - taking on branding, visual identity, and multimedia projects for clients. In 2025 I spent a semester on exchange at TUS Moylish in Limerick, Ireland, studying Broadcast &amp; Film Production, which expanded my practice into audio and moving image.</p>
   </div>
   <div class="about-block reveal">
-    <h3>How I work</h3>
-    <!-- EDIT THIS: Your design philosophy / process -->
-    <p>Research first, always. I use mixed methods - interviews, diary studies, usability testing, co-creation, desk research - and I care about keeping the trail from finding to decision visible. A design choice that can't be traced back to something real is a guess, and I'd rather have fewer decisions made with more confidence than lots of decisions made fast.</p>
-    <p>I'm drawn to projects where the problem has emotional weight - caregiver support, financial literacy for teenagers, harm reduction. These are areas where the difference between a good and a bad design isn't aesthetic, it's functional in someone's life. That raises the stakes in a way I find motivating rather than overwhelming.</p>
+    <h3 data-i18n="about.howIWork.h3">How I work</h3>
+    <p data-i18n="about.howIWork.p1">Research first, always. I use mixed methods - interviews, diary studies, usability testing, co-creation, desk research - and I care about keeping the trail from finding to decision visible. A design choice that can't be traced back to something real is a guess, and I'd rather have fewer decisions made with more confidence than lots of decisions made fast.</p>
+    <p data-i18n="about.howIWork.p2">I'm drawn to projects where the problem has emotional weight - caregiver support, financial literacy for teenagers, harm reduction. These are areas where the difference between a good and a bad design isn't aesthetic, it's functional in someone's life. That raises the stakes in a way I find motivating rather than overwhelming.</p>
   </div>
 </div>
 
 <!-- SKILLS -->
-<div class="section-header skills-section-header reveal">
-  <span class="section-label" data-i18n="about.skills.label">Skills & tools</span>
-</div>
+<section style="padding-bottom: 0; padding-top: 40px;">
+  <div class="section-header reveal">
+    <span class="section-label" data-i18n="about.skills.label">Skills & tools</span>
+  </div>
+</section>
 <div class="skills-grid">
   <div class="skill-block reveal">
     <span class="skill-block-label" data-i18n="about.skills.design">Design</span>
@@ -400,7 +389,7 @@
 <!-- MY STATS -->
 <section id="stats">
   <div class="section-header reveal">
-    <span class="section-label" data-i18n="about.mystats.label">My stats</span>
+    <span class="section-label" data-i18n="about.mystats.label">My stats (Click me!)</span>
   </div>
   <div class="stats-grid reveal">
     <!-- MBTI Card -->
@@ -518,7 +507,7 @@
 
 <footer>
   <p data-i18n="footer.name">Luna Rachmani - Portfolio 2025/26</p>
-  <p><a href="../index.html" style="color:var(--text-muted);text-decoration:none;" data-i18n="footer.back">Back to work ↗</a></p>
+  <p><a href="../index.html" style="color:var(--text-muted);text-decoration:none;" data-i18n="about.footer.back">Back to work ↗</a></p>
 </footer>
 
 <script src="../js/translations.js"></script>
@@ -533,6 +522,13 @@
     entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   reveals.forEach(function(el) { observer.observe(el); });
+
+  // Stat card click-to-flip
+  document.querySelectorAll('.stat-card:not(#cat-btn)').forEach(function(card) {
+    card.addEventListener('click', function() {
+      card.classList.toggle('flipped');
+    });
+  });
 
   // Cat modal and confetti
   const catBtn = document.getElementById('cat-btn');
