@@ -101,9 +101,9 @@
 .cs-gallery-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
 /* CASE STUDY BODY */
-.cs-body { max-width: 1200px; margin: 0 auto; padding: 0 48px 120px; }
+.cs-body { max-width: 1200px; margin: 0 auto; padding: 0 48px 80px; }
 
-.cs-section { margin-bottom: 96px; }
+.cs-section { margin-bottom: 72px; }
 .cs-section:last-child { margin-bottom: 0; }
 
 .cs-section-label {
@@ -112,8 +112,8 @@
   text-transform: uppercase;
   color: var(--text-mid);
   border-top: 0.5px solid var(--accent);
-  padding-top: 24px;
-  margin-bottom: 48px;
+  padding-top: 20px;
+  margin-bottom: 36px;
 }
 
 .cs-two-col {
@@ -264,7 +264,7 @@
 @media (max-width: 900px) {
   .cs-hero { padding: 140px 24px 64px; }
   .cs-hero-grid { grid-template-columns: 1fr; gap: 48px; }
-  .cs-body { padding: 0 24px 80px; }
+  .cs-body { padding: 0 24px 60px; }
   .cs-gallery-grid { grid-template-columns: 1fr 1fr; }
   .cs-two-col, .cs-three-col { grid-template-columns: 1fr; gap: 40px; }
   .cs-ksat-grid { grid-template-columns: 1fr; }
@@ -345,7 +345,7 @@
 
 @media (max-width: 480px) {
   .cs-hero { padding: 120px 20px 48px; }
-  .cs-body { padding: 0 20px 60px; }
+  .cs-body { padding: 0 20px 48px; }
   .cs-gallery-grid { grid-template-columns: 1fr; }
   .cs-gallery-img.tall { aspect-ratio: 4/3; }
   .cs-ksat-cell { padding: 20px; }
@@ -353,4 +353,25 @@
   .cs-title { font-size: clamp(32px, 9vw, 52px); }
   .cs-prose h3 { font-size: 22px; }
   .cs-outcome { padding: 20px 20px; }
+}
+
+/* Reusable responsive grid helpers */
+.cs-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.cs-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .cs-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .cs-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .cs-grid-3 { grid-template-columns: 1fr; }
+  .cs-grid-4 { grid-template-columns: 1fr 1fr; gap: 12px; }
 }

@@ -9,6 +9,7 @@
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: 28px;
+  margin-left: -36px;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -115,6 +116,7 @@
 
 @media (max-width: 900px) {
   .hero { padding: 140px 24px 80px; }
+  .hero-eyebrow { margin-left: 0; }
   .hero-actions { flex-wrap: wrap; margin-top: 36px; }
   .ec-layout { grid-template-columns: 1fr; gap: 48px; }
   .ec-row { grid-template-columns: 100px 1fr; }
