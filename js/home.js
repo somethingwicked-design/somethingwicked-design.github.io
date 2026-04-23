@@ -23,7 +23,7 @@ axisTicks.style.cssText = 'position:relative;height:16px;';
 [0,3,6,9,12,15,18,21,24,27,30].forEach(function(n) {
   var tick = document.createElement('span');
   tick.textContent = n;
-  tick.style.cssText = 'position:absolute;left:' + (n / MAX * 100).toFixed(1) + '%;transform:translateX(-50%);font-size:10px;color:#7a7872;letter-spacing:0.04em;';
+  tick.style.cssText = 'position:absolute;left:' + (n / MAX * 100).toFixed(1) + '%;transform:translateX(-50%);font-size:10px;color:var(--text-muted);letter-spacing:0.04em;';
   axisTicks.appendChild(tick);
 });
 axisRow.appendChild(axisBlank);
@@ -45,27 +45,16 @@ rows.forEach(function(row) {
   var rqPct  = ((row.received + row.requested) / MAX * 100).toFixed(1);
   var reqPct = ((row.received + row.requested + row.required) / MAX * 100).toFixed(1);
 
-  if (row.required > 0) {
+  function addSegment(className, width) {
     var seg = document.createElement('div');
-    seg.className = 'ec-bar-segment ec-bar-required';
-    seg.style.left = '0';
-    seg.style.width = reqPct + '%';
+    seg.className = 'ec-bar-segment ' + className;
+    seg.style.width = width + '%';
     track.appendChild(seg);
   }
-  if (row.requested > 0) {
-    var seg2 = document.createElement('div');
-    seg2.className = 'ec-bar-segment ec-bar-requested';
-    seg2.style.left = '0';
-    seg2.style.width = rqPct + '%';
-    track.appendChild(seg2);
-  }
-  if (row.received > 0) {
-    var seg3 = document.createElement('div');
-    seg3.className = 'ec-bar-segment ec-bar-received';
-    seg3.style.left = '0';
-    seg3.style.width = rPct + '%';
-    track.appendChild(seg3);
-  }
+
+  if (row.required  > 0) addSegment('ec-bar-required',  reqPct);
+  if (row.requested > 0) addSegment('ec-bar-requested', rqPct);
+  if (row.received  > 0) addSegment('ec-bar-received',  rPct);
 
   div.appendChild(label);
   div.appendChild(track);

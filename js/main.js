@@ -1,3 +1,6 @@
+const CURSOR_HOVER   = { width: '28px', height: '28px', opacity: '0.6' };
+const CURSOR_DEFAULT = { width: '6px',  height: '6px',  opacity: '1' };
+
 const cursor = document.getElementById('cursor');
 
 document.addEventListener('mousemove', function(e) {
@@ -7,14 +10,10 @@ document.addEventListener('mousemove', function(e) {
 
 document.querySelectorAll('a, button').forEach(function(el) {
   el.addEventListener('mouseenter', function() {
-    cursor.style.width = '28px';
-    cursor.style.height = '28px';
-    cursor.style.opacity = '0.6';
+    Object.assign(cursor.style, CURSOR_HOVER);
   });
   el.addEventListener('mouseleave', function() {
-    cursor.style.width = '6px';
-    cursor.style.height = '6px';
-    cursor.style.opacity = '1';
+    Object.assign(cursor.style, CURSOR_DEFAULT);
   });
 });
 

@@ -41,7 +41,7 @@
 }
 .hero-actions { display: flex; gap: 16px; margin-top: 48px; align-items: center; }
 
-.ec-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.ec-layout, .about-grid, .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .ec-chart-wrap { display: flex; flex-direction: column; gap: 0; }
 .ec-row { display: grid; grid-template-columns: 140px 1fr; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
 .ec-row:first-child { border-top: 0.5px solid var(--border); }
@@ -93,7 +93,6 @@
 .project-arrow { margin-top: 12px; font-size: 18px; color: var(--text-muted); display: inline-block; transition: transform 0.2s, color 0.2s; }
 .project-card:hover .project-arrow { transform: translate(4px, -4px); color: var(--accent); }
 
-.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .about-text h2 { font-family: 'DM Serif Display', serif; font-size: 36px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 24px; color: var(--text); }
 .about-text h2 em { font-style: italic; color: var(--text-mid); }
 .about-text p { color: var(--text-muted); font-size: 15px; line-height: 1.75; margin-bottom: 16px; }
@@ -103,7 +102,6 @@
 .detail-label { color: var(--text-muted); letter-spacing: 0.04em; }
 .detail-val { color: var(--text); text-align: right; }
 
-.contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
 .contact-left h2 { font-family: 'DM Serif Display', serif; font-size: 48px; font-weight: 400; letter-spacing: -0.03em; line-height: 1.1; color: var(--text); margin-bottom: 24px; }
 .contact-left h2 em { font-style: italic; color: var(--text-mid); }
 .contact-left p { color: var(--text-muted); font-size: 15px; line-height: 1.7; max-width: 360px; }
@@ -118,11 +116,10 @@
   .hero { padding: 140px 24px 80px; }
   .hero-eyebrow { margin-left: 0; }
   .hero-actions { flex-wrap: wrap; margin-top: 36px; }
-  .ec-layout { grid-template-columns: 1fr; gap: 48px; }
+  .ec-layout, .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .ec-row { grid-template-columns: 100px 1fr; }
   .project-grid { grid-template-columns: 1fr; }
   .project-card.featured { grid-column: span 1; }
-  .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .contact-left h2 { font-size: 36px; }
 }
 
