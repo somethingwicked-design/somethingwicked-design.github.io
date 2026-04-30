@@ -141,7 +141,7 @@ nav.scrolled { border-bottom-color: var(--border); }
 
 .tag {
   font-size: 10px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted);
   background: var(--tag-bg);
