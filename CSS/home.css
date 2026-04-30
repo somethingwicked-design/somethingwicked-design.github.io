@@ -45,7 +45,7 @@
 .ec-chart-wrap { display: flex; flex-direction: column; gap: 0; }
 .ec-row { display: grid; grid-template-columns: 140px 1fr; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
 .ec-row:first-child { border-top: 0.5px solid var(--border); }
-.ec-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
+.ec-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); text-align: right; }
 .ec-bar-track { position: relative; height: 10px; background: var(--bg3); border-radius: 1px; }
 .ec-bar-segment { position: absolute; top: 0; height: 100%; border-radius: 1px; }
 .ec-bar-received  { background: var(--text); }
@@ -70,7 +70,7 @@
 .lg-ec-badge { font-family: 'DM Serif Display', serif; font-size: 16px; color: var(--text-mid); }
 .lg-goals { display: flex; flex-direction: column; gap: 10px; }
 .lg-goal { display: grid; grid-template-columns: 20px 1fr; gap: 12px; align-items: start; }
-.lg-goal-num { font-size: 10px; letter-spacing: 0.06em; color: var(--text-muted); padding-top: 2px; }
+.lg-goal-num { font-size: 10px; letter-spacing: 0.1em; color: var(--text-muted); padding-top: 2px; }
 .lg-goal-text { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
 
 .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
@@ -110,7 +110,7 @@
 .contact-link:first-child { border-top: 0.5px solid var(--border); }
 .contact-link:hover { color: var(--accent); padding-left: 8px; }
 .contact-link-label { font-size: 15px; font-weight: 300; }
-.contact-link-platform { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+.contact-link-platform { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
 
 @media (max-width: 900px) {
   .hero { padding: 140px 24px 80px; }
