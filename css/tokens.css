@@ -71,11 +71,16 @@
   --sp-144: 144px;
   --sp-160: 160px;
 
-  /* Grid: 12 columns, 32px gutters, 80px margins at 1440 (fluid to 16px) */
+  /* Grid: 12 columns, 32px gutters, 80px margins from 1429px (fluid to 16px).
+     Content stops growing at 1920px. */
   --cols: 12;
   --gutter: 32px;
   --margin: clamp(16px, 5.6vw, 80px);
-  --page-max: 1440px;
+  --page-max: 1920px;
+
+  /* Header height, fixed so the hero paper can reach up behind it */
+  --header-h: 120px;
+  --band-peek: 40px; /* how much of the caution band shows below a full-screen hero */
 
   /* Targets */
   --target-link: 48px;
@@ -88,10 +93,20 @@
   --z-skip: 200;
 }
 
+/* Desktop and laptop: the header and hero scale with the screen width only,
+   like a picture. 1hu = 10px at 1440 wide (the canvas). */
+@media (min-width: 1024px) {
+  :root {
+    --hu: calc(100vw / 144);
+    --header-h: calc(12 * var(--hu)); /* 120px at 1440 */
+  }
+}
+
 /* Below 760px everything stacks; a narrower gutter keeps 12 columns
    from overflowing at 360px. */
 @media (max-width: 760px) {
   :root {
     --gutter: 16px;
+    --header-h: 176px; /* logo row + nav row */
   }
 }

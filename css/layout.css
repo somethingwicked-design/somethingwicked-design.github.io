@@ -2,7 +2,7 @@
    Layout: page wrapper, 12-column grid, span helpers, stacking
    ========================================================================== */
 
-/* Content width: 1440px canvas with fluid side margins */
+/* Content width: up to 1920px with fluid side margins */
 .wrap {
   width: 100%;
   max-width: var(--page-max);

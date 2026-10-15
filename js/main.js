@@ -1,5 +1,4 @@
-// Small things only: nav state and the dev grid overlay.
-// Marquee pause arrives with the homepage (step 2).
+// Small things only: nav state, marquee pause and the dev grid overlay.
 
 (function () {
   'use strict';
@@ -17,6 +16,27 @@
     var link = document.querySelector('.nav [data-nav="' + section + '"]');
     if (link) link.setAttribute('aria-current', 'page');
   }
+
+  // ---------------------------------------------------------------------
+  // Marquee: pause on hover and while off screen (saves work, and stops
+  // motion nobody is looking at). Reduced motion is handled in CSS.
+  // ---------------------------------------------------------------------
+  var bands = document.querySelectorAll('[data-marquee]');
+  Array.prototype.forEach.call(bands, function (band) {
+    var hovered = false;
+    var visible = true;
+    function update() {
+      band.classList.toggle('is-paused', hovered || !visible);
+    }
+    band.addEventListener('pointerenter', function () { hovered = true; update(); });
+    band.addEventListener('pointerleave', function () { hovered = false; update(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        update();
+      }).observe(band);
+    }
+  });
 
   // ---------------------------------------------------------------------
   // Dev-only grid overlay: add ?grid to the URL or press G.

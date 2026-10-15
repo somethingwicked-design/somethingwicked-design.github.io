@@ -13,8 +13,9 @@
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
+  align-content: center;
   gap: var(--sp-16);
-  padding-block: var(--sp-32);
+  height: var(--header-h);
 }
 
 .logo {
@@ -52,6 +53,30 @@
 }
 .nav a[aria-current='page'] {
   color: var(--accent);
+}
+
+/* Desktop: the header is part of the hero picture, so it scales with --hu
+   (canvas sizes at 1440 wide, 80px margins = 8hu). Links stay at least 44px
+   tall as click targets. */
+@media (min-width: 1024px) {
+  .site-header {
+    max-width: none;
+    padding-inline: calc(8 * var(--hu));
+    gap: calc(1.6 * var(--hu));
+  }
+  .logo-something {
+    font-size: calc(2 * var(--hu));
+  }
+  .logo-wicked {
+    font-size: calc(3.6 * var(--hu));
+  }
+  .nav {
+    gap: calc(4 * var(--hu));
+    font-size: calc(1.4 * var(--hu));
+  }
+  .nav a {
+    min-height: max(44px, calc(4.8 * var(--hu)));
+  }
 }
 
 /* EN / NL. Hidden in the markup until there is a Dutch version. */
@@ -126,4 +151,489 @@
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Button: yellow, the one primary action
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-button);
+  padding: 0 var(--sp-32);
+  background: var(--accent);
+  color: var(--ink);
+  font-size: var(--fs-button);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.btn:hover {
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Hero: torn paper behind, headline cols 1-7, photo cols 8-11
+   -------------------------------------------------------------------------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  row-gap: var(--sp-40);
+  align-items: stretch;
+  padding-block: clamp(64px, 8.9vw, 128px) clamp(80px, 10vw, 144px);
+}
+
+/* Wraps the hero. Clips the paper sideways at the screen edge (so it still
+   runs up behind the header), and on desktop it is the box the two hero
+   groups are anchored to. */
+.hero-bleed {
+  position: relative;
+  isolation: isolate;
+  overflow-x: clip;
+}
+
+/* Torn yellow paper: right 51.5% of the viewport, from the top of the page
+   (behind the header) down to and behind the caution band.
+   TEMPORARY CSS rip: swap the SVG for the After Effects Lottie in
+   data-lottie when it exists. Do not add lottie-web until then. */
+.hero-rip {
+  position: absolute;
+  top: calc(-1 * var(--header-h));
+  right: calc((100vw - 100%) / -2); /* to the screen edge, past the wrap */
+  bottom: 0;
+  z-index: -1;
+  width: calc(100vw * 0.515);
+  pointer-events: none;
+  clip-path: inset(-200vh -200vw 0 -200vw); /* never below the band */
+}
+.hero-rip svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible; /* shadow and fibres past the edges */
+}
+
+.hero-title {
+  font-size: var(--fs-hero);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+.hero-something {
+  font-family: var(--font-something);
+  font-size: 0.82em;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--accent);
+}
+.hero-wicked {
+  margin-right: 0.12em; /* the swashes touched 'in it.' */
+  font-family: var(--font-wicked);
+  font-size: 1.2em;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-32);
+  margin-top: var(--sp-56);
+}
+.hero-intro {
+  max-width: 416px;
+  color: var(--bone-muted);
+}
+
+/* Photo: straight white frame, rotated, tape on top, crossing the tear */
+.hero-photo {
+  position: relative;
+  z-index: 2;
+  min-height: 384px;
+  transform: rotate(3deg);
+}
+.hero-frame {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  padding: var(--sp-12);
+  background: var(--frame);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+.hero-frame picture {
+  display: contents;
+}
+.hero-frame img {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Masking tape: beige, slightly see-through, torn ends */
+.tape {
+  position: absolute;
+  width: 136px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
+  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
+}
+.hero-photo .tape {
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-6deg);
+}
+
+/* 'that's me!' annotation. Placeholder for Luna's handwriting SVG. */
+.hero-note {
+  position: absolute;
+  left: -168px;
+  bottom: 72px;
+  width: 160px;
+  height: 112px;
+  transform: rotate(-3deg);
+  pointer-events: none;
+}
+.hero-note-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 24px;
+  line-height: 1;
+  white-space: nowrap;
+  transform: rotate(-8deg);
+}
+.hero-note svg {
+  position: absolute;
+  inset: 0;
+  width: 160px;
+  height: 112px;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop hero (1024px and up): one picture that scales with the screen
+   width only (--hu, 1hu = 10px at 1440), so it looks identical everywhere.
+   The canvas is 144hu wide; header + hero is 86hu tall and the band peeks in
+   up to 90hu, as 1440x900. On screens shorter than 90hu the band, and
+   eventually the button, sit below the first screen.
+   Coordinates: x from the left edge of the screen, y from the top of the
+   page, in hu.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1024px) {
+  .hero {
+    position: static; /* the parts anchor to .hero-bleed (full width) */
+    display: block;
+    max-width: none;
+    height: calc(86 * var(--hu) - var(--header-h));
+    padding: 0;
+  }
+
+  /* Paper: x 69.1hu to the screen edge (74.9hu), page top to band */
+  .hero-rip {
+    top: calc(-1 * var(--header-h));
+    left: calc(69.1 * var(--hu));
+    right: auto;
+    width: calc(74.9 * var(--hu));
+  }
+
+  /* Headline, button, intro: x 8hu (the margin), y 27.5hu */
+  .hero-text {
+    position: absolute;
+    left: calc(8 * var(--hu));
+    top: calc(27.5 * var(--hu) - var(--header-h));
+    width: calc(69.12 * var(--hu));
+  }
+  .hero-title {
+    font-size: calc(10.08 * var(--hu));
+    white-space: nowrap; /* keep the canvas's three lines */
+  }
+  /* Pinned rather than flowing under the h1: the h1's line boxes round
+     differently per size (mixed fonts), which made the button drift. */
+  .hero-cta {
+    position: absolute;
+    top: calc(34.85 * var(--hu));
+    left: 0;
+    flex-wrap: nowrap;
+    gap: calc(3.2 * var(--hu));
+    margin-top: 0;
+  }
+  .hero .btn {
+    min-height: max(44px, calc(5.6 * var(--hu))); /* never below a 44px target */
+    padding: 0 calc(3.2 * var(--hu));
+    font-size: calc(1.5 * var(--hu));
+  }
+  .hero-intro {
+    max-width: calc(41.6 * var(--hu));
+    font-size: calc(1.8 * var(--hu));
+  }
+
+  /* Photo: x 83.6hu, y 22.46hu, 40.32hu wide, always 4:5 */
+  .hero-photo {
+    position: absolute;
+    left: calc(83.6 * var(--hu));
+    top: calc(22.46 * var(--hu) - var(--header-h));
+    width: calc(40.32 * var(--hu));
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+  }
+  .hero-frame {
+    padding: calc(1.2 * var(--hu));
+    box-shadow: 0 calc(1.4 * var(--hu)) calc(3.2 * var(--hu)) rgba(0, 0, 0, 0.4);
+  }
+  .hero-photo .tape {
+    top: calc(-1.6 * var(--hu));
+    width: calc(13.6 * var(--hu));
+    height: calc(4 * var(--hu));
+  }
+
+  /* Note and arrow: placed from the photo's own edges */
+  .hero-note {
+    left: calc(-16.8 * var(--hu));
+    bottom: calc(17.28 * var(--hu));
+    width: calc(16 * var(--hu));
+    height: calc(11.2 * var(--hu));
+  }
+  .hero-note-text {
+    font-size: calc(2.4 * var(--hu));
+  }
+  .hero-note svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Caution tape band: over the paper, tilted, scrolling
+   -------------------------------------------------------------------------- */
+.band-clip {
+  overflow-x: clip; /* the band is 104% wide */
+}
+.band {
+  position: relative;
+  z-index: var(--z-band);
+  width: 104%;
+  margin: -8px 0 0 -2%;
+  padding: var(--sp-24) var(--margin);
+  overflow: hidden;
+  transform: rotate(-1.4deg);
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.45);
+  background:
+    repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) top / 100% 10px no-repeat,
+    repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) bottom / 100% 10px no-repeat,
+    var(--accent);
+  color: var(--ink);
+  font-size: var(--fs-band);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.marquee {
+  display: flex;
+  width: max-content;
+}
+/* Two identical groups; the trailing padding makes -50% loop seamlessly */
+.marquee-group {
+  display: flex;
+  gap: var(--sp-40);
+  padding-right: var(--sp-40);
+}
+
+/* --------------------------------------------------------------------------
+   Selected work
+   -------------------------------------------------------------------------- */
+.work {
+  padding-block: var(--sp-120) var(--sp-144);
+}
+.work-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--sp-24);
+  margin-bottom: var(--sp-56);
+}
+.work-title {
+  font-size: var(--fs-h2);
+  line-height: 0.9;
+}
+.work-intro {
+  max-width: 360px;
+  color: var(--bone-muted);
+}
+.pgrid {
+  row-gap: var(--sp-64);
+  align-items: start;
+}
+
+/* Project card: the whole card is one link */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-24);
+  color: var(--bone);
+  text-decoration: none;
+}
+.card:hover {
+  color: var(--bone);
+}
+
+/* Project image: thick white frame, glossy sheen, shadow, no grain */
+.card-img {
+  position: relative;
+  z-index: var(--z-media);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  border: var(--sp-12) solid var(--frame);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 36%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.07) 100%),
+    var(--placeholder);
+  color: var(--muted);
+  font-size: var(--fs-ui);
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+.card-img--wide {
+  aspect-ratio: 16 / 8;
+}
+.pill {
+  position: absolute;
+  top: var(--sp-24);
+  left: var(--sp-24);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--sp-40);
+  padding: 0 var(--sp-16);
+  border-radius: 999px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+.card-title {
+  font-size: var(--fs-card);
+  line-height: 0.95;
+}
+.card-title--lg {
+  font-size: var(--fs-card-lg);
+}
+.card-line {
+  font-size: var(--fs-body);
+  line-height: 1.4;
+}
+.tags {
+  color: var(--muted);
+  font-size: var(--fs-tag);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+
+/* 'All projects' tile: cream, tips on hover */
+.tile {
+  position: relative;
+  z-index: var(--z-media);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  aspect-ratio: 4 / 3;
+  padding: clamp(24px, 3vw, 40px);
+  background: var(--bone);
+  color: var(--ink);
+  text-decoration: none;
+}
+.tile:hover {
+  color: var(--ink);
+}
+.tile-meta {
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+.tile-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--sp-16);
+}
+.tile-title {
+  font-size: clamp(48px, 6vw, 96px);
+  line-height: 0.85;
+}
+.tile-arrow {
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Hover motion: subtle, only with a real pointer, never with reduced motion
+   -------------------------------------------------------------------------- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition: transform .2s;
+  }
+  .btn:hover {
+    transform: rotate(-2deg) scale(1.04);
+  }
+  .card-img {
+    transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .5s;
+  }
+  .card:hover .card-img {
+    transform: translateY(-8px) rotate(-.8deg);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6);
+  }
+  .tile {
+    transition: transform .4s cubic-bezier(.2, .7, .2, 1);
+  }
+  .tile:hover {
+    transform: rotate(-1.2deg) scale(1.015);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hero on phones (below 760px). Not on the canvas: see todo
+   'Check the torn paper and hero on phone width'.
+   The photo shrinks and sits right so the note fits on its left, and the
+   paper only covers the lower part of the hero, behind the photo, so it
+   never sits under the headline.
+   -------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  .hero-photo {
+    justify-self: end;
+    width: 60%;
+    min-height: 0;
+    aspect-ratio: 4 / 5;
+    margin-top: var(--sp-16);
+  }
+  .hero-note {
+    bottom: 40%;
+    transform: rotate(-3deg) scale(0.85);
+    transform-origin: 100% 50%;
+  }
+  .card-img--wide {
+    aspect-ratio: 4 / 3;
+  }
+  .hero-rip {
+    top: auto;
+    height: 46%;
+    width: 80vw;
+  }
 }
