@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foundation check (dev only)</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <script src="/js/main.js" defer></script>
+  <!-- /head -->
+
+  <!-- Dev-only page for reviewing step 1. Delete before launch. -->
+  <style>
+    .fc { padding-block: var(--sp-80); display: grid; gap: var(--sp-80); }
+    .fc h2 { font-size: var(--fs-ui); font-weight: 600; letter-spacing: var(--tracking-ui); text-transform: uppercase; color: var(--muted); margin-bottom: var(--sp-24); }
+    .fc-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--sp-16); }
+    .fc-swatch { display: grid; gap: var(--sp-8); font-size: var(--fs-tag); color: var(--muted); }
+    .fc-swatch span:first-child { height: var(--sp-80); border: 1px solid var(--line); }
+    .fc-type { display: grid; gap: var(--sp-24); }
+    .fc-space { display: grid; gap: var(--sp-8); font-size: var(--fs-tag); color: var(--muted); }
+    .fc-space div { display: flex; align-items: center; gap: var(--sp-16); }
+    .fc-space i { display: block; height: var(--sp-8); background: var(--accent); }
+    .fc-cols { row-gap: var(--sp-16); }
+    .fc-cols div { min-height: var(--sp-64); background: var(--card); display: grid; place-items: center; font-size: var(--fs-tag); color: var(--muted); }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header wrap">
+    <a class="logo" href="/" aria-label="Something Wicked, home">
+      <span class="logo-something">SOMETHING</span>
+      <span class="logo-wicked">Wicked</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <!-- EN / NL goes here once there is a Dutch version:
+    <p class="lang"><span class="lang-current">EN</span> / NL</p> -->
+  </header>
+  <!-- /header -->
+
+  <main id="main" class="wrap fc">
+    <h1 class="visually-hidden">Foundation check</h1>
+
+    <section>
+      <h2>Colour</h2>
+      <div class="fc-swatches">
+        <div class="fc-swatch"><span style="background:var(--ink)"></span><span>--ink #0B0B0B</span></div>
+        <div class="fc-swatch"><span style="background:var(--bone)"></span><span>--bone #F2EEE6</span></div>
+        <div class="fc-swatch"><span style="background:var(--bone-muted)"></span><span>--bone-muted #D6D1C7</span></div>
+        <div class="fc-swatch"><span style="background:var(--muted)"></span><span>--muted #A8A39A</span></div>
+        <div class="fc-swatch"><span style="background:var(--card)"></span><span>--card #1A1917</span></div>
+        <div class="fc-swatch"><span style="background:var(--placeholder)"></span><span>--placeholder #24231F</span></div>
+        <div class="fc-swatch"><span style="background:var(--accent)"></span><span>--accent #E8C547</span></div>
+      </div>
+    </section>
+
+    <section class="fc-type">
+      <h2>Type</h2>
+      <p class="head" style="font-size:var(--fs-h2);line-height:.9">Archivo 900, 70% width</p>
+      <p style="color:var(--bone-muted)">Outfit 18/1.5 body on dark. The quick brown fox jumps over the lazy dog.</p>
+      <p style="font-size:var(--fs-tag);font-weight:600;letter-spacing:var(--tracking-ui);text-transform:uppercase;color:var(--muted)">Tag / Meta / 12px</p>
+    </section>
+
+    <section>
+      <h2>Spacing (8px scale)</h2>
+      <div class="fc-space">
+        <div><i style="width:var(--sp-8)"></i>8</div>
+        <div><i style="width:var(--sp-16)"></i>16</div>
+        <div><i style="width:var(--sp-24)"></i>24</div>
+        <div><i style="width:var(--sp-32)"></i>32</div>
+        <div><i style="width:var(--sp-40)"></i>40</div>
+        <div><i style="width:var(--sp-48)"></i>48</div>
+        <div><i style="width:var(--sp-64)"></i>64</div>
+        <div><i style="width:var(--sp-80)"></i>80</div>
+        <div><i style="width:var(--sp-112)"></i>112</div>
+        <div><i style="width:var(--sp-160)"></i>160</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Grid (press G locally, or add ?grid)</h2>
+      <div class="g12 fc-cols">
+        <div class="s12">s12</div>
+        <div class="s6">s6</div><div class="s6">s6</div>
+        <div class="s4">s4</div><div class="s4">s4</div><div class="s4">s4</div>
+        <div class="s3">s3</div><div class="s3">s3</div><div class="s3">s3</div><div class="s3">s3</div>
+        <div class="s4">c1 s4 (chapter label)</div><div class="c5 s7">c5 s7 (chapter text)</div>
+        <div class="s7">s7 (hero text)</div><div class="c8 s4">c8 s4 (hero photo)</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <div class="wrap">
+      <p class="footer-line head">Let's make<br>some <span class="accent">trouble.</span></p>
+      <div class="footer-meta">
+        <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+          <!-- EN / NL goes here once there is a Dutch version:
+          <p class="lang"><span class="lang-current">EN</span> / NL</p> -->
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>

@@ -1,79 +1,65 @@
-const CURSOR_HOVER   = { width: '28px', height: '28px', opacity: '0.6' };
-const CURSOR_DEFAULT = { width: '6px',  height: '6px',  opacity: '1' };
+// Small things only: nav state and the dev grid overlay.
+// Marquee pause arrives with the homepage (step 2).
 
-const cursor = document.getElementById('cursor');
+(function () {
+  'use strict';
 
-document.addEventListener('mousemove', function(e) {
-  cursor.style.left = e.clientX + 'px';
-  cursor.style.top = e.clientY + 'px';
-});
+  // ---------------------------------------------------------------------
+  // Nav state: the header is identical on every page, so mark the
+  // current section here instead of in the markup.
+  // ---------------------------------------------------------------------
+  var path = window.location.pathname;
+  var section = null;
+  if (path.indexOf('/work/') === 0) section = 'work';
+  else if (path === '/about.html' || path === '/about') section = 'about';
 
-document.querySelectorAll('a, button').forEach(function(el) {
-  el.addEventListener('mouseenter', function() {
-    Object.assign(cursor.style, CURSOR_HOVER);
-  });
-  el.addEventListener('mouseleave', function() {
-    Object.assign(cursor.style, CURSOR_DEFAULT);
-  });
-});
-
-var nav = document.getElementById('nav');
-window.addEventListener('scroll', function() {
-  if (window.scrollY > 40) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
+  if (section) {
+    var link = document.querySelector('.nav [data-nav="' + section + '"]');
+    if (link) link.setAttribute('aria-current', 'page');
   }
-});
 
-var reveals = document.querySelectorAll('.reveal');
-var observer = new IntersectionObserver(function(entries) {
-  entries.forEach(function(e) {
-    if (e.isIntersecting) e.target.classList.add('visible');
-  });
-}, { threshold: 0.1 });
-reveals.forEach(function(el) { observer.observe(el); });
+  // ---------------------------------------------------------------------
+  // Dev-only grid overlay: add ?grid to the URL or press G.
+  // Off by default and never visible to visitors.
+  // ---------------------------------------------------------------------
+  var overlay = null;
 
-// Language Toggle
-let currentLanguage = localStorage.getItem('language') || 'en';
-
-function setLanguage(lang) {
-  currentLanguage = lang;
-  localStorage.setItem('language', lang);
-  document.documentElement.lang = lang;
-  updatePageText();
-  const toggle = document.getElementById('lang-toggle');
-  if (toggle) {
-    toggle.querySelectorAll('[data-lang]').forEach(function(span) {
-      span.classList.toggle('active', span.getAttribute('data-lang') === lang);
-    });
+  function buildOverlay() {
+    var el = document.createElement('div');
+    el.className = 'dev-grid';
+    el.setAttribute('aria-hidden', 'true');
+    var cols = '';
+    for (var i = 0; i < 12; i++) cols += '<span></span>';
+    el.innerHTML = '<div class="wrap"><div class="g12">' + cols + '</div></div>';
+    return el;
   }
-}
 
-function updatePageText() {
-  const elements = document.querySelectorAll('[data-i18n]');
-  elements.forEach(function(el) {
-    const key = el.getAttribute('data-i18n');
-    if (translations[currentLanguage] && translations[currentLanguage][key]) {
-      el.textContent = translations[currentLanguage][key];
+  function toggleGrid(force) {
+    var show = typeof force === 'boolean' ? force : !overlay;
+    if (show && !overlay) {
+      overlay = buildOverlay();
+      document.body.appendChild(overlay);
+    } else if (!show && overlay) {
+      overlay.remove();
+      overlay = null;
     }
-  });
-}
-
-function initLanguage() {
-  setLanguage(currentLanguage);
-  const toggle = document.getElementById('lang-toggle');
-  if (toggle) {
-    toggle.addEventListener('click', function() {
-      const newLang = currentLanguage === 'en' ? 'nl' : 'en';
-      setLanguage(newLang);
-    });
   }
-}
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initLanguage);
-} else {
-  initLanguage();
-}
+  var gridParam = new URLSearchParams(window.location.search).has('grid');
+  var isLocal = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname) ||
+    window.location.protocol === 'file:';
 
+  if (gridParam) toggleGrid(true);
+
+  // The G shortcut only listens locally or after ?grid, so a visitor
+  // typing G on the live site never sees it.
+  if (!gridParam && !isLocal) return;
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'g' && e.key !== 'G') return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var t = e.target;
+    if (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)) return;
+    toggleGrid();
+  });
+})();

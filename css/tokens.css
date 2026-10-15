@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Tokens
+   Values come from DESIGN.md and the canvas exports in the SW vault
+   (reference/homepage.dc.html, reference/case-study.dc.html).
+   ========================================================================== */
+
+/* Local display fonts. Logo and hero h1 only (decision 003).
+   Heartless is a personal-use licence: flag before going live (see todo). */
+@font-face {
+  font-family: 'Quinthero';
+  src: url('/fonts/Quinthero.ttf') format('truetype');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Heartless';
+  src: url('/fonts/Heartless.ttf') format('truetype');
+  font-display: swap;
+}
+
+:root {
+  /* Colour */
+  --ink: #0B0B0B;          /* page background */
+  --bone: #F2EEE6;         /* main text, paper notes, cream tile */
+  --bone-muted: #D6D1C7;   /* body text on dark */
+  --muted: #A8A39A;        /* captions, tags, meta */
+  --card: #1A1917;         /* number tiles, chart cards */
+  --placeholder: #24231F;  /* image placeholder fill */
+  --line: #2A2A2A;         /* hairlines (footer border) */
+  --ink-soft: #4A463F;     /* meta text on cream */
+  --frame: #FFFFFF;        /* photo and project image frames */
+  --accent: #E8C547;       /* the one loud colour, one per section */
+
+  /* Fonts */
+  --font-head: 'Archivo', 'Arial Narrow', sans-serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
+  --font-something: 'Quinthero', serif;
+  --font-wicked: 'Heartless', serif;
+  --head-weight: 900;
+  --head-stretch: 70%;
+
+  /* Type scale (sizes copied from the canvas) */
+  --fs-hero: clamp(56px, 7.8vw, 128px);
+  --fs-footer: clamp(48px, 7vw, 112px);
+  --fs-h2: clamp(48px, 6vw, 88px);
+  --fs-card-lg: clamp(30px, 3vw, 44px);
+  --fs-card: clamp(26px, 2.4vw, 36px);
+  --fs-band: 28px;
+  --fs-lead: 18px;
+  --fs-body: 17px;
+  --fs-button: 15px;
+  --fs-ui: 14px;
+  --fs-tag: 12px;
+  --tracking-ui: 0.08em;
+
+  /* Spacing: 8px scale, 4px steps for small elements only */
+  --sp-4: 4px;
+  --sp-8: 8px;
+  --sp-12: 12px;
+  --sp-16: 16px;
+  --sp-24: 24px;
+  --sp-32: 32px;
+  --sp-40: 40px;
+  --sp-48: 48px;
+  --sp-56: 56px;
+  --sp-64: 64px;
+  --sp-80: 80px;
+  --sp-96: 96px;
+  --sp-112: 112px;
+  --sp-120: 120px;
+  --sp-128: 128px;
+  --sp-144: 144px;
+  --sp-160: 160px;
+
+  /* Grid: 12 columns, 32px gutters, 80px margins at 1440 (fluid to 16px) */
+  --cols: 12;
+  --gutter: 32px;
+  --margin: clamp(16px, 5.6vw, 80px);
+  --page-max: 1440px;
+
+  /* Targets */
+  --target-link: 48px;
+  --target-button: 56px;
+
+  /* Layers. Grain sits over the background, under cards and images (51). */
+  --z-band: 1;
+  --z-grain: 50;
+  --z-media: 51;
+  --z-skip: 200;
+}
+
+/* Below 760px everything stacks; a narrower gutter keeps 12 columns
+   from overflowing at 360px. */
+@media (max-width: 760px) {
+  :root {
+    --gutter: 16px;
+  }
+}

@@ -1,0 +1,143 @@
+/* ==========================================================================
+   Base: reset, body, links, focus, grain, reduced motion
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  position: relative; /* anchors the grain and the dev grid overlay */
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+  overflow-x: clip; /* 104% bands and the torn paper must never cause sideways scroll */
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, p, figure, blockquote, ul, ol {
+  margin: 0;
+}
+
+ul[role='list'],
+ol[role='list'] {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+/* Headings: Archivo 900, condensed, uppercase */
+.head {
+  font-family: var(--font-head);
+  font-weight: var(--head-weight);
+  font-stretch: var(--head-stretch);
+  text-transform: uppercase;
+}
+
+/* The one yellow word per section */
+.accent {
+  color: var(--accent);
+}
+
+/* Links */
+a {
+  color: var(--bone);
+}
+a:hover {
+  color: var(--accent);
+}
+
+/* Focus: yellow outline with offset, never removed without a replacement */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Hidden but available to screen readers */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Skip link: off screen until focused */
+.skip-link {
+  position: absolute;
+  top: var(--sp-16);
+  left: var(--sp-16);
+  z-index: var(--z-skip);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-link);
+  padding: 0 var(--sp-24);
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible {
+  transform: none;
+  outline-color: var(--bone);
+}
+.skip-link:hover {
+  color: var(--ink);
+}
+
+/* Page grain
+   Same filter as the canvas (#pageGrain), drawn as a repeating tile so it
+   stays cheap on long pages. Over the background, under cards and images
+   (they sit at --z-media). Never over photos, project images or data. */
+body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.93  0 0 0 0 0.88  3.2 0 0 0 -2.05'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduced motion: no animation, everything in its final state */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Components
+   Step 1: header, nav, language switch, footer.
+   Buttons, tape band, cards, tiles, frames, quotes and figures follow in
+   steps 2 and 3.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Header: logo left, nav centred, EN / NL right
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--sp-16);
+  padding-block: var(--sp-32);
+}
+
+.logo {
+  justify-self: start;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.9;
+  color: var(--bone);
+  text-decoration: none;
+}
+.logo-something {
+  font-family: var(--font-something);
+  font-size: 20px;
+}
+.logo-wicked {
+  font-family: var(--font-wicked);
+  font-size: 36px;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-40);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+}
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-link);
+  text-decoration: none;
+}
+.nav a[aria-current='page'] {
+  color: var(--accent);
+}
+
+/* EN / NL. Hidden in the markup until there is a Dutch version. */
+.lang {
+  color: var(--muted);
+  font-size: var(--fs-ui);
+  font-weight: 600;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.lang-current {
+  color: var(--bone);
+}
+.site-header .lang {
+  justify-self: end;
+}
+
+/* Phones: logo and EN / NL on the first row, nav full width below */
+@media (max-width: 760px) {
+  .site-header {
+    grid-template-columns: 1fr auto;
+    row-gap: var(--sp-8);
+  }
+  .site-header .nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    gap: var(--sp-32);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Footer: 'Let's make / some trouble.', email, LinkedIn, EN / NL
+   -------------------------------------------------------------------------- */
+.site-footer {
+  padding-block: var(--sp-112) var(--sp-48);
+  border-top: 1px solid var(--line);
+}
+
+.footer-line {
+  font-size: var(--fs-footer);
+  line-height: 0.9;
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--sp-24);
+  margin-top: var(--sp-48);
+  font-size: var(--fs-lead);
+}
+.footer-meta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-link);
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-32);
+}
+.footer-links a {
+  color: var(--muted);
+}
+.footer-links a:hover {
+  color: var(--accent);
+}
+.site-footer .lang {
+  font-size: var(--fs-lead);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}

@@ -1,0 +1,72 @@
+/* ==========================================================================
+   Layout: page wrapper, 12-column grid, span helpers, stacking
+   ========================================================================== */
+
+/* Content width: 1440px canvas with fluid side margins */
+.wrap {
+  width: 100%;
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--margin);
+}
+
+/* 12-column grid, 32px gutters */
+.g12 {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+/* Spans: .s1 to .s12. Set the end only, so a start helper (.c5) can combine with them */
+.s1  { grid-column-end: span 1; }
+.s2  { grid-column-end: span 2; }
+.s3  { grid-column-end: span 3; }
+.s4  { grid-column-end: span 4; }
+.s5  { grid-column-end: span 5; }
+.s6  { grid-column-end: span 6; }
+.s7  { grid-column-end: span 7; }
+.s8  { grid-column-end: span 8; }
+.s9  { grid-column-end: span 9; }
+.s10 { grid-column-end: span 10; }
+.s11 { grid-column-end: span 11; }
+.s12 { grid-column: 1 / -1; }
+
+/* Start columns: .c1 to .c12, combine with a span (e.g. "c5 s7") */
+.c1  { grid-column-start: 1; }
+.c2  { grid-column-start: 2; }
+.c3  { grid-column-start: 3; }
+.c4  { grid-column-start: 4; }
+.c5  { grid-column-start: 5; }
+.c6  { grid-column-start: 6; }
+.c7  { grid-column-start: 7; }
+.c8  { grid-column-start: 8; }
+.c9  { grid-column-start: 9; }
+.c10 { grid-column-start: 10; }
+.c11 { grid-column-start: 11; }
+.c12 { grid-column-start: 12; }
+
+/* Below 760px everything stacks to one column */
+@media (max-width: 760px) {
+  .g12 > * {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Dev-only grid overlay, built by js/main.js with ?grid or the G key.
+   12 translucent red columns plus 8px lines, as the canvas showGrid block. */
+.dev-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 80, 80, 0.18) 1px, transparent 1px);
+  background-size: 100% 8px;
+}
+.dev-grid .wrap,
+.dev-grid .g12 {
+  height: 100%;
+}
+.dev-grid .g12 > span {
+  grid-column: auto; /* keep 12 columns visible, even where content stacks */
+  background: rgba(255, 80, 80, 0.14);
+}
