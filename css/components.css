@@ -60,7 +60,9 @@
    tall as click targets. */
 @media (min-width: 1024px) {
   .site-header {
+    width: min(144 * var(--hu), 100%); /* the picture's width (nav centred in it), never past a scrollbar */
     max-width: none;
+    margin-inline: 0;
     padding-inline: calc(8 * var(--hu));
     gap: calc(1.6 * var(--hu));
   }
@@ -198,12 +200,16 @@
    TEMPORARY CSS rip: swap the SVG for the After Effects Lottie in
    data-lottie when it exists. Do not add lottie-web until then. */
 .hero-rip {
+  /* The SVG is 2400 units wide but the designed paper is the first 742 (the
+     canvas). Right of that is plain paper, so the paper always reaches the
+     screen edge. Every width is the designed paper width x 2400/742. */
+  --paper-bleed: 3.2345;
   position: absolute;
   top: calc(-1 * var(--header-h));
-  right: calc((100vw - 100%) / -2); /* to the screen edge, past the wrap */
+  left: calc(48.5vw - (100vw - 100%) / 2); /* paper starts at 48.5% of the screen */
   bottom: 0;
   z-index: -1;
-  width: calc(100vw * 0.515);
+  width: calc(51.5vw * var(--paper-bleed));
   pointer-events: none;
   clip-path: inset(-200vh -200vw 0 -200vw); /* never below the band */
 }
@@ -320,8 +326,9 @@
    Desktop hero (1024px and up): one picture that scales with the screen
    width only (--hu, 1hu = 10px at 1440), so it looks identical everywhere.
    The canvas is 144hu wide; header + hero is 86hu tall and the band peeks in
-   up to 90hu, as 1440x900. On screens shorter than 90hu the band, and
-   eventually the button, sit below the first screen.
+   up to 90hu, as 1440x900. --hu is capped at 1/70 of the screen height so
+   the button (bottom at 68hu) always fits the first screen; then the picture
+   is narrower than the screen and the paper runs on to the right edge.
    Coordinates: x from the left edge of the screen, y from the top of the
    page, in hu.
    -------------------------------------------------------------------------- */
@@ -338,8 +345,7 @@
   .hero-rip {
     top: calc(-1 * var(--header-h));
     left: calc(69.1 * var(--hu));
-    right: auto;
-    width: calc(74.9 * var(--hu));
+    width: calc(74.9 * var(--paper-bleed) * var(--hu));
   }
 
   /* Headline, button, intro: x 8hu (the margin), y 27.5hu */
@@ -633,7 +639,8 @@
   }
   .hero-rip {
     top: auto;
+    left: calc(20vw - (100vw - 100%) / 2);
     height: 46%;
-    width: 80vw;
+    width: calc(80vw * var(--paper-bleed));
   }
 }

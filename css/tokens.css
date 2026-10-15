@@ -97,7 +97,10 @@
    like a picture. 1hu = 10px at 1440 wide (the canvas). */
 @media (min-width: 1024px) {
   :root {
-    --hu: calc(100vw / 144);
+    /* Width-based, capped by height so the button always fits the first
+       screen. On very wide, short screens the picture is narrower than the
+       screen and the paper continues to the right edge. */
+    --hu: min(100vw / 144, 100svh / 70);
     --header-h: calc(12 * var(--hu)); /* 120px at 1440 */
   }
 }
