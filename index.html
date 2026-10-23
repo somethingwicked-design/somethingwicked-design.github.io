@@ -7,97 +7,152 @@
   <meta name="theme-color" content="#0B0B0B">
 
   <!-- head: keep in sync -->
+  <script>document.documentElement.classList.add('js');</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
   <link rel="preload" href="/fonts/Quinthero.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="preload" href="/fonts/Heartless.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/layout.css">
   <link rel="stylesheet" href="/css/components.css">
-  <script src="/js/main.js" defer></script>
-  <!-- /head -->
-  <!-- Homepage only: placeholder handwriting font until Luna's SVGs exist -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&amp;display=swap">
   <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
   <link rel="preload" href="/img/luna-halftone.avif" as="image" type="image/avif">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- header: keep in sync -->
-  <header class="site-header wrap">
-    <a class="logo" href="/" aria-label="Something Wicked, home">
-      <span class="logo-something">SOMETHING</span>
-      <span class="logo-wicked">Wicked</span>
-    </a>
-    <nav class="nav" aria-label="Main">
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
       <a href="/#work" data-nav="work">Work</a>
       <a href="/about.html" data-nav="about">About</a>
       <a href="#contact" data-nav="contact">Contact</a>
     </nav>
-    <!-- EN / NL goes here once there is a Dutch version:
-    <p class="lang"><span class="lang-current">EN</span> / NL</p> -->
-  </header>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
   <!-- /header -->
 
   <main id="main">
 
     <!-- ============================================================
-         HERO: torn paper, headline (cols 1-7), photo (cols 8-11)
+         HERO
+         Desktop: torn paper on the right 51.5% (from the top of the page,
+         behind the header, down behind the tape), headline cols 1-7,
+         square photo cols 8-11.
+         Phone: headline, torn paper band with the photo left and
+         'that's me!' + intro right, centred See the work.
          ============================================================ -->
-    <!-- Full-width wrapper: clips the paper's bleed at the screen edge (sideways
-         only, so it still runs up behind the header) -->
     <div class="hero-bleed">
-    <section class="hero wrap g12" aria-labelledby="hero-title">
-
-      <!-- Torn paper. TEMPORARY CSS rip (.sw-tear): replace the SVG with the
-           After Effects Lottie from data-lottie once lottie/rip.json exists.
-           Paths and filters copied exactly from reference/homepage.dc.html,
-           except: the viewBox is 2400 wide instead of 742 and the plain right
-           edge runs to x 2600 instead of 780, so the paper itself reaches the
-           screen edge on any width. The tear points are unchanged. -->
-      <div class="hero-rip" data-lottie="lottie/rip.json" aria-hidden="true">
-        <svg class="sw-tear" viewBox="0 0 2400 1000" preserveAspectRatio="none" focusable="false">
-        <defs>
+      <!-- Desktop paper. Paths and filters copied exactly from
+           reference/homepage.dc.html. Static: no rip animation (039). -->
+      <svg class="hero-paper" viewBox="0 0 742 1000" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <defs>
           <filter id="paperTex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="3" result="n"></feTurbulence><feDiffuseLighting in="n" lighting-color="#F2CC45" surfaceScale="2.2" result="l"><feDistantLight azimuth="45" elevation="62"></feDistantLight></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="in"></feComposite></filter>
           <filter id="paperShadow" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="10"></feGaussianBlur></filter>
           <filter id="fibers" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="12" result="f"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="f" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="6" result="t"></feTurbulence><feColorMatrix in="t" values="0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  2.6 0 0 0 -1.6" result="flecks"></feColorMatrix><feComposite in="flecks" in2="fuzzy" operator="in" result="fl"></feComposite><feMerge><feMergeNode in="fuzzy"></feMergeNode><feMergeNode in="fl"></feMergeNode></feMerge></filter>
           <filter id="roughEdge" x="-2%" y="-2%" width="104%" height="104%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="21" result="r"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="r" scale="2.5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
           <filter id="paperGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="4" result="g"></feTurbulence><feColorMatrix in="g" values="0 0 0 0 0.04  0 0 0 0 0.04  0 0 0 0 0.04  3.4 0 0 0 -2.1" result="specks"></feColorMatrix><feComposite in="specks" in2="SourceAlpha" operator="in"></feComposite></filter>
-        </defs>
-        <path transform="translate(-10 14)" fill="rgba(0,0,0,0.6)" filter="url(#paperShadow)" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L2600 1020 L2600 -15 Z"></path>
-        <path filter="url(#fibers)" fill="#F4EFE3" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L2600 1020 L2600 -15 Z"></path>
-        <path fill="none" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L2600 1020 L2600 -15 Z"></path>
-        <g filter="url(#roughEdge)"><path id="tornMain" fill="#E8C547" filter="url(#paperTex)" d="M760 -15 L750 -3 L750 3 L752 11 L750 16 L750 22 L747 26 L747 32 L747 38 L741 40 L742 47 L739 51 L736 55 L734 60 L733 65 L732 71 L725 72 L722 76 L715 77 L710 79 L702 80 L699 84 L699 90 L697 95 L698 101 L698 108 L691 109 L686 112 L681 114 L684 123 L679 125 L678 131 L674 134 L668 136 L662 137 L658 141 L648 139 L643 142 L640 146 L638 151 L635 155 L636 162 L635 167 L633 172 L628 175 L626 180 L625 185 L623 190 L617 192 L619 199 L616 203 L613 207 L611 212 L607 215 L607 221 L603 224 L595 225 L588 226 L582 228 L570 225 L566 228 L568 236 L567 242 L565 247 L563 252 L562 257 L558 260 L558 266 L554 269 L549 272 L545 275 L542 279 L536 281 L531 284 L523 284 L519 288 L519 293 L514 296 L507 297 L505 302 L499 304 L493 306 L489 309 L483 311 L477 313 L473 316 L469 319 L469 325 L466 330 L465 335 L464 340 L460 343 L457 348 L455 352 L453 357 L452 362 L450 367 L451 374 L446 377 L442 380 L439 384 L440 391 L437 395 L435 399 L432 404 L431 409 L431 416 L430 421 L428 425 L427 431 L427 438 L425 442 L422 446 L420 451 L417 455 L413 458 L413 464 L412 469 L411 475 L409 480 L401 480 L397 484 L393 487 L387 488 L382 491 L376 493 L367 492 L362 495 L358 498 L354 501 L361 513 L360 518 L363 527 L360 531 L356 534 L354 539 L350 543 L345 545 L342 549 L337 551 L332 554 L328 557 L323 559 L318 562 L318 569 L315 573 L312 576 L312 583 L311 588 L308 593 L306 597 L304 602 L304 608 L304 614 L301 618 L302 625 L299 629 L299 636 L298 641 L292 643 L288 646 L279 645 L273 647 L265 647 L264 653 L260 657 L257 660 L254 664 L255 671 L256 678 L252 682 L252 687 L246 690 L241 692 L238 696 L235 700 L231 704 L229 708 L222 710 L220 714 L218 719 L215 723 L210 726 L208 730 L199 729 L194 732 L188 734 L183 737 L178 739 L172 741 L168 745 L164 748 L167 756 L166 761 L164 766 L164 773 L167 781 L166 786 L164 791 L162 796 L161 801 L157 805 L157 811 L153 814 L151 818 L146 821 L146 827 L142 831 L139 835 L137 839 L133 843 L131 848 L125 850 L123 854 L119 857 L117 862 L115 867 L111 870 L110 876 L110 882 L107 886 L105 890 L103 895 L101 900 L97 903 L95 908 L89 910 L86 914 L79 915 L75 918 L70 921 L66 924 L63 928 L61 933 L59 938 L60 945 L58 949 L59 956 L54 959 L49 961 L47 966 L46 971 L44 976 L44 982 L43 988 L40 992 L38 997 L38 1003 L37 1008 L34 1013 L33 1018 L30 1020 L-2 1020 L2600 1020 L2600 -15 Z"></path>
-        <use href="#tornMain" filter="url(#paperGrain)"></use></g>
-        </svg>
-      </div>
+          </defs>
+          <path transform="translate(-10 14)" fill="rgba(0,0,0,0.6)" filter="url(#paperShadow)" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L780 1020 L780 -15 Z"></path>
+          <path filter="url(#fibers)" fill="#F4EFE3" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L780 1020 L780 -15 Z"></path>
+          <path fill="none" d="M742 -15 L732 -16 L733 -9 L735 -2 L733 3 L733 9 L729 13 L729 19 L728 24 L722 26 L722 33 L720 37 L717 42 L714 45 L713 51 L710 55 L705 57 L701 60 L695 63 L689 64 L683 66 L679 70 L679 75 L677 80 L678 87 L677 93 L672 95 L668 98 L663 101 L666 109 L663 113 L660 117 L658 122 L652 124 L646 126 L641 128 L633 129 L628 131 L625 135 L621 139 L621 144 L622 152 L622 158 L620 163 L616 166 L614 171 L612 176 L610 180 L606 183 L607 190 L605 195 L602 199 L601 204 L597 208 L597 214 L592 216 L587 219 L581 221 L573 221 L562 219 L557 222 L559 230 L559 236 L557 241 L555 245 L553 250 L553 256 L552 262 L547 264 L541 267 L539 271 L535 274 L530 276 L523 278 L515 278 L511 282 L511 288 L505 289 L499 292 L495 295 L491 298 L485 300 L482 304 L476 306 L471 308 L466 311 L462 314 L461 320 L459 324 L457 329 L457 335 L451 337 L449 342 L446 346 L444 351 L445 357 L442 362 L442 368 L439 371 L433 373 L431 378 L429 383 L430 390 L426 393 L425 398 L423 403 L424 410 L423 415 L419 419 L421 427 L420 432 L417 436 L415 441 L413 446 L412 451 L409 455 L409 461 L407 466 L406 472 L403 475 L397 477 L392 480 L389 484 L382 485 L376 487 L372 490 L363 490 L358 492 L354 496 L352 500 L356 510 L358 517 L360 525 L357 529 L352 532 L351 537 L349 542 L343 544 L339 547 L336 551 L330 552 L324 555 L319 557 L315 560 L314 566 L314 572 L309 574 L309 581 L309 587 L308 592 L305 596 L302 601 L301 606 L302 612 L299 617 L300 623 L297 628 L296 633 L293 637 L287 639 L282 642 L273 641 L269 644 L260 644 L257 648 L253 651 L250 655 L248 660 L247 665 L246 671 L244 676 L241 679 L237 683 L232 686 L227 688 L223 692 L220 696 L217 700 L212 702 L208 705 L206 710 L203 714 L198 717 L193 719 L186 721 L181 723 L176 725 L170 727 L164 729 L159 732 L154 734 L150 737 L151 744 L148 749 L148 754 L148 760 L151 769 L150 775 L149 780 L146 784 L145 789 L141 793 L138 797 L135 801 L133 806 L129 809 L128 814 L127 820 L124 824 L120 827 L117 831 L115 836 L110 838 L109 844 L104 846 L102 851 L100 856 L95 859 L93 863 L93 870 L92 875 L92 881 L89 885 L87 890 L83 893 L80 897 L75 900 L71 903 L66 905 L61 908 L57 911 L54 915 L51 919 L48 924 L47 929 L47 935 L47 941 L46 947 L42 950 L37 953 L35 957 L34 963 L32 968 L29 971 L30 979 L27 982 L26 988 L24 993 L23 998 L21 1003 L18 1007 L0 1000 L-2 1020 L780 1020 L780 -15 Z"></path>
+          <g filter="url(#roughEdge)"><path id="tornMain" fill="#E8C547" filter="url(#paperTex)" d="M760 -15 L750 -3 L750 3 L752 11 L750 16 L750 22 L747 26 L747 32 L747 38 L741 40 L742 47 L739 51 L736 55 L734 60 L733 65 L732 71 L725 72 L722 76 L715 77 L710 79 L702 80 L699 84 L699 90 L697 95 L698 101 L698 108 L691 109 L686 112 L681 114 L684 123 L679 125 L678 131 L674 134 L668 136 L662 137 L658 141 L648 139 L643 142 L640 146 L638 151 L635 155 L636 162 L635 167 L633 172 L628 175 L626 180 L625 185 L623 190 L617 192 L619 199 L616 203 L613 207 L611 212 L607 215 L607 221 L603 224 L595 225 L588 226 L582 228 L570 225 L566 228 L568 236 L567 242 L565 247 L563 252 L562 257 L558 260 L558 266 L554 269 L549 272 L545 275 L542 279 L536 281 L531 284 L523 284 L519 288 L519 293 L514 296 L507 297 L505 302 L499 304 L493 306 L489 309 L483 311 L477 313 L473 316 L469 319 L469 325 L466 330 L465 335 L464 340 L460 343 L457 348 L455 352 L453 357 L452 362 L450 367 L451 374 L446 377 L442 380 L439 384 L440 391 L437 395 L435 399 L432 404 L431 409 L431 416 L430 421 L428 425 L427 431 L427 438 L425 442 L422 446 L420 451 L417 455 L413 458 L413 464 L412 469 L411 475 L409 480 L401 480 L397 484 L393 487 L387 488 L382 491 L376 493 L367 492 L362 495 L358 498 L354 501 L361 513 L360 518 L363 527 L360 531 L356 534 L354 539 L350 543 L345 545 L342 549 L337 551 L332 554 L328 557 L323 559 L318 562 L318 569 L315 573 L312 576 L312 583 L311 588 L308 593 L306 597 L304 602 L304 608 L304 614 L301 618 L302 625 L299 629 L299 636 L298 641 L292 643 L288 646 L279 645 L273 647 L265 647 L264 653 L260 657 L257 660 L254 664 L255 671 L256 678 L252 682 L252 687 L246 690 L241 692 L238 696 L235 700 L231 704 L229 708 L222 710 L220 714 L218 719 L215 723 L210 726 L208 730 L199 729 L194 732 L188 734 L183 737 L178 739 L172 741 L168 745 L164 748 L167 756 L166 761 L164 766 L164 773 L167 781 L166 786 L164 791 L162 796 L161 801 L157 805 L157 811 L153 814 L151 818 L146 821 L146 827 L142 831 L139 835 L137 839 L133 843 L131 848 L125 850 L123 854 L119 857 L117 862 L115 867 L111 870 L110 876 L110 882 L107 886 L105 890 L103 895 L101 900 L97 903 L95 908 L89 910 L86 914 L79 915 L75 918 L70 921 L66 924 L63 928 L61 933 L59 938 L60 945 L58 949 L59 956 L54 959 L49 961 L47 966 L46 971 L44 976 L44 982 L43 988 L40 992 L38 997 L38 1003 L37 1008 L34 1013 L33 1018 L30 1020 L-2 1020 L780 1020 L780 -15 Z"></path>
+          <use href="#tornMain" filter="url(#paperGrain)"></use></g>
+      </svg>
 
-      <div class="hero-text s7">
-        <h1 class="hero-title head sw-rise" id="hero-title">Useful design<br>with <span class="hero-something">SOMETHING</span><br><span class="hero-wicked">wicked</span> in it.</h1>
-        <div class="hero-cta sw-rise sw-d3">
-          <a class="btn" href="#work">See the work</a>
-          <p class="hero-intro">I'm Luna, a CMD designer interning at Framna. UX research, interaction design and identity.</p>
+      <div class="head-space" aria-hidden="true"></div>
+
+      <section class="hero wrap g12" aria-labelledby="hero-title">
+        <!-- Phone paper band: torn bone rim with fibres top and bottom,
+             textured yellow. Copied exactly from
+             reference/homepage-mobile.dc.html. -->
+        <span class="hero-mpaper" aria-hidden="true">
+          <svg width="0" height="0" focusable="false"><defs>
+          <defs>
+          <filter id="mpTex" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="4" seed="3" result="n"></feTurbulence><feDiffuseLighting in="n" lighting-color="#F2CC45" surfaceScale="2.2" result="l"><feDistantLight azimuth="45" elevation="62"></feDistantLight></feDiffuseLighting><feComposite in="l" in2="SourceGraphic" operator="in"></feComposite></filter>
+          <filter id="mpGrain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="4" result="g"></feTurbulence><feColorMatrix in="g" values="0 0 0 0 0.04  0 0 0 0 0.04  0 0 0 0 0.04  3.4 0 0 0 -2.1" result="specks"></feColorMatrix><feComposite in="specks" in2="SourceAlpha" operator="in"></feComposite></filter>
+          <filter id="mpFibers" x="-2%" y="-10%" width="104%" height="120%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="12" result="f"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="f" scale="3.5" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="6" result="t"></feTurbulence><feColorMatrix in="t" values="0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  2.6 0 0 0 -1.6" result="flecks"></feColorMatrix><feComposite in="flecks" in2="fuzzy" operator="in" result="fl"></feComposite><feMerge><feMergeNode in="fuzzy"></feMergeNode><feMergeNode in="fl"></feMergeNode></feMerge></filter>
+          <filter id="mpRough" x="-2%" y="-5%" width="104%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="21" result="r"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="r" scale="2" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+          <filter id="mpShadow" x="-5%" y="-40%" width="110%" height="180%"><feGaussianBlur stdDeviation="6"></feGaussianBlur></filter>
+          </defs>
+          </defs></svg>
+          <svg viewBox="0 0 360 312" preserveAspectRatio="none" focusable="false">
+          <path fill="rgba(0,0,0,0.55)" filter="url(#mpShadow)" d="M0 40 L0 2.8 L14 2.0 L25 1.7 L33 9.0 L41 6.1 L51 4.6 L61 2.5 L73 1.7 L81 1.2 L89 4.3 L102 4.0 L109 3.1 L123 1.5 L134 4.0 L146 3.7 L157 5.0 L168 8.2 L179 2.1 L185 8.6 L195 2.6 L209 5.6 L221 8.0 L229 3.9 L242 2.1 L254 1.8 L266 6.6 L279 7.7 L289 2.6 L297 5.2 L307 1.6 L320 5.1 L331 2.8 L339 1.1 L348 3.1 L358 4.0 L360 8.1 L360 40 Z"></path>
+          <path fill="rgba(0,0,0,0.55)" filter="url(#mpShadow)" d="M0 272 L0 304.0 L13 305.7 L26 304.3 L39 310.1 L53 308.6 L61 311.8 L70 304.7 L81 308.0 L91 305.2 L98 308.6 L108 305.0 L117 309.8 L129 307.8 L138 306.9 L146 305.6 L155 304.9 L167 309.7 L178 304.2 L187 307.5 L194 311.7 L206 308.0 L217 305.6 L225 308.2 L237 309.2 L243 308.9 L256 309.9 L270 311.9 L278 306.4 L288 311.8 L297 311.5 L310 308.1 L321 311.7 L333 306.4 L346 305.6 L355 311.7 L360 306.5 L360 272 Z"></path>
+          <path fill="#F4EFE3" filter="url(#mpFibers)" d="M0 40 L0 6.8 L14 6.0 L25 5.7 L33 13.0 L41 10.1 L51 8.6 L61 6.5 L73 5.7 L81 5.2 L89 8.3 L102 8.0 L109 7.1 L123 5.5 L134 8.0 L146 7.7 L157 9.0 L168 12.2 L179 6.1 L185 12.6 L195 6.6 L209 9.6 L221 12.0 L229 7.9 L242 6.1 L254 5.8 L266 10.6 L279 11.7 L289 6.6 L297 9.2 L307 5.6 L320 9.1 L331 6.8 L339 5.1 L348 7.1 L358 8.0 L360 12.1 L360 40 Z"></path>
+          <path fill="#F4EFE3" filter="url(#mpFibers)" d="M0 272 L0 299.0 L13 300.7 L26 299.3 L39 305.1 L53 303.6 L61 306.8 L70 299.7 L81 303.0 L91 300.2 L98 303.6 L108 300.0 L117 304.8 L129 302.8 L138 301.9 L146 300.6 L155 299.9 L167 304.7 L178 299.2 L187 302.5 L194 306.7 L206 303.0 L217 300.6 L225 303.2 L237 304.2 L243 303.9 L256 304.9 L270 306.9 L278 301.4 L288 306.8 L297 306.5 L310 303.1 L321 306.7 L333 301.4 L346 300.6 L355 306.7 L360 301.5 L360 272 Z"></path>
+          <g filter="url(#mpRough)"><path id="mpYellow" fill="#E8C547" filter="url(#mpTex)" d="M0 10.9 L14 11.4 L25 9.7 L33 20.0 L41 19.0 L51 12.8 L61 14.1 L73 10.5 L81 8.2 L89 15.8 L102 13.1 L109 11.1 L123 11.1 L134 12.4 L146 13.2 L157 14.7 L168 17.7 L179 12.7 L185 17.3 L195 10.1 L209 13.1 L221 15.7 L229 14.0 L242 11.2 L254 13.6 L266 16.6 L279 19.0 L289 15.5 L297 12.6 L307 8.7 L320 12.9 L331 12.1 L339 11.5 L348 14.6 L358 13.1 L360 20.9 L360 296.3 L355 298.7 L346 294.0 L333 293.5 L321 302.2 L310 295.6 L297 298.8 L288 298.0 L278 296.2 L270 301.4 L256 296.6 L243 299.2 L237 298.2 L225 295.4 L217 295.9 L206 298.4 L194 298.8 L187 298.8 L178 293.7 L167 300.0 L155 292.5 L146 297.2 L138 297.3 L129 294.7 L117 298.6 L108 294.1 L98 298.1 L91 295.1 L81 296.3 L70 291.7 L61 299.4 L53 295.0 L39 298.0 L26 291.2 L13 294.0 L0 294.3 Z"></path><use href="#mpYellow" filter="url(#mpGrain)"></use></g>
+          </svg>
+        </span>
+
+        <div class="hero-text">
+          <h1 class="hero-title head sw-rise" id="hero-title"><span>Useful design</span><br><span>with <span class="hero-something">SOMETHING</span></span><br><span><span class="hero-wicked">wicked</span> in it.</span></h1>
+          <div class="hero-cta">
+            <a class="btn sw-rise sw-d3" href="#work">See the work</a>
+            <p class="hero-intro sw-rise sw-d3">I'm Luna, a CMD designer interning at Framna. UX research, interaction design and&nbsp;identity.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="hero-photo c8 s4 sw-drop">
-        <!-- TODO: replace with Luna's handwriting SVG ('that's me!' + arrow) -->
-        <span class="hero-note" aria-hidden="true">
-          <span class="hero-note-text sw-note">that's me!</span>
-          <svg class="sw-draw" viewBox="0 0 160 110" focusable="false"><path d="M40 70 C55 30, 100 18, 150 26" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round"/><path d="M136 14 L151 26 L134 36" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div class="hero-photo sw-drop">
+          <!-- TODO: replace with Luna's handwriting SVG ('that's me!' + arrow) -->
+          <span class="hero-note" aria-hidden="true">
+            <span class="hand sw-note">that's me!</span>
+            <svg class="sw-draw" viewBox="0 0 160 110" focusable="false"><path d="M40 70 C55 30, 100 18, 150 26" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round"/><path d="M136 14 L151 26 L134 36" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="hero-frame">
+            <picture>
+              <source srcset="/img/luna-halftone.avif" type="image/avif">
+              <img src="/img/luna-halftone.jpg" width="799" height="1000" alt="Halftone portrait of Luna Rachmani in a striped top" fetchpriority="high">
+            </picture>
+            <span class="gloss" aria-hidden="true"></span>
+          </span>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <!-- Phone note: 'that's me!' right of the photo, arrow pointing at it.
+             TODO: replace with Luna's handwriting SVG -->
+        <span class="hero-mnote" aria-hidden="true">
+          <svg class="sw-draw" viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="#0B0B0B" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="#0B0B0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="hand sw-note">that's me!</span>
         </span>
-        <span class="hero-frame">
-          <picture>
-            <source srcset="/img/luna-halftone.avif" type="image/avif">
-            <img src="/img/luna-halftone.jpg" width="799" height="1000" alt="Halftone portrait of Luna Rachmani in a striped top" fetchpriority="high">
-          </picture>
-        </span>
-        <span class="tape" aria-hidden="true"></span>
-      </div>
-    </section>
+      </section>
     </div>
 
     <!-- ============================================================
@@ -126,74 +181,113 @@
     </div>
 
     <!-- ============================================================
-         SELECTED WORK: Op Jezelf full width, then 6 + 6
-         Image slots are placeholders until the real images exist (see todo).
+         SELECTED WORK (019): big, small + small, repeating. The first
+         three show; Load more reveals the rest. '/#all-work' opens the
+         list fully loaded (036). [Square brackets] are placeholders.
          ============================================================ -->
     <section class="work wrap" id="work" aria-labelledby="work-title">
       <div class="work-head">
         <h2 class="work-title head" id="work-title">Selected work</h2>
-        <p class="work-intro">Research-led apps, products and identities, 2024 to now.</p>
+        <p class="work-intro">Research-led apps, products and identities, 2024&nbsp;to&nbsp;now.</p>
       </div>
 
-      <div class="pgrid g12">
+      <div class="wgrid g12">
 
-        <!-- Card: Op Jezelf (full width) -->
-        <a class="card s12" href="/work/op-jezelf.html">
-          <span class="card-img card-img--wide">[Op Jezelf, app in hand / in context]
-            <span class="pill">Op Jezelf</span>
+        <!-- Card: Op Jezelf (big) -->
+        <a class="card card--big" href="/work/op-jezelf.html" data-slug="op-jezelf">
+          <span class="card-img">
+            <img src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="Two phones showing the Op Jezelf app" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">Op Jezelf</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
           </span>
-          <div class="card-text">
-            <h3 class="card-title card-title--lg head">Getting teens ready to live on their own</h3>
-            <span class="card-line">Turns out the money problem was an anxiety problem.</span>
-            <span class="tags">UX research / Gamification / Team lead</span>
-          </div>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>Op Jezelf</strong> Getting teens ready to live on their own</span><span class="card-type">UI/UX</span></span>
         </a>
 
-        <!-- Card: ReStock -->
-        <a class="card s6" href="/work/restock.html">
-          <span class="card-img">[ReStock in context]
-            <span class="pill">ReStock</span>
+        <!-- Card: ReStock (small) -->
+        <a class="card card--small" href="/work/restock.html" data-slug="restock">
+          <span class="card-img">
+            <span class="card-ph">[ReStock in context]</span>
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">ReStock</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
           </span>
-          <div class="card-text">
-            <h3 class="card-title head">Wasting less food, one fridge at a time</h3>
-            <span class="card-line">[ReStock: one finding or design call only you would know]</span>
-            <span class="tags">Product design / Framna internship</span>
-          </div>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>ReStock</strong> Wasting less food, one fridge at a time</span><span class="card-type">Branding, UI/UX</span></span>
         </a>
 
-        <!-- Card: Emma -->
-        <a class="card s6" href="/work/emma.html">
-          <span class="card-img">[Emma in context]
-            <span class="pill">Emma</span>
+        <!-- Card: Health Potion (small) -->
+        <a class="card card--small" href="/work/health-potion.html" data-slug="health-potion">
+          <span class="card-img">
+            <img src="/img/health-potion-guide.webp" width="1800" height="1799" alt="Open Health Potion brand guide" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">Health Potion</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
           </span>
-          <div class="card-text">
-            <h3 class="card-title head">[Emma in one line: the outcome]</h3>
-            <span class="card-line">[Emma: what changed for the people using it]</span>
-            <span class="tags">UX research / App design / Accessibility</span>
-          </div>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>Health Potion</strong> [Health Potion in one line]</span><span class="card-type">Branding</span></span>
         </a>
 
-        <!-- Card: Kokoro. 'attitude' is this section's one yellow word. -->
-        <a class="card s6" href="/work/kokoro.html">
-          <span class="card-img">[Kokoro poster, full colour]
-            <span class="pill">Kokoro</span>
+        <!-- Card: Kokoro (big) -->
+        <a class="card card--big" href="/work/kokoro.html" data-slug="kokoro" data-more>
+          <span class="card-img">
+            <img src="/img/kokoro-poster.webp" width="1800" height="1202" alt="The Kokoro poster hanging on a wall" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">Kokoro</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
           </span>
-          <div class="card-text">
-            <h3 class="card-title head">A lucky cat with <span class="accent">attitude</span></h3>
-            <span class="card-line">Sorry, <b><i>cattitude</i></b>. Koko insisted.</span>
-            <span class="tags">Poster / Mascot / Branding</span>
-          </div>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>Kokoro</strong> A lucky cat with cattitude</span><span class="card-type">Poster</span></span>
         </a>
 
-        <!-- Tile: All projects -->
-        <a class="tile s6" href="/work/">
-          <span class="tile-meta">+ Health Potion, De Bote, Something Wicked</span>
-          <span class="tile-foot">
-            <span class="tile-title head">All<br>projects</span>
-            <span class="tile-arrow" aria-hidden="true">&#8594;</span>
+        <!-- Card: Emma (small) -->
+        <a class="card card--small" href="/work/emma.html" data-slug="emma" data-more>
+          <span class="card-img">
+            <img src="/img/emma-phones.webp" width="1800" height="1338" alt="Two phones showing the Emma app" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">Emma</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
           </span>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>Emma</strong> [Emma in one line: the outcome]</span><span class="card-type">UX research</span></span>
         </a>
 
+        <!-- Card: De Bote (small) -->
+        <a class="card card--small" href="/work/de-bote.html" data-slug="de-bote" data-more>
+          <span class="card-img">
+            <img src="/img/de-bote-papers.webp" width="1800" height="1440" alt="A stack of De Bote newspapers tied with string" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">De Bote</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
+          </span>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>De Bote</strong> [De Bote in one line]</span><span class="card-type">Editorial</span></span>
+        </a>
+
+        <!-- Card: Something Wicked (big) -->
+        <a class="card card--big" href="/work/something-wicked.html" data-slug="something-wicked" data-more>
+          <span class="card-img">
+            <img src="/img/something-wicked-cards.webp" width="1800" height="1350" alt="Something Wicked business cards" loading="lazy" decoding="async">
+            <span class="card-gloss" aria-hidden="true"></span>
+            <span class="pill" aria-hidden="true">Something Wicked</span>
+            <span class="seen" hidden><span class="seen-label"><svg viewBox="0 0 16 14" aria-hidden="true" focusable="false"><path d="M1 8 L6 12 L15 1" fill="none" stroke="#F2EEE6" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="miter"/></svg>Just seen</span></span>
+          </span>
+          <span class="ticket ticket--pointer" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="ticket ticket--focus" aria-hidden="true"><span class="tk-p tk-main"><span class="tk-label">View case</span></span><span class="tk-p tk-stub"><span class="tk-arrow"><svg viewBox="0 0 14 14" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#0B0B0B" stroke-width="2.4" stroke-linecap="square"/></svg></span></span><span class="tk-perf"></span></span>
+          <span class="card-cap"><span><strong>Something Wicked</strong> [Something Wicked in one line]</span><span class="card-type">Branding</span></span>
+        </a>
+
+      </div>
+
+      <div class="more" hidden>
+        <button class="btn-pill" type="button">Load more</button>
       </div>
     </section>
 
@@ -201,15 +295,27 @@
 
   <!-- footer: keep in sync -->
   <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031). Paths and filters copied exactly from
+         reference/homepage.dc.html. -->
+    <span class="footer-paper" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+        <defs>
+        <filter id="dkFibers" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="12" result="f"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="f" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="6" result="t"></feTurbulence><feColorMatrix in="t" values="0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  2.6 0 0 0 -1.6" result="flecks"></feColorMatrix><feComposite in="flecks" in2="fuzzy" operator="in" result="fl"></feComposite><feMerge><feMergeNode in="fuzzy"></feMergeNode><feMergeNode in="fl"></feMergeNode></feMerge></filter>
+        <filter id="dkRough" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="21" result="r"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="r" scale="2.5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+        <filter id="dkShadow" x="-5%" y="-100%" width="110%" height="300%"><feGaussianBlur stdDeviation="10"></feGaussianBlur></filter>
+        </defs>
+        <path fill="rgba(0,0,0,0.6)" filter="url(#dkShadow)" d="M0 64 L0 9 L17 9 L34 9 L51 9 L58 5 L71 7 L82 10 L95 12 L102 11 L111 8 L122 8 L131 8 L142 8 L148 12 L155 15 L170 15 L181 16 L193 14 L208 13 L218 17 L225 16 L240 18 L253 19 L267 17 L281 15 L298 18 L309 14 L324 11 L334 11 L347 9 L361 7 L371 8 L378 11 L390 9 L404 12 L417 14 L429 15 L442 12 L451 13 L459 17 L469 15 L484 16 L493 17 L500 19 L507 21 L514 22 L523 21 L536 17 L552 15 L562 14 L572 14 L582 13 L591 15 L607 18 L619 21 L628 24 L636 23 L651 24 L665 23 L681 24 L690 22 L703 18 L720 18 L733 18 L750 16 L758 18 L776 15 L783 16 L794 16 L800 15 L816 19 L830 20 L848 16 L863 16 L881 12 L893 11 L911 13 L926 14 L936 12 L954 8 L964 8 L973 5 L980 5 L991 6 L999 7 L1017 8 L1034 6 L1043 10 L1050 8 L1062 8 L1070 7 L1083 3 L1099 3 L1108 0 L1119 4 L1136 1 L1147 5 L1157 7 L1174 4 L1189 6 L1206 7 L1220 5 L1231 9 L1246 12 L1262 14 L1275 10 L1284 8 L1294 4 L1305 1 L1320 -2 L1333 0 L1345 1 L1361 2 L1368 4 L1382 5 L1392 8 L1405 11 L1421 9 L1430 10 L1440 8 L1440 64 Z"></path>
+        <path fill="#F4EFE3" filter="url(#dkFibers)" d="M0 64 L0 15 L17 15 L34 15 L51 15 L58 11 L71 13 L82 16 L95 18 L102 17 L111 14 L122 14 L131 14 L142 14 L148 18 L155 21 L170 21 L181 22 L193 20 L208 19 L218 23 L225 22 L240 24 L253 25 L267 23 L281 21 L298 24 L309 20 L324 17 L334 17 L347 15 L361 13 L371 14 L378 17 L390 15 L404 18 L417 20 L429 21 L442 18 L451 19 L459 23 L469 21 L484 22 L493 23 L500 25 L507 27 L514 28 L523 27 L536 23 L552 21 L562 20 L572 20 L582 19 L591 21 L607 24 L619 27 L628 30 L636 29 L651 30 L665 29 L681 30 L690 28 L703 24 L720 24 L733 24 L750 22 L758 24 L776 21 L783 22 L794 22 L800 21 L816 25 L830 26 L848 22 L863 22 L881 18 L893 17 L911 19 L926 20 L936 18 L954 14 L964 14 L973 11 L980 11 L991 12 L999 13 L1017 14 L1034 12 L1043 16 L1050 14 L1062 14 L1070 13 L1083 9 L1099 9 L1108 6 L1119 10 L1136 7 L1147 11 L1157 13 L1174 10 L1189 12 L1206 13 L1220 11 L1231 15 L1246 18 L1262 20 L1275 16 L1284 14 L1294 10 L1305 7 L1320 4 L1333 6 L1345 7 L1361 8 L1368 10 L1382 11 L1392 14 L1405 17 L1421 15 L1430 16 L1440 14 L1440 64 Z"></path>
+        <path fill="#E8C547" filter="url(#dkRough)" d="M0 64 L0 24 L17 21 L34 24 L51 27 L58 19 L71 18 L82 22 L95 23 L102 25 L111 25 L122 25 L131 24 L142 21 L148 22 L155 34 L170 33 L181 32 L193 27 L208 26 L218 30 L225 30 L240 33 L253 31 L267 27 L281 27 L298 33 L309 29 L324 27 L334 30 L347 28 L361 28 L371 18 L378 23 L390 20 L404 22 L417 28 L429 28 L442 32 L451 24 L459 37 L469 24 L484 26 L493 32 L500 35 L507 40 L514 38 L523 31 L536 37 L552 29 L562 30 L572 33 L582 27 L591 32 L607 31 L619 42 L628 35 L636 41 L651 33 L665 41 L681 39 L690 36 L703 31 L720 36 L733 32 L750 29 L758 32 L776 34 L783 36 L794 32 L800 32 L816 39 L830 34 L848 36 L863 29 L881 21 L893 32 L911 31 L926 27 L936 28 L954 24 L964 24 L973 15 L980 16 L991 19 L999 25 L1017 24 L1034 19 L1043 22 L1050 23 L1062 27 L1070 27 L1083 21 L1099 23 L1108 18 L1119 21 L1136 21 L1147 15 L1157 17 L1174 23 L1189 26 L1206 22 L1220 21 L1231 26 L1246 23 L1262 32 L1275 29 L1284 19 L1294 21 L1305 22 L1320 17 L1333 16 L1345 19 L1361 12 L1368 17 L1382 20 L1392 22 L1405 21 L1421 27 L1430 29 L1440 27 L1440 64 Z"></path>
+      </svg>
+      <span class="footer-paper-fill"></span>
+    </span>
     <div class="wrap">
-      <p class="footer-line head">Let's make<br>some <span class="accent">trouble.</span></p>
-      <div class="footer-meta">
-        <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
-        <div class="footer-links">
-          <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
-          <!-- EN / NL goes here once there is a Dutch version:
-          <p class="lang"><span class="lang-current">EN</span> / NL</p> -->
-        </div>
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
       </div>
     </div>
   </footer>

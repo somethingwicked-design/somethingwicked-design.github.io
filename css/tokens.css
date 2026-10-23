@@ -1,11 +1,10 @@
 /* ==========================================================================
    Tokens
    Values come from DESIGN.md and the canvas exports in the SW vault
-   (reference/homepage.dc.html, reference/case-study.dc.html).
+   (reference/*.dc.html). Type scale: decisions 023 and 037.
    ========================================================================== */
 
-/* Local display fonts. Logo and hero h1 only (decision 003).
-   Heartless is a personal-use licence: flag before going live (see todo). */
+/* Local display fonts. Logo and hero h1 only (decision 003). */
 @font-face {
   font-family: 'Quinthero';
   src: url('/fonts/Quinthero.ttf') format('truetype');
@@ -20,37 +19,40 @@
 :root {
   /* Colour */
   --ink: #0B0B0B;          /* page background */
-  --bone: #F2EEE6;         /* main text, paper notes, cream tile */
+  --bone: #F2EEE6;         /* main text, paper notes */
   --bone-muted: #D6D1C7;   /* body text on dark */
   --muted: #A8A39A;        /* captions, tags, meta */
-  --card: #1A1917;         /* number tiles, chart cards */
+  --card: #1A1917;         /* dark buttons, number tiles */
   --placeholder: #24231F;  /* image placeholder fill */
-  --line: #2A2A2A;         /* hairlines (footer border) */
-  --ink-soft: #4A463F;     /* meta text on cream */
+  --paper-ink: #3A3526;    /* secondary text on the yellow paper */
+  --fibre: #F4EFE3;        /* white paper core along a tear */
   --frame: #FFFFFF;        /* photo and project image frames */
-  --accent: #E8C547;       /* the one loud colour, one per section */
+  --yellow: #E8C547;       /* brand yellow: nav, footer, tape. Never changes */
+  --accent: var(--yellow); /* the one loud colour; a case study sets its own */
 
   /* Fonts */
   --font-head: 'Archivo', 'Arial Narrow', sans-serif;
   --font-body: 'Outfit', system-ui, sans-serif;
+  --font-hand: 'Reenie Beanie', cursive; /* stand-in for Luna's handwriting (027) */
   --font-something: 'Quinthero', serif;
   --font-wicked: 'Heartless', serif;
   --head-weight: 900;
   --head-stretch: 70%;
 
-  /* Type scale (sizes copied from the canvas) */
-  --fs-hero: clamp(56px, 7.8vw, 128px);
-  --fs-footer: clamp(48px, 7vw, 112px);
-  --fs-h2: clamp(48px, 6vw, 88px);
-  --fs-card-lg: clamp(30px, 3vw, 44px);
-  --fs-card: clamp(26px, 2.4vw, 36px);
-  --fs-band: 28px;
-  --fs-lead: 18px;
-  --fs-body: 17px;
+  /* Type scale (023, 037). Large type uses ratios, small styles the 8px grid. */
+  /* Display tops out at 112px, its 1440 size (023): the page is capped at
+     1440, so cols 1-7 stop growing there. */
+  --fs-display: clamp(56px, 7.8vw, 112px);  --lh-display: 0.88;
+  --fs-h1: clamp(48px, 6vw, 88px);          --lh-h1: 0.9;
+  --fs-h2: 56px;                            --lh-h2: 1;
+  --fs-lead: 32px;                          --lh-lead: 1.25;  /* 32 / 40 */
+  --fs-body: 18px;                          --lh-body: 1.5;
+  --fs-small: 14px;                         --lh-small: 24px;
+  --fs-label: 13px;                         --lh-label: 16px;
   --fs-button: 15px;
-  --fs-ui: 14px;
-  --fs-tag: 12px;
-  --tracking-ui: 0.08em;
+  --fs-hand: 28px;
+  --fs-band: 28px;
+  --tracking-label: 0.1em;
 
   /* Spacing: 8px scale, 4px steps for small elements only */
   --sp-4: 4px;
@@ -71,45 +73,46 @@
   --sp-144: 144px;
   --sp-160: 160px;
 
-  /* Grid: 12 columns, 32px gutters, 80px margins from 1429px (fluid to 16px).
-     Content stops growing at 1920px. */
+  /* Grid: 12 columns, 32px gutters, fluid margins inside a 1440px page.
+     Full-bleed parts (tape, grain, paper) still run edge to edge. */
   --cols: 12;
   --gutter: 32px;
   --margin: clamp(16px, 5.6vw, 80px);
-  --page-max: 1920px;
+  --page-max: 1440px;
 
-  /* Header height, fixed so the hero paper can reach up behind it */
-  --header-h: 120px;
-  --band-peek: 40px; /* how much of the caution band shows below a full-screen hero */
+  /* Header: 32px padding + 48px link targets */
+  --header-pad: 32px;
+  --header-h: 112px;
 
   /* Targets */
   --target-link: 48px;
   --target-button: 56px;
 
-  /* Layers. Grain sits over the background, under cards and images (51). */
+  /* Layers. Grain lies under everything (page background only). */
+  --z-grain: -1;
   --z-band: 1;
-  --z-grain: 50;
   --z-media: 51;
+  --z-footer: 60;
+  --z-header: 80;
   --z-skip: 200;
 }
 
-/* Desktop and laptop: the header and hero scale with the screen width only,
-   like a picture. 1hu = 10px at 1440 wide (the canvas). */
-@media (min-width: 1024px) {
+/* Below 760px everything stacks. Phones use a 4-column grid with 16px
+   margins and gutters, and the phone type sizes from 023. */
+@media (max-width: 759.98px) {
   :root {
-    /* Width-based, capped by height so the button always fits the first
-       screen. On very wide, short screens the picture is narrower than the
-       screen and the paper continues to the right edge. */
-    --hu: min(100vw / 144, 100svh / 70);
-    --header-h: calc(12 * var(--hu)); /* 120px at 1440 */
-  }
-}
-
-/* Below 760px everything stacks; a narrower gutter keeps 12 columns
-   from overflowing at 360px. */
-@media (max-width: 760px) {
-  :root {
+    --cols: 4;
     --gutter: 16px;
-    --header-h: 176px; /* logo row + nav row */
+    --margin: 16px;
+    --header-pad: 24px;
+    --header-h: 72px; /* 24px top + 48px MENU box */
+
+    --fs-h1: 48px;     --lh-h1: 1;
+    --fs-h2: 40px;
+    --fs-lead: 24px;   --lh-lead: 1.333; /* 24 / 32 */
+    --fs-body: 16px;
+    --fs-button: 13px;
+    --fs-hand: 24px;
+    --fs-band: 24px;
   }
 }

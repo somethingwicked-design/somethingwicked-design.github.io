@@ -1,31 +1,42 @@
 /* ==========================================================================
    Motion: keyframes and animation classes, copied from the canvas.
-   Load order: paper tears in (0.15s), headline rises, intro follows (0.45s),
-   photo drops (1.3s), note and arrow draw (2.2s), marquee runs.
+   Load order: headline rises, intro follows (0.45s), photo drops (1.3s),
+   note and arrow draw (2.2s), marquee runs. The paper is static (039).
    Reduced motion switches all of this off in base.css.
    ========================================================================== */
 
+/* Phones move a little less (reference/homepage-mobile.dc.html) */
+:root {
+  --rise-y: 40px;
+  --drop-y: -70px;
+  --drop-bounce: 8px;
+}
+@media (max-width: 759.98px) {
+  :root {
+    --rise-y: 32px;
+    --drop-y: -56px;
+    --drop-bounce: 6px;
+  }
+}
+
 @keyframes swRise {
-  from { opacity: 0; transform: translateY(40px); }
+  from { opacity: 0; transform: translateY(var(--rise-y)); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Temporary CSS paper rip. Replaced by the After Effects Lottie later. */
-@keyframes swTear {
-  0%   { clip-path: inset(-4% -4% 100% -4%); transform: translate(10px, -6px) rotate(.6deg); }
-  14%  { clip-path: inset(-4% -4% 82% -4%);  transform: translate(9px, -5px) rotate(.6deg); }
-  24%  { clip-path: inset(-4% -4% 76% -4%);  transform: translate(8px, -5px) rotate(.5deg); }
-  40%  { clip-path: inset(-4% -4% 48% -4%);  transform: translate(6px, -3px) rotate(.4deg); }
-  52%  { clip-path: inset(-4% -4% 42% -4%);  transform: translate(5px, -3px) rotate(.3deg); }
-  70%  { clip-path: inset(-4% -4% 14% -4%);  transform: translate(3px, -2px) rotate(.2deg); }
-  84%  { clip-path: inset(-4% -4% -4% -4%);  transform: translate(-4px, 3px) rotate(-.4deg); }
-  100% { clip-path: inset(-4% -4% -4% -4%);  transform: none; }
+/* Desktop photo settles at 3deg */
+@keyframes swDrop {
+  0%   { opacity: 0; transform: translateY(var(--drop-y)) rotate(-8deg); }
+  65%  { opacity: 1; transform: translateY(var(--drop-bounce)) rotate(5deg); }
+  100% { opacity: 1; transform: rotate(3deg); }
 }
 
-@keyframes swDrop {
-  0%   { opacity: 0; transform: translateY(-70px) rotate(-8deg); }
-  65%  { opacity: 1; transform: translateY(8px) rotate(5deg); }
-  100% { opacity: 1; transform: rotate(3deg); }
+/* Phone photo settles at -3deg: the mirror of swDrop. (The canvas reuses
+   swDrop here, which would leave the photo at +3deg after the drop.) */
+@keyframes swDropL {
+  0%   { opacity: 0; transform: translateY(var(--drop-y)) rotate(8deg); }
+  65%  { opacity: 1; transform: translateY(var(--drop-bounce)) rotate(-5deg); }
+  100% { opacity: 1; transform: rotate(-3deg); }
 }
 
 @keyframes swDraw {
@@ -42,15 +53,26 @@
   to { transform: translateX(-50%); }
 }
 
-.sw-rise { animation: swRise .9s cubic-bezier(.2, .7, .2, 1) both; }
+/* View case ticket: sticks on once the card has lifted */
+@keyframes ticketIn {
+  0%   { opacity: 0; scale: .8; }
+  60%  { opacity: 1; scale: 1.06; }
+  100% { opacity: 1; scale: 1; }
+}
+
+.sw-rise { animation: swRise .9s cubic-bezier(.2, .7, .2, 1) backwards; } /* backwards: leaves hover transforms free afterwards */
 .sw-d3   { animation-delay: .45s; }
-.sw-tear { animation: swTear 1.3s linear .15s both; }
 .sw-drop { animation: swDrop 1s cubic-bezier(.2, .7, .2, 1) 1.3s both; }
 .sw-draw path { stroke-dasharray: 220; animation: swDraw .8s ease-out 2.2s both; }
 .sw-note { animation: swFade .4s ease-out 2.2s both; }
 .sw-run  { animation: swMarquee 30s linear infinite; }
 
-/* Paused by js/main.js on hover, on focus and while off screen */
+@media (max-width: 759.98px) {
+  .sw-drop { animation-name: swDropL; }
+  .sw-run  { animation-duration: 24s; }
+}
+
+/* Paused by js/main.js on hover and while off screen */
 .is-paused .sw-run {
   animation-play-state: paused;
 }

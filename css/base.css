@@ -20,8 +20,8 @@ body {
   background: var(--ink);
   color: var(--bone);
   font-family: var(--font-body);
-  font-size: var(--fs-lead);
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
   overflow-x: clip; /* 104% bands and the torn paper must never cause sideways scroll */
   -webkit-font-smoothing: antialiased;
 }
@@ -47,6 +47,17 @@ img {
   height: auto;
 }
 
+/* No widows or orphans (DESIGN.md, Type). Where a short ending still drops
+   onto its own line at 390 or 360px, glue the last words with &nbsp;. */
+h1, h2, h3, .head {
+  text-wrap: balance;
+}
+p, li, blockquote, figcaption {
+  text-wrap: pretty;
+  orphans: 2;
+  widows: 2;
+}
+
 /* Headings: Archivo 900, condensed, uppercase */
 .head {
   font-family: var(--font-head);
@@ -70,7 +81,7 @@ a:hover {
 
 /* Focus: yellow outline with offset, never removed without a replacement */
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--yellow);
   outline-offset: 4px;
 }
 
@@ -113,8 +124,8 @@ a:hover {
 
 /* Page grain
    Same filter as the canvas (#pageGrain), drawn as a repeating tile so it
-   stays cheap on long pages. Over the background, under cards and images
-   (they sit at --z-media). Never over photos, project images or data. */
+   stays cheap on long pages. It lies on the page background only, under
+   all content: text, paper, photos and cards never get grain. */
 body::before {
   content: '';
   position: absolute;

@@ -2,7 +2,7 @@
    Layout: page wrapper, 12-column grid, span helpers, stacking
    ========================================================================== */
 
-/* Content width: up to 1920px with fluid side margins */
+/* Content width: up to 1440px with fluid side margins inside it */
 .wrap {
   width: 100%;
   max-width: var(--page-max);
@@ -46,7 +46,7 @@
 .c12 { grid-column-start: 12; }
 
 /* Below 760px everything stacks to one column */
-@media (max-width: 760px) {
+@media (max-width: 759.98px) {
   .g12 > * {
     grid-column: 1 / -1;
   }
@@ -69,4 +69,10 @@
 .dev-grid .g12 > span {
   grid-column: auto; /* keep 12 columns visible, even where content stacks */
   background: rgba(255, 80, 80, 0.14);
+}
+/* Phones have 4 columns */
+@media (max-width: 759.98px) {
+  .dev-grid .g12 > span:nth-child(n + 5) {
+    display: none;
+  }
 }

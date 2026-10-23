@@ -1,166 +1,231 @@
 /* ==========================================================================
-   Components
-   Step 1: header, nav, language switch, footer.
-   Buttons, tape band, cards, tiles, frames, quotes and figures follow in
-   steps 2 and 3.
+   Components: header, phone menu, buttons, footer, hero, caution tape,
+   project cards. Values from reference/homepage.dc.html (desktop, 1440)
+   and reference/homepage-mobile.dc.html (phone, 360).
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   Header: logo left, nav centred, EN / NL right
+   Header (020, 025, 032): logo, nav right next to it. Fixed; hides while
+   scrolling down and folds back in as a dark bar when scrolling up
+   (js/main.js). The spacer keeps the layout from jumping.
    -------------------------------------------------------------------------- */
 .site-header {
-  position: relative;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-header);
+  padding-block: var(--header-pad);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), background-color .25s, padding .25s;
+}
+.site-header.is-solid {
+  padding-block: var(--sp-16);
+  background: rgba(11, 11, 11, 0.92);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+/* Hidden while scrolling down, but never while a link in it has focus */
+.site-header.is-hidden:not(:focus-within) {
+  transform: translateY(-100%);
+}
+.site-header-inner {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  align-content: center;
-  gap: var(--sp-16);
+  column-gap: var(--sp-56);
+  row-gap: var(--sp-8);
+}
+.head-space {
   height: var(--header-h);
 }
 
+/* Logo (041): one link, two sizes, swapped by screen width only.
+   L2 wordmark from 760px up, L3 'SW' below 760px. */
 .logo {
-  justify-self: start;
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
   line-height: 0.9;
   color: var(--bone);
   text-decoration: none;
+}
+.logo-l2 {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo-l3 {
+  display: none;
+  font-family: var(--font-something); /* both letters, normal kerning */
+  font-size: 28px;
+}
+.logo:hover {
+  color: var(--bone);
 }
 .logo-something {
   font-family: var(--font-something);
   font-size: 20px;
 }
 .logo-wicked {
+  margin-top: -0.5px;
   font-family: var(--font-wicked);
-  font-size: 36px;
+  font-size: 21px; /* Heartless draws large: 21 matches the canvas */
 }
 
+/* Main nav, everywhere: current page yellow, the rest grey, hover bone (025).
+   The nav keeps the brand yellow on case studies too (014). */
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-40);
-  font-size: var(--fs-ui);
+  column-gap: var(--sp-32);
+  font-size: var(--fs-label);
   font-weight: 600;
-  letter-spacing: var(--tracking-ui);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
-.nav a {
+.nav a,
+.menu-nav a {
   display: inline-flex;
   align-items: center;
   min-height: var(--target-link);
+  color: var(--muted);
   text-decoration: none;
 }
-.nav a[aria-current='page'] {
-  color: var(--accent);
-}
-
-/* Desktop: the header is part of the hero picture, so it scales with --hu
-   (canvas sizes at 1440 wide, 80px margins = 8hu). Links stay at least 44px
-   tall as click targets. */
-@media (min-width: 1024px) {
-  .site-header {
-    width: min(144 * var(--hu), 100%); /* the picture's width (nav centred in it), never past a scrollbar */
-    max-width: none;
-    margin-inline: 0;
-    padding-inline: calc(8 * var(--hu));
-    gap: calc(1.6 * var(--hu));
-  }
-  .logo-something {
-    font-size: calc(2 * var(--hu));
-  }
-  .logo-wicked {
-    font-size: calc(3.6 * var(--hu));
-  }
-  .nav {
-    gap: calc(4 * var(--hu));
-    font-size: calc(1.4 * var(--hu));
-  }
-  .nav a {
-    min-height: max(44px, calc(4.8 * var(--hu)));
-  }
-}
-
-/* EN / NL. Hidden in the markup until there is a Dutch version. */
-.lang {
-  color: var(--muted);
-  font-size: var(--fs-ui);
-  font-weight: 600;
-  letter-spacing: var(--tracking-ui);
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.lang-current {
+.nav a:hover,
+.menu-nav a:hover {
   color: var(--bone);
 }
-.site-header .lang {
-  justify-self: end;
+.nav a[aria-current='page'],
+.menu-nav a[aria-current='page'] {
+  color: var(--yellow);
 }
 
-/* Phones: logo and EN / NL on the first row, nav full width below */
-@media (max-width: 760px) {
+/* The dark MENU box (phones only) */
+.menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-12);
+  min-height: var(--target-link);
+  padding: 0 20px;
+  border: 0;
+  border-radius: 0;
+  background: var(--card);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.menu-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+@media (max-width: 759.98px) {
   .site-header {
-    grid-template-columns: 1fr auto;
-    row-gap: var(--sp-8);
+    padding-bottom: 0;
+  }
+  .site-header-inner {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: var(--sp-16);
   }
   .site-header .nav {
-    grid-row: 2;
-    grid-column: 1 / -1;
-    gap: var(--sp-32);
+    display: none;
+  }
+  .menu-btn {
+    display: inline-flex;
+  }
+  .logo {
+    min-height: var(--target-link);
+  }
+  .logo-l2 {
+    display: none;
+  }
+  .logo-l3 {
+    display: inline;
   }
 }
 
 /* --------------------------------------------------------------------------
-   Footer: 'Let's make / some trouble.', email, LinkedIn, EN / NL
+   Phone menu (020): full screen, a native <dialog> so focus stays inside
+   and Escape closes it.
    -------------------------------------------------------------------------- */
-.site-footer {
-  padding-block: var(--sp-112) var(--sp-48);
-  border-top: 1px solid var(--line);
+.menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: var(--sp-24) var(--sp-16) var(--sp-32);
+  overflow-y: auto;
+  border: 0;
+  background: var(--ink);
+  color: var(--bone);
 }
-
-.footer-line {
-  font-size: var(--fs-footer);
-  line-height: 0.9;
-}
-
-.footer-meta {
+.menu[open] {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+}
+.menu::backdrop {
+  background: var(--ink);
+}
+.menu-top {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--sp-24);
-  margin-top: var(--sp-48);
-  font-size: var(--fs-lead);
 }
-.footer-meta a {
+.menu .menu-btn {
+  display: inline-flex;
+}
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  margin-top: var(--sp-96);
+  font-family: var(--font-head);
+  font-weight: var(--head-weight);
+  font-stretch: var(--head-stretch);
+  font-size: 56px;
+  line-height: 48px;
+  text-transform: uppercase;
+}
+.menu-nav a {
+  align-self: flex-start;
+}
+.menu-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  margin-top: auto;
+  padding-top: var(--sp-48);
+  font-size: 16px;
+}
+.menu-meta a {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
   min-height: var(--target-link);
 }
-.footer-links {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-32);
-}
-.footer-links a {
+.menu-meta a + a {
   color: var(--muted);
 }
-.footer-links a:hover {
-  color: var(--accent);
-}
-.site-footer .lang {
-  font-size: var(--fs-lead);
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
+.menu-meta a + a:hover {
+  color: var(--bone);
 }
 
 /* --------------------------------------------------------------------------
-   Button: yellow, the one primary action
+   Buttons
    -------------------------------------------------------------------------- */
+/* Yellow, the one primary action */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   min-height: var(--target-button);
   padding: 0 var(--sp-32);
   background: var(--accent);
@@ -175,53 +240,201 @@
   color: var(--ink);
 }
 
-/* --------------------------------------------------------------------------
-   Hero: torn paper behind, headline cols 1-7, photo cols 8-11
-   -------------------------------------------------------------------------- */
-.hero {
-  position: relative;
-  isolation: isolate;
-  row-gap: var(--sp-40);
-  align-items: stretch;
-  padding-block: clamp(64px, 8.9vw, 128px) clamp(80px, 10vw, 144px);
+/* Outlined pill: Load more */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 64px;
+  padding: 0 var(--sp-32);
+  border: 1.5px solid var(--bone);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--bone);
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* Wraps the hero. Clips the paper sideways at the screen edge (so it still
-   runs up behind the header), and on desktop it is the box the two hero
-   groups are anchored to. */
+/* Dark box on the yellow paper: GET IN TOUCH */
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-8);
+  height: var(--target-link);
+  padding: 0 var(--sp-16);
+  background: var(--card);
+  color: var(--bone);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.btn-dark:hover {
+  color: var(--bone);
+}
+
+/* --------------------------------------------------------------------------
+   Footer (031, 040): a sheet of torn yellow paper, all text black.
+   The same on every page except the 404.
+   -------------------------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  z-index: var(--z-footer); /* over the grain: the paper never gets grain */
+  isolation: isolate;
+  padding-block: var(--sp-96) var(--sp-48);
+  color: var(--ink);
+}
+.footer-paper {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.footer-paper svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  overflow: visible;
+}
+.footer-paper-fill {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--yellow);
+}
+.footer-title {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}
+.footer-sub {
+  margin-top: var(--sp-16);
+  color: var(--paper-ink);
+}
+.footer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-24);
+  margin-top: var(--sp-40);
+}
+.footer-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-link);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.site-footer .footer-link,
+.site-footer .footer-link:hover {
+  color: var(--ink);
+}
+.site-footer a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+@media (max-width: 759.98px) {
+  .site-footer {
+    margin-top: var(--sp-96);
+    padding-block: var(--sp-32);
+  }
+  .footer-title {
+    font-size: clamp(36px, 13.4vw, 48px);
+    line-height: 1;
+  }
+  .footer-title span {
+    white-space: nowrap;
+  }
+  .footer-sub {
+    margin-top: var(--sp-8);
+    text-wrap: balance;
+  }
+  .footer-actions {
+    margin-top: var(--sp-16);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Shared bits: gloss, masking tape, handwritten notes
+   -------------------------------------------------------------------------- */
+/* Gloss coating over a photo and its white border, like a glossy print */
+.gloss {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    linear-gradient(118deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, .30) 32%, rgba(255, 255, 255, .08) 42%, rgba(255, 255, 255, 0) 56%, rgba(255, 255, 255, 0) 78%, rgba(255, 255, 255, .10) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0) 35%);
+}
+
+/* Masking tape: beige, slightly see-through, torn ends */
+.tape {
+  position: absolute;
+  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
+  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
+}
+
+/* Handwriting stand-in (027). Replace with Luna's SVGs later. */
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Hero, desktop (760px and up): torn paper on the right 51.5% of the
+   screen from the top of the page down behind the tape, headline in
+   cols 1-7, square photo in cols 8-11. Fills the first screen.
+   -------------------------------------------------------------------------- */
 .hero-bleed {
   position: relative;
   isolation: isolate;
   overflow-x: clip;
 }
-
-/* Torn yellow paper: right 51.5% of the viewport, from the top of the page
-   (behind the header) down to and behind the caution band.
-   TEMPORARY CSS rip: swap the SVG for the After Effects Lottie in
-   data-lottie when it exists. Do not add lottie-web until then. */
-.hero-rip {
-  /* The SVG is 2400 units wide but the designed paper is the first 742 (the
-     canvas). Right of that is plain paper, so the paper always reaches the
-     screen edge. Every width is the designed paper width x 2400/742. */
-  --paper-bleed: 3.2345;
+.hero-paper {
   position: absolute;
-  top: calc(-1 * var(--header-h));
-  left: calc(48.5vw - (100vw - 100%) / 2); /* paper starts at 48.5% of the screen */
-  bottom: 0;
+  top: 0;
+  right: 0;
   z-index: -1;
-  width: calc(51.5vw * var(--paper-bleed));
-  pointer-events: none;
-  clip-path: inset(-200vh -200vw 0 -200vw); /* never below the band */
-}
-.hero-rip svg {
-  width: 100%;
+  width: 51.5%;
   height: 100%;
-  overflow: visible; /* shadow and fibres past the edges */
+  overflow: visible;
+  pointer-events: none;
 }
 
+.hero {
+  position: relative;
+  isolation: isolate;
+  align-content: center;
+  align-items: stretch;
+  row-gap: var(--sp-40);
+  min-height: calc(100svh - var(--header-h));
+  padding-block: clamp(64px, 8.9vw, 128px) clamp(80px, 10vw, 144px);
+}
+.hero-text {
+  grid-column: 1 / span 7;
+  min-width: 0;
+}
 .hero-title {
-  font-size: var(--fs-hero);
-  line-height: 0.88;
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
   letter-spacing: -0.01em;
 }
 .hero-something {
@@ -240,7 +453,6 @@
   text-transform: none;
   color: var(--accent);
 }
-
 .hero-cta {
   display: flex;
   flex-wrap: wrap;
@@ -253,11 +465,14 @@
   color: var(--bone-muted);
 }
 
-/* Photo: straight white frame, rotated, tape on top, crossing the tear */
+/* Photo: square at every width (040), straight white frame, gloss, tape,
+   rotated 3deg, crossing the tear. Above the page, never under grain. */
 .hero-photo {
   position: relative;
-  z-index: 2;
-  min-height: 384px;
+  z-index: var(--z-media);
+  grid-column: 8 / span 4;
+  align-self: center;
+  aspect-ratio: 1;
   transform: rotate(3deg);
 }
 .hero-frame {
@@ -279,22 +494,15 @@
   object-fit: cover;
   object-position: center top;
 }
-
-/* Masking tape: beige, slightly see-through, torn ends */
-.tape {
-  position: absolute;
-  width: 136px;
-  height: 40px;
-  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
-  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
-}
 .hero-photo .tape {
   top: -16px;
   left: 50%;
+  width: 136px;
+  height: 40px;
   transform: translateX(-50%) rotate(-6deg);
 }
 
-/* 'that's me!' annotation. Placeholder for Luna's handwriting SVG. */
+/* 'that's me!' left of the photo, arrow pointing at it */
 .hero-note {
   position: absolute;
   left: -168px;
@@ -304,14 +512,13 @@
   transform: rotate(-3deg);
   pointer-events: none;
 }
-.hero-note-text {
+.hero-note .hand {
   position: absolute;
   left: 0;
   bottom: 0;
-  font-family: 'Permanent Marker', cursive;
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1;
-  white-space: nowrap;
+  color: var(--bone);
   transform: rotate(-8deg);
 }
 .hero-note svg {
@@ -322,95 +529,174 @@
   overflow: visible;
 }
 
-/* --------------------------------------------------------------------------
-   Desktop hero (1024px and up): one picture that scales with the screen
-   width only (--hu, 1hu = 10px at 1440), so it looks identical everywhere.
-   The canvas is 144hu wide; header + hero is 86hu tall and the band peeks in
-   up to 90hu, as 1440x900. --hu is capped at 1/70 of the screen height so
-   the button (bottom at 68hu) always fits the first screen; then the picture
-   is narrower than the screen and the paper runs on to the right edge.
-   Coordinates: x from the left edge of the screen, y from the top of the
-   page, in hu.
-   -------------------------------------------------------------------------- */
-@media (min-width: 1024px) {
-  .hero {
-    position: static; /* the parts anchor to .hero-bleed (full width) */
-    display: block;
-    max-width: none;
-    height: calc(86 * var(--hu) - var(--header-h));
-    padding: 0;
-  }
-
-  /* Paper: x 69.1hu to the screen edge (74.9hu), page top to band */
-  .hero-rip {
-    top: calc(-1 * var(--header-h));
-    left: calc(69.1 * var(--hu));
-    width: calc(74.9 * var(--paper-bleed) * var(--hu));
-  }
-
-  /* Headline, button, intro: x 8hu (the margin), y 27.5hu */
+/* Small laptops and tablets (760-1023px): no canvas board. The headline
+   keeps its three lines in cols 1-8, the photo moves to cols 9-12 and
+   'that's me!' goes under it, so the note never runs into the headline. */
+@media (min-width: 760px) and (max-width: 1023px) {
   .hero-text {
-    position: absolute;
-    left: calc(8 * var(--hu));
-    top: calc(27.5 * var(--hu) - var(--header-h));
-    width: calc(69.12 * var(--hu));
+    grid-column: 1 / span 8;
   }
-  .hero-title {
-    font-size: calc(10.08 * var(--hu));
-    white-space: nowrap; /* keep the canvas's three lines */
+  .hero-title > span {
+    white-space: nowrap;
   }
-  /* Pinned rather than flowing under the h1: the h1's line boxes round
-     differently per size (mixed fonts), which made the button drift. */
-  .hero-cta {
-    position: absolute;
-    top: calc(34.85 * var(--hu));
-    left: 0;
-    flex-wrap: nowrap;
-    gap: calc(3.2 * var(--hu));
-    margin-top: 0;
-  }
-  .hero .btn {
-    min-height: max(44px, calc(5.6 * var(--hu))); /* never below a 44px target */
-    padding: 0 calc(3.2 * var(--hu));
-    font-size: calc(1.5 * var(--hu));
-  }
-  .hero-intro {
-    max-width: calc(41.6 * var(--hu));
-    font-size: calc(1.8 * var(--hu));
-  }
-
-  /* Photo: x 83.6hu, y 22.46hu, 40.32hu wide, always 4:5 */
   .hero-photo {
-    position: absolute;
-    left: calc(83.6 * var(--hu));
-    top: calc(22.46 * var(--hu) - var(--header-h));
-    width: calc(40.32 * var(--hu));
-    min-height: 0;
-    aspect-ratio: 4 / 5;
+    grid-column: 9 / span 4;
   }
-  .hero-frame {
-    padding: calc(1.2 * var(--hu));
-    box-shadow: 0 calc(1.4 * var(--hu)) calc(3.2 * var(--hu)) rgba(0, 0, 0, 0.4);
-  }
-  .hero-photo .tape {
-    top: calc(-1.6 * var(--hu));
-    width: calc(13.6 * var(--hu));
-    height: calc(4 * var(--hu));
-  }
-
-  /* Note and arrow: placed from the photo's own edges */
   .hero-note {
-    left: calc(-16.8 * var(--hu));
-    bottom: calc(17.28 * var(--hu));
-    width: calc(16 * var(--hu));
-    height: calc(11.2 * var(--hu));
-  }
-  .hero-note-text {
-    font-size: calc(2.4 * var(--hu));
+    left: 8px;
+    top: calc(100% + 16px);
+    bottom: auto;
+    width: 112px;
+    height: 80px;
+    transform: rotate(-3deg);
   }
   .hero-note svg {
+    width: 64px;
+    height: 48px;
+    transform: rotate(-110deg) scaleY(-1);
+  }
+  .hero-note .hand {
+    left: 40px;
+    top: 40px;
+    bottom: auto;
+    transform: rotate(-6deg);
+  }
+}
+
+/* Phone-only parts of the hero */
+.hero-mpaper,
+.hero-mnote {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Hero, phones (below 760px, 040): headline, a full-width band of torn
+   yellow paper with the photo left and 'that's me!' + intro right, then a
+   centred See the work. One grid, so the photo, intro and button exist
+   once; .hero-text and .hero-cta dissolve into it.
+   Rows: title / 40 + 48 / note / 24 / intro / 48 + 40 / button.
+   -------------------------------------------------------------------------- */
+@media (max-width: 759.98px) {
+  .hero-paper,
+  .hero-note {
+    display: none;
+  }
+
+  .hero {
+    grid-template-rows: auto 88px auto 24px auto 88px auto;
+    row-gap: 0;
+    align-items: start;
+    min-height: calc(100svh - var(--header-h));
+    padding-block: var(--sp-32);
+  }
+  .hero-text,
+  .hero-cta {
+    display: contents;
+  }
+
+  .hero-title {
+    position: relative;
+    z-index: 2;
+    grid-row: 1;
+    grid-column: 1 / -1;
+    font-size: clamp(40px, 13.3vw, 56px);
+    line-height: 0.857; /* 48 at 56 */
+  }
+  .hero-title > span {
+    white-space: nowrap;
+  }
+  .hero-wicked {
+    margin-right: 0;
+    margin-left: 4px;
+  }
+
+  /* The paper band: full width, 48px of paper above and below the photo
+     row, plus the 4px the torn rims stick out. Stretched over rows 3-5. */
+  .hero-mpaper {
+    display: block;
+    position: relative;
+    grid-row: 3 / 6;
+    grid-column: 1 / -1;
+    align-self: stretch;
+    margin: -52px calc(-1 * var(--margin));
+    pointer-events: none;
+  }
+  .hero-mpaper svg[viewBox] {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    overflow: visible;
+  }
+
+  .hero-photo {
+    grid-row: 3 / 6;
+    grid-column: 1 / span 2;
+    align-self: start;
+    height: 216px;
+    aspect-ratio: auto;
+    transform: rotate(-3deg);
+  }
+  .hero-frame {
+    padding: var(--sp-8);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  }
+  .hero-photo .tape {
+    top: -12px;
+    width: 96px;
+    height: 32px;
+    transform: translateX(-50%) rotate(-4deg);
+  }
+
+  /* 'that's me!' with the arrow pointing left at the photo */
+  .hero-mnote {
+    display: block;
+    position: relative;
+    grid-row: 3;
+    grid-column: 3 / span 2;
+    height: 56px; /* 8px top padding + 48 */
+    margin-top: 0;
+    pointer-events: none;
+  }
+  .hero-mnote svg {
+    position: absolute;
+    left: -8px;
+    top: 8px;
+    width: 72px;
+    height: 40px;
+    overflow: visible;
+  }
+  .hero-mnote .hand {
+    position: absolute;
+    left: 40px;
+    top: 32px;
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--ink);
+    transform: rotate(-6deg);
+  }
+
+  .hero-intro {
+    position: relative;
+    grid-row: 5;
+    grid-column: 3 / span 2;
+    max-width: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: var(--ink);
+  }
+
+  /* See the work: outlined yellow on the phone, as the export */
+  .hero .btn {
+    grid-row: 7;
+    grid-column: 1 / -1;
+    justify-self: center;
+    min-height: var(--target-link);
+    padding: 0 var(--sp-24);
+    border: 1.5px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
   }
 }
 
@@ -418,7 +704,7 @@
    Caution tape band: over the paper, tilted, scrolling
    -------------------------------------------------------------------------- */
 .band-clip {
-  overflow-x: clip; /* the band is 104% wide */
+  overflow-x: clip; /* the band is wider than the screen */
 }
 .band {
   position: relative;
@@ -432,7 +718,7 @@
   background:
     repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) top / 100% 10px no-repeat,
     repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) bottom / 100% 10px no-repeat,
-    var(--accent);
+    var(--yellow);
   color: var(--ink);
   font-size: var(--fs-band);
   letter-spacing: 0.02em;
@@ -449,8 +735,27 @@
   padding-right: var(--sp-40);
 }
 
+@media (max-width: 759.98px) {
+  .band {
+    z-index: 3;
+    width: 108%;
+    margin: 4px 0 0 -4%;
+    padding: var(--sp-16) 0 var(--sp-16) var(--sp-24);
+    box-shadow: none;
+    background:
+      repeating-linear-gradient(-45deg, var(--ink) 0 10px, transparent 10px 20px) top / 100% 8px no-repeat,
+      repeating-linear-gradient(-45deg, var(--ink) 0 10px, transparent 10px 20px) bottom / 100% 8px no-repeat,
+      var(--yellow);
+    line-height: 32px;
+  }
+  .marquee-group {
+    gap: var(--sp-24);
+    padding-right: var(--sp-24);
+  }
+}
+
 /* --------------------------------------------------------------------------
-   Selected work
+   Selected work (019): big (16:8), small + small (4:3), repeating.
    -------------------------------------------------------------------------- */
 .work {
   padding-block: var(--sp-120) var(--sp-144);
@@ -464,56 +769,88 @@
   margin-bottom: var(--sp-56);
 }
 .work-title {
-  font-size: var(--fs-h2);
-  line-height: 0.9;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
 }
 .work-intro {
   max-width: 360px;
   color: var(--bone-muted);
 }
-.pgrid {
-  row-gap: var(--sp-64);
+.wgrid {
+  row-gap: var(--sp-56);
   align-items: start;
+}
+
+/* Cards from 'Load more' stay hidden until the button is pressed. Without
+   JS (no .js on <html>) every card shows and the button stays hidden. */
+.js .card[data-more]:not(.is-shown) {
+  display: none;
 }
 
 /* Project card: the whole card is one link */
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--sp-24);
+  gap: var(--sp-16);
   color: var(--bone);
   text-decoration: none;
 }
 .card:hover {
   color: var(--bone);
 }
+.card--big {
+  grid-column: 1 / -1;
+}
+.card--small {
+  grid-column-end: span 6;
+}
 
-/* Project image: thick white frame, glossy sheen, shadow, no grain */
+/* Image: thick white frame, glossy sheen, shadow, no grain. Images fill
+   the frame so every small card is exactly 4:3. No yellow inside (014). */
 .card-img {
   position: relative;
   z-index: var(--z-media);
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: var(--sp-12) solid var(--frame);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+  background: var(--placeholder);
+}
+.card--big .card-img {
+  aspect-ratio: 16 / 8;
+}
+.card-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-ph {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 4 / 3;
-  border: var(--sp-12) solid var(--frame);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 36%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.07) 100%),
-    var(--placeholder);
+  padding: var(--sp-16);
   color: var(--muted);
-  font-size: var(--fs-ui);
+  font-size: var(--fs-small);
   letter-spacing: 0.1em;
   text-align: center;
   text-transform: uppercase;
 }
-.card-img--wide {
-  aspect-ratio: 16 / 8;
+.card-gloss {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 36%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.07) 100%);
 }
 .pill {
   position: absolute;
-  top: var(--sp-24);
-  left: var(--sp-24);
+  top: 20px;
+  left: 20px;
   display: inline-flex;
   align-items: center;
   min-height: var(--sp-40);
@@ -521,78 +858,164 @@
   border-radius: 999px;
   background: var(--bone);
   color: var(--ink);
-  font-size: var(--fs-ui);
+  font-size: var(--fs-small);
   font-weight: 600;
-  letter-spacing: 0;
-  text-transform: none;
 }
 
-.card-text {
+/* Just seen (021): this visit only, set by the case study (sessionStorage) */
+.seen {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: flex;
-  flex-direction: column;
-  gap: var(--sp-8);
+  align-items: center;
+  justify-content: center;
+  background: rgba(11, 11, 11, 0.62);
+  pointer-events: none;
 }
-.card-title {
-  font-size: var(--fs-card);
-  line-height: 0.95;
+.seen[hidden] {
+  display: none;
 }
-.card-title--lg {
-  font-size: var(--fs-card-lg);
+.seen-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-12);
+  color: var(--bone);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
-.card-line {
-  font-size: var(--fs-body);
+.seen-label svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Caption row: name + one line left, type right */
+.card-cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--sp-16);
   line-height: 1.4;
 }
-.tags {
+.card-cap strong {
+  font-weight: 700;
+}
+.card-type {
+  flex: none;
   color: var(--muted);
-  font-size: var(--fs-tag);
-  font-weight: 600;
-  letter-spacing: var(--tracking-ui);
-  text-transform: uppercase;
+  font-size: var(--fs-small);
+  font-style: italic;
 }
 
-/* 'All projects' tile: cream, tips on hover */
-.tile {
-  position: relative;
-  z-index: var(--z-media);
+.more {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  aspect-ratio: 4 / 3;
-  padding: clamp(24px, 3vw, 40px);
-  background: var(--bone);
-  color: var(--ink);
-  text-decoration: none;
+  justify-content: center;
+  margin-top: var(--sp-40);
 }
-.tile:hover {
-  color: var(--ink);
-}
-.tile-meta {
-  color: var(--ink-soft);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: var(--tracking-ui);
-  text-transform: uppercase;
-}
-.tile-foot {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: var(--sp-16);
-}
-.tile-title {
-  font-size: clamp(48px, 6vw, 96px);
-  line-height: 0.85;
-}
-.tile-arrow {
-  font-size: clamp(40px, 5vw, 72px);
-  line-height: 1;
+.more[hidden] {
+  display: none;
 }
 
-/* --------------------------------------------------------------------------
-   Hover motion: subtle, only with a real pointer, never with reduced motion
-   -------------------------------------------------------------------------- */
-@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+/* View case ticket (040): a cream ticket with a perforated stub. Follows
+   the pointer over the image once the card has lifted (js/main.js); on
+   keyboard focus it parks top-right of the frame. Decorative: the link
+   already says where it goes. */
+.ticket {
+  position: absolute;
+  z-index: 60;
+  display: none;
+  width: 104px;
+  height: 22px;
+  pointer-events: none;
+  transform: translate(-6px, -50%) rotate(-3deg);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
+  animation: ticketIn .22s cubic-bezier(.2, .7, .2, 1) .22s both;
+}
+.tk-p {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #ECE2C4, #D6CAA6);
+}
+.tk-main {
+  clip-path: path('M 0 0 L 79 0 A 3 3 0 0 0 82 3 L 82 19 A 3 3 0 0 0 79 22 L 0 22 L 0 20.75 A 1.5 1.5 0 0 0 0 17.75 L 0 15.25 A 1.5 1.5 0 0 0 0 12.25 L 0 9.75 A 1.5 1.5 0 0 0 0 6.75 L 0 4.25 A 1.5 1.5 0 0 0 0 1.25 L 0 0 Z');
+}
+.tk-stub {
+  clip-path: path('M 82 3 A 3 3 0 0 0 85 0 L 104 0 L 104 1.25 A 1.5 1.5 0 0 0 104 4.25 L 104 6.75 A 1.5 1.5 0 0 0 104 9.75 L 104 12.25 A 1.5 1.5 0 0 0 104 15.25 L 104 17.75 A 1.5 1.5 0 0 0 104 20.75 L 104 22 L 85 22 A 3 3 0 0 0 82 19 Z');
+}
+.tk-label {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 22px;
+  color: var(--ink);
+  font-family: var(--font-head);
+  font-size: 11px;
+  font-weight: 800;
+  font-stretch: 85%;
+  line-height: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tk-arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 82px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tk-arrow svg {
+  width: 9px;
+  height: 9px;
+}
+.tk-perf {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 81.5px;
+  width: 0;
+  border-left: 1px dotted rgba(11, 11, 11, .45);
+}
+
+/* Pointer ticket: only with a fine pointer, set up by js/main.js */
+.has-ticket .card-img {
+  cursor: none;
+}
+.card.is-hover .ticket--pointer {
+  display: block;
+}
+
+/* Keyboard focus: lift, yellow ring around the frame, ticket top-right */
+.card:focus {
+  outline: none;
+}
+.card:focus-visible .card-img {
+  outline: 3px solid var(--yellow);
+  outline-offset: 6px;
+}
+.ticket--focus {
+  left: calc(100% - 90px);
+  top: 43px;
+}
+.card:focus-visible .ticket--focus {
+  display: block;
+}
+.card:focus-visible .ticket--pointer {
+  display: none;
+}
+
+/* Hover and focus lift: subtle, never with reduced motion */
+@media (prefers-reduced-motion: no-preference) {
   .btn {
     transition: transform .2s;
   }
@@ -602,45 +1025,56 @@
   .card-img {
     transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .5s;
   }
-  .card:hover .card-img {
+  .card:hover .card-img,
+  .card:focus-visible .card-img {
     transform: translateY(-8px) rotate(-.8deg);
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6);
   }
-  .tile {
-    transition: transform .4s cubic-bezier(.2, .7, .2, 1);
-  }
-  .tile:hover {
-    transform: rotate(-1.2deg) scale(1.015);
-  }
 }
 
-/* --------------------------------------------------------------------------
-   Hero on phones (below 760px). Not on the canvas: see todo
-   'Check the torn paper and hero on phone width'.
-   The photo shrinks and sits right so the note fits on its left, and the
-   paper only covers the lower part of the hero, behind the photo, so it
-   never sits under the headline.
-   -------------------------------------------------------------------------- */
-@media (max-width: 760px) {
-  .hero-photo {
-    justify-self: end;
-    width: 60%;
-    min-height: 0;
-    aspect-ratio: 4 / 5;
+/* Selected work on phones: single cards, all 4:3, 8px frames */
+@media (max-width: 759.98px) {
+  .work {
+    padding-block: 76px 0; /* 56 + the 20px the tape is lifted */
+  }
+  .work-head {
+    display: block;
+    margin-bottom: var(--sp-40);
+  }
+  .work-title {
+    font-size: 48px;
+    line-height: 48px;
+  }
+  .work-intro {
+    max-width: none;
     margin-top: var(--sp-16);
+    line-height: 24px;
   }
-  .hero-note {
-    bottom: 40%;
-    transform: rotate(-3deg) scale(0.85);
-    transform-origin: 100% 50%;
+  .wgrid {
+    row-gap: var(--sp-40);
   }
-  .card-img--wide {
+  .card--small {
+    grid-column: 1 / -1;
+  }
+  .card--big .card-img,
+  .card-img {
     aspect-ratio: 4 / 3;
+    border-width: var(--sp-8);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
   }
-  .hero-rip {
-    top: auto;
-    left: calc(20vw - (100vw - 100%) / 2);
-    height: 46%;
-    width: calc(80vw * var(--paper-bleed));
+  .card-ph {
+    font-size: var(--fs-label);
+  }
+  .pill {
+    top: var(--sp-16);
+    left: var(--sp-16);
+    min-height: var(--sp-32);
+    padding: 0 var(--sp-12);
+    font-size: var(--fs-label);
+  }
+  .card-cap {
+    flex-direction: column;
+    gap: var(--sp-4);
+    line-height: 24px;
   }
 }
