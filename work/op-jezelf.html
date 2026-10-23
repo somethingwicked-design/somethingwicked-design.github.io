@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Op Jezelf - Luna Rachmani - Something Wicked</title>
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <!-- Case study only -->
+  <link rel="stylesheet" href="/css/case.css">
+  <script src="/js/case.js" defer></script>
+  <link rel="preload" href="/img/op-jezelf-phones.webp" as="image" type="image/webp">
+</head>
+<!-- Case study template (040). For the next case study: copy this file,
+     change the accent and screen tint below, data-project, the content and
+     the Next up block. Order of next projects: 024. -->
+<body class="case" data-project="op-jezelf" style="--accent:#C4DCA4; --screen-bg:#CFE3B5">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- Stage: the case study, Next up and (desktop) the spacer that
+         scrubs the Next up slide (js/case.js) -->
+    <div class="cs-stage">
+    <article class="cs-main grain" id="csMain" aria-labelledby="cs-title">
+      <span class="cs-dim" id="csDim" aria-hidden="true"></span>
+      <div class="wrap">
+      <div class="cs-flow">
+
+        <!-- ========================================================
+             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
+             ======================================================== -->
+        <div class="cs-hero">
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="Two phones showing the Op Jezelf welcome screen and a profile" fetchpriority="high">
+          </figure>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <section class="cs-text cs-intro" aria-label="Introduction">
+          <div>
+            <h1 class="cs-title head" id="cs-title">Op Jezelf</h1>
+          </div>
+          <div class="cs-body">
+            <p class="cs-lead">Getting teens ready to live on their own.</p>
+            <p>A gamified app for teenagers in Friesland aged 14 to 17, building the practical and emotional skills for independent living, from budgeting and chores to the anxiety of growing up.</p>
+            <p>Research showed the money problem was really an anxiety problem. So instead of more information, teens got a safe place to practise: real costs with zero risk, small wins and stories from peers.</p>
+            <dl class="cs-facts">
+              <div><dt>My role</dt><dd>Lead researcher, team lead, illustrator</dd></div>
+              <div><dt>Team</dt><dd>4 people: a programmer, two designers and me</dd></div>
+              <div><dt>Discipline</dt><dd>UI/UX</dd></div>
+              <!-- TODO (todo.md): the year -->
+              <div><dt>Year</dt><dd>[year]</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/op-jezelf/hand-phone-room.webp" width="1601" height="2000" alt="A hand holding a phone with the Op Jezelf app open on a room scene" class="obj-y40" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-wide">
+              <img src="/img/op-jezelf/campaign-banner.webp" width="2000" height="997" alt="Op Jezelf campaign banner with app screens and illustrated teens" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-scene">[Photo: teens using the app in class]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             01 CONTEXT
+             ======================================================== -->
+        <section class="cs-text" id="context" aria-labelledby="h-context">
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <div class="cs-body">
+            <p>Many teenagers in Friesland lack practical preparation for living on their own. They underestimate real costs, feel overwhelmed by chores and routines, and are anxious about growing up.</p>
+            <p>The brief, through NHL Stenden, asked for a concept, visual design and working prototype in seven weeks. After delivery, we were hired for five more months to build the full version.</p>
+          </div>
+        </section>
+
+        <!-- The wicked part (007, 040): right after 01 Context.
+             TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked">
+          <span class="wicked-note" aria-hidden="true">
+            <span class="hand">the wicked part</span>
+            <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>We made adulting feel like</span><br><span>a game, not a lecture.</span></p>
+        </div>
+
+        <div class="media media--ph ar-wide m-ar-portrait">[Video: 10 seconds of the app in use]</div>
+
+        <!-- ========================================================
+             02 RESEARCH
+             ======================================================== -->
+        <section class="cs-text" id="research" aria-labelledby="h-research">
+          <h2 class="cs-h2 head" id="h-research"><span class="cs-num">02</span> Research</h2>
+          <div class="cs-body">
+            <p>Financial literacy and emotional readiness turned out to be tangled together, so one method would have missed half the picture. We mixed interviews, a diary study, quizzes, co-creation and desk research.</p>
+          </div>
+        </section>
+
+        <!-- Numbers (035): after the chapter text, before its images -->
+        <ul class="stats" role="list" aria-label="Research in numbers">
+          <li><span class="stat-num head">10</span><span class="stat-label">in-depth interviews</span></li>
+          <li><span class="stat-num head">7</span><span class="stat-label">day diary study</span></li>
+          <li><span class="stat-num head">9/10</span><span class="stat-label">asked for budgeting tools</span></li>
+        </ul>
+
+        <div class="cs-bento cs-bento--flip">
+          <div class="media media--ph ar-tall m-ar-scene">[Photo: co-creation session, post-its on the table]</div>
+          <div class="cs-stack">
+            <div class="media media--ph m-ar-tall">[Photo: a page from the diary study]</div>
+            <div class="media media--ph m-ar-wide">[Photo: insights wall]</div>
+          </div>
+        </div>
+
+        <section class="cs-text" aria-labelledby="h-told">
+          <h2 class="cs-label" id="h-told">What teens told us</h2>
+          <blockquote class="cs-body cs-quote">&#8216;Rent, furniture, bills. It adds up fast and nobody told us.&#8217;</blockquote>
+        </section>
+
+        <!-- ========================================================
+             03 DESIGN DECISIONS
+             ======================================================== -->
+        <section class="cs-text" id="decisions" aria-labelledby="h-decisions">
+          <h2 class="cs-h2 head" id="h-decisions"><span class="cs-num">03</span> Design decisions</h2>
+          <div class="cs-body">
+            <p><strong>A. Real costs, zero risk.</strong> The budgeting feature uses real expenses like rent, utilities and insurance, so teens can practise planning without real consequences.</p>
+            <p><strong>B. Micro-tasks, not a to-do list.</strong> A full list of adult chores causes paralysis. Small daily tasks with visible progress keep motivation going.</p>
+            <p><strong>C. Peer stories over lectures.</strong> Because anxiety kept coming up, the app leans on relatable stories and humour instead of instructions.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media media--screen ar-tall">
+            <img src="/img/op-jezelf/screen-quiz-rent.webp" width="923" height="2000" alt="Op Jezelf quiz screen about paying rent" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media media--screen m-ar-tall">
+              <img src="/img/op-jezelf/screen-municipality-letter.webp" width="923" height="2000" alt="Op Jezelf screen: you got a letter from your municipality" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-tall">[Budget screen]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             04 WHAT TESTING CHANGED
+             ======================================================== -->
+        <section class="cs-text" id="testing" aria-labelledby="h-testing">
+          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
+          <div class="cs-body">
+            <p>We tested the Figma prototype with 14 to 17 year olds in usability sessions and a classroom pilot. Teens got lost in the guidance, missed next steps, and asked how to manage expenses without any income.</p>
+            <p>That led to clearer onboarding, a tighter task structure and more honest feedback in the decision flow.</p>
+          </div>
+        </section>
+
+        <div class="media media--ph ar-wide m-ar-scene">[Photo: the classroom pilot]</div>
+
+        <!-- ========================================================
+             05 REFLECTION
+             ======================================================== -->
+        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
+          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+          <div class="cs-body">
+            <p><span class="cs-em">Good research isn't just finding what people need. It's understanding the feeling those needs live in.</span></p>
+            <p>What worked: putting research straight into design, relatable scenarios, and humour to take the edge off. Next time: test with a bigger, more diverse group of teens.</p>
+            <!-- TODO (todo.md): 'The result', where it landed after launch -->
+            <p>[Where it landed: release, users, what the client said]</p>
+          </div>
+        </section>
+
+      </div>
+      </div>
+      <span class="cs-hairline" aria-hidden="true"></span>
+    </article>
+
+    <!-- ============================================================
+         NEXT UP (024, 040): the next project in the homepage order.
+         Desktop: pinned under the case study, which slides left over it
+         while the preview grows from its bottom-right corner, scrubbed by
+         the spacer below (js/case.js). Then both unpin and scroll away
+         together, and the footer follows in the normal flow.
+         Phone: it scrolls in while the case study darkens (028).
+         ============================================================ -->
+    <section class="next grain" id="csNext" aria-label="Next up">
+      <div class="next-inner wrap">
+        <p class="next-label" aria-hidden="true">Next up</p>
+        <a class="next-title" href="/work/restock.html">
+          <span class="visually-hidden">Next up: </span>
+          <span>ReStock</span>
+          <span class="next-sub">Wasting less food, one fridge at a time</span>
+        </a>
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <a class="next-prev" href="/work/restock.html" aria-label="Next project: ReStock">
+          <span class="next-prev-in">
+            <span class="next-prev-ph">[ReStock preview video]</span>
+            <span class="next-prev-name head" aria-hidden="true">ReStock</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="cs-spacer" id="csSpacer" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031). Paths and filters copied exactly from
+         reference/homepage.dc.html. -->
+    <span class="footer-paper" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+        <defs>
+        <filter id="dkFibers" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="12" result="f"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="f" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="6" result="t"></feTurbulence><feColorMatrix in="t" values="0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  2.6 0 0 0 -1.6" result="flecks"></feColorMatrix><feComposite in="flecks" in2="fuzzy" operator="in" result="fl"></feComposite><feMerge><feMergeNode in="fuzzy"></feMergeNode><feMergeNode in="fl"></feMergeNode></feMerge></filter>
+        <filter id="dkRough" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="21" result="r"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="r" scale="2.5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+        <filter id="dkShadow" x="-5%" y="-100%" width="110%" height="300%"><feGaussianBlur stdDeviation="10"></feGaussianBlur></filter>
+        </defs>
+        <path fill="rgba(0,0,0,0.6)" filter="url(#dkShadow)" d="M0 64 L0 9 L17 9 L34 9 L51 9 L58 5 L71 7 L82 10 L95 12 L102 11 L111 8 L122 8 L131 8 L142 8 L148 12 L155 15 L170 15 L181 16 L193 14 L208 13 L218 17 L225 16 L240 18 L253 19 L267 17 L281 15 L298 18 L309 14 L324 11 L334 11 L347 9 L361 7 L371 8 L378 11 L390 9 L404 12 L417 14 L429 15 L442 12 L451 13 L459 17 L469 15 L484 16 L493 17 L500 19 L507 21 L514 22 L523 21 L536 17 L552 15 L562 14 L572 14 L582 13 L591 15 L607 18 L619 21 L628 24 L636 23 L651 24 L665 23 L681 24 L690 22 L703 18 L720 18 L733 18 L750 16 L758 18 L776 15 L783 16 L794 16 L800 15 L816 19 L830 20 L848 16 L863 16 L881 12 L893 11 L911 13 L926 14 L936 12 L954 8 L964 8 L973 5 L980 5 L991 6 L999 7 L1017 8 L1034 6 L1043 10 L1050 8 L1062 8 L1070 7 L1083 3 L1099 3 L1108 0 L1119 4 L1136 1 L1147 5 L1157 7 L1174 4 L1189 6 L1206 7 L1220 5 L1231 9 L1246 12 L1262 14 L1275 10 L1284 8 L1294 4 L1305 1 L1320 -2 L1333 0 L1345 1 L1361 2 L1368 4 L1382 5 L1392 8 L1405 11 L1421 9 L1430 10 L1440 8 L1440 64 Z"></path>
+        <path fill="#F4EFE3" filter="url(#dkFibers)" d="M0 64 L0 15 L17 15 L34 15 L51 15 L58 11 L71 13 L82 16 L95 18 L102 17 L111 14 L122 14 L131 14 L142 14 L148 18 L155 21 L170 21 L181 22 L193 20 L208 19 L218 23 L225 22 L240 24 L253 25 L267 23 L281 21 L298 24 L309 20 L324 17 L334 17 L347 15 L361 13 L371 14 L378 17 L390 15 L404 18 L417 20 L429 21 L442 18 L451 19 L459 23 L469 21 L484 22 L493 23 L500 25 L507 27 L514 28 L523 27 L536 23 L552 21 L562 20 L572 20 L582 19 L591 21 L607 24 L619 27 L628 30 L636 29 L651 30 L665 29 L681 30 L690 28 L703 24 L720 24 L733 24 L750 22 L758 24 L776 21 L783 22 L794 22 L800 21 L816 25 L830 26 L848 22 L863 22 L881 18 L893 17 L911 19 L926 20 L936 18 L954 14 L964 14 L973 11 L980 11 L991 12 L999 13 L1017 14 L1034 12 L1043 16 L1050 14 L1062 14 L1070 13 L1083 9 L1099 9 L1108 6 L1119 10 L1136 7 L1147 11 L1157 13 L1174 10 L1189 12 L1206 13 L1220 11 L1231 15 L1246 18 L1262 20 L1275 16 L1284 14 L1294 10 L1305 7 L1320 4 L1333 6 L1345 7 L1361 8 L1368 10 L1382 11 L1392 14 L1405 17 L1421 15 L1430 16 L1440 14 L1440 64 Z"></path>
+        <path fill="#E8C547" filter="url(#dkRough)" d="M0 64 L0 24 L17 21 L34 24 L51 27 L58 19 L71 18 L82 22 L95 23 L102 25 L111 25 L122 25 L131 24 L142 21 L148 22 L155 34 L170 33 L181 32 L193 27 L208 26 L218 30 L225 30 L240 33 L253 31 L267 27 L281 27 L298 33 L309 29 L324 27 L334 30 L347 28 L361 28 L371 18 L378 23 L390 20 L404 22 L417 28 L429 28 L442 32 L451 24 L459 37 L469 24 L484 26 L493 32 L500 35 L507 40 L514 38 L523 31 L536 37 L552 29 L562 30 L572 33 L582 27 L591 32 L607 31 L619 42 L628 35 L636 41 L651 33 L665 41 L681 39 L690 36 L703 31 L720 36 L733 32 L750 29 L758 32 L776 34 L783 36 L794 32 L800 32 L816 39 L830 34 L848 36 L863 29 L881 21 L893 32 L911 31 L926 27 L936 28 L954 24 L964 24 L973 15 L980 16 L991 19 L999 25 L1017 24 L1034 19 L1043 22 L1050 23 L1062 27 L1070 27 L1083 21 L1099 23 L1108 18 L1119 21 L1136 21 L1147 15 L1157 17 L1174 23 L1189 26 L1206 22 L1220 21 L1231 26 L1246 23 L1262 32 L1275 29 L1284 19 L1294 21 L1305 22 L1320 17 L1333 16 L1345 19 L1361 12 L1368 17 L1382 20 L1392 22 L1405 21 L1421 27 L1430 29 L1440 27 L1440 64 Z"></path>
+      </svg>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>

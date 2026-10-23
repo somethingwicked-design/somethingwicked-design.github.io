@@ -1,0 +1,683 @@
+/* ==========================================================================
+   Case study template (040). Values from reference/case-study.dc.html
+   (desktop, 1440) and reference/case-study-mobile.dc.html (phone, 360).
+   Each case study sets on <body>:
+     --accent     the project colour (chapter numbers, the wicked part)
+     --screen-bg  the backdrop behind app screens (a light project tint)
+   Logo, nav and footer keep the brand yellow (014).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Stage: the case study (#csMain) and, on desktop, the scroll spacer that
+   drives the Next up slide (js/case.js)
+   -------------------------------------------------------------------------- */
+.cs-main {
+  position: relative;
+  z-index: 1;
+  padding-block: var(--sp-24) var(--sp-96);
+}
+/* Darkens the case study as Next up arrives (desktop and phone) */
+.cs-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+}
+/* Hairline 48px above the bottom of the case study */
+.cs-hairline {
+  position: absolute;
+  bottom: var(--sp-48);
+  left: 50%;
+  width: min(100%, var(--page-max));
+  padding-inline: var(--margin);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.cs-hairline::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: rgba(242, 238, 230, 0.12);
+}
+.cs-spacer {
+  display: none; /* only when the Next up slide runs (.next-live) */
+  height: 1200px;
+}
+
+/* The flow of blocks: media and text, 8px apart */
+.cs-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+
+/* --------------------------------------------------------------------------
+   Media (034): every photo in a white frame with gloss, square corners.
+   Ratios: desktop class first, phone override (.m-…) second.
+   -------------------------------------------------------------------------- */
+.media {
+  position: relative;
+  z-index: var(--z-media);
+  margin: 0;
+  overflow: hidden;
+  border: var(--sp-12) solid var(--frame);
+  border-radius: 0;
+  background: var(--card);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+.media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, .04) 36%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, .07) 100%);
+}
+.media > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media > img.obj-y40 {
+  object-position: 50% 40%;
+}
+
+/* Placeholder: visible until the real image exists (see todo) */
+.media--ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-24);
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* App screen on a light project tint, standing on the bottom edge */
+.media--screen {
+  background: var(--screen-bg, var(--card));
+}
+.media--screen > img {
+  inset: auto auto 0 50%;
+  width: auto;
+  height: 88%;
+  max-width: 70%;
+  object-fit: contain;
+  object-position: bottom;
+  border-radius: 12px 12px 0 0; /* the phone screen's own corners, as the export */
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+  transform: translateX(-50%);
+}
+
+.ar-wide  { aspect-ratio: 16 / 9; }
+.ar-tall  { aspect-ratio: 4 / 5; }
+.ar-scene { aspect-ratio: 4 / 3; }
+
+/* Bento: one tall image and a stack of two, 32px apart (8px vertically) */
+.cs-bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--sp-8);
+}
+.cs-stack {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--sp-8);
+}
+.cs-bento--flip > .ar-tall {
+  order: 2;
+}
+
+/* --------------------------------------------------------------------------
+   Hero: 16:9 in a 12px frame on desktop; a tilted polaroid with tape on
+   phones (the tape only shows there)
+   -------------------------------------------------------------------------- */
+.cs-hero {
+  position: relative;
+  z-index: var(--z-media);
+}
+.cs-hero .tape {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Text blocks: title or label in cols 1-4, text in cols 5-12
+   -------------------------------------------------------------------------- */
+.cs-text {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: var(--sp-16);
+  padding-block: var(--sp-96) var(--sp-56);
+}
+.cs-text > :first-child {
+  grid-column: 1 / span 4;
+}
+.cs-text > :nth-child(2) {
+  grid-column: 5 / -1;
+}
+.cs-intro {
+  padding-top: var(--sp-48);
+}
+.cs-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+  max-width: 520px;
+}
+.cs-body p {
+  font-weight: 300;
+  color: var(--bone-muted);
+}
+.cs-body strong {
+  font-weight: 500;
+  color: var(--bone);
+}
+.cs-title {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}
+.cs-lead,
+.cs-body .cs-lead {
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: 300;
+  color: var(--bone);
+}
+.cs-em {
+  color: var(--bone);
+}
+
+/* Facts: My role, Team, Discipline, Year */
+.cs-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-16);
+  margin: var(--sp-8) 0 0;
+}
+.cs-facts div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+.cs-facts dt {
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cs-facts dd {
+  margin: 0;
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: 300;
+}
+
+/* Chapter heading: the number sits in front like an annotation (040) */
+.cs-h2 {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--fs-h2);
+  line-height: var(--fs-h2);
+}
+.cs-num {
+  padding-top: 6px;
+  font-size: var(--fs-label);
+  line-height: 13px;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+/* Small heading for a quote block */
+.cs-label {
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.cs-quote {
+  margin: 0;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: 300;
+  color: var(--bone);
+}
+
+/* --------------------------------------------------------------------------
+   The wicked part (007, 040): handwritten note in the project colour with
+   an arrow, the line itself in Lead size
+   -------------------------------------------------------------------------- */
+.wicked {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  padding-block: var(--sp-56) 72px;
+}
+.wicked-note {
+  position: relative;
+  color: var(--accent);
+  grid-column: 1 / span 4;
+  justify-self: end;
+  align-self: center;
+  width: 200px;
+  height: 72px;
+}
+.wicked-note .hand {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: var(--fs-hand);
+  line-height: 32px;
+  color: var(--accent);
+  transform: rotate(-6deg);
+}
+.wicked-note svg {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 72px;
+  height: 40px;
+  overflow: visible;
+  transform: scaleX(-1) rotate(-10deg);
+}
+.wicked-line {
+  grid-column: 5 / -1;
+  max-width: 720px;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: 300;
+  color: var(--bone);
+}
+.wicked-line span {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Numbers (035): a row of three, no boxes
+   -------------------------------------------------------------------------- */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sp-32);
+  margin: 0;
+  padding: var(--sp-64) 0 var(--sp-80);
+  list-style: none;
+}
+.stats li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-12);
+}
+.stat-num {
+  font-size: var(--fs-h2);
+  line-height: var(--fs-h2);
+  color: var(--bone);
+}
+.stat-label {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  font-weight: 300;
+  color: var(--bone-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Next up (024, 040). Default: in the page flow, end state (no JS, reduced
+   motion, phones). With .next-live (js/case.js, desktop only) it pins under
+   the case study while the case study slides left over it, scrubbed by the
+   spacer; when the slide is done both unpin and scroll away together, and
+   the footer follows in the flow (never on top of Next up).
+   -------------------------------------------------------------------------- */
+.next {
+  position: relative;
+  min-height: 100svh;
+}
+.next-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: 1fr auto auto 1fr auto auto;
+  column-gap: var(--gutter);
+  height: 100%;
+  min-height: inherit;
+  padding-block: var(--header-h) var(--sp-48);
+}
+.next-label {
+  grid-column: 4 / span 6;
+  grid-row: 2;
+  margin-bottom: var(--sp-16);
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.next-title {
+  grid-column: 4 / span 6;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: 300;
+  color: var(--bone);
+  text-decoration: none;
+}
+.next-title:hover {
+  color: var(--bone);
+}
+.next-sub {
+  color: var(--muted);
+}
+.next-all {
+  grid-column: 9 / span 4;
+  grid-row: 5;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--sp-16);
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.next-all a {
+  color: var(--muted);
+  text-decoration: none;
+}
+.next-all a:hover {
+  color: var(--bone);
+}
+/* Preview: grows from its bottom-right corner (clip-path + inner scale) */
+.next-prev {
+  position: relative;
+  grid-column: 9 / span 4;
+  grid-row: 6;
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  text-decoration: none;
+}
+.next-prev-in {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: var(--placeholder);
+  transform-origin: 100% 100%;
+}
+.next-prev-ph {
+  position: absolute;
+  top: var(--sp-16);
+  left: var(--sp-16);
+  color: var(--muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.next-prev-name {
+  position: absolute;
+  left: var(--sp-16);
+  bottom: var(--sp-8);
+  color: var(--bone);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+}
+
+/* Live (desktop, motion allowed). Stage = case study (height H), Next up,
+   spacer (1200). Next up is one screen tall and pulled up by one screen, so
+   it sits behind the end of the case study; both are sticky, so they pin
+   together through the spacer and let go together at the end of the stage. */
+.next-live .cs-main {
+  will-change: transform;
+}
+.next-live .cs-spacer {
+  display: block;
+}
+.next-live .next {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: 100vh;
+  min-height: 0;
+  margin-top: -100vh;
+}
+.next-live .next-label,
+.next-live .next-title,
+.next-live .next-all {
+  opacity: 0;
+}
+.next-live .next-prev {
+  clip-path: inset(89% 0 0 89%);
+}
+.next-live .next-prev-in {
+  transform: scale(.5);
+}
+
+/* The footer follows Next up */
+.case .site-footer {
+  margin-top: var(--sp-40);
+}
+
+/* --------------------------------------------------------------------------
+   Phones (below 760px, 022/028/040): everything stacks; images run 8px
+   from the screen edge, text 16px; Next up scrolls in under a hairline
+   while the case study darkens (js/case.js).
+   -------------------------------------------------------------------------- */
+@media (max-width: 759.98px) {
+  .cs-main {
+    padding-block: 0;
+  }
+  .cs-hairline {
+    position: static;
+    width: auto;
+    margin: var(--sp-48) 0 0;
+    padding-inline: 0;
+    transform: none;
+  }
+
+  .cs-flow {
+    margin-inline: calc(var(--sp-8) - var(--margin)); /* images 8px from the edge */
+  }
+  .cs-flow > .cs-text,
+  .cs-flow > .stats {
+    padding-inline: var(--sp-8);
+  }
+  .cs-flow > .wicked {
+    padding-inline: var(--sp-16);
+  }
+
+  .media {
+    border-width: var(--sp-8);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
+  }
+  .media--ph {
+    padding: var(--sp-16);
+  }
+  .media--screen > img {
+    max-width: 76%;
+    border-radius: 8px 8px 0 0;
+    box-shadow: none;
+  }
+
+  /* Phone ratios (034): 4:5 screens, 4:3 scenes, 16:9 wide, 9:16 video */
+  .m-ar-wide     { aspect-ratio: 16 / 9; }
+  .m-ar-tall     { aspect-ratio: 4 / 5; }
+  .m-ar-scene    { aspect-ratio: 4 / 3; }
+  .m-ar-portrait { aspect-ratio: 9 / 16; }
+
+  .cs-bento,
+  .cs-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+  }
+  .cs-bento--flip > .ar-tall {
+    order: 0;
+  }
+
+  /* Hero: tilted polaroid with tape */
+  .cs-hero {
+    padding: var(--sp-32) var(--sp-16) var(--sp-8);
+  }
+  .cs-hero .media {
+    padding: var(--sp-8) var(--sp-8) var(--sp-40);
+    border: 0;
+    background: var(--frame);
+    aspect-ratio: auto;
+    transform: rotate(-1.5deg);
+  }
+  /* Gloss over the photo and its white border, as the homepage photo */
+  .cs-hero .media::after {
+    mix-blend-mode: screen;
+    background: var(--gloss-photo);
+  }
+  .cs-hero .media > img {
+    position: static;
+    aspect-ratio: 4 / 5;
+    background: var(--card);
+  }
+  .cs-hero .tape {
+    display: block;
+    top: 18px; /* 32px padding - 14px */
+    left: 50%;
+    z-index: calc(var(--z-media) + 1); /* over the polaroid */
+    width: 112px;
+    height: 32px;
+    transform: translateX(-50%) rotate(-4deg);
+  }
+
+  .cs-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-16);
+    padding-block: var(--sp-64) var(--sp-40);
+  }
+  .cs-intro {
+    gap: var(--sp-32);
+    padding-block: var(--sp-32) var(--sp-40);
+  }
+  .cs-body {
+    max-width: none;
+  }
+  .cs-title {
+    font-size: 48px;
+    line-height: 48px;
+  }
+  .cs-num {
+    padding-top: 3px;
+  }
+  .cs-quote {
+    line-height: 1.3;
+  }
+
+  .wicked {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sp-8);
+    padding-block: var(--sp-48) var(--sp-64);
+  }
+  .wicked-note {
+    display: inline-flex;
+    align-self: flex-start; /* desktop centres it in its grid cell */
+    align-items: flex-end;
+    gap: 6px;
+    width: auto;
+    height: auto;
+    justify-self: auto;
+  }
+  .wicked-note .hand {
+    position: static;
+    font-size: 24px;
+    transform: rotate(-4deg);
+    transform-origin: left center;
+  }
+  .wicked-note svg {
+    position: static;
+    flex: none;
+    width: 44px;
+    height: 25px;
+    margin-bottom: -18px;
+    transform: rotate(-110deg) scaleY(-1);
+  }
+  .wicked-line {
+    margin-top: var(--sp-16);
+  }
+
+  .stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-40);
+    padding-block: var(--sp-56) 72px;
+    text-align: center;
+  }
+  .stats li {
+    align-items: center;
+    gap: var(--sp-8);
+  }
+
+  /* Next up on the phone: label and All work on top, a big gap, then the
+     name and a 4:3 preview */
+  .next {
+    min-height: 0;
+  }
+  .next-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    padding-block: var(--sp-48) var(--sp-96);
+  }
+  .next-label {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    margin: 0;
+  }
+  .next-all {
+    grid-column: 2;
+    grid-row: 1;
+    align-items: center;
+    gap: 0.3em;
+    margin: 0;
+  }
+  .next-all a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--target-link);
+  }
+  .next-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 192px;
+  }
+  .next-prev {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: var(--sp-24);
+    aspect-ratio: 4 / 3;
+  }
+  .next-prev-name {
+    font-size: 48px;
+    line-height: 48px;
+  }
+
+  .case .site-footer {
+    margin-top: 0;
+  }
+}

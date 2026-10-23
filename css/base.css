@@ -30,8 +30,9 @@ h1, h2, h3, h4, p, figure, blockquote, ul, ol {
   margin: 0;
 }
 
-ul[role='list'],
-ol[role='list'] {
+/* :where() keeps this reset at zero specificity, so a component's own
+   padding (e.g. the numbers block) always wins */
+:where(ul[role='list'], ol[role='list']) {
   padding: 0;
   list-style: none;
 }
@@ -125,8 +126,15 @@ a:hover {
 /* Page grain
    Same filter as the canvas (#pageGrain), drawn as a repeating tile so it
    stays cheap on long pages. It lies on the page background only, under
-   all content: text, paper, photos and cards never get grain. */
-body::before {
+   all content: text, paper, photos and cards never get grain.
+   .grain gives an opaque ink panel (the case study that slides over Next
+   up) the same grain on its own background. */
+.grain {
+  isolation: isolate;
+  background: var(--ink);
+}
+body::before,
+.grain::before {
   content: '';
   position: absolute;
   inset: 0;

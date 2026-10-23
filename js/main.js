@@ -120,8 +120,11 @@
       if (more) more.hidden = true;
     }
 
-    // Load more: reveal the rest, move focus to the first new card
+    // Load more: reveal the rest, move focus to the first new card. The
+    // extra cards are only hidden from here on (.has-more), so they never
+    // disappear without a working button.
     if (more && moreCards.length) {
+      work.classList.add('has-more');
       more.hidden = false;
       moreBtn.addEventListener('click', function () {
         showAll();

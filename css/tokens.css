@@ -88,6 +88,12 @@
   --target-link: 48px;
   --target-button: 56px;
 
+  /* Gloss coating on a photo and its white border, like a glossy print
+     (blend with mix-blend-mode: screen) */
+  --gloss-photo:
+    linear-gradient(118deg, rgba(255, 255, 255, 0) 16%, rgba(255, 255, 255, .30) 32%, rgba(255, 255, 255, .08) 42%, rgba(255, 255, 255, 0) 56%, rgba(255, 255, 255, 0) 78%, rgba(255, 255, 255, .10) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, 0) 35%);
+
   /* Layers. Grain lies under everything (page background only). */
   --z-grain: -1;
   --z-band: 1;
