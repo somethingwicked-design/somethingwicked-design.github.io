@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Emma - Luna Rachmani - Something Wicked</title>
+  <meta name="description" content="Emma, a calm support app for people caring for a loved one with dementia: education, mindfulness and community, each in under ten minutes.">
+  <meta name="theme-color" content="#0B0B0B">
+  <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
+  <meta name="color-scheme" content="only dark">
+  <link rel="canonical" href="https://somethingwicked.design/work/emma.html">
+  <!-- Sharing (Open Graph). The share image is L1 on ink (041). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Something Wicked">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Emma - Luna Rachmani - Something Wicked">
+  <meta property="og:description" content="Emma, a calm support app for people caring for a loved one with dementia: education, mindfulness and community, each in under ten minutes.">
+  <meta property="og:url" content="https://somethingwicked.design/work/emma.html">
+  <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Something Wicked logo: a triangle with rays, an eye and two skeleton hands">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <!-- Case study only -->
+  <link rel="stylesheet" href="/css/case.css">
+  <script src="/js/case.js" defer></script>
+  <link rel="preload" href="/img/emma-phones.webp" as="image" type="image/webp">
+</head>
+<!-- Case study template (040). For the next case study: copy this file,
+     change the accent and screen tint below, data-project, the content and
+     the Next up block. Order of next projects: 024. -->
+<body class="case" data-project="emma" style="--accent:#9CC2FE; --on-accent:#0B0B0B; --screen-bg:#C4DBFE">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- Stage: the case study, Next up and (desktop) the spacer that
+         scrubs the Next up slide (js/case.js) -->
+    <div class="cs-stage">
+    <article class="cs-main grain" id="csMain" aria-labelledby="cs-title">
+      <span class="cs-dim" id="csDim" aria-hidden="true"></span>
+      <div class="wrap">
+      <div class="cs-flow">
+        <!-- ========================================================
+             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
+             ======================================================== -->
+        <div class="cs-hero">
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/emma-phones.webp" width="1800" height="1338" alt="Two phones showing the Emma app: a mindfulness session and the home screen" fetchpriority="high">
+          </figure>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <section class="cs-text cs-intro" aria-label="Introduction">
+          <div>
+            <h1 class="cs-title head" id="cs-title">Emma</h1>
+          </div>
+          <div class="cs-body">
+            <p class="cs-lead">Supporting dementia caregivers.</p>
+            <p>A five-week project to design a support app for people over 40 caring for loved ones with dementia, combining mindfulness, education, and community into one accessible, calming experience.</p>
+            <p>The project ultimately came close to winning the award for best idea - a result of the depth of the empathise phase and how directly the research shaped our design decisions.</p>
+            <dl class="cs-facts">
+              <div><dt>My role</dt><dd>Project manager, lead researcher, illustrator</dd></div>
+              <div><dt>Team</dt><dd>3 people: Greta, Lina and me</dd></div>
+              <div><dt>Discipline</dt><dd>UX research</dd></div>
+              <div><dt>Year</dt><dd>2025</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/emma/hand-phone.webp" width="2000" height="1333" alt="A hand holding a phone with the Emma app open" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-wide">
+              <img src="/img/emma/campaign-banner.webp" width="2000" height="1416" alt="Emma banner: 'Hello, I'm Emma! Care with confidence.' next to a phone playing a mindfulness session" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-scene">[Photo: a caregiver using the app]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             01 CONTEXT
+             ======================================================== -->
+        <section class="cs-text" id="context" aria-labelledby="h-context">
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <div class="cs-body">
+            <p>Caregivers of people with dementia face a specific and underserved problem: they're so focused on the person they're caring for that their own mental health is neglected. High stress, lack of structured guidance, and social isolation are the norm - not the exception.</p>
+            <p>When we looked at the market, nothing existed that helped caregivers take care of themselves while taking care of their loved ones. That gap was the brief.</p>
+            <p>The five-week NHL Stenden brief asked us to develop a concept, visual design, and interactive prototype. I led research and project management while working alongside two UI/UX designers, with responsibility for the illustration work throughout.</p>
+          </div>
+        </section>
+
+        <!-- The wicked part (007, 040): right after 01 Context.
+             TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked">
+          <span class="wicked-note" aria-hidden="true">
+            <span class="hand">the wicked part</span>
+            <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>Every feature was designed</span><br><span>to be completable</span><br><span>in under ten minutes.</span></p>
+        </div>
+
+        <div class="media media--ph ar-wide m-ar-portrait">[Video: 10 seconds of the app in use]</div>
+
+        <!-- ========================================================
+             02 RESEARCH
+             ======================================================== -->
+        <section class="cs-text" id="research" aria-labelledby="h-research">
+          <h2 class="cs-h2 head" id="h-research"><span class="cs-num">02</span> Research</h2>
+          <div class="cs-body">
+            <p>We ran surveys, interviews, and a seven-day diary study to understand caregivers' daily challenges, emotional strain, and coping strategies. Desk research and benchmarking highlighted usability patterns and effective content delivery for this age group.</p>
+            <p>Findings showed caregivers needed structured guidance, concise information, and calming design. Early testing confirmed key issues, guiding iterative improvements. This research also shaped navigation, colour palette, and layout choices.</p>
+            <p>Caregivers were time-poor and cognitively loaded - content had to be digestible, not comprehensive. These findings directly shaped every design decision that followed.</p>
+          </div>
+        </section>
+
+        <!-- Numbers (035): after the chapter text, before its images -->
+        <ul class="stats" role="list" aria-label="Research in numbers">
+          <li><span class="stat-num head">7</span><span class="stat-label">day diary study</span></li>
+          <li><span class="stat-num head">40.9%</span><span class="stat-label">mobility and physical assistance, the most common challenge</span></li>
+          <li><span class="stat-num head">55%</span><span class="stat-label">frequently or always socially isolated</span></li>
+        </ul>
+
+        <div class="cs-bento cs-bento--flip">
+          <div class="media media--ph ar-tall m-ar-scene">[Photo: the diary study]</div>
+          <div class="cs-stack">
+            <div class="media media--ph m-ar-tall">[Image: survey results]</div>
+            <div class="media media--ph m-ar-wide">[Image: the persona, Emma Johnson]</div>
+          </div>
+        </div>
+
+        <section class="cs-text" aria-labelledby="h-told">
+          <h2 class="cs-label" id="h-told">Our persona, Emma Johnson</h2>
+          <blockquote class="cs-body cs-quote">&#8216;I love my mum and want to do everything I can for her, but sometimes it feels overwhelming. I wish there were more hours in the day and someone to tell me I'm not alone in this.&#8217;</blockquote>
+        </section>
+
+        <!-- ========================================================
+             03 DESIGN DECISIONS
+             ======================================================== -->
+        <section class="cs-text" id="decisions" aria-labelledby="h-decisions">
+          <h2 class="cs-h2 head" id="h-decisions"><span class="cs-num">03</span> Design decisions</h2>
+          <div class="cs-body">
+            <p>The app was structured around three core features: Education (concise, digestible guidance on dementia symptoms and caregiving strategies), Mindfulness (short structured sessions with animations and guided breathing), and Community (peer connection, shared experiences, group support).</p>
+            <p>Every feature was designed to be completable in under ten minutes. Caregivers don't have more time than that, and designing for their reality meant accepting that constraint rather than fighting it.</p>
+            <p>My role in this wasn't primarily visual design - that sat with the two UI/UX designers on the team. My contribution was the research that made those decisions defensible: understanding who caregivers are, what exhausts them, what they actually need from a tool like this, and translating that into a brief the design could follow. Every feature decision traces back to something we found in the surveys, interviews, or diary study.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media media--screen ar-tall">
+            <img src="/img/emma/screen-education.webp" width="923" height="2000" alt="Emma education screen: browse symptoms such as anxiety, depression, confusion and attention" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media media--screen m-ar-tall">
+              <img src="/img/emma/screen-mindfulness.webp" width="923" height="2000" alt="Emma mindfulness screen: how are you feeling today, and a list of meditations" loading="lazy" decoding="async">
+            </figure>
+            <figure class="media media--screen m-ar-tall">
+              <img src="/img/emma/screen-community.webp" width="923" height="2000" alt="Emma community screen: a list of caregiver groups" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             04 WHAT TESTING CHANGED
+             ======================================================== -->
+        <section class="cs-text" id="testing" aria-labelledby="h-testing">
+          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
+          <div class="cs-body">
+            <p>We built interactive Figma prototypes and tested them with caregivers, observing navigation, mindfulness engagement, and content access. Feedback highlighted font readability issues, button placement problems, and unclear instructions.</p>
+            <p>Animations and visual cues were specifically tested to support focus without adding cognitive load. Each testing round informed refinements until the app felt intuitive and calming rather than another thing to manage.</p>
+          </div>
+        </section>
+
+        <figure class="media media--screen ar-wide m-ar-tall">
+          <img src="/img/emma/screen-anxiety.webp" width="923" height="2000" alt="Emma screen with five chapters on anxiety, from challenging anxious thoughts to mind over anxiety" loading="lazy" decoding="async">
+        </figure>
+
+        <!-- ========================================================
+             05 REFLECTION
+             ======================================================== -->
+        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
+          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+          <div class="cs-body">
+            <p><span class="cs-em">Leading this project showed me that the most important design skill isn't knowing what to add - it's knowing what to leave out.</span></p>
+            <p>Caregivers needed less, not more. Every time we considered adding a feature, the right question was whether it would increase or decrease the load on someone who was already stretched.</p>
+            <p>What worked: connecting research directly to design decisions, the calming visual language, and the community tab addressing isolation. What I'd push further: broader accessibility testing, and motion design that better guides caregivers through sessions.</p>
+            <p>Caregivers responded positively to the calming interface, clear navigation, and practical guidance. The final prototype combined structured educational content, guided mindfulness exercises, and community support into a cohesive and accessible experience.</p>
+          </div>
+        </section>
+      </div>
+      </div>
+      <span class="cs-hairline" aria-hidden="true"></span>
+    </article>
+
+    <!-- ============================================================
+         NEXT UP (024, 040): the next project in the homepage order.
+         Desktop: pinned under the case study, which slides left over it
+         while the preview grows from its bottom-right corner, scrubbed by
+         the spacer below (js/case.js). Then both unpin and scroll away
+         together, and the footer follows in the normal flow.
+         Phone: it scrolls in while the case study darkens (028).
+         ============================================================ -->
+    <section class="next grain" id="csNext" aria-label="Next up">
+      <div class="next-inner wrap">
+        <p class="next-label" aria-hidden="true">Next up</p>
+        <a class="next-title" href="/work/de-bote.html">
+          <span class="visually-hidden">Next up: </span>
+          <span>De Bote</span>
+          <span class="next-sub">Newspaper &amp; identity</span>
+        </a>
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <a class="next-prev" href="/work/de-bote.html" aria-label="Next project: De Bote">
+          <span class="next-prev-in">
+            <span class="next-prev-ph">[De Bote preview video]</span>
+            <span class="next-prev-name head" aria-hidden="true">De Bote</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="cs-spacer" id="csSpacer" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031) from reference/homepage.dc.html: the torn
+         edge is baked into img/paper/footer-edge.webp, the rest is flat
+         yellow. -->
+    <span class="footer-paper" aria-hidden="true">
+      <span class="footer-edge"></span>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>

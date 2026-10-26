@@ -50,3 +50,11 @@
   from = "/pages/kokoro.html"
   to = "/work/kokoro.html"
   status = 301
+[[redirects]]
+  from = "/pages/emma"
+  to = "/work/emma.html"
+  status = 301
+[[redirects]]
+  from = "/pages/emma.html"
+  to = "/work/emma.html"
+  status = 301
