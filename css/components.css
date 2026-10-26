@@ -685,16 +685,13 @@
     color: var(--ink);
   }
 
-  /* See the work: outlined yellow on the phone, as the export */
+  /* See the work: filled yellow like desktop (not outlined as the export) */
   .hero .btn {
     grid-row: 7;
     grid-column: 1 / -1;
     justify-self: center;
     min-height: var(--target-link);
     padding: 0 var(--sp-24);
-    border: 1.5px solid var(--accent);
-    background: transparent;
-    color: var(--accent);
   }
 }
 

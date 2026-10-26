@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-page="404">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found - Something Wicked</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <link rel="stylesheet" href="/css/404.css">
+  <link rel="preload" href="/img/404-ilio.jpg" as="image">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync (here Contact goes to /#contact: the 404 has no footer) -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="/#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="/#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+  <!-- ============================================================
+       404 (038): Ilio got there first
+       Desktop: text cols 1-5, Ilio cols 7-12, vertically centred.
+       Phone: text first, then Ilio with the note under her.
+       No footer: the page stays short.
+       ============================================================ -->
+  <main id="main" class="nf wrap g12">
+    <div class="nf-text">
+      <div class="nf-copy">
+        <span class="nf-label">Error 404</span>
+        <h1 class="nf-title head">This page doesn&#8217;t exist</h1>
+        <p class="nf-body">Ilio got to it first. Whatever was here, she clawed right through it. Let&#8217;s get you somewhere that still exists.</p>
+        <div class="nf-actions">
+          <a class="btn" href="/">Take me home</a>
+          <a class="nf-link" href="/#work">See the work<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M2 12 L12 2 M4 2 H12 V10" fill="none" stroke="#F2EEE6" stroke-width="2" stroke-linecap="square"/></svg></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="nf-pic">
+      <div class="nf-frame">
+        <!-- Clicking her repeats the shove (js/main.js) -->
+        <button class="nf-sheet" type="button" aria-label="Ilio, a ginger and white cat, pushing her face and one paw through a hole torn in the page">
+          <span class="nf-push">
+            <span class="nf-open">
+              <!-- TODO: swap for the full-size original (038) -->
+              <img src="/img/404-ilio.jpg" alt="" width="897" height="831">
+            </span>
+            <!-- Page grain over the paper only; Ilio stays clean on top -->
+            <span class="nf-grain" aria-hidden="true"></span>
+          </span>
+          <span class="nf-scraps" aria-hidden="true"><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span><span class="nf-scrap"></span></span>
+        </button>
+        <!-- TODO: replace with Luna's handwriting SVG -->
+        <span class="nf-note" aria-hidden="true">it was her.<svg viewBox="0 0 120 70" focusable="false"><path d="M8 58 C30 60, 70 50, 104 18" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round"/><path d="M90 16 L105 17 L102 32" fill="none" stroke="#F2EEE6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -43,7 +43,12 @@
   window.addEventListener('pagereveal', function (e) {
     var type = takeMark(); // always consumed, also when nothing animates
     if (!e.viewTransition) return;
-    if (!type) { e.viewTransition.skipTransition(); return; }
+    // A project link to a page that doesn't exist yet lands on the 404,
+    // which has its own intro: no morph or paper there
+    if (!type || document.documentElement.getAttribute('data-page') === '404') {
+      e.viewTransition.skipTransition();
+      return;
+    }
     var cls = 'is-vt-' + type;
     document.documentElement.classList.add(cls);
     e.viewTransition.finished.then(function () {

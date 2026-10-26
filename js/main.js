@@ -8,14 +8,15 @@
   // ---------------------------------------------------------------------
   // Nav state: the header is identical on every page, so mark the
   // current section here instead of in the markup (025). The homepage
-  // has no current item.
+  // has no current item, and neither has the 404 (GitHub Pages serves it
+  // at any missing URL, also under /work/).
   // ---------------------------------------------------------------------
   var path = window.location.pathname;
   var section = null;
   if (path.indexOf('/work/') === 0) section = 'work';
   else if (path === '/about.html' || path === '/about') section = 'about';
 
-  if (section) {
+  if (section && document.documentElement.getAttribute('data-page') !== '404') {
     document.querySelectorAll('[data-nav="' + section + '"]').forEach(function (link) {
       link.setAttribute('aria-current', 'page');
     });
@@ -167,6 +168,21 @@
         });
       });
     }
+  }
+
+  // ---------------------------------------------------------------------
+  // 404 (038): clicking Ilio repeats the shove. The intro plays once.
+  // Reduced motion: base.css keeps it still.
+  // ---------------------------------------------------------------------
+  var sheet = document.querySelector('.nf-sheet');
+  var push = sheet && sheet.querySelector('.nf-push');
+  if (push) {
+    sheet.addEventListener('click', function () {
+      push.classList.add('is-poked');
+      push.style.animation = 'none';
+      void push.offsetWidth; // restart the animation
+      push.style.animation = '';
+    });
   }
 
   // ---------------------------------------------------------------------
