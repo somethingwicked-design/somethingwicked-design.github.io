@@ -1024,8 +1024,14 @@
   .card-img {
     transition: transform .5s cubic-bezier(.2, .7, .2, 1), box-shadow .5s;
   }
-  .card:hover .card-img,
   .card:focus-visible .card-img {
+    transform: translateY(-8px) rotate(-.8deg);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6);
+  }
+}
+/* Hover tilt only with a real mouse: a tap on a phone never tilts the card */
+@media (prefers-reduced-motion: no-preference) and (hover: hover) and (pointer: fine) {
+  .card:hover .card-img {
     transform: translateY(-8px) rotate(-.8deg);
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.6);
   }

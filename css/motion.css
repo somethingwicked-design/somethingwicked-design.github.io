@@ -210,14 +210,15 @@
 }
 
 /* --- Phone, 2: the paper tears off the top, the case study is under it - */
+/* Straight up, no rotate: the export's rotate(-5deg) read as a tilt on a
+   real phone */
 @keyframes tpOff {
-  0%   { transform: translateY(0) rotate(0); }
-  100% { transform: translateY(-118%) rotate(-5deg); }
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-118%); }
 }
 .is-vt-rip::view-transition-old(root) {
   z-index: 1;
   mix-blend-mode: normal;
-  transform-origin: 0 100%;
   animation: tpOff .5s cubic-bezier(.55, 0, .8, .2) both;
 }
 .is-vt-rip::view-transition-new(root) {
