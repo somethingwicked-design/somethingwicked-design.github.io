@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Health Potion - Luna Rachmani - Something Wicked</title>
+  <meta name="description" content="Health Potion, a brand identity and design manual for a fictional game studio. I made it in 2022 and revisited it in 2024 to see how far I'd come.">
+  <meta name="theme-color" content="#0B0B0B">
+  <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
+  <meta name="color-scheme" content="only dark">
+  <link rel="canonical" href="https://somethingwicked.design/work/health-potion.html">
+  <!-- Sharing (Open Graph). The share image is L1 on ink (041). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Something Wicked">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Health Potion - Luna Rachmani - Something Wicked">
+  <meta property="og:description" content="Health Potion, a brand identity and design manual for a fictional game studio. I made it in 2022 and revisited it in 2024 to see how far I'd come.">
+  <meta property="og:url" content="https://somethingwicked.design/work/health-potion.html">
+  <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Something Wicked logo: a triangle with rays, an eye and two skeleton hands">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <!-- Case study only -->
+  <link rel="stylesheet" href="/css/case.css">
+  <script src="/js/case.js" defer></script>
+  <link rel="preload" href="/img/health-potion-guide.webp" as="image" type="image/webp">
+</head>
+<!-- Case study template (040). For the next case study: copy this file,
+     change the accent and screen tint below, data-project, the content and
+     the Next up block. Order of next projects: 024. -->
+<body class="case" data-project="health-potion" style="--accent:#6893B5; --on-accent:#0B0B0B">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- Stage: the case study, Next up and (desktop) the spacer that
+         scrubs the Next up slide (js/case.js) -->
+    <div class="cs-stage">
+    <article class="cs-main grain" id="csMain" aria-labelledby="cs-title">
+      <span class="cs-dim" id="csDim" aria-hidden="true"></span>
+      <div class="wrap">
+      <div class="cs-flow">
+        <!-- ========================================================
+             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
+             ======================================================== -->
+        <div class="cs-hero">
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/health-potion-guide.webp" width="1800" height="1799" alt="The Health Potion brand manual lying open on its typography and colour pages" fetchpriority="high">
+          </figure>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <section class="cs-text cs-intro" aria-label="Introduction">
+          <div>
+            <h1 class="cs-title head" id="cs-title">Health Potion</h1>
+          </div>
+          <div class="cs-body">
+            <p class="cs-lead">[Health Potion in one line]</p>
+            <p>A brand identity and corporate design manual for a fictional video game studio, started in 2022 at vocational college and revisited in 2024 to see how far the work had developed.</p>
+            <p>The brief: take the iconic MMORPG health potion and build a studio identity around it.</p>
+            <dl class="cs-facts">
+              <div><dt>My role</dt><dd>Concept, typography, colour system, layout</dd></div>
+              <div><dt>Team</dt><dd>Solo</dd></div>
+              <div><dt>Discipline</dt><dd>Branding</dd></div>
+              <div><dt>Year</dt><dd>2022 (original), 2024 (revisited)</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/health-potion/cover-2024.webp" width="1414" height="2000" alt="The 2024 cover of the Health Potion brand manual: a dark fantasy character under the Health Potion wordmark" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-wide">
+              <img src="/img/health-potion/banner-2024.webp" width="2000" height="1298" alt="The 2024 Health Potion banner: the same character with the wordmark bottom right" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-scene">[Photo: the printed manual]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             01 CONTEXT
+             ======================================================== -->
+        <section class="cs-text" id="context" aria-labelledby="h-context">
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <div class="cs-body">
+            <p>[Context: the brief at vocational college, who it was for and what it asked]</p>
+          </div>
+        </section>
+
+        <!-- The wicked part (007, 040): right after 01 Context.
+             TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked">
+          <span class="wicked-note" aria-hidden="true">
+            <span class="hand">the wicked part</span>
+            <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
+        </div>
+
+        <div class="media media--ph ar-wide m-ar-scene">[Photo: sketches from 2022]</div>
+
+        <!-- ========================================================
+             02 CONCEPT
+             ======================================================== -->
+        <section class="cs-text" id="concept" aria-labelledby="h-concept">
+          <h2 class="cs-h2 head" id="h-concept"><span class="cs-num">02</span> Concept</h2>
+          <div class="cs-body">
+            <p>The concept borrows from MMORPG culture - specifically the health potion, one of the most universally recognised game items. The studio identity needed to balance playfulness with professionalism: a brand that could sit in the gaming industry without looking like it was trying too hard.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento cs-bento--flip">
+          <figure class="media ar-tall m-ar-tall">
+            <img src="/img/health-potion/cover-2022.webp" width="1414" height="2000" alt="The 2022 cover of the manual: a red-haired character on a red page with the potion logo" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-tall">
+              <img src="/img/health-potion/logo-variants-2022.webp" width="782" height="1107" alt="2022 manual page with the three logo variants: the potion bottle between Health and Potion, in red, black and reversed" class="obj-bottom" loading="lazy" decoding="async">
+            </figure>
+            <figure class="media m-ar-tall">
+              <img src="/img/health-potion/letter-2022.webp" width="782" height="1107" alt="The 2022 Health Potion letterhead" class="obj-top" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             03 DESIGN SYSTEM
+             ======================================================== -->
+        <section class="cs-text" id="system" aria-labelledby="h-system">
+          <h2 class="cs-h2 head" id="h-system"><span class="cs-num">03</span> Design system</h2>
+          <div class="cs-body">
+            <p>The primary typeface is Century Gothic Bold - a modern grotesque with geometry that references both digital culture and corporate credibility. It's paired across the manual with HKS and Pantone shades to ensure consistency across print and digital applications.</p>
+            <p>The manual demonstrates hierarchy, spacing, and brand application through the cover and internal spread design - a complete set of guidelines a real studio could hand to a printer or developer.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/health-potion/typography-2024.webp" width="1414" height="2000" alt="Manual page: corporate fonts and typographic rules, Century Gothic in bold, bold italic, italic and regular" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-tall">
+              <img src="/img/health-potion/colours-2024.webp" width="1414" height="2000" alt="Manual page: the secondary colour system, three colours in navy, steel blue and mauve with their tints" class="obj-bottom" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-scene">[Photo: the identity applied]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             04 THE 2024 REVISIT
+             ======================================================== -->
+        <section class="cs-text" id="revisit" aria-labelledby="h-revisit">
+          <h2 class="cs-h2 head" id="h-revisit"><span class="cs-num">04</span> The 2024 revisit</h2>
+          <div class="cs-body">
+            <p>Returning to this project two years later was a deliberate exercise in measuring growth. The decisions I'd made in 2022 - the font choice, the secondary colour system, the layout approach - held up better than expected, but the 2024 version shows tighter colour harmony, more considered typographic hierarchy, and better application consistency.</p>
+          </div>
+        </section>
+
+        <div class="media media--ph ar-wide m-ar-scene">[Before and after: the 2022 and 2024 manuals side by side]</div>
+
+        <!-- ========================================================
+             05 REFLECTION
+             ======================================================== -->
+        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
+          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+          <div class="cs-body">
+            <p><span class="cs-em">[The one thing this project taught me]</span></p>
+            <p>[What worked, and what I'd do next time]</p>
+          </div>
+        </section>
+      </div>
+      </div>
+      <span class="cs-hairline" aria-hidden="true"></span>
+    </article>
+
+    <!-- ============================================================
+         NEXT UP (024, 040): the next project in the homepage order.
+         Desktop: pinned under the case study, which slides left over it
+         while the preview grows from its bottom-right corner, scrubbed by
+         the spacer below (js/case.js). Then both unpin and scroll away
+         together, and the footer follows in the normal flow.
+         Phone: it scrolls in while the case study darkens (028).
+         ============================================================ -->
+    <section class="next grain" id="csNext" aria-label="Next up">
+      <div class="next-inner wrap">
+        <p class="next-label" aria-hidden="true">Next up</p>
+        <a class="next-title" href="/work/kokoro.html">
+          <span class="visually-hidden">Next up: </span>
+          <span>Kokoro</span>
+          <span class="next-sub">A lucky cat with cattitude</span>
+        </a>
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <a class="next-prev" href="/work/kokoro.html" aria-label="Next project: Kokoro">
+          <span class="next-prev-in">
+            <span class="next-prev-ph">[Kokoro preview video]</span>
+            <span class="next-prev-name head" aria-hidden="true">Kokoro</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="cs-spacer" id="csSpacer" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031) from reference/homepage.dc.html: the torn
+         edge is baked into img/paper/footer-edge.webp, the rest is flat
+         yellow. -->
+    <span class="footer-paper" aria-hidden="true">
+      <span class="footer-edge"></span>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>

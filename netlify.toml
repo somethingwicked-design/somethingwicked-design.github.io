@@ -34,3 +34,11 @@
   from = "/pages/op-jezelf.html"
   to = "/work/op-jezelf.html"
   status = 301
+[[redirects]]
+  from = "/pages/health-potion"
+  to = "/work/health-potion.html"
+  status = 301
+[[redirects]]
+  from = "/pages/health-potion.html"
+  to = "/work/health-potion.html"
+  status = 301
