@@ -66,3 +66,11 @@
   from = "/pages/de-bote.html"
   to = "/work/de-bote.html"
   status = 301
+[[redirects]]
+  from = "/pages/something-wicked"
+  to = "/work/something-wicked.html"
+  status = 301
+[[redirects]]
+  from = "/pages/something-wicked.html"
+  to = "/work/something-wicked.html"
+  status = 301

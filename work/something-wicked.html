@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Something Wicked - Luna Rachmani - Something Wicked</title>
+  <meta name="description" content="Something Wicked, the logo for my own brand: a planchette with skeleton hands and an eye, balancing the occult with the professional.">
+  <meta name="theme-color" content="#0B0B0B">
+  <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
+  <meta name="color-scheme" content="only dark">
+  <link rel="canonical" href="https://somethingwicked.design/work/something-wicked.html">
+  <!-- Sharing (Open Graph). The share image is L1 on ink (041). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Something Wicked">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Something Wicked - Luna Rachmani - Something Wicked">
+  <meta property="og:description" content="Something Wicked, the logo for my own brand: a planchette with skeleton hands and an eye, balancing the occult with the professional.">
+  <meta property="og:url" content="https://somethingwicked.design/work/something-wicked.html">
+  <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Something Wicked logo: a triangle with rays, an eye and two skeleton hands">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <!-- Case study only -->
+  <link rel="stylesheet" href="/css/case.css">
+  <script src="/js/case.js" defer></script>
+  <link rel="preload" href="/img/something-wicked-cards.webp" as="image" type="image/webp">
+</head>
+<!-- Case study template (040). For the next case study: copy this file,
+     change the accent and screen tint below, data-project, the content and
+     the Next up block. Order of next projects: 024. -->
+<body class="case" data-project="something-wicked" style="--accent:#E8C547; --on-accent:#0B0B0B">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- Stage: the case study, Next up and (desktop) the spacer that
+         scrubs the Next up slide (js/case.js) -->
+    <div class="cs-stage">
+    <article class="cs-main grain" id="csMain" aria-labelledby="cs-title">
+      <span class="cs-dim" id="csDim" aria-hidden="true"></span>
+      <div class="wrap">
+      <div class="cs-flow">
+        <!-- ========================================================
+             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
+             ======================================================== -->
+        <div class="cs-hero">
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/something-wicked-cards.webp" width="1800" height="1350" alt="A stack of black Something Wicked business cards with the logo in white" fetchpriority="high">
+          </figure>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <section class="cs-text cs-intro" aria-label="Introduction">
+          <div>
+            <h1 class="cs-title cs-title--long head" id="cs-title">Something Wicked</h1>
+          </div>
+          <div class="cs-body">
+            <p class="cs-lead">[Something Wicked in one line]</p>
+            <p>A personal logo built from the inside out, taking the traits that define me most and turning them into a mark I'd actually want to put on client work.</p>
+            <p>The result is a planchette-based emblem that balances the occult with the professional.</p>
+            <dl class="cs-facts">
+              <div><dt>My role</dt><dd>Concept, design, vectorisation</dd></div>
+              <div><dt>Team</dt><dd>Solo</dd></div>
+              <div><dt>Discipline</dt><dd>Branding</dd></div>
+              <div><dt>Year</dt><dd>2024</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <div class="media media--ph ar-tall">[Photo: the logo on client work]</div>
+          <div class="cs-stack">
+            <div class="media media--ph m-ar-wide">[Photo: the business cards in hand]</div>
+            <div class="media media--ph m-ar-scene">[Photo: the 2021 logo]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             01 CONTEXT
+             ======================================================== -->
+        <section class="cs-text" id="context" aria-labelledby="h-context">
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <div class="cs-body">
+            <p>Something Wicked has been my operational brand since 2021. The 2024 logo redesign brought the visual identity in line with where my design practice had actually developed.</p>
+          </div>
+        </section>
+
+        <!-- The wicked part (007, 040): right after 01 Context.
+             TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked">
+          <span class="wicked-note" aria-hidden="true">
+            <span class="hand">the wicked part</span>
+            <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
+        </div>
+
+        <figure class="media ar-wide m-ar-wide">
+          <video src="/img/something-wicked/logo-glitch.mp4" poster="/img/something-wicked/logo-glitch.jpg" muted loop playsinline disablepictureinpicture preload="metadata" aria-label="The Something Wicked logo glitching on black"></video>
+        </figure>
+
+        <!-- ========================================================
+             02 CONCEPT
+             ======================================================== -->
+        <section class="cs-text" id="concept" aria-labelledby="h-concept">
+          <h2 class="cs-h2 head" id="h-concept"><span class="cs-num">02</span> Concept</h2>
+          <div class="cs-body">
+            <p>I needed a logo for Something Wicked - my freelance multimedia agency - that felt genuinely mine rather than generically professional. The starting point was a planchette, a shape that captures the intersection of the mysterious and the purposeful that runs through a lot of my work.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento cs-bento--flip">
+          <div class="media media--ph ar-tall m-ar-scene">[Photo: planchette sketches]</div>
+          <div class="cs-stack">
+            <div class="media media--ph m-ar-tall">[Image: the traits I started from]</div>
+            <div class="media media--ph m-ar-wide">[Image: with and without the embellishments]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             03 THE MARK
+             ======================================================== -->
+        <section class="cs-text" id="mark" aria-labelledby="h-mark">
+          <h2 class="cs-h2 head" id="h-mark"><span class="cs-num">03</span> The mark</h2>
+          <div class="cs-body">
+            <p>The key decision point came during vectorisation: whether to keep the embellishments on top of the planchette. I preferred it with them. The extra detail adds weight and character without tipping into chaos.</p>
+            <p>The final logo works in both dark and light contexts, which matters for a freelance brand that appears across digital and print deliverables. The skeleton hands framing the central eye create a symbol that's immediately legible at small sizes but rewards closer inspection.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/something-wicked/logo-dark.webp" width="1600" height="2000" alt="The Something Wicked logo in white on black: a triangle with rays, the name, an eye and two skeleton hands" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-wide">
+              <img src="/img/something-wicked/logo-light.webp" width="2000" height="1250" alt="The same logo in black on white" loading="lazy" decoding="async">
+            </figure>
+            <div class="media media--ph m-ar-scene">[Image: the logo at small sizes]</div>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             04 KOTO AND FRAMNA (note 2026-10-22: what I studied in
+             each and what I took from it, in my own words)
+             ======================================================== -->
+        <section class="cs-text" id="borrowing" aria-labelledby="h-borrowing">
+          <h2 class="cs-h2 head" id="h-borrowing"><span class="cs-num">04</span> Koto and Framna</h2>
+          <div class="cs-body">
+            <p>[What I studied in Koto's and Framna's sites for this website, and what I took from each]</p>
+            <p>[How I made the borrowed parts my own]</p>
+          </div>
+        </section>
+
+        <div class="media media--ph ar-wide m-ar-scene">[Screenshot: this site]</div>
+
+        <!-- ========================================================
+             05 REFLECTION
+             ======================================================== -->
+        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
+          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+          <div class="cs-body">
+            <p><span class="cs-em">[The one thing this project taught me]</span></p>
+            <p>[What worked, and what I'd do next time]</p>
+          </div>
+        </section>
+      </div>
+      </div>
+      <span class="cs-hairline" aria-hidden="true"></span>
+    </article>
+
+    <!-- ============================================================
+         NEXT UP (024, 040): the next project in the homepage order.
+         Desktop: pinned under the case study, which slides left over it
+         while the preview grows from its bottom-right corner, scrubbed by
+         the spacer below (js/case.js). Then both unpin and scroll away
+         together, and the footer follows in the normal flow.
+         Phone: it scrolls in while the case study darkens (028).
+         ============================================================ -->
+    <section class="next grain" id="csNext" aria-label="Next up">
+      <div class="next-inner wrap">
+        <p class="next-label" aria-hidden="true">Next up</p>
+        <a class="next-title" href="/work/op-jezelf.html">
+          <span class="visually-hidden">Next up: </span>
+          <span>Op Jezelf</span>
+          <span class="next-sub">Getting teens ready to live on their own</span>
+        </a>
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <a class="next-prev" href="/work/op-jezelf.html" aria-label="Next project: Op Jezelf">
+          <span class="next-prev-in">
+            <span class="next-prev-ph">[Op Jezelf preview video]</span>
+            <span class="next-prev-name head" aria-hidden="true">Op Jezelf</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="cs-spacer" id="csSpacer" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031) from reference/homepage.dc.html: the torn
+         edge is baked into img/paper/footer-edge.webp, the rest is flat
+         yellow. -->
+    <span class="footer-paper" aria-hidden="true">
+      <span class="footer-edge"></span>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>

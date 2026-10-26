@@ -200,6 +200,10 @@
   font-size: var(--fs-h1);
   line-height: var(--lh-h1);
 }
+/* A title with a long word ('SOMETHING') still fits cols 1-4 */
+.cs-title--long {
+  font-size: clamp(40px, 4.8vw, 72px);
+}
 .cs-lead,
 .cs-body .cs-lead {
   font-size: var(--fs-lead);
