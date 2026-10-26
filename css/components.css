@@ -481,9 +481,6 @@
   background: var(--frame);
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
 }
-.hero-frame picture {
-  display: contents;
-}
 .hero-frame img {
   flex: 1;
   min-width: 0;
