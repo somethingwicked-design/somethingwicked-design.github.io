@@ -1,0 +1,36 @@
+# Netlify: plain HTML, CSS and JS, no build step. Publishes the repo root.
+# Missing pages get /404.html automatically.
+
+[build]
+  publish = "."
+
+# Fonts never change under the same name: cache for a year
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Images and video: a week, as placeholders still get swapped under the
+# same name
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# Old site URLs (/pages/...) that have a page in the new site
+[[redirects]]
+  from = "/pages/about"
+  to = "/about.html"
+  status = 301
+[[redirects]]
+  from = "/pages/about.html"
+  to = "/about.html"
+  status = 301
+[[redirects]]
+  from = "/pages/op-jezelf"
+  to = "/work/op-jezelf.html"
+  status = 301
+[[redirects]]
+  from = "/pages/op-jezelf.html"
+  to = "/work/op-jezelf.html"
+  status = 301
