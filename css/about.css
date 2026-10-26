@@ -666,15 +666,6 @@
   transform: none;
   transition: opacity .15s ease-out .16s, transform .55s cubic-bezier(.34, 1.6, .64, 1) .16s;
 }
-.iq-shadow {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -10px;
-  height: 24px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(0, 0, 0, .6), transparent);
-}
 /* The bobbing yellow '!' (a white '?' once the log has been seen) */
 .iq-bang {
   position: absolute;
