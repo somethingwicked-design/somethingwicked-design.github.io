@@ -42,3 +42,11 @@
   from = "/pages/health-potion.html"
   to = "/work/health-potion.html"
   status = 301
+[[redirects]]
+  from = "/pages/kokoro"
+  to = "/work/kokoro.html"
+  status = 301
+[[redirects]]
+  from = "/pages/kokoro.html"
+  to = "/work/kokoro.html"
+  status = 301
