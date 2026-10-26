@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About - Luna Rachmani - Something Wicked</title>
+  <meta name="theme-color" content="#0B0B0B">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <link rel="stylesheet" href="/css/about.css">
+  <script src="/js/about.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main" class="about">
+
+    <!-- ============================================================
+         PICK A CARD (026, 033): exactly the first screen, 'More about
+         me' on its bottom edge.
+         Desktop: a hand of five cards; pick one and it swings upright,
+         lifts out and turns face up. Phone: the same five cards as a
+         deck you swipe or tap through. Both in js/about.js.
+         ============================================================ -->
+    <section class="ab-cards wrap" aria-labelledby="ab-cards-title">
+      <h1 class="ab-title" id="ab-cards-title">pick a card, any card</h1>
+      <p class="ab-sub">Five fun facts about me, face&nbsp;down.</p>
+      <div class="ab-deck-wrap">
+        <!-- DOM order = the hand from left to right (Ilio in the middle).
+             data-deck = the order in the phone deck (Ilio last). -->
+        <div class="ab-deck" id="abDeck" role="group" aria-label="Five fun facts about me">
+          <button class="pc" type="button" aria-pressed="false" data-deck="0" style="--r: rotate(-32deg); --sh: -80px; --shr: -6deg; --sx: -9.5px; --sy: 15.3px; --z: 1;">
+            <span class="visually-hidden">Personality card</span>
+            <span class="pc-lift"><span class="pc-in">
+              <span class="pc-face pc-back" aria-hidden="true"><span class="pc-back-in"><img class="pc-logo" src="/img/logo-l1.webp" alt="" width="520" height="597"></span></span>
+              <span class="pc-face pc-front" aria-hidden="true">
+                <span class="st-big">My<br>MBTI&nbsp;type</span>
+                <span class="st-line"><span class="st-em">ENFJ&#8209;A</span>, a.k.a. someone with snacks and a&nbsp;plan.</span>
+              </span>
+            </span></span>
+          </button>
+          <button class="pc" type="button" aria-pressed="false" data-deck="1" style="--r: rotate(-16deg); --sh: 80px; --shr: 6deg; --sx: -5.0px; --sy: 17.3px; --z: 2;">
+            <span class="visually-hidden">Languages card</span>
+            <span class="pc-lift"><span class="pc-in">
+              <span class="pc-face pc-back" aria-hidden="true"><span class="pc-back-in"><img class="pc-logo" src="/img/logo-l1.webp" alt="" width="520" height="597"></span></span>
+              <span class="pc-face pc-front" aria-hidden="true">
+                <span class="st-big">I speak 4<br>languages</span>
+                <span class="st-line">Hello. <span lang="de">Moin.</span><br><span lang="el">&#915;&#949;&#953;&#945;&nbsp;&#963;&#959;&#965;.</span> <span lang="nl">Hoi.</span><span class="st-mute">*</span></span>
+                <span class="st-small">*Still practising my Dutch&nbsp;:)</span>
+              </span>
+            </span></span>
+          </button>
+          <button class="pc st-cat" type="button" aria-pressed="false" data-deck="4" style="--r: rotate(0deg); --sh: 0px; --shr: 0deg; --sx: 0.0px; --sy: 18.0px; --z: 3;">
+            <span class="visually-hidden">Ilio card</span>
+            <span class="pc-lift"><span class="pc-in">
+              <span class="pc-face pc-back" aria-hidden="true"><span class="pc-back-in"><img class="pc-logo" src="/img/logo-l1.webp" alt="" width="520" height="597"></span></span>
+              <span class="pc-face pc-front" aria-hidden="true">
+                <span class="st-cat-ph"><img src="/img/about/ilio-bed.jpg" alt="Ilio, a ginger and white cat, lying on a bed" width="1000" height="563"></span>
+                <span class="st-line">This is Ilio. She&#8217;s the&nbsp;boss.</span>
+                <span class="st-cat-space"></span>
+              </span>
+            </span></span>
+          </button>
+          <button class="pc" type="button" aria-pressed="false" data-deck="2" style="--r: rotate(16deg); --sh: -80px; --shr: -6deg; --sx: 5.0px; --sy: 17.3px; --z: 4;">
+            <span class="visually-hidden">Astrology card</span>
+            <span class="pc-lift"><span class="pc-in">
+              <span class="pc-face pc-back" aria-hidden="true"><span class="pc-back-in"><img class="pc-logo" src="/img/logo-l1.webp" alt="" width="520" height="597"></span></span>
+              <span class="pc-face pc-front" aria-hidden="true">
+                <span class="st-big">My<br>birth&nbsp;chart</span>
+                <span class="st-chart"><span class="st-mute" aria-hidden="true">&#9737;</span><span>Aquarius <span class="st-mute">- creative, a free&nbsp;spirit</span></span><span class="st-mute" aria-hidden="true">&#8593;</span><span>Sagittarius <span class="st-mute">- bold, a ray of&nbsp;sunshine</span></span><span class="st-mute" aria-hidden="true">&#9789;</span><span>Pisces <span class="st-mute">- a dreamer who reads a&nbsp;room</span></span></span>
+              </span>
+            </span></span>
+          </button>
+          <button class="pc" type="button" aria-pressed="false" data-deck="3" style="--r: rotate(32deg); --sh: 80px; --shr: 6deg; --sx: 9.5px; --sy: 15.3px; --z: 5;">
+            <span class="visually-hidden">Hand card</span>
+            <span class="pc-lift"><span class="pc-in">
+              <span class="pc-face pc-back" aria-hidden="true"><span class="pc-back-in"><img class="pc-logo" src="/img/logo-l1.webp" alt="" width="520" height="597"></span></span>
+              <span class="pc-face pc-front" aria-hidden="true">
+                <span class="st-big">I&#8217;m left&#8209;handed</span>
+                <span class="st-line">Ink on my hand, ink on the page, and spiral notebooks that make me&nbsp;spiral.<span class="st-mute">*</span></span>
+                <span class="st-small">*I flip them upside down. Problem solved&nbsp;:)</span>
+              </span>
+            </span></span>
+          </button>
+          <button class="cf-more hand" type="button" hidden>more catfetti!!! &#x1F431;</button>
+        </div>
+        <div class="sd-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+        <p class="visually-hidden" id="abDeckSay" aria-live="polite"></p>
+      </div>
+      <a class="ab-more" href="#ab-intro"><span>More about me</span><span class="ab-more-ring" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3 6 L8 11 L13 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    </section>
+
+    <!-- ============================================================
+         HI, I'M LUNA (029, 033): three paragraphs, polaroid carousel
+         ============================================================ -->
+    <section class="ab-intro wrap" id="ab-intro" aria-labelledby="ab-intro-title">
+      <div class="ab-intro-text">
+        <h2 class="ab-title ab-title--left" id="ab-intro-title">Hi, I&#8217;m Luna!</h2>
+        <div class="ab-copy">
+          <p>Picture me with a sketchbook in my left hand (obviously) and a research plan in the other. I move between screen and paper, wherever the idea wants to live, but it always starts with the people it&#8217;s&nbsp;for.</p>
+          <p class="ab-bal">Since 2021 I&#8217;ve done that as Something&nbsp;Wicked, and right now as a CMD student and intern at&nbsp;Framna.</p>
+          <p>Pull up a chair, I&#8217;ll bring the&nbsp;snacks.</p>
+        </div>
+      </div>
+      <div class="ph" role="group" aria-roledescription="carousel" aria-label="Photos of me">
+        <figure class="ph-pol" style="--rot: 3deg; --pos: 72% 44%;">
+          <span class="ph-print">
+            <img src="/img/about/professional.jpg" alt="Luna at a table with a microphone, smiling" width="960" height="1440">
+          </span>
+          <figcaption class="ph-cap hand">me, all professional</figcaption>
+          <span class="tape ph-tape" aria-hidden="true"></span>
+        </figure>
+        <figure class="ph-pol" style="--rot: -2deg; --pos: 50% 45%;" hidden>
+          <span class="ph-print">
+            <video class="ph-vid" src="/img/about/rock-sign.mp4" poster="/img/about/rock-sign.jpg" autoplay muted loop playsinline disablepictureinpicture aria-label="Luna grinning at the camera and throwing the rock sign"></video>
+            <img class="ph-still" src="/img/about/rock-sign.jpg" alt="Luna grinning at the camera and throwing the rock sign" width="540" height="960" loading="lazy">
+          </span>
+          <figcaption class="ph-cap hand">...and the real me \m/</figcaption>
+          <span class="tape ph-tape" aria-hidden="true"></span>
+        </figure>
+        <figure class="ph-pol" style="--rot: 4deg; --pos: 50% 38%;" hidden>
+          <span class="ph-print">
+            <img src="/img/about/pikachu.jpg" alt="Luna in a yellow puffer jacket and a Pikachu cap with ears, surrounded by Pikachu in a toy shop" width="784" height="1200" loading="lazy">
+          </span>
+          <figcaption class="ph-cap hand">a wild Luna has appeared!</figcaption>
+          <span class="tape ph-tape" aria-hidden="true"></span>
+        </figure>
+        <figure class="ph-pol" style="--rot: -3deg; --pos: 58% 40%;" hidden>
+          <span class="ph-print">
+            <img src="/img/about/salt-red.jpg" alt="Luna on stage as SALT under red lights, singing into the mic" width="1080" height="939" loading="lazy">
+          </span>
+          <figcaption class="ph-cap hand">add a pinch of SALT</figcaption>
+          <span class="tape ph-tape" aria-hidden="true"></span>
+        </figure>
+        <div class="ph-nav">
+          <button class="ph-btn" type="button" data-ph="-1" aria-label="Previous photo"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M10 3 L5 8 L10 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <span class="ph-count" aria-live="polite">1 / 4</span>
+          <button class="ph-btn" type="button" data-ph="1" aria-label="Next photo"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3 L11 8 L6 13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ILIO'S QUEST LOG (030, 033): click her to get it back.
+         TODO: the side quests copy is still open (todo.md: 'more
+         personal'); kept as in reference/about.dc.html until then.
+         'Hide a doodle' needs the doodle hidden somewhere on the site.
+         ============================================================ -->
+    <section class="ab-quest wrap" aria-labelledby="ab-quest-title">
+      <h2 class="ab-title" id="ab-quest-title">Uh oh... Ilio stole my quest&nbsp;log.</h2>
+      <p class="ab-sub">Can you bring it&nbsp;back?</p>
+      <svg class="iq-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <defs>
+          <!-- Torn white paper outline around the cut-out, from the reference -->
+          <filter id="tornOutline" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+            <feMorphology in="SourceAlpha" operator="dilate" radius="10" result="grow"></feMorphology>
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="5" result="n"></feTurbulence>
+            <feDisplacementMap in="grow" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G" result="rough"></feDisplacementMap>
+            <feTurbulence type="fractalNoise" baseFrequency="0.45" numOctaves="1" seed="12" result="f"></feTurbulence>
+            <feDisplacementMap in="rough" in2="f" scale="2" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap>
+            <feGaussianBlur in="fuzzy" stdDeviation="0.7" result="soft"></feGaussianBlur>
+            <feComponentTransfer in="soft" result="edge"><feFuncA type="linear" slope="2.4" intercept="-0.6"></feFuncA></feComponentTransfer>
+            <feFlood flood-color="#F4EFE3" result="paper"></feFlood>
+            <feComposite in="paper" in2="edge" operator="in" result="outline"></feComposite>
+            <feMerge><feMergeNode in="outline"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+          </filter>
+        </defs>
+      </svg>
+      <div class="iq">
+        <div class="iq-me">
+          <button class="iq-ilio" id="iqIlio" type="button" aria-expanded="false" aria-controls="iqLog" aria-label="Ilio, she stole my quest log. Get it back">
+            <span class="iq-shadow" aria-hidden="true"></span>
+            <img class="iq-sitting" src="/img/about/ilio-sitting.webp" alt="" width="840" height="1142" loading="lazy">
+            <img class="iq-lying" src="/img/about/ilio-lying.webp" alt="" width="730" height="687" loading="lazy">
+            <span class="iq-bang" aria-hidden="true"><span class="iq-bang-in">!</span></span>
+          </button>
+          <p class="iq-note hand" aria-live="polite"></p>
+        </div>
+        <div class="iq-wrap">
+          <div class="iq-log" id="iqLog" role="region" aria-label="Quest log">
+            <div class="iq-top">
+              <p class="iq-lbl">My quest log</p>
+              <button class="ph-btn" type="button" data-iq-close aria-label="Close the quest log"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4 L12 12 M12 4 L4 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+            </div>
+            <div class="iq-grid">
+              <div class="iq-row"><span class="iq-lbl iq-st">In progress</span><p class="iq-h head"><a class="iq-link" href="https://soundcloud.com/booscaredyet" target="_blank" rel="noopener" aria-label="Finish a SALT song, listen to my music on SoundCloud (opens in a new tab)">Finish a SALT song<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M5 11 L11 5 M6 5 H11 V10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p><p class="iq-p">My own music. One more&nbsp;take.</p></div>
+              <div class="iq-row"><span class="iq-lbl iq-st">Daily</span><p class="iq-h head">One more batch</p><p class="iq-p">Bake cookies for my clients (wink&nbsp;wink)</p></div>
+              <div class="iq-row"><span class="iq-lbl iq-st">Every night</span><p class="iq-h head">Survive the night</p><p class="iq-p">Cosy games by day, horror by&nbsp;night.</p></div>
+              <div class="iq-row"><span class="iq-lbl iq-st">Secret</span><p class="iq-h head">Hide a doodle</p><p class="iq-p">Can you find the hidden one on this&nbsp;website?</p></div>
+            </div>
+            <div class="iq-row iq-main"><span class="iq-lbl iq-st">New quest</span><p class="iq-h head"><a href="#contact">Your quest: say hi</a></p><p class="iq-p">Reward: Happy&nbsp;Luna!</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031). Paths and filters copied exactly from
+         reference/homepage.dc.html. -->
+    <span class="footer-paper" aria-hidden="true">
+      <svg viewBox="0 0 1440 64" preserveAspectRatio="none" focusable="false">
+        <defs>
+        <filter id="dkFibers" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="1.1" numOctaves="3" seed="12" result="f"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="f" scale="4.5" xChannelSelector="R" yChannelSelector="G" result="fuzzy"></feDisplacementMap><feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="2" seed="6" result="t"></feTurbulence><feColorMatrix in="t" values="0 0 0 0 0.55  0 0 0 0 0.5  0 0 0 0 0.42  2.6 0 0 0 -1.6" result="flecks"></feColorMatrix><feComposite in="flecks" in2="fuzzy" operator="in" result="fl"></feComposite><feMerge><feMergeNode in="fuzzy"></feMergeNode><feMergeNode in="fl"></feMergeNode></feMerge></filter>
+        <filter id="dkRough" x="-2%" y="-40%" width="104%" height="180%"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="21" result="r"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="r" scale="2.5" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap></filter>
+        <filter id="dkShadow" x="-5%" y="-100%" width="110%" height="300%"><feGaussianBlur stdDeviation="10"></feGaussianBlur></filter>
+        </defs>
+        <path fill="rgba(0,0,0,0.6)" filter="url(#dkShadow)" d="M0 64 L0 9 L17 9 L34 9 L51 9 L58 5 L71 7 L82 10 L95 12 L102 11 L111 8 L122 8 L131 8 L142 8 L148 12 L155 15 L170 15 L181 16 L193 14 L208 13 L218 17 L225 16 L240 18 L253 19 L267 17 L281 15 L298 18 L309 14 L324 11 L334 11 L347 9 L361 7 L371 8 L378 11 L390 9 L404 12 L417 14 L429 15 L442 12 L451 13 L459 17 L469 15 L484 16 L493 17 L500 19 L507 21 L514 22 L523 21 L536 17 L552 15 L562 14 L572 14 L582 13 L591 15 L607 18 L619 21 L628 24 L636 23 L651 24 L665 23 L681 24 L690 22 L703 18 L720 18 L733 18 L750 16 L758 18 L776 15 L783 16 L794 16 L800 15 L816 19 L830 20 L848 16 L863 16 L881 12 L893 11 L911 13 L926 14 L936 12 L954 8 L964 8 L973 5 L980 5 L991 6 L999 7 L1017 8 L1034 6 L1043 10 L1050 8 L1062 8 L1070 7 L1083 3 L1099 3 L1108 0 L1119 4 L1136 1 L1147 5 L1157 7 L1174 4 L1189 6 L1206 7 L1220 5 L1231 9 L1246 12 L1262 14 L1275 10 L1284 8 L1294 4 L1305 1 L1320 -2 L1333 0 L1345 1 L1361 2 L1368 4 L1382 5 L1392 8 L1405 11 L1421 9 L1430 10 L1440 8 L1440 64 Z"></path>
+        <path fill="#F4EFE3" filter="url(#dkFibers)" d="M0 64 L0 15 L17 15 L34 15 L51 15 L58 11 L71 13 L82 16 L95 18 L102 17 L111 14 L122 14 L131 14 L142 14 L148 18 L155 21 L170 21 L181 22 L193 20 L208 19 L218 23 L225 22 L240 24 L253 25 L267 23 L281 21 L298 24 L309 20 L324 17 L334 17 L347 15 L361 13 L371 14 L378 17 L390 15 L404 18 L417 20 L429 21 L442 18 L451 19 L459 23 L469 21 L484 22 L493 23 L500 25 L507 27 L514 28 L523 27 L536 23 L552 21 L562 20 L572 20 L582 19 L591 21 L607 24 L619 27 L628 30 L636 29 L651 30 L665 29 L681 30 L690 28 L703 24 L720 24 L733 24 L750 22 L758 24 L776 21 L783 22 L794 22 L800 21 L816 25 L830 26 L848 22 L863 22 L881 18 L893 17 L911 19 L926 20 L936 18 L954 14 L964 14 L973 11 L980 11 L991 12 L999 13 L1017 14 L1034 12 L1043 16 L1050 14 L1062 14 L1070 13 L1083 9 L1099 9 L1108 6 L1119 10 L1136 7 L1147 11 L1157 13 L1174 10 L1189 12 L1206 13 L1220 11 L1231 15 L1246 18 L1262 20 L1275 16 L1284 14 L1294 10 L1305 7 L1320 4 L1333 6 L1345 7 L1361 8 L1368 10 L1382 11 L1392 14 L1405 17 L1421 15 L1430 16 L1440 14 L1440 64 Z"></path>
+        <path fill="#E8C547" filter="url(#dkRough)" d="M0 64 L0 24 L17 21 L34 24 L51 27 L58 19 L71 18 L82 22 L95 23 L102 25 L111 25 L122 25 L131 24 L142 21 L148 22 L155 34 L170 33 L181 32 L193 27 L208 26 L218 30 L225 30 L240 33 L253 31 L267 27 L281 27 L298 33 L309 29 L324 27 L334 30 L347 28 L361 28 L371 18 L378 23 L390 20 L404 22 L417 28 L429 28 L442 32 L451 24 L459 37 L469 24 L484 26 L493 32 L500 35 L507 40 L514 38 L523 31 L536 37 L552 29 L562 30 L572 33 L582 27 L591 32 L607 31 L619 42 L628 35 L636 41 L651 33 L665 41 L681 39 L690 36 L703 31 L720 36 L733 32 L750 29 L758 32 L776 34 L783 36 L794 32 L800 32 L816 39 L830 34 L848 36 L863 29 L881 21 L893 32 L911 31 L926 27 L936 28 L954 24 L964 24 L973 15 L980 16 L991 19 L999 25 L1017 24 L1034 19 L1043 22 L1050 23 L1062 27 L1070 27 L1083 21 L1099 23 L1108 18 L1119 21 L1136 21 L1147 15 L1157 17 L1174 23 L1189 26 L1206 22 L1220 21 L1231 26 L1246 23 L1262 32 L1275 29 L1284 19 L1294 21 L1305 22 L1320 17 L1333 16 L1345 19 L1361 12 L1368 17 L1382 20 L1392 22 L1405 21 L1421 27 L1430 29 L1440 27 L1440 64 Z"></path>
+      </svg>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <!-- About only (026, 030): the quest log's 'say hi' leads here -->
+      <p class="footer-note hand">Quest accepted? Then...</p>
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>
