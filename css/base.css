@@ -145,6 +145,38 @@ body::before,
   background-size: 256px 256px;
 }
 
+/* Text selection: the accent with ink text (a case study's own accent);
+   on yellow surfaces (footer paper, caution tape, the phone hero paper,
+   filled buttons) ink with bone text */
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+.site-footer::selection,
+.site-footer *::selection,
+.band::selection,
+.band *::selection,
+.btn::selection,
+.btn *::selection {
+  background: var(--ink);
+  color: var(--bone);
+}
+@media (max-width: 759.98px) {
+  .hero-intro::selection {
+    background: var(--ink);
+    color: var(--bone);
+  }
+}
+/* Notes, arrows, tape and the View case ticket are decoration: not
+   selectable (.hand covers the handwritten notes). Real text stays
+   selectable. */
+.tape,
+.ticket,
+.nf-note {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
