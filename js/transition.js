@@ -88,8 +88,13 @@
     function step() {
       if (off) return;
       target = Math.max(target, complete ? 100 : Math.min(99, done / total * 100));
+      // While loading: ease gently towards the share that's done. Once
+      // everything is in: race to 100 (about 0.15s), so a fast page is
+      // never kept waiting by the counter
       var gap = target - shown;
-      shown = gap < 0.5 ? target : shown + Math.max(gap * 0.12, 0.5);
+      var rate = complete ? 0.35 : 0.12;
+      var least = complete ? 4 : 0.5;
+      shown = gap < least ? target : shown + Math.max(gap * rate, least);
       pctEl.textContent = Math.floor(shown) + '%';
       if (complete && shown >= 100 && Date.now() - start >= 400) { tearOff(); return; }
       requestAnimationFrame(step);
