@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>De Bote - Luna Rachmani - Something Wicked</title>
+  <meta name="description" content="De Bote, a newspaper, a logo and a working telephone about the Dutch 06 lines. How feedback took it from a science fair board to a phone you pick up.">
+  <meta name="theme-color" content="#0B0B0B">
+  <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
+  <meta name="color-scheme" content="only dark">
+  <link rel="canonical" href="https://somethingwicked.design/work/de-bote.html">
+  <!-- Sharing (Open Graph). The share image is L1 on ink (041). -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Something Wicked">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="De Bote - Luna Rachmani - Something Wicked">
+  <meta property="og:description" content="De Bote, a newspaper, a logo and a working telephone about the Dutch 06 lines. How feedback took it from a science fair board to a phone you pick up.">
+  <meta property="og:url" content="https://somethingwicked.design/work/de-bote.html">
+  <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Something Wicked logo: a triangle with rays, an eye and two skeleton hands">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- head: keep in sync -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;family=Outfit:wght@300..800&amp;family=Reenie+Beanie&amp;display=swap">
+  <link rel="preload" href="/fonts/Quinthero.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/Heartless.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/motion.css">
+  <script src="/js/main.js" defer></script>
+  <!-- Not deferred: it must listen for pagereveal before the first render -->
+  <script src="/js/transition.js"></script>
+  <!-- Icons: L3 'SW' in Quinthero (041), bone on ink -->
+  <link rel="icon" href="/img/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/img/icons/favicon-16.png" sizes="16x16" type="image/png">
+  <link rel="icon" href="/img/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png">
+  <!-- /head -->
+  <!-- Case study only -->
+  <link rel="stylesheet" href="/css/case.css">
+  <script src="/js/case.js" defer></script>
+  <link rel="preload" href="/img/de-bote-papers.webp" as="image" type="image/webp">
+</head>
+<!-- Case study template (040). For the next case study: copy this file,
+     change the accent and screen tint below, data-project, the content and
+     the Next up block. Order of next projects: 024. -->
+<body class="case" data-project="de-bote" style="--accent:#E13B44; --on-accent:#0B0B0B">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- header: keep in sync -->
+  <header class="site-header">
+    <div class="site-header-inner wrap">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="/#work" data-nav="work">Work</a>
+        <a href="/about.html" data-nav="about">About</a>
+        <a href="#contact" data-nav="contact">Contact</a>
+      </nav>
+      <!-- EN / NL goes here once there is a Dutch version -->
+      <button class="menu-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="menu">Menu</button>
+    </div>
+  </header>
+
+  <!-- Phone menu (020): full screen -->
+  <dialog class="menu" id="menu" aria-label="Menu">
+    <div class="menu-top">
+      <!-- Logo (041): L2 wordmark from 760px, L3 SW below 760px -->
+      <a class="logo" href="/" aria-label="Something Wicked, home">
+        <span class="logo-l2"><span class="logo-something">SOMETHING</span><span class="logo-wicked">Wicked</span></span>
+        <span class="logo-l3">SW</span>
+      </a>
+      <button class="menu-btn" type="button" data-menu-close>Close<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M1 1 L13 13 M13 1 L1 13" stroke="#F2EEE6" stroke-width="2" fill="none"/></svg></button>
+    </div>
+    <nav class="menu-nav" aria-label="Menu">
+      <a href="/#work" data-nav="work">Work</a>
+      <a href="/about.html" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+    <div class="menu-meta">
+      <a href="mailto:lurachmani@gmail.com">lurachmani@gmail.com</a>
+      <a href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+    </div>
+  </dialog>
+  <!-- /header -->
+
+  <div class="head-space" aria-hidden="true"></div>
+
+  <main id="main">
+
+    <!-- Stage: the case study, Next up and (desktop) the spacer that
+         scrubs the Next up slide (js/case.js) -->
+    <div class="cs-stage">
+    <article class="cs-main grain" id="csMain" aria-labelledby="cs-title">
+      <span class="cs-dim" id="csDim" aria-hidden="true"></span>
+      <div class="wrap">
+      <div class="cs-flow">
+        <!-- ========================================================
+             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
+             ======================================================== -->
+        <div class="cs-hero">
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/de-bote-papers.webp" width="1800" height="1440" alt="A stack of De Bote newspapers tied with string" fetchpriority="high">
+          </figure>
+          <span class="tape" aria-hidden="true"></span>
+        </div>
+
+        <section class="cs-text cs-intro" aria-label="Introduction">
+          <div>
+            <h1 class="cs-title head" id="cs-title">De Bote</h1>
+          </div>
+          <div class="cs-body">
+            <p class="cs-lead">Newspaper &amp; identity.</p>
+            <p>An editorial design project combining a newspaper layout with an original logo, built around the story of Teleholding, the Skene brothers, and how the Dutch 06 phone lines changed the Netherlands forever.</p>
+            <p>Survey results from the pop-up confirmed the telephone was the standout piece. The interactivity did what static editorial couldn't: it put people inside the experience rather than in front of it. The newspaper added depth for those who wanted it; the flyer handled everyone else.</p>
+            <dl class="cs-facts">
+              <div><dt>My role</dt><dd>Logo design, editorial layout, TLDR infographic, telephone engineering, research</dd></div>
+              <div><dt>Team</dt><dd>2 people: Stef (poster) and me (design, engineering, research)</dd></div>
+              <div><dt>Discipline</dt><dd>Editorial</dd></div>
+              <div><dt>Year</dt><dd>2024</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/de-bote/front-page.webp" width="1128" height="1600" alt="The De Bote front page: 'British Brothers Pioneer Dutch Phone Sex' under the masthead with the Leeuwarden lion" class="obj-top" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-wide">
+              <img src="/img/de-bote/banner.webp" width="1600" height="1067" alt="Two open copies of De Bote lying in the sun" loading="lazy" decoding="async">
+            </figure>
+            <figure class="media m-ar-wide">
+              <img src="/img/de-bote/logo.webp" width="2000" height="1125" alt="The De Bote logo: the name in a serif with the Leeuwarden lion between the words" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             01 CONTEXT
+             ======================================================== -->
+        <section class="cs-text" id="context" aria-labelledby="h-context">
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <div class="cs-body">
+            <p>I proposed the topic after watching the Netflix series Dirty Lines - a show based on Fred Saueressig's book '06 Cowboys' about the Skene brothers, who pioneered Europe's first phone-based adult entertainment services in the Netherlands in the mid-1980s. The story had everything: entrepreneurial audacity, cultural controversy, a submarine fire, and a lasting impact on Dutch telecommunications law.</p>
+            <p>The team agreed it struck the right balance between historical depth and design challenge - building an editorial experience with a retro aesthetic around a topic most people had never heard of.</p>
+            <p>The four-week NHL Stenden brief asked us to design an interactive educational experience. I led on concept development, proposed and engineered the functioning telephone prototype, edited the newspaper layout inspired by De Telegraaf, and designed the TLDR flyer and timeline infographic.</p>
+          </div>
+        </section>
+
+        <!-- The wicked part (007, 040): right after 01 Context.
+             TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked">
+          <span class="wicked-note" aria-hidden="true">
+            <span class="hand">the wicked part</span>
+            <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>The telephone wasn't</span><br><span>in the brief.</span></p>
+        </div>
+
+        <figure class="media ar-wide m-ar-scene">
+          <img src="/img/de-bote/soldering.webp" width="1600" height="900" alt="Soldering wires to a speaker for the telephone, with the red phone in the background" loading="lazy" decoding="async">
+        </figure>
+
+        <!-- ========================================================
+             02 THE PIVOT
+             ======================================================== -->
+        <section class="cs-text" id="pivot" aria-labelledby="h-pivot">
+          <h2 class="cs-h2 head" id="h-pivot"><span class="cs-num">02</span> The pivot</h2>
+          <div class="cs-body">
+            <p>The original concept was a Science Fair board - divided into an introduction, a timeline, and a breakdown of the 06 phone lines. After a feedback session with our mentor Rik, it became clear the board lacked engagement. We pivoted to a combination of a poster, a functioning telephone, and a newspaper - a more immersive and interactive approach.</p>
+            <p>I engineered the telephone to play audio clips mimicking the real 06 lines, making the experience tactile and era-appropriate. The poster was simplified to a silhouette of a woman consistent with the late 80s theme.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento cs-bento--flip">
+          <figure class="media ar-tall m-ar-tall">
+            <img src="/img/de-bote/telephone-inside.webp" width="1125" height="2000" alt="The red rotary telephone opened up, its mechanism exposed" class="obj-y40" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-tall">
+              <img src="/img/de-bote/circuit-board.webp" width="1125" height="2000" alt="A hand holding the soldered circuit board that plays the audio clips" loading="lazy" decoding="async">
+            </figure>
+            <figure class="media m-ar-tall">
+              <img src="/img/de-bote/poster.webp" width="1415" height="2000" alt="The poster: a silhouette of a woman on a red phone line, 'Teleholding' above and 'Call now' below" class="obj-y40" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             03 THE NEWSPAPER
+             ======================================================== -->
+        <section class="cs-text" id="newspaper" aria-labelledby="h-newspaper">
+          <h2 class="cs-h2 head" id="h-newspaper"><span class="cs-num">03</span> The newspaper</h2>
+          <div class="cs-body">
+            <p>The logo needed to sit on top of a busy newspaper layout without getting lost - bold enough to read over content but still feeling like it belonged to the publication. I used Leeuwarden's coat of arms as the anchor, vectorising the lion in Illustrator for clean scaling at any size.</p>
+            <p>The colour palette - Night Black, Anti-Flash White, and Fire Engine Red - was chosen to reflect the provocative nature of the 06 lines. Playfair Display and EB Garamond were selected for readability and historical resonance.</p>
+            <p>The newspaper ran to seven pages plus a TLDR insert, covering the Skene brothers, Cora Emens (a voice actress for the lines), Menno Buch's documentary coverage, the De Walrus incident, and media representation through the Netflix series.</p>
+          </div>
+        </section>
+
+        <div class="cs-bento">
+          <figure class="media ar-tall">
+            <img src="/img/de-bote/page-walrus.webp" width="1128" height="1600" alt="Newspaper page on the De Walrus incident: 'Overloaded lines' over a photo of the submarine" class="obj-top" loading="lazy" decoding="async">
+          </figure>
+          <div class="cs-stack">
+            <figure class="media m-ar-tall">
+              <img src="/img/de-bote/page-dirty-lines.webp" width="1128" height="1600" alt="Newspaper page on media coverage: 'Dirty Lines' and the book '06 Cowboys'" class="obj-top" loading="lazy" decoding="async">
+            </figure>
+            <figure class="media m-ar-tall">
+              <img src="/img/de-bote/tldr-flyer.webp" width="1128" height="1600" alt="The TLDR flyer: important dates and numbers on a timeline from 1986 to 2002" class="obj-top" loading="lazy" decoding="async">
+            </figure>
+          </div>
+        </div>
+
+        <!-- ========================================================
+             04 WHAT TESTING CHANGED
+             ======================================================== -->
+        <section class="cs-text" id="testing" aria-labelledby="h-testing">
+          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
+          <div class="cs-body">
+            <p>At a community feedback session, it became clear that the newspaper format - while visually strong - was too much content for an exhibition environment. We responded by designing a compact TLDR flyer that compressed the key information into a clear timeline from 1986 to 2002.</p>
+            <p>The flyer used period-appropriate 90s-style advertisements to keep it authentic to the era, and a red phone icon in place of a standard graphic. At the final pop-up stand on October 22nd, over 20 students from the target demographic confirmed the telephone and poster were the most effective pieces - the interactivity and retro aesthetic were what landed.</p>
+          </div>
+        </section>
+
+        <!-- Numbers (035): after the chapter text, before its images -->
+        <ul class="stats" role="list" aria-label="The project in numbers">
+          <li><span class="stat-num head">20+</span><span class="stat-label">students at the final pop-up stand</span></li>
+          <li><span class="stat-num head">7</span><span class="stat-label">newspaper pages, plus a TLDR insert</span></li>
+          <li><span class="stat-num head">4</span><span class="stat-label">week brief</span></li>
+        </ul>
+
+        <figure class="media ar-wide m-ar-scene">
+          <img src="/img/de-bote/pop-up-stand.webp" width="1600" height="1037" alt="The pop-up stand: the red telephone, copies of De Bote and the TLDR flyer on a table, the poster behind" loading="lazy" decoding="async">
+        </figure>
+
+        <!-- ========================================================
+             05 REFLECTION
+             ======================================================== -->
+        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
+          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+          <div class="cs-body">
+            <p><span class="cs-em">Designing around a topic this specific taught me that strong editorial work isn't about fitting content into a template - it's about finding the format that fits the content.</span></p>
+            <p>The telephone wasn't in the brief. It came from asking what would actually make someone want to engage with this story.</p>
+            <p>The project was an exercise in iterative working. Moving from a Science Fair board to a telephone, poster, and newspaper - and then adding the TLDR flyer - was driven entirely by feedback at each stage. Every pivot made the end product stronger.</p>
+          </div>
+        </section>
+      </div>
+      </div>
+      <span class="cs-hairline" aria-hidden="true"></span>
+    </article>
+
+    <!-- ============================================================
+         NEXT UP (024, 040): the next project in the homepage order.
+         Desktop: pinned under the case study, which slides left over it
+         while the preview grows from its bottom-right corner, scrubbed by
+         the spacer below (js/case.js). Then both unpin and scroll away
+         together, and the footer follows in the normal flow.
+         Phone: it scrolls in while the case study darkens (028).
+         ============================================================ -->
+    <section class="next grain" id="csNext" aria-label="Next up">
+      <div class="next-inner wrap">
+        <p class="next-label" aria-hidden="true">Next up</p>
+        <a class="next-title" href="/work/something-wicked.html">
+          <span class="visually-hidden">Next up: </span>
+          <span>Something Wicked</span>
+          <span class="next-sub">[Something Wicked in one line]</span>
+        </a>
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <a class="next-prev" href="/work/something-wicked.html" aria-label="Next project: Something Wicked">
+          <span class="next-prev-in">
+            <span class="next-prev-ph">[Something Wicked preview video]</span>
+            <span class="next-prev-name head" aria-hidden="true">Something Wicked</span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <div class="cs-spacer" id="csSpacer" aria-hidden="true"></div>
+    </div>
+
+  </main>
+
+  <!-- footer: keep in sync -->
+  <footer class="site-footer" id="contact">
+    <!-- Torn yellow paper (031) from reference/homepage.dc.html: the torn
+         edge is baked into img/paper/footer-edge.webp, the rest is flat
+         yellow. -->
+    <span class="footer-paper" aria-hidden="true">
+      <span class="footer-edge"></span>
+      <span class="footer-paper-fill"></span>
+    </span>
+    <div class="wrap">
+      <h2 class="footer-title head"><span>Let's make</span><br><span>some trouble.</span></h2>
+      <p class="footer-sub">Tell me what you're making and how I can&nbsp;help.</p>
+      <div class="footer-actions">
+        <a class="btn-dark" href="mailto:lurachmani@gmail.com">Get in touch <span aria-hidden="true">&#8599;</span></a>
+        <a class="footer-link" href="https://www.linkedin.com/in/somethingwicked/">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+  <!-- /footer -->
+</body>
+</html>
