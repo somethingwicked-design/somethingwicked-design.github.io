@@ -230,7 +230,7 @@
   min-height: var(--target-button);
   padding: 0 var(--sp-32);
   background: var(--accent-paint) var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
   font-size: var(--fs-button);
   font-weight: 800;
   letter-spacing: 0.06em;
@@ -238,7 +238,7 @@
   text-decoration: none;
 }
 .btn:hover {
-  color: var(--ink);
+  color: var(--on-accent);
 }
 
 /* Outlined pill: Load more */

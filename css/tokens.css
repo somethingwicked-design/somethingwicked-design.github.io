@@ -32,6 +32,7 @@
   --frame: #FFFFFF;        /* photo and project image frames */
   --yellow: #E8C547;       /* brand yellow: nav, footer, tape. Never changes */
   --accent: var(--yellow); /* the one loud colour; a case study sets its own */
+  --on-accent: var(--ink); /* text on the accent; a case study sets its own (014) */
   /* The yellow as an image layer over the colour (an invisible grain, mean
      #E8C547): a browser's forced dark mode (Samsung Internet) recolours
      colours but leaves photos alone, so yellow surfaces stay yellow */

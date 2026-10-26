@@ -117,6 +117,14 @@
   window.addEventListener('resize', setMode);
   desktopMq.addEventListener('change', setMode);
   reduceMq.addEventListener('change', setMode);
+  // Videos in the case study loop without sound; reduced motion keeps
+  // them on their poster
+  document.querySelectorAll('.cs-main video').forEach(function (video) {
+    if (reduceMq.matches) return;
+    var p = video.play();
+    if (p && p.catch) p.catch(function () { /* autoplay blocked: the poster shows */ });
+  });
+
   // Images and fonts change the case study's height
   window.addEventListener('load', setMode);
   setMode();

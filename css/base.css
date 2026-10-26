@@ -116,7 +116,7 @@ a:hover {
   min-height: var(--target-link);
   padding: 0 var(--sp-24);
   background: var(--accent-paint) var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
   font-weight: 800;
   text-decoration: none;
   transform: translateY(-200%);
@@ -126,7 +126,7 @@ a:hover {
   outline-color: var(--bone);
 }
 .skip-link:hover {
-  color: var(--ink);
+  color: var(--on-accent);
 }
 
 /* Page grain
@@ -156,7 +156,7 @@ body::before,
    filled buttons) ink with bone text */
 ::selection {
   background: var(--accent);
-  color: var(--ink);
+  color: var(--on-accent);
 }
 .site-footer::selection,
 .site-footer *::selection,

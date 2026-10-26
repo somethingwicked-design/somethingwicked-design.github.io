@@ -3,6 +3,7 @@
    (desktop, 1440) and reference/case-study-mobile.dc.html (phone, 360).
    Each case study sets on <body>:
      --accent     the project colour (chapter numbers, the wicked part)
+     --on-accent  text on the accent (selection, buttons): black or white
      --screen-bg  the backdrop behind app screens (a light project tint)
    Logo, nav and footer keep the brand yellow (014).
    ========================================================================== */
@@ -80,7 +81,8 @@
   pointer-events: none;
   background: linear-gradient(135deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, .04) 36%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, .07) 100%);
 }
-.media > img {
+.media > img,
+.media > video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -89,6 +91,13 @@
 }
 .media > img.obj-y40 {
   object-position: 50% 40%;
+}
+/* Printed pages: keep the top (masthead, headings) or the bottom in view */
+.media > img.obj-top {
+  object-position: 50% 0;
+}
+.media > img.obj-bottom {
+  object-position: 50% 100%;
 }
 
 /* Placeholder: visible until the real image exists (see todo) */
