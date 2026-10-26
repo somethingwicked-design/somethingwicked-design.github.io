@@ -567,6 +567,11 @@
     aspect-ratio: 4 / 5;
     background: var(--card);
   }
+  /* A hero still waiting for its photo keeps the polaroid's shape */
+  .cs-hero .media--ph {
+    aspect-ratio: 4 / 5;
+    color: var(--paper-ink);
+  }
   .cs-hero .tape {
     display: block;
     top: 18px; /* 32px padding - 14px */
