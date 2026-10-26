@@ -729,6 +729,51 @@
   gap: var(--sp-40);
   padding-right: var(--sp-40);
 }
+/* Pause / play at the visible end of the band: ink on yellow, 48px
+   target. The band overhangs the screen by 2% of the page (1.92% of its
+   own width); the yellow fades out to the left so the words slide under
+   it cleanly, and covers the overhang on the right. */
+.band-toggle {
+  position: absolute;
+  top: 50%;
+  right: calc(1.92% + var(--sp-8));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--target-link);
+  height: var(--target-link);
+  margin-top: calc(var(--target-link) / -2);
+  padding: 0;
+  border: 0;
+  background: var(--yellow);
+  box-shadow: -24px 0 16px var(--yellow), 32px 0 0 var(--yellow);
+  color: var(--ink);
+  cursor: pointer;
+}
+.band-toggle[hidden] {
+  display: none;
+}
+.band-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.band-toggle:focus-visible {
+  outline-color: var(--ink);
+  outline-offset: -6px;
+}
+.band-icon-play,
+.is-stopped .band-icon-pause {
+  display: none;
+}
+.is-stopped .band-icon-play {
+  display: block;
+}
+/* Nothing moves with reduced motion, so nothing to pause */
+@media (prefers-reduced-motion: reduce) {
+  .band-toggle {
+    display: none;
+  }
+}
 
 @media (max-width: 759.98px) {
   .band {
@@ -746,6 +791,9 @@
   .marquee-group {
     gap: var(--sp-24);
     padding-right: var(--sp-24);
+  }
+  .band-toggle {
+    right: calc(3.7% + var(--sp-8)); /* 4% overhang of a 108% band */
   }
 }
 

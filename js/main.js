@@ -66,13 +66,25 @@
 
   // ---------------------------------------------------------------------
   // Marquee: pause on hover and while off screen (saves work, and stops
-  // motion nobody is looking at). Reduced motion is handled in CSS.
+  // motion nobody is looking at), and with its pause button (WCAG 2.2.2).
+  // Reduced motion is handled in CSS.
   // ---------------------------------------------------------------------
   document.querySelectorAll('[data-marquee]').forEach(function (band) {
     var hovered = false;
     var visible = true;
+    var stopped = false;
+    var toggle = band.querySelector('.band-toggle');
     function update() {
-      band.classList.toggle('is-paused', hovered || !visible);
+      band.classList.toggle('is-paused', hovered || !visible || stopped);
+      band.classList.toggle('is-stopped', stopped);
+    }
+    if (toggle) {
+      toggle.hidden = false;
+      toggle.addEventListener('click', function () {
+        stopped = !stopped;
+        toggle.setAttribute('aria-label', stopped ? 'Play the moving tape' : 'Pause the moving tape');
+        update();
+      });
     }
     band.addEventListener('pointerenter', function () { hovered = true; update(); });
     band.addEventListener('pointerleave', function () { hovered = false; update(); });
