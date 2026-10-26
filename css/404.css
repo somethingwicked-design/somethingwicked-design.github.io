@@ -8,6 +8,7 @@
    ========================================================================== */
 
 .nf {
+  min-height: calc(100vh - var(--header-h));
   min-height: calc(100svh - var(--header-h));
   align-items: center;
   padding-block: var(--sp-48) var(--sp-96);
@@ -99,6 +100,7 @@
 .nf-sheet {
   position: relative;
   display: block;
+  overflow: visible; /* Firefox clips button content: the scraps fly out */
   width: 100%;
   padding: 0;
   border: 0;
@@ -202,7 +204,7 @@
     flex-direction: column;
     align-items: stretch;
     gap: var(--sp-8);
-    padding-block: var(--sp-40) var(--sp-32);
+    padding-block: var(--sp-40) calc(var(--sp-32) + env(safe-area-inset-bottom, 0px));
   }
   .nf-actions {
     gap: var(--sp-24);

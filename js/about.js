@@ -286,8 +286,29 @@
     var bang = ilio.querySelector('.iq-bang');
     var mark = ilio.querySelector('.iq-bang-in');
     var note = document.querySelector('.iq-note');
+    var lying = ilio.querySelector('.iq-lying');
     var open = false;
     var seen = false;
+
+    // The curled-up pose is hidden until the flop: decode it before she
+    // needs it (when the section comes near), so the flop never waits on it
+    var ready = null;
+    var prepare = function () {
+      if (!ready) {
+        ready = lying.decode ? lying.decode().catch(function () {}) : Promise.resolve();
+      }
+      return ready;
+    };
+    if ('IntersectionObserver' in window) {
+      var near = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        near.disconnect();
+        prepare();
+      }, { rootMargin: '800px 0px' });
+      near.observe(ilio);
+    } else {
+      prepare();
+    }
 
     var toggle = function () {
       seen = seen || open; // seen once it has been open and closed again
@@ -302,16 +323,33 @@
       var thanks = seen && !open;
       note.classList.toggle('is-on', thanks);
       note.textContent = thanks ? 'Thanks for getting it back. She’ll steal it again.' : '';
-      // Stacked: the log opens under her, so bring it into view
+      // Stacked: the log opens under her. Only if it opened entirely below
+      // the screen, scroll just far enough to show its top; otherwise leave
+      // the scrolling to the visitor.
       if (open && stacked.matches) {
         requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            log.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth', block: 'nearest' });
-          });
+          var top = log.getBoundingClientRect().top;
+          var room = window.innerHeight - 96;
+          if (top > room) {
+            window.scrollBy({ top: top - room, behavior: reduce.matches ? 'auto' : 'smooth' });
+          }
         });
       }
     };
-    ilio.addEventListener('click', toggle);
+    // First flop: wait for the curled-up pose (at most 400ms), then go
+    var busy = false;
+    ilio.addEventListener('click', function () {
+      if (busy) return;
+      if (open) { toggle(); return; }
+      busy = true;
+      var go = function () {
+        if (!busy) return;
+        busy = false;
+        toggle();
+      };
+      prepare().then(go);
+      setTimeout(go, 400);
+    });
     log.querySelector('[data-iq-close]').addEventListener('click', function () {
       toggle();
       ilio.focus();

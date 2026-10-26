@@ -7,7 +7,8 @@
   width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
-  padding-inline: var(--margin);
+  padding-left: max(var(--margin), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--margin), env(safe-area-inset-right, 0px));
 }
 
 /* 12-column grid, 32px gutters */

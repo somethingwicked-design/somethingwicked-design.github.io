@@ -40,8 +40,9 @@
   z-index: 2; /* a picked card lifts over the intro */
   display: flex;
   flex-direction: column;
-  height: max(560px, min(calc(100svh - var(--header-h)), 980px));
-  padding-block: var(--sp-64) var(--sp-32);
+  min-height: max(560px, min(calc(100vh - var(--header-h)), 980px));
+  min-height: max(560px, min(calc(100svh - var(--header-h)), 980px));
+  padding-block: var(--sp-64) calc(var(--sp-32) + env(safe-area-inset-bottom, 0px));
 }
 
 .ab-more {
@@ -86,7 +87,13 @@
 }
 
 /* --- The cards, both layouts -------------------------------------------- */
+/* 3D chain (robust in Firefox too): .pc-lift holds the perspective,
+   .pc-in preserves 3D and turns, the two faces hide their backs. The
+   button, .pc-lift and .pc-in never get overflow, filter, opacity,
+   mix-blend-mode or will-change: those flatten the 3D. Dimming, gloss and
+   shadow live on or inside the faces. */
 .pc {
+  overflow: visible; /* Firefox clips button content otherwise */
   padding: 0;
   border: 0;
   background: none;
@@ -94,7 +101,6 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  perspective: 1400px;
 }
 .pc:focus-visible {
   outline: none;
@@ -111,9 +117,11 @@
   height: 100%;
 }
 .pc-lift {
+  perspective: 1400px;
   transition: transform .6s cubic-bezier(.2, .7, .2, 1);
 }
 .pc-in {
+  -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   transition: transform .7s cubic-bezier(.2, .7, .2, 1);
 }
@@ -121,9 +129,43 @@
   position: absolute;
   inset: 0;
   border-radius: 10px;
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+/* Safety net for browsers that ignore backface-visibility (seen in
+   Firefox): each face also switches visibility when the card is edge-on.
+   The turn eases out, so 90deg comes at about 17% of its time:
+   .12s of .7s turning back, .4s + .12s turning up on desktop, .1s of .6s
+   in the deck. */
+.pc-front {
+  visibility: hidden;
+  transition: visibility 0s .12s;
+}
+.pc-back {
+  transition: visibility 0s .12s;
+}
+/* Dimming (the other cards while one is picked, the deck below the top
+   card): a dark layer inside each face. A filter would show the turned
+   face through in Safari and Firefox. */
+.pc-dim {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: 10px;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s;
+}
+/* The card's shadow, a layer inside each face */
+.pc-face::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 10px;
   box-shadow: var(--sx, 0) var(--sy, 18px) 40px rgba(0, 0, 0, .5);
+  pointer-events: none;
 }
 
 /* Back: glossy tarot-style card, bone border, black face, thin yellow
@@ -175,7 +217,6 @@
   justify-content: center;
   gap: var(--sp-24);
   padding: 20px;
-  overflow: hidden;
   background: var(--card);
   transform: rotateY(180deg);
 }
@@ -307,8 +348,12 @@
     aspect-ratio: 5 / 7;
     transform: var(--r);
     transform-origin: 50% 200%;
-    transition: transform .6s cubic-bezier(.2, .7, .2, 1), filter .4s;
+    transition: transform .6s cubic-bezier(.2, .7, .2, 1);
     animation: pcDeal 2s cubic-bezier(.45, 0, .2, 1) .2s backwards;
+  }
+  /* The deal fades in on the faces: opacity on the card would flatten it */
+  .pc-face {
+    animation: pcFadeIn .24s linear .2s backwards;
   }
   .pc:focus-visible {
     z-index: 10;
@@ -328,11 +373,19 @@
     transform: rotateY(180deg);
     transition-delay: .4s;
   }
-  .pc.is-sel .pc-face {
+  .pc.is-sel .pc-front {
+    visibility: visible;
+    transition-delay: .52s;
+  }
+  .pc.is-sel .pc-back {
+    visibility: hidden;
+    transition-delay: .52s;
+  }
+  .pc.is-sel .pc-face::before {
     box-shadow: 0 40px 80px rgba(0, 0, 0, .65);
   }
-  .pc.is-dim {
-    filter: brightness(.5);
+  .pc.is-dim .pc-dim {
+    opacity: .5;
   }
 }
 /* Mouse only: no sticky hover after a tap (033) */
@@ -516,12 +569,6 @@
 .ab-quest {
   padding-block: var(--sp-48) 248px;
 }
-.iq-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
 .iq {
   display: flex;
   justify-content: center;
@@ -535,6 +582,7 @@
 .iq-ilio {
   position: relative;
   display: block;
+  overflow: visible; /* Firefox clips button content otherwise */
   width: clamp(240px, 21vw, 304px);
   padding: 0;
   border: 0;
@@ -546,22 +594,27 @@
   outline-offset: 8px;
   border-radius: 12px;
 }
+/* Both poses carry their outline and shadow, baked in with padding (at
+   304px: 48 left and right, 32 top, 80 bottom); the negative margins take
+   that padding back out, so her feet stay on the button's floor line */
 .iq-ilio img {
   display: block;
-  width: 100%;
+  max-width: none;
   height: auto;
-  filter: url(#tornOutline) drop-shadow(0 18px 24px rgba(0, 0, 0, .55));
-  transform-origin: 50% 100%;
 }
 .iq-sitting {
+  width: 131.579%;                           /* 400 / 304 */
+  margin: -10.526% 0 -26.316% -15.789%;      /* 32, 80, 48 / 304 */
+  transform-origin: 50% 84.79%;              /* her feet: 446 / 526 */
   transition: opacity .18s ease-in .12s, transform .5s cubic-bezier(.34, 1.5, .64, 1);
 }
 .iq-ilio .iq-lying {
   position: absolute;
-  left: -9.2%;
+  left: -24.989%;                            /* -9.2% - 48 / 304 */
   bottom: 0;
-  width: 118.4%;
-  max-width: none;
+  width: 149.973%;                           /* 118.4% x 456 / 360 */
+  margin-bottom: -26.316%;                   /* 80 / 304 */
+  transform-origin: 50% 82.26%;              /* 371 / 451 */
   opacity: 0;
   transform: scale(.82, 1.12);
   transition: opacity .12s ease-out, transform .25s ease-in;
@@ -802,10 +855,9 @@
   /* First screen: heading, subline and deck centred between the header
      and 'More about me' */
   .ab-cards {
-    height: calc(100svh - var(--header-h));
-    min-height: 560px;
-    max-height: 932px;
-    padding-block: var(--sp-32) var(--sp-24);
+    min-height: max(560px, calc(100vh - var(--header-h)));
+    min-height: max(560px, calc(100svh - var(--header-h)));
+    padding-block: var(--sp-32) calc(var(--sp-24) + env(safe-area-inset-bottom, 0px));
   }
   .ab-cards .ab-title {
     margin-top: auto;
@@ -835,11 +887,13 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-user-select: none;
     user-select: none;
-    transition: transform .45s cubic-bezier(.2, .7, .2, 1), filter .3s;
+    transition: transform .45s cubic-bezier(.2, .7, .2, 1);
   }
   .pc:not(.is-top) {
-    filter: brightness(.6);
     cursor: default;
+  }
+  .pc:not(.is-top) .pc-dim {
+    opacity: .4;
   }
   .pc.is-drag {
     transition: none;
@@ -850,6 +904,14 @@
   }
   .pc.is-flip .pc-in {
     transform: rotateY(180deg);
+  }
+  .pc.is-flip .pc-front {
+    visibility: visible;
+    transition-delay: .1s;
+  }
+  .pc.is-flip .pc-back {
+    visibility: hidden;
+    transition-delay: .1s;
   }
   /* First load: the top card wiggles once to hint at the swipe */
   .pc.is-nudge .pc-in {
@@ -914,10 +976,6 @@
   .iq-ilio {
     width: min(240px, 64vw);
   }
-  .iq-ilio .iq-lying {
-    left: -10%;
-    width: 120%;
-  }
   .iq-bang {
     top: -80px;
     width: 48px;
@@ -961,13 +1019,16 @@
    -------------------------------------------------------------------------- */
 /* Dealing the hand on load: rises in, shuffles twice, fans out */
 @keyframes pcDeal {
-  0%   { transform: translateY(48px) rotate(0deg); opacity: 0; }
-  12%  { transform: rotate(0deg); opacity: 1; }
+  0%   { transform: translateY(48px) rotate(0deg); }
+  12%  { transform: rotate(0deg); }
   28%  { transform: translateX(var(--sh, 0px)) rotate(var(--shr, 0deg)); }
   42%  { transform: translateX(0) rotate(0deg); }
   56%  { transform: translateX(calc(var(--sh, 0px) * -.7)) rotate(calc(var(--shr, 0deg) * -.6)); }
   70%  { transform: translateX(0) rotate(0deg); }
   100% { transform: var(--r); }
+}
+@keyframes pcFadeIn {
+  from { opacity: 0; }
 }
 @keyframes sdNudge {
   0%, 100% { transform: none; }

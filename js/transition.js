@@ -1,17 +1,20 @@
-// Opening a project (021, 040): cross-document View Transitions.
-// Loaded in <head> without defer: the pagereveal listener has to exist
-// before the first render of the incoming page.
+// Opening a project (021, 040).
+// Loaded in <head> without defer: the incoming page has to set itself up
+// before its first render.
 //
 // Desktop ('morph', reference/transition-desktop.dc.html): the ticket's stub
 //   tears off (0.34s) while the card straightens, then the card photo
 //   grows into the case study hero (0.7s, position and size only) and
 //   the rest of the case study rises in under it. From Next up the
 //   preview grows into the next hero the same way.
+//   A cross-document View Transition: where the browser has none (Firefox
+//   for now), a plain page load.
 // Phone ('rip', reference/transition-mobile.dc.html): the image lifts, the
 //   yellow paper tears up from the bottom (0.6s), then on the new page the
-//   paper tears off the top and reveals the case study (0.5s).
+//   paper tears off the top and reveals the case study (0.5s). No View
+//   Transition: plain CSS on both pages, so it works in every browser.
 // Only project openings animate: every other navigation skips the
-// transition. No support or reduced motion: a plain page load.
+// transition. Reduced motion: a plain page load.
 // The styles and keyframes are in css/motion.css.
 
 (function () {
@@ -37,26 +40,45 @@
   }
 
   // ---------------------------------------------------------------------
-  // Incoming page: only run the transition when a project was opened. The
-  // class picks the styles in css/motion.css and names the hero.
+  // Incoming page: only animate when a project was opened. A project link
+  // to a page that doesn't exist yet lands on the 404, which has its own
+  // intro: no morph or paper there.
   // ---------------------------------------------------------------------
+  var html = document.documentElement;
+  var type = takeMark(); // always consumed, also when nothing animates
+  if (reduce.matches || html.getAttribute('data-page') === '404') type = null;
+
+  // Phone: the paper covers the page from its first paint (this script
+  // runs before it) and tears off; the class goes when it's done
+  if (type === 'rip') {
+    html.classList.add('is-rip-in');
+    var done = function () { html.classList.remove('is-rip-in'); };
+    html.addEventListener('animationend', function (e) {
+      if (e.pseudoElement === '::after') done();
+    });
+    setTimeout(done, 2000); // in case animationend never fires
+  }
+
+  // Desktop: the morph, as a View Transition. Every other navigation in a
+  // browser that has them (and the rip) skips it.
+  var morphIn = type === 'morph';
   window.addEventListener('pagereveal', function (e) {
-    var type = takeMark(); // always consumed, also when nothing animates
+    var morph = morphIn;
+    morphIn = false; // once: not again when coming back from the bfcache
     if (!e.viewTransition) return;
-    // A project link to a page that doesn't exist yet lands on the 404,
-    // which has its own intro: no morph or paper there
-    if (!type || document.documentElement.getAttribute('data-page') === '404') {
+    if (!morph) {
+      // Skipping rejects these promises: expected, not an error
+      var quiet = function () {};
+      e.viewTransition.ready.catch(quiet);
+      e.viewTransition.finished.catch(quiet);
       e.viewTransition.skipTransition();
       return;
     }
-    var cls = 'is-vt-' + type;
-    document.documentElement.classList.add(cls);
+    html.classList.add('is-vt-morph');
     e.viewTransition.finished.then(function () {
-      document.documentElement.classList.remove(cls);
+      html.classList.remove('is-vt-morph');
     });
   });
-
-  if (!supported) return;
 
   // ---------------------------------------------------------------------
   // Outgoing page
@@ -121,6 +143,8 @@
     if (!link || reduce.matches) return;
     var url = new URL(link.href, window.location.href);
     if (url.origin !== window.location.origin) return;
+    // Desktop without View Transitions: a plain page load
+    if (!phone.matches && !supported) return;
     e.preventDefault();
     if (busy) return;
     busy = true;

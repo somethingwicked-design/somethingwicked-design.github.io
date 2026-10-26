@@ -158,10 +158,11 @@
   inset: 0;
   width: 100%;
   max-width: none;
-  height: 100%;
+  height: 100vh;
+  height: 100svh;
   max-height: none;
   margin: 0;
-  padding: var(--sp-24) var(--sp-16) var(--sp-32);
+  padding: var(--sp-24) var(--sp-16) calc(var(--sp-32) + env(safe-area-inset-bottom, 0px));
   overflow-y: auto;
   border: 0;
   background: var(--ink);
@@ -296,13 +297,15 @@
   z-index: -1;
   pointer-events: none;
 }
-.footer-paper svg {
+/* The torn edge, baked from the reference SVG (1440 x 64 user units plus
+   40 above for the shadow), stretched across the width like the SVG */
+.footer-edge {
   position: absolute;
-  top: 0;
+  top: -40px;
   left: 0;
   width: 100%;
-  height: 64px;
-  overflow: visible;
+  height: 104px;
+  background: url('/img/paper/footer-edge.webp') 0 0 / 100% 100% no-repeat;
 }
 .footer-paper-fill {
   position: absolute;
@@ -413,8 +416,18 @@
   z-index: -1;
   width: 51.5%;
   height: 100%;
-  overflow: visible;
   pointer-events: none;
+}
+/* Baked paper (img/paper/hero.webp): the reference SVG's 742 x 1000 box
+   plus 40 user units on every side for the shadow, stretched like the SVG
+   (preserveAspectRatio none) */
+.hero-paper .paper-bake {
+  position: absolute;
+  left: -5.391%;  /* -40 / 742 */
+  top: -4%;       /* -40 / 1000 */
+  width: 110.512%; /* 820 / 742 */
+  height: 108%;    /* 1080 / 1000 */
+  background: url('/img/paper/hero.webp') 0 0 / 100% 100% no-repeat;
 }
 
 .hero {
@@ -423,6 +436,7 @@
   align-content: center;
   align-items: stretch;
   row-gap: var(--sp-40);
+  min-height: calc(100vh - var(--header-h));
   min-height: calc(100svh - var(--header-h));
   padding-block: clamp(64px, 8.9vw, 128px) clamp(80px, 10vw, 144px);
 }
@@ -581,6 +595,7 @@
     grid-template-rows: auto 88px auto 24px auto 88px auto;
     row-gap: 0;
     align-items: start;
+    min-height: calc(100vh - var(--header-h));
     min-height: calc(100svh - var(--header-h));
     padding-block: var(--sp-32);
   }
@@ -616,12 +631,15 @@
     margin: -52px calc(-1 * var(--margin));
     pointer-events: none;
   }
-  .hero-mpaper svg[viewBox] {
+  /* Baked band (img/paper/hero-phone.webp): the reference SVG's 360 x 312
+     box plus 20 user units on every side, stretched like the SVG */
+  .hero-mpaper .paper-bake {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: visible;
+    left: -5.556%;   /* -20 / 360 */
+    top: -6.410%;    /* -20 / 312 */
+    width: 111.111%; /* 400 / 360 */
+    height: 112.821%; /* 352 / 312 */
+    background: url('/img/paper/hero-phone.webp') 0 0 / 100% 100% no-repeat;
   }
 
   .hero-photo {
