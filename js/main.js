@@ -155,13 +155,14 @@
         var ticket = card.querySelector('.ticket--pointer');
         if (!img || !ticket) return;
         img.addEventListener('pointermove', function (e) {
-          if (e.pointerType === 'touch') return;
+          if (e.pointerType === 'touch' || card.classList.contains('is-opening')) return;
           var r = card.getBoundingClientRect();
           ticket.style.left = (e.clientX - r.left) + 'px';
           ticket.style.top = (e.clientY - r.top) + 'px';
           card.classList.add('is-hover');
         });
         img.addEventListener('pointerleave', function () {
+          if (card.classList.contains('is-opening')) return; // mid-tear (js/transition.js)
           card.classList.remove('is-hover');
         });
       });
