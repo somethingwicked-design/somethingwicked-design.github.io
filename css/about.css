@@ -93,6 +93,7 @@
    mix-blend-mode or will-change: those flatten the 3D. Dimming, gloss and
    shadow live on or inside the faces. */
 .pc {
+  container-type: inline-size; /* the fact text scales with the card */
   overflow: visible; /* Firefox clips button content otherwise */
   padding: 0;
   border: 0;
@@ -210,14 +211,23 @@
   height: auto;
 }
 
-/* Front: the fun fact */
+/* Front: the fun fact. Everything scales with the card's width (cqi of
+   the card button), matching the reference at 208px; --fit (js/about.js)
+   shrinks it further if a fact still doesn't fit, e.g. with a bigger
+   system font. Words never break; nothing is clipped. */
 .pc-front {
+  --fit: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: var(--sp-24);
+  justify-content: safe center; /* overflow would go down, never up out of reach */
+  gap: 24px;
+  gap: calc(clamp(8px, 11.54cqi, 24px) * var(--fit));
   padding: 20px;
+  padding: clamp(12px, 9.62cqi, 20px);
   background: var(--card);
+  hyphens: none;
+  overflow-wrap: normal;
+  word-break: normal;
   transform: rotateY(180deg);
 }
 .st-big {
@@ -228,15 +238,16 @@
   font-stretch: var(--head-stretch);
   text-transform: uppercase;
   font-size: 28px;
-  line-height: 32px;
+  font-size: calc(clamp(10px, 13.46cqi, 28px) * var(--fit));
+  line-height: 1.143; /* 32 / 28 */
   text-wrap: balance;
-  overflow-wrap: break-word;
 }
 .st-line {
   display: block;
   color: var(--bone-muted);
   font-size: 16px;
-  line-height: 24px;
+  font-size: calc(clamp(10px, 7.69cqi, 16px) * var(--fit));
+  line-height: 1.5;
   font-weight: 300;
 }
 .st-em {
@@ -250,15 +261,17 @@
   display: block;
   color: var(--muted);
   font-size: 14px;
-  line-height: 24px;
+  font-size: calc(clamp(9px, 6.73cqi, 14px) * var(--fit));
+  line-height: 1.714; /* 24 / 14 */
   font-weight: 300;
 }
 .st-chart {
   display: grid;
-  grid-template-columns: 20px 1fr;
-  row-gap: var(--sp-4);
+  grid-template-columns: 1.25em 1fr;
+  row-gap: .25em;
   font-size: 16px;
-  line-height: 20px;
+  font-size: calc(clamp(10px, 7.69cqi, 16px) * var(--fit));
+  line-height: 1.25;
   font-weight: 300;
 }
 

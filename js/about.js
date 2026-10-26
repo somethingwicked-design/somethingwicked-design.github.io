@@ -70,6 +70,29 @@
     };
     more.addEventListener('click', function () { burst(0); });
 
+    // Every fact must fit its card: if one still overflows (a narrow card,
+    // a bigger system font), shrink its text in steps (--fit), never clip
+    var fitCards = function () {
+      cards.forEach(function (card) {
+        var front = card.querySelector('.pc-front');
+        var fit = 1;
+        front.style.setProperty('--fit', '1');
+        while (fit > 0.6 && (front.scrollHeight > front.clientHeight + 1 || front.scrollWidth > front.clientWidth + 1)) {
+          fit -= 0.05;
+          front.style.setProperty('--fit', fit.toFixed(2));
+        }
+      });
+    };
+    var fitQueued = false;
+    var queueFit = function () {
+      if (fitQueued) return;
+      fitQueued = true;
+      requestAnimationFrame(function () { fitQueued = false; fitCards(); });
+    };
+    fitCards();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitCards);
+    window.addEventListener('resize', queueFit);
+
     // --- Desktop: the hand ----------------------------------------------
     var sel = null;
     var putBack = function () {
