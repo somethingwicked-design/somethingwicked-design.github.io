@@ -4,15 +4,18 @@
    (reference/*.dc.html). Type scale: decisions 023 and 037.
    ========================================================================== */
 
-/* Local display fonts. Logo and hero h1 only (decision 003). */
+/* Local display fonts. Logo and hero h1 only (decision 003). WOFF2, with
+   the TTF as a fallback for old browsers. */
 @font-face {
   font-family: 'Quinthero';
-  src: url('/fonts/Quinthero.ttf') format('truetype');
+  src: url('/fonts/Quinthero.woff2') format('woff2'),
+       url('/fonts/Quinthero.ttf') format('truetype');
   font-display: swap;
 }
 @font-face {
   font-family: 'Heartless';
-  src: url('/fonts/Heartless.ttf') format('truetype');
+  src: url('/fonts/Heartless.woff2') format('woff2'),
+       url('/fonts/Heartless.ttf') format('truetype');
   font-display: swap;
 }
 
