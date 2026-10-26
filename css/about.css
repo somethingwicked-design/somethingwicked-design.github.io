@@ -38,6 +38,10 @@
 .ab-cards {
   position: relative;
   z-index: 2; /* a picked card lifts over the intro */
+  /* A swiped card flies off past the screen edge: never let it widen the
+     page (a phone would zoom out and shift everything, header included).
+     clip, not hidden: no scroll box, the cards can still lift upwards. */
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
   min-height: max(560px, min(calc(100vh - var(--header-h)), 980px));
@@ -308,6 +312,10 @@
   z-index: 90;
   overflow: hidden;
   pointer-events: none;
+}
+.cf-layer.is-leaving {
+  opacity: 0;
+  transition: opacity .2s ease-out;
 }
 .cf {
   position: absolute;

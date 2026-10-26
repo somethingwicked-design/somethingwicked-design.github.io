@@ -48,9 +48,21 @@
     // fire (after it has turned), whatever its transforms.
     var layer = null;
     var catTimer = 0;
+    var fadeTimer = 0;
     var clearCats = function () {
       clearTimeout(catTimer);
-      if (layer) layer.textContent = '';
+      clearTimeout(fadeTimer);
+      if (!layer) return;
+      layer.textContent = '';
+      layer.classList.remove('is-leaving');
+    };
+    // The card is leaving: the cats fade out with it (0.2s) instead of
+    // flying on after it has gone
+    var fadeCats = function () {
+      clearTimeout(catTimer);
+      if (!layer || !layer.firstChild) return;
+      layer.classList.add('is-leaving');
+      fadeTimer = setTimeout(clearCats, 200);
     };
     var burst = function (delay) {
       clearCats();
@@ -174,7 +186,7 @@
         if (d === 0) c.removeAttribute('aria-hidden');
         else c.setAttribute('aria-hidden', 'true');
       });
-      more.hidden = !(flip && stack[top] === cat);
+      more.hidden = !(flip && stack[top] === cat && !flying);
     };
 
     // The top card flies out (left or right) and tucks in at the back
@@ -195,6 +207,8 @@
         say.textContent = 'Card ' + (top + 1) + ' / 5';
       };
       touched = true;
+      fadeCats();
+      more.hidden = true; // it sits on the deck, not on the card: it would stay behind
       if (reduce.matches) { next(); return; }
       flying = true;
       dx = dir * 420;
