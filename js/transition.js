@@ -11,8 +11,9 @@
 //   for now), a plain page load.
 // Phone ('rip', reference/transition-mobile.dc.html): the image lifts, the
 //   yellow paper tears up from the bottom (0.6s), then on the new page the
-//   paper tears off the top and reveals the case study (0.5s). No View
-//   Transition: plain CSS on both pages, so it works in every browser.
+//   paper shows how far the case study's first screen has loaded and only
+//   tears off at 100% (0.5s). No View Transition: plain CSS and a little
+//   script on both pages, so it works in every browser.
 // Only project openings animate: every other navigation skips the
 // transition. Reduced motion: a plain page load.
 // The styles and keyframes are in css/motion.css.
@@ -45,18 +46,94 @@
   // intro: no morph or paper there.
   // ---------------------------------------------------------------------
   var html = document.documentElement;
+  html.classList.add('js'); // CSS can wait for scripts that will run (About's deal)
   var type = takeMark(); // always consumed, also when nothing animates
   if (reduce.matches || html.getAttribute('data-page') === '404') type = null;
 
+  // The yellow paper, with 'Loading' and the percentage on it (021)
+  function paper() {
+    var el = document.createElement('div');
+    el.className = 'vt-rip';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<span class="vt-rip-fibre"></span><span class="vt-rip-paper"></span>' +
+      '<span class="vt-rip-load"><span class="vt-rip-label">Loading</span><span class="vt-rip-pct">0%</span></span>';
+    return el;
+  }
+
   // Phone: the paper covers the page from its first paint (this script
-  // runs before it) and tears off; the class goes when it's done
-  if (type === 'rip') {
-    html.classList.add('is-rip-in');
-    var done = function () { html.classList.remove('is-rip-in'); };
-    html.addEventListener('animationend', function (e) {
-      if (e.pseudoElement === '::after') done();
+  // runs before it, so it goes straight into <html>) and counts what the
+  // first screen needs: the stylesheets (done: this script waits for them),
+  // the page itself, the fonts and every image in the first screen. The
+  // number eases towards the share that's done, never goes back and holds
+  // at 99 until everything is in. At 100 the paper tears off: at the
+  // earliest 0.4s after it went up, at the latest after 4s.
+  if (type === 'rip') ripIn();
+
+  function ripIn() {
+    var el = paper();
+    el.classList.add('is-in');
+    html.appendChild(el);
+    var pctEl = el.querySelector('.vt-rip-pct');
+    var start = Date.now();
+    var total = 4;   // stylesheets, page, fonts, at least one image (a guess until the page is read)
+    var done = 1;    // the stylesheets
+    var target = 0;  // never goes down
+    var shown = 0;
+    var complete = false;
+    var off = false;
+    var live = document.createElement('p');
+    live.className = 'visually-hidden';
+    live.setAttribute('aria-live', 'polite');
+
+    function step() {
+      if (off) return;
+      target = Math.max(target, complete ? 100 : Math.min(99, done / total * 100));
+      var gap = target - shown;
+      shown = gap < 0.5 ? target : shown + Math.max(gap * 0.12, 0.5);
+      pctEl.textContent = Math.floor(shown) + '%';
+      if (complete && shown >= 100 && Date.now() - start >= 400) { tearOff(); return; }
+      requestAnimationFrame(step);
+    }
+    function tick() {
+      done++;
+      if (done >= total) complete = true;
+    }
+    function tearOff() {
+      off = true;
+      el.classList.add('is-off');
+      live.textContent = 'Loaded';
+      var gone = function () {
+        el.remove();
+        setTimeout(function () { live.remove(); }, 2000);
+      };
+      el.addEventListener('animationend', gone);
+      setTimeout(gone, 900); // in case animationend never fires
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Screen readers: 'Loading' once now, 'Loaded' at the end, no numbers
+      document.body.appendChild(live);
+      live.textContent = 'Loading';
+      // The images in the first screen (the hero first of all)
+      var imgs = Array.prototype.filter.call(document.images, function (img) {
+        var r = img.getBoundingClientRect();
+        return r.bottom > 0 && r.top < window.innerHeight && r.width > 0;
+      });
+      total = 3 + imgs.length; // stylesheets, page, fonts, images
+      tick(); // the page
+      var fonts = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+      fonts.then(tick, tick);
+      imgs.forEach(function (img) {
+        var loaded = img.complete ? Promise.resolve() : new Promise(function (res) {
+          img.addEventListener('load', res);
+          img.addEventListener('error', res);
+        });
+        loaded.then(function () { return img.decode ? img.decode().catch(function () {}) : null; }).then(tick);
+      });
     });
-    setTimeout(done, 2000); // in case animationend never fires
+    // At most 4s: then it's done, whatever is still loading
+    setTimeout(function () { complete = true; }, 4000);
+    requestAnimationFrame(step);
   }
 
   // Desktop: the morph, as a View Transition. Every other navigation in a
@@ -120,11 +197,8 @@
     var lift = link.classList.contains('card') ? link.querySelector('.card-img') : document.querySelector('.next-prev');
     if (lift) lift.classList.add('is-lift');
     setTimeout(function () {
-      var paper = document.createElement('div');
-      paper.className = 'vt-rip';
-      paper.setAttribute('aria-hidden', 'true');
-      paper.innerHTML = '<span class="vt-rip-fibre"></span><span class="vt-rip-paper"></span>';
-      document.body.appendChild(paper);
+      var el = paper(); // shows 0% while it tears up
+      document.body.appendChild(el);
       var left = false;
       function leave() {
         if (left) return;
@@ -132,7 +206,7 @@
         mark('rip');
         go(url);
       }
-      paper.addEventListener('animationend', leave);
+      el.addEventListener('animationend', leave);
       setTimeout(leave, 700); // in case animationend never fires
     }, 180);
   }

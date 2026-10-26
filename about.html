@@ -7,7 +7,7 @@
   <meta name="description" content="Pick a card, any card: five fun facts, a few polaroids and a cat who stole my quest log. Meet the person behind Something Wicked.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
-  <meta name="color-scheme" content="dark">
+  <meta name="color-scheme" content="only dark">
   <link rel="canonical" href="https://somethingwicked.design/about.html">
   <!-- Sharing (Open Graph). The share image is L1 on ink (041). -->
   <meta property="og:type" content="website">
@@ -100,6 +100,9 @@
          deck you swipe or tap through. Both in js/about.js.
          ============================================================ -->
     <section class="ab-cards wrap" aria-labelledby="ab-cards-title">
+      <!-- Heading, subline and cards as one group: centred on the phone's
+           first screen, 'More about me' on its bottom edge (033) -->
+      <div class="ab-stage">
       <h1 class="ab-title" id="ab-cards-title">pick a card, any card</h1>
       <p class="ab-sub">Five fun facts about me, face&nbsp;down.</p>
       <div class="ab-deck-wrap">
@@ -166,8 +169,8 @@
           </button>
           <button class="cf-more hand" type="button" hidden>more catfetti!!! &#x1F431;</button>
         </div>
-        <div class="sd-dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i></div>
         <p class="visually-hidden" id="abDeckSay" aria-live="polite"></p>
+      </div>
       </div>
       <a class="ab-more" href="#ab-intro"><span>More about me</span><span class="ab-more-ring" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3 6 L8 11 L13 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
     </section>
@@ -237,8 +240,8 @@
             <span class="iq-shadow" aria-hidden="true"></span>
             <!-- The torn paper outline and the shadow are baked into both poses
                  (Firefox redrew the live SVG filter on every frame) -->
-            <img class="iq-sitting" src="/img/about/ilio-sitting.webp" alt="" width="800" height="1052" decoding="async">
-            <img class="iq-lying" src="/img/about/ilio-lying.webp" alt="" width="912" height="902" decoding="async">
+            <img class="iq-sitting" src="/img/about/ilio-sitting.webp" alt="" width="832" height="1100" decoding="async">
+            <img class="iq-lying" src="/img/about/ilio-lying.webp" alt="" width="944" height="950" decoding="async">
             <span class="iq-bang" aria-hidden="true"><span class="iq-bang-in">!</span></span>
           </button>
           <p class="iq-note hand" aria-live="polite"></p>

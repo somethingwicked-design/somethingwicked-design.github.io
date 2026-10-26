@@ -33,7 +33,6 @@
     var cat = deck.querySelector('.st-cat');
     var more = deck.querySelector('.cf-more');
     var say = document.getElementById('abDeckSay');
-    var dots = document.querySelectorAll('.sd-dots i');
 
     // Face up or down, for screen readers too: the fact is only read out
     // once the card has turned
@@ -44,29 +43,46 @@
       if (up) say.textContent = front.textContent.replace(/\s+/g, ' ').trim();
     };
 
-    // Catfetti: 28 rainbow cats out of Ilio's card
+    // Catfetti: 28 rainbow cats out of Ilio's card. They fly from a fixed
+    // layer over the page, centred on where the card really is when they
+    // fire (after it has turned), whatever its transforms.
+    var layer = null;
+    var catTimer = 0;
     var clearCats = function () {
-      cat.querySelectorAll('.cf').forEach(function (el) { el.remove(); });
+      clearTimeout(catTimer);
+      if (layer) layer.textContent = '';
     };
     var burst = function (delay) {
       clearCats();
       if (reduce.matches) return;
-      for (var k = 0; k < 28; k++) {
-        var a = Math.random() * Math.PI * 2;
-        var r = 110 + Math.random() * 220;
-        var el = document.createElement('span');
-        el.className = 'cf';
-        el.setAttribute('aria-hidden', 'true');
-        el.textContent = CAT;
-        el.style.setProperty('--dx', (Math.cos(a) * r).toFixed(0) + 'px');
-        el.style.setProperty('--dy', (Math.sin(a) * r - 90).toFixed(0) + 'px');
-        el.style.setProperty('--rot', (Math.random() * 140 - 70).toFixed(0) + 'deg');
-        el.style.animationDelay = (delay + Math.random() * 0.1).toFixed(2) + 's';
-        el.style.fontSize = (18 + Math.random() * 22).toFixed(0) + 'px';
-        el.style.filter = 'hue-rotate(' + Math.round(k * 360 / 28) + 'deg) saturate(1.6)';
-        el.addEventListener('animationend', function () { this.remove(); });
-        cat.appendChild(el);
-      }
+      catTimer = setTimeout(function () {
+        if (!layer) {
+          layer = document.createElement('div');
+          layer.className = 'cf-layer';
+          layer.setAttribute('aria-hidden', 'true');
+          document.body.appendChild(layer);
+        }
+        var box = cat.querySelector('.pc-in').getBoundingClientRect();
+        var cx = (box.left + box.width / 2).toFixed(0) + 'px';
+        var cy = (box.top + box.height * 0.45).toFixed(0) + 'px';
+        for (var k = 0; k < 28; k++) {
+          var a = Math.random() * Math.PI * 2;
+          var r = 110 + Math.random() * 220;
+          var el = document.createElement('span');
+          el.className = 'cf';
+          el.textContent = CAT;
+          el.style.left = cx;
+          el.style.top = cy;
+          el.style.setProperty('--dx', (Math.cos(a) * r).toFixed(0) + 'px');
+          el.style.setProperty('--dy', (Math.sin(a) * r - 90).toFixed(0) + 'px');
+          el.style.setProperty('--rot', (Math.random() * 140 - 70).toFixed(0) + 'deg');
+          el.style.animationDelay = (Math.random() * 0.1).toFixed(2) + 's';
+          el.style.fontSize = (18 + Math.random() * 22).toFixed(0) + 'px';
+          el.style.filter = 'hue-rotate(' + Math.round(k * 360 / 28) + 'deg) saturate(1.6)';
+          el.addEventListener('animationend', function () { this.remove(); });
+          layer.appendChild(el);
+        }
+      }, delay * 1000);
     };
     more.addEventListener('click', function () { burst(0); });
 
@@ -137,6 +153,7 @@
     var dx = 0;
     var dragging = false;
     var flying = false;
+    var dealt = false;
 
     var render = function () {
       stack.forEach(function (c, i) {
@@ -147,15 +164,16 @@
         if (d === 0) { x = dx; r = dx / 14; }
         c.style.transform = 'translate(' + x + 'px, ' + y + 'px) rotate(' + r.toFixed(1) + 'deg)';
         c.style.zIndex = 10 - d;
+        c.style.setProperty('--i', d); // the shuffle: staggered by depth,
+        c.style.setProperty('--side', d % 2 ? 1 : -1); // alternate sides
         c.classList.toggle('is-top', d === 0);
         c.classList.toggle('is-flip', d === 0 && flip);
         c.classList.toggle('is-drag', d === 0 && dragging);
-        c.classList.toggle('is-nudge', d === 0 && !touched);
+        c.classList.toggle('is-nudge', d === 0 && dealt && !touched);
         c.disabled = d !== 0;
         if (d === 0) c.removeAttribute('aria-hidden');
         else c.setAttribute('aria-hidden', 'true');
       });
-      dots.forEach(function (dot, k) { dot.classList.toggle('on', k === top); });
       more.hidden = !(flip && stack[top] === cat);
     };
 
@@ -259,6 +277,8 @@
       cards.forEach(function (c) {
         c.style.transform = '';
         c.style.zIndex = '';
+        c.style.removeProperty('--i');
+        c.style.removeProperty('--side');
         c.disabled = false;
         c.removeAttribute('aria-hidden');
         c.classList.remove('is-top', 'is-flip', 'is-drag', 'is-nudge');
@@ -268,6 +288,52 @@
     };
     phone.addEventListener('change', setMode);
     setMode();
+
+    // --- The deal (026, 033): once per page load, the hand shuffles and
+    // fans out (desktop) or the deck shuffles and the top card wiggles
+    // (phone). It waits for the fonts and the card backs, a visible page
+    // and the deck on screen, so it plays where it can be seen. Reduced
+    // motion: no deal, the cards are simply there.
+    var dealDone = function () {
+      if (dealt) return;
+      dealt = true;
+      deck.classList.remove('is-dealing');
+      deck.classList.add('is-dealt');
+      if (phone.matches) render(); // now the wiggle hint
+    };
+    var deal = function () {
+      if (dealt || deck.classList.contains('is-dealing')) return;
+      if (reduce.matches) { dealDone(); return; }
+      deck.classList.add('is-dealing');
+      setTimeout(dealDone, phone.matches ? 1250 : 2050);
+    };
+    var logo = deck.querySelector('.pc-logo');
+    var ready = Promise.all([
+      document.fonts && document.fonts.ready ? document.fonts.ready : null,
+      logo && logo.decode ? logo.decode().catch(function () {}) : null
+    ]);
+    // Never wait longer than 1.5s for fonts or images
+    ready = Promise.race([ready, new Promise(function (res) { setTimeout(res, 1500); })]);
+    var visible = function () {
+      return new Promise(function (res) {
+        if (document.visibilityState === 'visible') { res(); return; }
+        document.addEventListener('visibilitychange', function onVis() {
+          if (document.visibilityState !== 'visible') return;
+          document.removeEventListener('visibilitychange', onVis);
+          res();
+        });
+      });
+    };
+    ready.then(visible).then(function () {
+      var wrapEl = deck.parentNode; // has a size, unlike the desktop hand
+      if (!('IntersectionObserver' in window)) { deal(); return; }
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        requestAnimationFrame(deal);
+      }, { threshold: 0.3 });
+      io.observe(wrapEl);
+    });
   }
 
   // ---------------------------------------------------------------------
@@ -345,7 +411,16 @@
       mark.textContent = seen ? '?' : '!';
       var thanks = seen && !open;
       note.classList.toggle('is-on', thanks);
-      note.textContent = thanks ? 'Thanks for getting it back. She’ll steal it again.' : '';
+      // 'steal it again.' stays together: no lone 'it again.' (widows rule).
+      // A nowrap span, not non-breaking spaces: Reenie Beanie draws those
+      // with no width.
+      note.textContent = '';
+      if (thanks) {
+        var keep = document.createElement('span');
+        keep.className = 'iq-keep';
+        keep.textContent = 'steal it again.';
+        note.append('Thanks for getting it back. She\u2019ll ', keep);
+      }
       // Stacked: the log opens under her. Only if it opened entirely below
       // the screen, scroll just far enough to show its top; otherwise leave
       // the scrolling to the visitor.

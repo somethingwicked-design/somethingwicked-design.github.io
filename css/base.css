@@ -11,7 +11,7 @@
 /* The site is dark by design: tell the browser, so a forced dark mode
    (Samsung Internet) leaves the colours alone */
 :root {
-  color-scheme: dark;
+  color-scheme: only dark;
 }
 
 html {
@@ -115,7 +115,7 @@ a:hover {
   align-items: center;
   min-height: var(--target-link);
   padding: 0 var(--sp-24);
-  background: var(--accent);
+  background: var(--accent-paint) var(--accent);
   color: var(--ink);
   font-weight: 800;
   text-decoration: none;

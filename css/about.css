@@ -87,13 +87,15 @@
 }
 
 /* --- The cards, both layouts -------------------------------------------- */
-/* 3D chain (robust in Firefox too): .pc-lift holds the perspective,
-   .pc-in preserves 3D and turns, the two faces hide their backs. The
-   button, .pc-lift and .pc-in never get overflow, filter, opacity,
-   mix-blend-mode or will-change: those flatten the 3D. Dimming, gloss and
-   shadow live on or inside the faces. */
+/* 3D chain: .pc-lift holds the perspective, .pc-in preserves 3D and
+   turns. The button, .pc-lift and .pc-in never get overflow, filter,
+   opacity, containment, mix-blend-mode or will-change: those flatten the
+   3D. Dimming, gloss and shadow live inside the faces. Which face shows is
+   decided by visibility alone, switched when the card is edge-on: no
+   backface-visibility, which hid the whole deck in Firefox. If a browser
+   flattens the 3D, the card still shows the right face the right way
+   round (the two half-turns cancel out). */
 .pc {
-  container-type: inline-size; /* the fact text scales with the card */
   overflow: visible; /* Firefox clips button content otherwise */
   padding: 0;
   border: 0;
@@ -129,15 +131,12 @@
 .pc-face {
   position: absolute;
   inset: 0;
+  isolation: isolate; /* its shadow layer stays inside the face */
   border-radius: 10px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 }
-/* Safety net for browsers that ignore backface-visibility (seen in
-   Firefox): each face also switches visibility when the card is edge-on.
-   The turn eases out, so 90deg comes at about 17% of its time:
-   .12s of .7s turning back, .4s + .12s turning up on desktop, .1s of .6s
-   in the deck. */
+/* The turn eases out, so 90deg comes at about 17% of its time: .12s of
+   .7s turning back, .4s + .12s turning up on desktop, .1s of .6s in the
+   deck. */
 .pc-front {
   visibility: hidden;
   transition: visibility 0s .12s;
@@ -211,8 +210,8 @@
   height: auto;
 }
 
-/* Front: the fun fact. Everything scales with the card's width (cqi of
-   the card button), matching the reference at 208px; --fit (js/about.js)
+/* Front: the fun fact. Everything scales with the card's width (--cw on
+   .ab-deck), matching the reference at 208px; --fit (js/about.js)
    shrinks it further if a fact still doesn't fit, e.g. with a bigger
    system font. Words never break; nothing is clipped. */
 .pc-front {
@@ -221,9 +220,9 @@
   flex-direction: column;
   justify-content: safe center; /* overflow would go down, never up out of reach */
   gap: 24px;
-  gap: calc(clamp(8px, 11.54cqi, 24px) * var(--fit));
+  gap: calc(clamp(8px, calc(var(--cw, 208px) * 0.1154), 24px) * var(--fit));
   padding: 20px;
-  padding: clamp(12px, 9.62cqi, 20px);
+  padding: clamp(12px, calc(var(--cw, 208px) * 0.0962), 20px);
   background: var(--card);
   hyphens: none;
   overflow-wrap: normal;
@@ -238,7 +237,7 @@
   font-stretch: var(--head-stretch);
   text-transform: uppercase;
   font-size: 28px;
-  font-size: calc(clamp(10px, 13.46cqi, 28px) * var(--fit));
+  font-size: calc(clamp(10px, calc(var(--cw, 208px) * 0.1346), 28px) * var(--fit));
   line-height: 1.143; /* 32 / 28 */
   text-wrap: balance;
 }
@@ -246,7 +245,7 @@
   display: block;
   color: var(--bone-muted);
   font-size: 16px;
-  font-size: calc(clamp(10px, 7.69cqi, 16px) * var(--fit));
+  font-size: calc(clamp(10px, calc(var(--cw, 208px) * 0.0769), 16px) * var(--fit));
   line-height: 1.5;
   font-weight: 300;
 }
@@ -261,7 +260,7 @@
   display: block;
   color: var(--muted);
   font-size: 14px;
-  font-size: calc(clamp(9px, 6.73cqi, 14px) * var(--fit));
+  font-size: calc(clamp(9px, calc(var(--cw, 208px) * 0.0673), 14px) * var(--fit));
   line-height: 1.714; /* 24 / 14 */
   font-weight: 300;
 }
@@ -270,7 +269,7 @@
   grid-template-columns: 1.25em 1fr;
   row-gap: .25em;
   font-size: 16px;
-  font-size: calc(clamp(10px, 7.69cqi, 16px) * var(--fit));
+  font-size: calc(clamp(10px, calc(var(--cw, 208px) * 0.0769), 16px) * var(--fit));
   line-height: 1.25;
   font-weight: 300;
 }
@@ -300,12 +299,18 @@
   height: 24px;
 }
 
-/* Catfetti: rainbow cats out of Ilio's card (spans made by js/about.js) */
+/* Catfetti: rainbow cats out of Ilio's card. js/about.js puts them in a
+   fixed layer over the page, centred on the card's real position at the
+   moment they fire. */
+.cf-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  pointer-events: none;
+}
 .cf {
   position: absolute;
-  left: 50%;
-  top: 45%;
-  z-index: 90;
   line-height: 1;
   opacity: 0;
   pointer-events: none;
@@ -336,16 +341,17 @@
   outline: 2px solid var(--yellow);
   outline-offset: 2px;
 }
-.sd-dots {
-  display: none;
-}
 
 /* --- Desktop: a hand of five (shared pivot below the cards, 16deg steps) - */
 @media (min-width: 760px) {
+  .ab-stage {
+    display: contents;
+  }
   .ab-deck-wrap {
     margin-top: clamp(24px, 7svh, 80px);
   }
   .ab-deck {
+    --cw: 208px;
     position: relative;
     z-index: 60;
     width: 0;
@@ -362,11 +368,19 @@
     transform: var(--r);
     transform-origin: 50% 200%;
     transition: transform .6s cubic-bezier(.2, .7, .2, 1);
-    animation: pcDeal 2s cubic-bezier(.45, 0, .2, 1) .2s backwards;
   }
-  /* The deal fades in on the faces: opacity on the card would flatten it */
-  .pc-face {
-    animation: pcFadeIn .24s linear .2s backwards;
+  /* The deal: shuffles once, then fans out. js/about.js starts it once the
+     fonts and the card backs are ready and the hand is on screen; until
+     then the hand waits unseen (only with JS: .js on <html>). The fade is
+     on the faces: opacity on the card would flatten it. */
+  .js .ab-deck:not(.is-dealing):not(.is-dealt) .pc-face {
+    opacity: 0;
+  }
+  .ab-deck.is-dealing .pc {
+    animation: pcDeal 2s cubic-bezier(.45, 0, .2, 1) both;
+  }
+  .ab-deck.is-dealing .pc-face {
+    animation: pcFadeIn .24s linear both;
   }
   .pc:focus-visible {
     z-index: 10;
@@ -607,8 +621,9 @@
   outline-offset: 8px;
   border-radius: 12px;
 }
-/* Both poses carry their outline and shadow, baked in with padding (at
-   304px: 48 left and right, 32 top, 80 bottom); the negative margins take
+/* Both poses carry their outline and a soft shadow, baked in with enough
+   padding (at 304px: 56 left and right, 40 top, 96 bottom) that the
+   shadow fades out completely inside the image; the negative margins take
    that padding back out, so her feet stay on the button's floor line */
 .iq-ilio img {
   display: block;
@@ -616,18 +631,18 @@
   height: auto;
 }
 .iq-sitting {
-  width: 131.579%;                           /* 400 / 304 */
-  margin: -10.526% 0 -26.316% -15.789%;      /* 32, 80, 48 / 304 */
-  transform-origin: 50% 84.79%;              /* her feet: 446 / 526 */
+  width: 136.842%;                           /* 416 / 304 */
+  margin: -13.158% 0 -31.579% -18.421%;      /* 40, 96, 56 / 304 */
+  transform-origin: 50% 82.42%;              /* her feet: 453 / 550 */
   transition: opacity .18s ease-in .12s, transform .5s cubic-bezier(.34, 1.5, .64, 1);
 }
 .iq-ilio .iq-lying {
   position: absolute;
-  left: -24.989%;                            /* -9.2% - 48 / 304 */
+  left: -27.621%;                            /* -9.2% - 56 / 304 */
   bottom: 0;
-  width: 149.973%;                           /* 118.4% x 456 / 360 */
-  margin-bottom: -26.316%;                   /* 80 / 304 */
-  transform-origin: 50% 82.26%;              /* 371 / 451 */
+  width: 155.236%;                           /* 118.4% x 472 / 360 */
+  margin-bottom: -31.579%;                   /* 96 / 304 */
+  transform-origin: 50% 79.75%;              /* 379 / 475 */
   opacity: 0;
   transform: scale(.82, 1.12);
   transition: opacity .12s ease-out, transform .25s ease-in;
@@ -704,9 +719,13 @@
   line-height: 32px;
   text-align: center;
   white-space: normal;
+  text-wrap: balance;
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity .2s, transform .2s;
+}
+.iq-keep {
+  white-space: nowrap; /* 'steal it again.' stays on one line */
 }
 .iq-note.is-on {
   opacity: 1;
@@ -865,29 +884,37 @@
     line-height: 40px;
   }
 
-  /* First screen: heading, subline and deck centred between the header
-     and 'More about me' */
+  /* First screen: heading, subline and deck centred on it as one group;
+     'More about me' on the bottom edge, at least 48px under the deck
+     (the last row is never shorter than 'More about me' + 48px) */
   .ab-cards {
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) auto minmax(124px, 1fr); /* 76 + 48 */
     min-height: max(560px, calc(100vh - var(--header-h)));
     min-height: max(560px, calc(100svh - var(--header-h)));
-    padding-block: var(--sp-32) calc(var(--sp-24) + env(safe-area-inset-bottom, 0px));
+    padding-block: var(--sp-24) calc(var(--sp-24) + env(safe-area-inset-bottom, 0px));
   }
-  .ab-cards .ab-title {
-    margin-top: auto;
+  .ab-stage {
+    grid-row: 2;
+  }
+  .ab-more {
+    grid-row: 3;
+    align-self: end;
+    margin: 0 auto;
   }
   .ab-deck-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--sp-16);
     margin: var(--sp-24) auto 0;
   }
 
   /* The deck: a slightly messy stack, the cards below peek out, dimmed.
      Positions, drag and flip from js/about.js. */
   .ab-deck {
+    --cw: clamp(176px, 27svh, 232px);
     position: relative;
-    width: clamp(176px, 27svh, 232px);
+    width: var(--cw);
     aspect-ratio: 5 / 7;
   }
   .pc {
@@ -926,40 +953,34 @@
     visibility: hidden;
     transition-delay: .1s;
   }
-  /* First load: the top card wiggles once to hint at the swipe */
+  /* First load: the deck shuffles once (each card slides out to one side
+     and back, staggered), then the top card wiggles to hint at the swipe.
+     Both started by js/about.js. */
+  .ab-deck.is-dealing .pc {
+    animation: sdShuffle .9s cubic-bezier(.45, 0, .2, 1) calc(var(--i, 0) * 70ms) both;
+  }
   .pc.is-nudge .pc-in {
-    animation: sdNudge 1.4s cubic-bezier(.45, 0, .2, 1) 1.2s 1 both;
+    animation: sdNudge 1.4s cubic-bezier(.45, 0, .2, 1) .3s 1 both;
   }
   .st-cat-space {
     height: 44px;
   }
+  /* 'more catfetti': inside the card, sized by it, wraps rather than
+     overflows */
   .cf-more {
-    left: 20px;
+    left: clamp(12px, calc(var(--cw) * .0962), 20px);
+    right: clamp(12px, calc(var(--cw) * .0962), 20px);
     top: auto;
-    bottom: 12px;
+    bottom: clamp(6px, calc(var(--cw) * .0571), 12px);
     z-index: 30;
-    height: 44px;
-    font-size: 24px;
+    height: auto;
+    min-height: 44px;
+    font-size: clamp(13px, calc(var(--cw) * .088), 22px);
+    line-height: 1.1;
+    white-space: normal;
+    text-wrap: balance;
     animation-delay: .7s;
   }
-  .sd-dots {
-    display: flex;
-    gap: var(--sp-8);
-    margin-top: var(--sp-8);
-  }
-  .sd-dots i {
-    display: block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: #3A3936;
-    transition: background .3s, transform .3s;
-  }
-  .sd-dots i.on {
-    background: var(--bone);
-    transform: scale(1.35);
-  }
-
   /* Intro: stacked, 40px between the paragraphs */
   .ab-intro {
     flex-direction: column;
@@ -1042,6 +1063,11 @@
 }
 @keyframes pcFadeIn {
   from { opacity: 0; }
+}
+@keyframes sdShuffle {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  40% { translate: calc(var(--side, 1) * 64px) -6px; rotate: calc(var(--side, 1) * 9deg); }
+  70% { translate: calc(var(--side, 1) * -10px) 2px; rotate: calc(var(--side, 1) * -2deg); }
 }
 @keyframes sdNudge {
   0%, 100% { transform: none; }

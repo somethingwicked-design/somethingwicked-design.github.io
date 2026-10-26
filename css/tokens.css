@@ -32,6 +32,11 @@
   --frame: #FFFFFF;        /* photo and project image frames */
   --yellow: #E8C547;       /* brand yellow: nav, footer, tape. Never changes */
   --accent: var(--yellow); /* the one loud colour; a case study sets its own */
+  /* The yellow as an image layer over the colour (an invisible grain, mean
+     #E8C547): a browser's forced dark mode (Samsung Internet) recolours
+     colours but leaves photos alone, so yellow surfaces stay yellow */
+  --yellow-paint: url('/img/paper/yellow.webp');
+  --accent-paint: var(--yellow-paint); /* none where the accent isn't yellow */
 
   /* Fonts */
   --font-head: 'Archivo', 'Arial Narrow', sans-serif;
@@ -126,5 +131,17 @@
     --fs-button: 13px;
     --fs-hand: 24px;
     --fs-band: 24px;
+  }
+}
+
+/* The site is dark by design. Declared as its own dark theme as well, as
+   Samsung Internet looks for one before it forces its own dark mode on a
+   page; 'only' tells browsers not to recolour it at all. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: only dark;
+    --ink: #0B0B0B;
+    --bone: #F2EEE6;
+    --yellow: #E8C547;
   }
 }

@@ -7,6 +7,11 @@
    Logo, nav and footer keep the brand yellow (014).
    ========================================================================== */
 
+/* The accent isn't yellow here: no yellow paint on the accent buttons */
+.case {
+  --accent-paint: none;
+}
+
 /* --------------------------------------------------------------------------
    Stage: the case study (#csMain) and, on desktop, the scroll spacer that
    drives the Next up slide (js/case.js)

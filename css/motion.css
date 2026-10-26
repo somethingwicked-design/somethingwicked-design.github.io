@@ -81,9 +81,10 @@
    Opening a project (021, 040), run by js/transition.js. Only under
    no-preference: with reduced motion there is no transition at all.
    Desktop: a cross-document View Transition (.is-vt-morph on <html>).
-   Phone: no View Transition, so it works in every browser: .vt-rip is the
-   paper tearing up on the old page, .is-rip-in on <html> the same paper
-   covering the new page from its first paint and tearing off.
+   Phone: no View Transition, so it works in every browser. .vt-rip is the
+   paper: on the old page it tears up showing 0%; on the new page
+   (.vt-rip.is-in) it covers the page from its first paint, counts the
+   first screen's loading up to 100% and only then tears off (.is-off).
    ========================================================================== */
 @media (prefers-reduced-motion: no-preference) {
   @view-transition {
@@ -212,38 +213,49 @@
 .vt-rip-paper {
   top: -14px;
   bottom: -14px;
-  background: var(--yellow); /* always the brand yellow (021), also on a case study */
+  background: var(--yellow-paint) var(--yellow); /* always the brand yellow (021), also on a case study */
   clip-path: var(--rip-paper);
 }
 
+/* Loading percentage on the paper (021): 'Loading' (label size) over the
+   number (H1 size, heading font), ink, bottom left on the page margins,
+   clear of the torn bottom edge and the system bar */
+.vt-rip-load {
+  position: absolute;
+  left: calc(8px + max(var(--margin), env(safe-area-inset-left, 0px)));
+  bottom: calc(14px + var(--sp-40) + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  color: var(--ink);
+}
+.vt-rip-label {
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+.vt-rip-pct {
+  font-family: var(--font-head);
+  font-weight: var(--head-weight);
+  font-stretch: var(--head-stretch);
+  font-size: var(--fs-h1);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
 /* --- Phone, 2: the paper tears off the top, the case study is under it - */
-/* On the new page the same paper covers the screen from the first paint
-   (class set by js/transition.js in <head>), then tears off straight up
-   (no rotate: the export's -5deg read as a tilt on a real phone). Both
-   layers move by the same screen height, so they stay together. */
+/* On the new page the paper covers the screen from the first paint (put
+   there by js/transition.js in <head>) and waits; at 100% it tears off
+   straight up (no rotate: the export's -5deg read as a tilt on a phone). */
 @keyframes tpOff {
   0%   { transform: translateY(0); }
   100% { transform: translateY(-118vh); }
 }
-.is-rip-in::before,
-.is-rip-in::after {
-  content: '';
-  position: fixed;
-  left: -8px;
-  right: -8px;
-  z-index: 1000;
-  pointer-events: none;
+.vt-rip.is-in {
+  animation: none;
+}
+.vt-rip.is-off {
   animation: tpOff .5s cubic-bezier(.55, 0, .8, .2) both;
-}
-.is-rip-in::before {
-  top: -20px;
-  bottom: -20px;
-  background: var(--fibre);
-  clip-path: var(--rip-fibre);
-}
-.is-rip-in::after {
-  top: -14px;
-  bottom: -14px;
-  background: var(--yellow);
-  clip-path: var(--rip-paper);
 }

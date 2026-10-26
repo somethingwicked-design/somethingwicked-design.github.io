@@ -229,7 +229,7 @@
   justify-content: center;
   min-height: var(--target-button);
   padding: 0 var(--sp-32);
-  background: var(--accent);
+  background: var(--accent-paint) var(--accent);
   color: var(--ink);
   font-size: var(--fs-button);
   font-weight: 800;
@@ -313,7 +313,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--yellow);
+  background: var(--yellow-paint) var(--yellow);
 }
 .footer-title {
   font-size: var(--fs-h1);
@@ -728,7 +728,7 @@
   background:
     repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) top / 100% 10px no-repeat,
     repeating-linear-gradient(-45deg, var(--ink) 0 14px, transparent 14px 28px) bottom / 100% 10px no-repeat,
-    var(--yellow);
+    var(--yellow-paint) var(--yellow);
   color: var(--ink);
   font-size: var(--fs-band);
   letter-spacing: 0.02em;
@@ -760,7 +760,7 @@
   margin-top: calc(var(--target-link) / -2);
   padding: 0;
   border: 0;
-  background: var(--yellow);
+  background: var(--yellow-paint) var(--yellow);
   box-shadow: -24px 0 16px var(--yellow), 32px 0 0 var(--yellow);
   color: var(--ink);
   cursor: pointer;
@@ -800,7 +800,7 @@
     background:
       repeating-linear-gradient(-45deg, var(--ink) 0 10px, transparent 10px 20px) top / 100% 8px no-repeat,
       repeating-linear-gradient(-45deg, var(--ink) 0 10px, transparent 10px 20px) bottom / 100% 8px no-repeat,
-      var(--yellow);
+      var(--yellow-paint) var(--yellow);
     line-height: 32px;
   }
   .marquee-group {
