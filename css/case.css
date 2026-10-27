@@ -131,9 +131,29 @@
   transform: translateX(-50%);
 }
 
-.ar-wide  { aspect-ratio: 16 / 9; }
-.ar-tall  { aspect-ratio: 4 / 5; }
-.ar-scene { aspect-ratio: 4 / 3; }
+.ar-wide   { aspect-ratio: 16 / 9; }
+.ar-tall   { aspect-ratio: 4 / 5; }
+.ar-scene  { aspect-ratio: 4 / 3; }
+.ar-square { aspect-ratio: 1; }
+.ar-banner { aspect-ratio: 2000 / 997; } /* a wide banner, whole */
+
+/* A row of square images (the Op Jezelf cards): two side by side, three
+   from 1100px. Room above each for its tape. */
+.cs-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-40) var(--gutter);
+  padding-top: var(--sp-16);
+}
+.cs-row > * {
+  flex: 0 0 calc((100% - var(--gutter)) / 2);
+}
+@media (min-width: 1100px) {
+  .cs-row--3 > * {
+    flex-basis: calc((100% - 2 * var(--gutter)) / 3);
+  }
+}
 
 /* Bento: one tall image and a stack of two, 32px apart (8px vertically) */
 .cs-bento {
@@ -266,6 +286,15 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+/* A list of short themes, each led by its name */
+.cs-themes {
+  margin: 0;
+  padding: 0;
+}
+.cs-themes li {
+  font-weight: 300;
+  color: var(--bone-muted);
 }
 .cs-quote {
   margin: 0;
@@ -550,6 +579,12 @@
     order: 0;
   }
 
+  .cs-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-32);
+  }
+
   /* Hero: tilted polaroid with tape */
   .cs-hero {
     padding: var(--sp-32) var(--sp-16) var(--sp-8);
@@ -570,6 +605,10 @@
     position: static;
     aspect-ratio: 4 / 5;
     background: var(--card);
+  }
+  /* A wide banner: keep the screens and characters in the polaroid */
+  .cs-hero .media > img.obj-x68 {
+    object-position: 68% 50%;
   }
   /* A hero still waiting for its photo keeps the polaroid's shape */
   .cs-hero .media--ph {

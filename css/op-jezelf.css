@@ -1,0 +1,797 @@
+/* ==========================================================================
+   Op Jezelf cards (043, 044, 045), rebuilt from the prototypes in the vault
+   (reference/op-jezelf-*.html). Each card is a <figure class="media ojc">
+   filled by js/op-jezelf.js: the case study frame (white, gloss, square
+   corners) with tape, and the card inside it. Motion, timing, colours,
+   layout and text follow the prototypes; sizes are in cqw of the card.
+   Poppins (the app's typeface) is used inside the cards only.
+   ========================================================================== */
+
+/* Poppins, latin, from Google Fonts (SIL Open Font License) */
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 400;
+  src: url('/fonts/Poppins-400.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 500;
+  src: url('/fonts/Poppins-500.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 600;
+  src: url('/fonts/Poppins-600.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  font-weight: 700;
+  src: url('/fonts/Poppins-700.woff2') format('woff2');
+  font-display: swap;
+}
+
+.ojc {
+  --cream: #FFFBE6;
+  --leaf: #C1EBA6;
+  --forest: #357929;
+  --olive: #3D4621;
+  --ease-slide: cubic-bezier(.65, 0, .35, 1);
+  aspect-ratio: 1;
+  overflow: visible; /* the tape sticks out; the card itself clips */
+}
+/* Tape across the top edge, as the prototypes */
+.ojc::before {
+  content: '';
+  position: absolute;
+  top: -26px; /* 14px above the frame, which is 12px wide */
+  left: 50%;
+  z-index: 4;
+  width: 120px;
+  height: 30px;
+  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
+  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
+  transform: translateX(-50%) rotate(-3deg);
+  pointer-events: none;
+}
+
+.ojc-card {
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* its own layer, under the gloss */
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--bg, var(--cream));
+  color: var(--fg, var(--olive));
+  font-family: 'Poppins', var(--font-body);
+  font-weight: 400;
+  line-height: 1.5;
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Widow/orphan rule: no single word alone on a last line */
+.ojc-card * {
+  text-wrap: pretty;
+}
+
+/* --------------------------------------------------------------------------
+   Shared parts: header, title, source line, slide-over panels, rolling word
+   -------------------------------------------------------------------------- */
+.ojc-hd {
+  position: absolute;
+  top: 6%;
+  left: 7%;
+  right: 7%;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  font-size: max(9px, 2.2cqw);
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.ojc-hd span {
+  white-space: nowrap;
+}
+
+.ojc-t {
+  position: absolute;
+  left: 7%;
+  top: var(--t-top, 14%);
+  z-index: 6;
+  font-size: var(--t-size, 6.4cqw);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.ojc-t em {
+  font-style: normal;
+  color: var(--em, var(--forest));
+}
+
+/* The big name line of the type and colour cards */
+.ojc-name {
+  position: absolute;
+  left: 7%;
+  right: 5%;
+  top: 17%;
+  z-index: 2;
+  font-size: 8.6cqw;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+}
+.ojc-name em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.ojc-src {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 5%;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 3cqw;
+  row-gap: .6cqw;
+  font-size: max(9px, 2.2cqw);
+  line-height: 1.5;
+}
+.ojc-src span {
+  opacity: var(--src-o, .6);
+  white-space: nowrap;
+}
+
+/* One full panel per colour or persona; the next slides over the last from
+   the right */
+.ojc-panel {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  color: var(--fg);
+  clip-path: inset(0 0 0 100%);
+}
+.ojc-panel.is-show {
+  clip-path: inset(0 0 0 0);
+}
+.ojc-panel.is-slide {
+  transition: clip-path 1.6s var(--ease-slide);
+}
+
+/* A word that changes in place: the old one rises and fades out, the new
+   one rises in. All share one grid cell, so they keep the baseline. */
+.ojc-roll {
+  display: grid;
+}
+.ojc-roll span {
+  grid-area: 1 / 1;
+  transition: transform var(--roll-move, 1.5s) cubic-bezier(.6, 0, .25, 1), opacity var(--roll-fade, 1.3s ease-in-out);
+}
+.ojc-roll .is-in {
+  transform: none;
+  opacity: 1;
+}
+.ojc-roll .is-out {
+  transform: translateY(var(--roll-up, -95%));
+  opacity: 0;
+}
+.ojc-roll .is-down {
+  transform: translateY(60%);
+  opacity: 0;
+  transition: none;
+}
+
+/* Back to the start without moving (only while off screen) */
+.ojc-card.is-snap,
+.ojc-card.is-snap * {
+  transition: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Typeface (043)
+   -------------------------------------------------------------------------- */
+.ojc--type {
+  --bg: var(--forest);
+  --fg: var(--cream);
+}
+.ojc--type svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.ojc-outline {
+  fill: none;
+  stroke: var(--leaf);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+.ojc-anchor {
+  fill: var(--forest);
+  stroke: var(--leaf);
+  stroke-width: 1.8;
+  vector-effect: non-scaling-stroke;
+}
+.ojc-l2 {
+  display: flex;
+  align-items: baseline;
+  gap: .26em;
+}
+.ojc--type .ojc-roll {
+  flex: 1;
+  justify-items: start;
+  color: var(--leaf);
+}
+
+/* --------------------------------------------------------------------------
+   Colour (044)
+   -------------------------------------------------------------------------- */
+.ojc-chips {
+  position: absolute;
+  left: 7%;
+  top: 42%;
+  display: flex;
+  gap: 1.6cqw;
+}
+.ojc-chip {
+  width: 5.2cqw;
+  height: 5.2cqw;
+  background: var(--c);
+  box-shadow: 0 0 0 .25cqw rgba(61, 70, 33, .25);
+}
+/* The marker square slides along the swatches, in sync with the card */
+.ojc-marker {
+  position: absolute;
+  left: 7%;
+  top: 42%;
+  z-index: 40;
+  width: 5.2cqw;
+  height: 5.2cqw;
+  outline: .35cqw solid var(--m, var(--olive));
+  outline-offset: .5cqw;
+  transform: translateX(calc(var(--i, 0) * 6.8cqw));
+  transition: transform 1.6s var(--ease-slide), outline-color 1.6s var(--ease-slide);
+  pointer-events: none;
+}
+.ojc-specs {
+  position: absolute;
+  left: 7%;
+  top: 53%;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: .6cqw 3cqw;
+  margin: 0;
+  font-size: max(10px, 2.4cqw);
+  font-weight: 500;
+}
+.ojc-specs dt {
+  opacity: .6;
+  font-weight: 400;
+}
+.ojc-specs dd {
+  margin: 0;
+}
+.ojc-hex {
+  position: absolute;
+  left: 6%;
+  bottom: 4%;
+  font-size: 18.5cqw;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: .28cqw var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   How living alone feels (045): the card is the chart
+   -------------------------------------------------------------------------- */
+.ojc-bands {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 32%;
+  bottom: 12%;
+  display: flex;
+  flex-direction: column;
+  gap: .8cqw;
+}
+.ojc-band {
+  position: relative;
+  flex: 0 0 0;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: .6cqw;
+  background: var(--c);
+  color: var(--fg);
+  transition: flex-grow 1.6s var(--ease-slide);
+}
+.is-on .ojc-band {
+  flex-grow: var(--g);
+}
+.ojc-band-in {
+  position: absolute;
+  left: 3.5cqw;
+  right: 3.5cqw;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 1cqw;
+  opacity: 0;
+  transform: translateY(40%);
+  transition: transform 1.2s cubic-bezier(.3, 0, .2, 1), opacity 1s;
+  transition-delay: calc(var(--d) + 1s);
+}
+.is-on .ojc-band-in {
+  transform: none;
+  opacity: 1;
+}
+.ojc-band b {
+  font-size: var(--fs);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.ojc-band i {
+  font-style: normal;
+  font-size: max(10px, 2.4cqw);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: .85;
+}
+
+/* --------------------------------------------------------------------------
+   What teens knew, and what they didn't (045)
+   -------------------------------------------------------------------------- */
+.ojc-qs {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+}
+.ojc-grp {
+  margin-bottom: 1.6cqw;
+  font-size: max(9px, 2.2cqw);
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 1s;
+  transition-delay: var(--d);
+}
+.ojc-grp.is-gap {
+  margin-top: 3.2cqw;
+}
+.ojc-q {
+  display: grid;
+  grid-template-columns: 19cqw 1fr;
+  column-gap: 3cqw;
+  align-items: end;
+  margin-bottom: 2.6cqw;
+}
+.ojc-num {
+  font-size: 8.6cqw;
+  font-weight: 600;
+  line-height: .82;
+  letter-spacing: -.04em;
+  color: var(--forest);
+  font-variant-numeric: tabular-nums;
+  clip-path: inset(0 0 100% 0);
+  transform: translateY(20%);
+  transition: clip-path 1.2s var(--ease-slide), transform 1.2s var(--ease-slide);
+  transition-delay: var(--d);
+}
+.ojc-num.is-zero {
+  color: var(--olive);
+}
+.ojc-num small {
+  margin-left: .04em;
+  font-size: .42em;
+}
+.ojc-txt {
+  font-size: max(10.5px, 2.8cqw);
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0;
+  transition: opacity 1s;
+  transition-delay: calc(var(--d) + .4s);
+}
+.ojc-meter {
+  grid-column: 1 / -1;
+  height: .8cqw;
+  margin-top: 1.3cqw;
+  overflow: hidden;
+  border-radius: 99px;
+  background: rgba(61, 70, 33, .12);
+}
+.ojc-meter i {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: 99px;
+  background: var(--forest);
+  transition: width 1.6s var(--ease-slide);
+  transition-delay: calc(var(--d) + .6s);
+}
+.is-on .ojc-num {
+  clip-path: inset(0 0 0 0);
+  transform: none;
+}
+.is-on .ojc-txt {
+  opacity: 1;
+}
+.is-on .ojc-grp {
+  opacity: .6;
+}
+.is-on .ojc-meter i {
+  width: var(--w);
+}
+/* A phone-sized card (the prototype's 420px screen) */
+@container (max-width: 364px) {
+  .ojc-qs { top: 29%; }
+  .ojc-q { margin-bottom: 1.4cqw; }
+  .ojc-grp.is-gap { margin-top: 1.8cqw; }
+  .ojc-txt { font-size: 10px; }
+}
+
+/* --------------------------------------------------------------------------
+   The characters (045): each face rises out of its own slot, once, then
+   they take turns saying hi
+   -------------------------------------------------------------------------- */
+.ojc--characters {
+  --bg: var(--forest);
+  --fg: var(--cream);
+  --em: var(--leaf);
+  --src-o: .7;
+}
+.ojc-cast {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 44%;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4.4cqw 2.4cqw;
+}
+.ojc-slot {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: #F5F5F5;
+}
+.ojc-face {
+  width: 100%;
+  height: 100%;
+  transform: translateY(105%);
+  transition: transform 1.3s cubic-bezier(.6, 0, .25, 1);
+  transition-delay: var(--d);
+}
+.ojc-face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform-origin: 50% 100%;
+  transform: scale(1.12);
+  transition: transform 1s cubic-bezier(.3, 1.4, .5, 1);
+}
+.is-on .ojc-face {
+  transform: none;
+}
+.ojc-face.is-hi img {
+  transform: translateY(-6%) rotate(-4deg) scale(1.12);
+}
+
+/* --------------------------------------------------------------------------
+   The weekly shop (045): food drops behind the front of the bag
+   -------------------------------------------------------------------------- */
+.ojc--shop {
+  --t-top: 13.5%;
+  --t-size: 5.8cqw;
+}
+.ojc-shadow {
+  position: absolute;
+  right: 7%;
+  bottom: 7%;
+  z-index: 1;
+  width: 44cqw;
+  height: 3cqw;
+  border-radius: 50%;
+  background: rgba(61, 70, 33, .12);
+}
+.ojc-bag {
+  position: absolute;
+  right: 9.5%;
+  bottom: 8%;
+  z-index: 4;
+  width: 39cqw;
+  transform-origin: 50% 100%;
+}
+.ojc-bag.is-thud {
+  animation: ojcThud .55s cubic-bezier(.3, 1.6, .5, 1);
+}
+@keyframes ojcThud {
+  30%  { transform: scale(1.035, .965); }
+  100% { transform: scale(1); }
+}
+.ojc-drop {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+.ojc--shop .ojc-src {
+  right: auto;
+  bottom: 6%;
+  display: block;
+  max-width: 40%;
+  opacity: .6;
+}
+
+/* --------------------------------------------------------------------------
+   The personas (045): one panel each, Pause/Play and dots on the card
+   -------------------------------------------------------------------------- */
+.ojc-k {
+  position: absolute;
+  left: 7%;
+  top: 14%;
+  font-size: max(10px, 2.4cqw);
+  line-height: 1.5;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  opacity: .7;
+}
+.ojc-nm {
+  position: absolute;
+  left: 7%;
+  top: 19%;
+  z-index: 2;
+  width: 60%;
+  font-size: 6.6cqw;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+}
+.ojc-tr {
+  position: absolute;
+  left: 7%;
+  top: 43%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6cqw;
+  width: 43%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: max(11px, 2.9cqw);
+  font-weight: 500;
+  line-height: 1.3;
+}
+.ojc-tr li {
+  padding-top: 1.4cqw;
+  border-top: .2cqw solid color-mix(in srgb, currentColor 25%, transparent);
+}
+/* A phone-sized card: the traits wrap more, so they sit a little tighter
+   to stay clear of the source line */
+@container (max-width: 364px) {
+  .ojc-tr { top: 41%; gap: 1cqw; line-height: 1.25; }
+  .ojc-tr li { padding-top: 1cqw; }
+}
+.ojc-pic {
+  position: absolute;
+  right: -3%;
+  bottom: 0;
+  z-index: 1;
+  width: auto;
+  height: 60%;
+}
+.ojc--personas .ojc-src {
+  right: auto;
+  bottom: 10%;
+  display: block;
+  font-size: max(9px, 2.1cqw);
+  opacity: .6;
+  white-space: nowrap;
+}
+.ojc-dots {
+  position: absolute;
+  left: 7%;
+  bottom: 6%;
+  display: flex;
+  gap: 1.4cqw;
+}
+.ojc-dot {
+  position: relative;
+  width: 1.6cqw;
+  height: 1.6cqw;
+  padding: 0;
+  border: .3cqw solid currentColor;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  opacity: .5;
+  cursor: pointer;
+}
+/* A bigger tap area than the square itself */
+.ojc-dot::before {
+  content: '';
+  position: absolute;
+  inset: -12px -.7cqw;
+}
+.ojc-dot.is-on {
+  background: currentColor;
+  opacity: 1;
+}
+.ojc-dot:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+/* Pause/Play, styled like the site's labels and outlined buttons. It
+   follows the colour of the persona on show. */
+.ojc-pause {
+  position: absolute;
+  top: calc(14% - 6px);
+  right: 7%;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 12px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pfg, var(--olive));
+  font-family: var(--font-body);
+  font-size: max(10px, 2.2cqw);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 1.6s var(--ease-slide);
+}
+.ojc-pause::before {
+  content: '';
+  position: absolute;
+  inset: -8px -4px;
+}
+.ojc-pause svg {
+  width: 8px;
+  height: 9px;
+  fill: currentColor;
+}
+.ojc-pause:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   Your first flat (045): messy underneath, each room's clean version slides
+   over it while the checklist ticks it off
+   -------------------------------------------------------------------------- */
+.ojc--flat {
+  --bg: var(--leaf);
+  --t-top: 13%;
+  --t-size: 5.4cqw;
+}
+.ojc-plan {
+  position: absolute;
+  left: 50%;
+  top: 27%;
+  width: 56cqw;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+}
+.ojc-plan img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.ojc-plan .ojc-room {
+  clip-path: inset(var(--t) var(--r) var(--b) var(--x2));
+  transition: clip-path 1.5s var(--ease-slide);
+}
+.ojc-plan .ojc-room.is-on {
+  clip-path: inset(var(--t) var(--r) var(--b) var(--l));
+}
+.ojc-list {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 5.5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4cqw;
+  margin: 0;
+  padding: 0;
+  font-size: max(10px, 2.4cqw);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.ojc-list li {
+  display: flex;
+  align-items: center;
+  gap: 1.4cqw;
+  list-style: none;
+  white-space: nowrap;
+  opacity: .55;
+  transition: opacity .8s;
+}
+.ojc-list i {
+  display: grid;
+  place-items: center;
+  width: 2.4cqw;
+  height: 2.4cqw;
+  border: .3cqw solid var(--olive);
+  transition: background-color .6s, border-color .6s;
+}
+.ojc-list i::after {
+  content: '';
+  width: 1.2cqw;
+  height: .6cqw;
+  border-left: .3cqw solid var(--cream);
+  border-bottom: .3cqw solid var(--cream);
+  transform: translateY(-.2cqw) rotate(-45deg) scale(0);
+  transition: transform .5s cubic-bezier(.3, 1.6, .5, 1) .2s;
+}
+.ojc-list li.is-done {
+  opacity: 1;
+}
+.ojc-list li.is-done i {
+  background: var(--forest);
+  border-color: var(--forest);
+}
+.ojc-list li.is-done i::after {
+  transform: translateY(-.2cqw) rotate(-45deg) scale(1);
+}
+.ojc--flat .ojc-roll {
+  --roll-move: 1s;
+  --roll-fade: .8s ease;
+  --roll-up: -60%;
+  position: absolute;
+  right: 7%;
+  top: 14.5%;
+  font-size: max(10px, 2.4cqw);
+  line-height: 1.5;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Reduced motion: every card stands still, complete (js/op-jezelf.js) */
+@media (prefers-reduced-motion: reduce) {
+  .ojc-card,
+  .ojc-card * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Phones: the frame is 8px, so the tape sits 14px above it as well */
+@media (max-width: 759.98px) {
+  .ojc::before {
+    top: -22px;
+    width: 104px;
+    height: 28px;
+  }
+}
