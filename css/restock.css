@@ -1,0 +1,627 @@
+/* ==========================================================================
+   ReStock cards (050), rebuilt from the prototypes in the vault
+   (reference/restock-*.html). Each card is a <figure class="media cs-card
+   rsc"> filled by js/restock.js; the frame, tape, header and pause button
+   are shared (css/cards.css). Motion, timing, layout and text follow the
+   prototypes; sizes are in cqw of the card. ReStock's own identity: cream,
+   charcoal, terracotta, Figtree for the interface and New Spirit Bold for
+   headlines (this page only).
+   ========================================================================== */
+
+/* Figtree (SIL Open Font License), latin, variable. The headlines are New
+   Spirit Bold (licensed): until its web font is in fonts/, Fraunces Black
+   Soft stands in, as in the prototypes. Add New Spirit as the first
+   @font-face and it takes over. */
+@font-face {
+  font-family: 'Figtree';
+  font-style: normal;
+  font-weight: 400 700;
+  src: url('/fonts/Figtree.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 700 900;
+  src: url('/fonts/Fraunces-SoftBlack.woff2') format('woff2');
+  font-display: swap;
+}
+
+.rsc {
+  --cream: #F7F3EC;
+  --char: #2B2620;
+  --terra: #B24E2E;
+  --terra-d: #803720;
+  --sage: #7C8F5E;
+  --label: #6B6157;
+  --e: cubic-bezier(.65, 0, .35, 1);
+  --bg: var(--cream);
+  --fg: var(--char);
+  --ctl-bg: var(--char);
+  --ctl-fg: var(--cream);
+}
+
+.rsc-card {
+  font-family: 'Figtree', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: normal;
+}
+.rsc-card .cs-card-hd {
+  right: calc(7% + 40px); /* room for the pause button */
+  font-size: max(10px, 2.2cqw);
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--label);
+}
+/* Headlines */
+.rsc-fr {
+  font-family: 'New Spirit', 'Fraunces', Georgia, serif;
+  font-weight: 900;
+  font-variation-settings: 'SOFT' 100, 'opsz' 40;
+  letter-spacing: -.01em;
+}
+
+/* The source line at the bottom */
+.rsc-src {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 5%;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 3cqw;
+  font-size: max(10px, 2.2cqw);
+  color: var(--label);
+}
+.rsc-src span {
+  white-space: nowrap;
+}
+
+/* Small cards (phones, under 440px): one label per header and source line */
+@container (max-width: 440px) {
+  .rsc-card .cs-card-hd span:last-child,
+  .rsc-src span:last-child {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Typography: two 'Aa', then both in a Kitchen row
+   -------------------------------------------------------------------------- */
+.rsc-spec {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 14%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5cqw;
+}
+.rsc-sp {
+  padding-bottom: 2.4cqw;
+  border-bottom: 1.5px solid var(--char);
+}
+.rsc-aa {
+  display: block;
+  height: 1.05em;
+  overflow: hidden;
+  font-size: 20cqw;
+  line-height: 1;
+}
+.rsc-aa span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s var(--e);
+}
+.rsc-sp--figtree .rsc-aa {
+  font-family: 'Figtree', sans-serif;
+  font-weight: 500;
+}
+.rsc-sp--figtree .rsc-aa span {
+  transition-delay: .15s;
+}
+.rsc-nm {
+  margin-top: 1.2cqw;
+  font-size: max(12px, 2.8cqw);
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity .35s;
+}
+.rsc-ro {
+  font-size: max(10px, 2.3cqw);
+  color: #5E564B;
+  opacity: 0;
+  transition: opacity .35s;
+}
+.is-v .rsc-aa span { transform: none; }
+.is-v .rsc-nm { opacity: 1; transition: opacity .7s .4s; }
+.is-v .rsc-ro { opacity: 1; transition: opacity .7s .55s; }
+.rsc-use {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 53%;
+}
+@container (max-width: 440px) {
+  .rsc-use { top: 57%; }
+}
+.rsc-kt {
+  overflow: hidden;
+  font-size: 7.6cqw;
+  line-height: 1;
+  color: var(--char);
+}
+.rsc-kt span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform .9s var(--e);
+}
+.rsc-row {
+  display: flex;
+  align-items: center;
+  gap: 3cqw;
+  margin-top: 3cqw;
+  padding: 2.6cqw 3cqw;
+  border-radius: 2.6cqw;
+  background: #FFFCF7;
+  box-shadow: 0 .4cqw 1.6cqw rgba(43, 38, 32, .08);
+  opacity: 0;
+  transform: translateY(14%);
+  transition: opacity .6s, transform .8s var(--e);
+}
+.rsc-av {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 7.6cqw;
+  height: 7.6cqw;
+  border-radius: 50%;
+  background: #E7ECDF;
+}
+.rsc-av i {
+  width: 2.6cqw;
+  height: 2.6cqw;
+  border-radius: 50%;
+  background: var(--sage);
+}
+.rsc-it b {
+  display: block;
+  font-size: max(12px, 3.4cqw);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.rsc-it span {
+  font-size: max(10px, 2.6cqw);
+  color: #5E564B;
+}
+.rsc-pill {
+  margin-left: auto;
+  padding: .9cqw 1.8cqw;
+  border-radius: 1.4cqw;
+  background: #E7ECDF;
+  color: #4A5A36;
+  font-size: max(10px, 2.5cqw);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.is-u .rsc-kt span { transform: none; }
+.is-u .rsc-row {
+  opacity: 1;
+  transform: none;
+  transition-delay: .35s;
+}
+
+/* --------------------------------------------------------------------------
+   Colour: three rings turning against each other (js/restock.js)
+   -------------------------------------------------------------------------- */
+.rsc--colour {
+  --bg: var(--char);
+  --fg: var(--cream);
+  --ctl-bg: var(--cream);
+  --ctl-fg: var(--char);
+}
+.rsc--colour .cs-card-hd,
+.rsc--colour .rsc-src {
+  color: #D8D0C0;
+}
+.rsc-fl {
+  position: absolute;
+  top: 9cqw;
+  left: 15cqw;
+  width: 70cqw;
+  height: 70cqw;
+}
+.rsc-rg {
+  position: absolute;
+  inset: 0;
+}
+.rsc-orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border: 1px solid rgba(247, 243, 236, .12);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.rsc-d {
+  position: absolute;
+  width: 5cqw;
+  height: 5cqw;
+  margin: -2.5cqw 0 0 -2.5cqw;
+  border-radius: 50%;
+  background: var(--c);
+  transform: scale(0);
+  transition: transform .7s cubic-bezier(.3, 1.4, .5, 1) var(--dl), box-shadow .5s;
+}
+.rsc-d--core {
+  width: 3.2cqw;
+  height: 3.2cqw;
+  margin: -1.6cqw 0 0 -1.6cqw;
+}
+/* Charcoal on charcoal: a faint rim so it shows */
+.rsc-d--rim {
+  box-shadow: inset 0 0 0 1.5px rgba(247, 243, 236, .5);
+}
+.is-on .rsc-d {
+  transform: scale(1);
+}
+/* A family steps forward with a thin cream outline */
+.is-fo .rsc-d.is-hl {
+  box-shadow: 0 0 0 .7cqw var(--char), 0 0 0 1cqw var(--cream);
+}
+.rsc-cap {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 12.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4cqw;
+  padding-top: 2.4cqw;
+  border-top: 1px solid rgba(247, 243, 236, .25);
+  transition: opacity .35s;
+}
+.rsc-cap.is-hide {
+  opacity: 0;
+}
+.rsc-capnm {
+  font-size: max(15px, 5cqw);
+  line-height: 1;
+}
+.rsc-caprl {
+  font-size: max(11px, 2.5cqw);
+  line-height: 1.35;
+  text-align: right;
+  color: #D8D0C0;
+}
+.rsc-caprl b {
+  display: block;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .02em;
+  color: var(--cream);
+}
+@container (max-width: 440px) {
+  .rsc-cap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1cqw;
+  }
+  .rsc-caprl { text-align: left; }
+  .rsc-fl { top: 6cqw; }
+}
+
+/* --------------------------------------------------------------------------
+   What the first test changed: one finding at a time
+   -------------------------------------------------------------------------- */
+.rsc-sl {
+  position: absolute;
+  top: 15%;
+  bottom: 14%;
+  left: 7%;
+  right: 7%;
+}
+.rsc-num {
+  overflow: hidden;
+  font-size: 24cqw;
+  line-height: 1;
+  color: var(--terra);
+}
+.rsc-num span {
+  display: block;
+  transform: translateY(105%);
+  transition: transform .9s var(--e);
+}
+.rsc-fd {
+  max-width: 84%;
+  margin-top: 2cqw;
+  font-size: max(13px, 4.4cqw);
+  line-height: 1.25;
+  opacity: 0;
+  transition: opacity .7s;
+}
+.rsc-fd b,
+.rsc-ch b {
+  font-weight: 700;
+}
+.rsc-ch {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 3cqw;
+  padding-top: 3cqw;
+  border-top: 1.5px solid var(--char);
+  opacity: 0;
+  transform: translateY(12%);
+  transition: opacity .7s, transform .8s var(--e);
+}
+.rsc-ar {
+  font-size: max(16px, 5cqw);
+  line-height: 1;
+  color: var(--terra);
+}
+.rsc-ch p {
+  font-size: max(13px, 4cqw);
+  line-height: 1.3;
+}
+.rsc-ch b {
+  background: linear-gradient(transparent 62%, #F0C670 62%);
+}
+.rsc-sl.is-a .rsc-num span { transform: none; }
+.rsc-sl.is-a .rsc-fd {
+  opacity: 1;
+  transition-delay: .45s;
+}
+.rsc-sl.is-a .rsc-ch {
+  opacity: 1;
+  transform: none;
+  transition-delay: 1.4s;
+}
+.rsc-sl.is-o .rsc-num span {
+  transform: translateY(-105%);
+  transition: transform .5s var(--e);
+}
+.rsc-sl.is-o .rsc-fd,
+.rsc-sl.is-o .rsc-ch {
+  opacity: 0;
+  transition-delay: 0s;
+}
+/* A slide that is neither showing nor leaving resets at once */
+.rsc-sl:not(.is-a):not(.is-o) * {
+  transition: none !important;
+}
+.rsc-dots {
+  position: absolute;
+  top: 13.6%;
+  right: 7%;
+  z-index: 5;
+  display: flex;
+  gap: 1.2cqw;
+}
+.rsc-dots i {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--char);
+}
+.rsc-dots i.is-on {
+  background: var(--terra);
+  border-color: var(--terra);
+}
+@container (max-width: 440px) {
+  .rsc-dots { top: 17%; }
+  .rsc-sl { top: 19%; }
+}
+
+/* --------------------------------------------------------------------------
+   Where it is now: Shape Up cycles. Wide 3:2 on desktop; 4:5 and top to
+   bottom on phones.
+   -------------------------------------------------------------------------- */
+.rsc--process {
+  aspect-ratio: 3 / 2;
+}
+.rsc--process .cs-card-ctl {
+  top: 4.95%; /* 3.3% of the width */
+  right: 3.5%;
+}
+.rsc--process .cs-card-hd {
+  top: 4.5cqw;
+  left: 5cqw;
+  right: calc(5cqw + 40px);
+  font-size: max(10px, 1.6cqw);
+}
+.rsc--process .rsc-src {
+  left: 5cqw;
+  right: 5cqw;
+  bottom: 4cqw;
+  font-size: max(10px, 1.6cqw);
+}
+.rsc-ttl {
+  position: absolute;
+  top: 10.5cqw;
+  left: 5cqw;
+  font-size: max(15px, 3.4cqw);
+  line-height: 1;
+}
+.rsc-ax {
+  position: absolute;
+  top: 22cqw;
+  left: 5cqw;
+  right: 5cqw;
+  height: .3cqw;
+  background: #D9D1C4;
+}
+.rsc-pr {
+  position: absolute;
+  top: 21.95cqw;
+  left: 5cqw;
+  width: 0;
+  height: .4cqw;
+  background: var(--char);
+  transition: width 1.8s var(--e);
+}
+.is-on .rsc-pr {
+  width: calc((100cqw - 10cqw) * .6 + 1.2cqw);
+}
+.rsc-st {
+  position: absolute;
+  top: 20.8cqw;
+  left: calc(5cqw + (100cqw - 10cqw) * var(--f));
+  width: calc((100cqw - 10cqw) * .18);
+  opacity: .35;
+  transition: opacity .6s;
+}
+.rsc-st i {
+  display: block;
+  width: 2.4cqw;
+  height: 2.4cqw;
+  min-width: 12px;
+  min-height: 12px;
+  border: .35cqw solid #B9AFA2;
+  border-radius: 50%;
+  background: var(--cream);
+  transition: background .5s, border-color .5s;
+}
+.rsc-st b {
+  display: block;
+  margin-top: 2.4cqw;
+  font-size: max(10px, 1.5cqw);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+.rsc-t {
+  display: block;
+  margin-top: 1cqw;
+  font-size: max(13px, 2.5cqw);
+  line-height: 1.05;
+  color: var(--char);
+}
+.rsc-st p {
+  margin-top: 1.2cqw;
+  font-size: max(11px, 1.6cqw);
+  line-height: 1.35;
+  color: #4A433B;
+}
+.rsc-st.is-v { opacity: 1; }
+.rsc-st--done.is-v i {
+  background: var(--char);
+  border-color: var(--char);
+}
+.rsc-st--now.is-v i {
+  background: var(--terra);
+  border-color: var(--terra);
+  box-shadow: 0 0 0 .8cqw rgba(178, 78, 46, .18);
+}
+.rsc-st--now.is-v b { color: var(--terra-d); }
+.rsc-st--later.is-v i { border-style: dashed; }
+.rsc-tag {
+  display: inline-block;
+  margin-top: 1.4cqw;
+  padding: .4cqw 1cqw;
+  border-radius: 99px;
+  background: var(--terra);
+  color: #FFFFFF;
+  font-size: max(10px, 1.4cqw);
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .5s;
+}
+.rsc-st--now.is-v .rsc-tag {
+  opacity: 1;
+  transition-delay: .4s;
+}
+/* Phones: 4:5, the timeline runs top to bottom */
+@media (max-width: 759.98px) {
+  .rsc--process {
+    aspect-ratio: 4 / 5;
+  }
+  .rsc--process .cs-card-ctl {
+    top: 4.5%;
+    right: 4.5%;
+  }
+  .rsc--process .rsc-card {
+    --rowh: 13.6cqw;
+  }
+  .rsc--process .cs-card-hd {
+    left: 7cqw;
+    right: calc(7cqw + 40px);
+    font-size: max(10px, 2.2cqw);
+  }
+  .rsc--process .rsc-src {
+    left: 7cqw;
+    right: 7cqw;
+    bottom: 5cqw;
+    font-size: max(10px, 2.2cqw);
+  }
+  .rsc-ttl {
+    top: 12cqw;
+    left: 7cqw;
+    font-size: 6cqw;
+  }
+  .rsc-ax {
+    top: 25cqw;
+    left: 9.4cqw;
+    right: auto;
+    width: .6cqw;
+    height: calc(var(--rowh) * 4);
+  }
+  .rsc-pr {
+    top: 25cqw;
+    left: 9.2cqw;
+    width: 1cqw;
+    height: 0;
+    transition: height 1.8s var(--e);
+  }
+  .is-on .rsc-pr {
+    width: 1cqw;
+    height: calc(var(--rowh) * 3);
+  }
+  .rsc-st {
+    top: calc(23.4cqw + var(--f) * 5 * var(--rowh));
+    left: 7cqw;
+    right: 7cqw;
+    width: auto;
+    display: grid;
+    grid-template-columns: 7cqw 1fr;
+    align-items: start;
+    column-gap: 3cqw;
+    row-gap: .6cqw;
+  }
+  .rsc-st i {
+    grid-row: 1 / span 2;
+    width: 5cqw;
+    height: 5cqw;
+    border-width: .8cqw;
+  }
+  .rsc-st b {
+    margin: 0;
+    font-size: 2.8cqw;
+  }
+  .rsc-t {
+    margin: 0;
+    font-size: 4.6cqw;
+  }
+  .rsc-st p {
+    display: none;
+  }
+  .rsc-tag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: .8cqw 2cqw;
+    font-size: 2.6cqw;
+  }
+}

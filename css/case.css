@@ -233,6 +233,20 @@
 .cs-title--long {
   font-size: clamp(40px, 4.8vw, 72px);
 }
+/* A status under the title ('In progress', ReStock 050): ink on the
+   page's accent */
+.cs-tag {
+  display: inline-block;
+  margin-top: var(--sp-16);
+  padding: 6px 10px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
 .cs-lead,
 .cs-body .cs-lead {
   font-size: var(--fs-lead);
@@ -329,6 +343,11 @@
 /* Closer to the images above (the De Bote mockup) */
 .wicked--close {
   padding-top: var(--sp-56);
+}
+/* Between two rows of images: the same room above and below (ReStock,
+   050) */
+.wicked--between {
+  padding-block: 120px;
 }
 .wicked-note {
   position: relative;
@@ -737,6 +756,9 @@
   }
   .wicked--after-media {
     padding-block: var(--sp-64) 0;
+  }
+  .wicked--between {
+    padding-block: var(--sp-64);
   }
 
   .stats {

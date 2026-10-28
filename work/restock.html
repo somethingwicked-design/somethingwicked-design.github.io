@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>ReStock - Luna Rachmani - Something Wicked</title>
-  <meta name="description" content="ReStock, branding and UI/UX for wasting less food, one fridge at a time.">
+  <meta name="description" content="ReStock, an app for wasting less food, one fridge at a time. A short, honest look at where my rebuild stands: where it started, what testing changed and the cycles so far.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
   <meta name="color-scheme" content="only dark">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Something Wicked">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="ReStock - Luna Rachmani - Something Wicked">
-  <meta property="og:description" content="ReStock, branding and UI/UX for wasting less food, one fridge at a time.">
+  <meta property="og:description" content="ReStock, an app for wasting less food, one fridge at a time. A short, honest look at where my rebuild stands: where it started, what testing changed and the cycles so far.">
   <meta property="og:url" content="https://somethingwicked.design/work/restock.html">
   <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
   <meta property="og:image:width" content="1200">
@@ -45,11 +45,21 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
+  <!-- Moving cards, shared by the case studies -->
+  <link rel="stylesheet" href="/css/cards.css">
+  <script src="/js/cards.js" defer></script>
+  <!-- ReStock cards (050): New Spirit (Fraunces stands in) and Figtree,
+       this page only -->
+  <link rel="stylesheet" href="/css/restock.css">
+  <script src="/js/restock.js" defer></script>
+  <link rel="preload" href="/img/restock/hero.webp" as="image" type="image/webp">
 </head>
 <!-- Case study template (040). For the next case study: copy this file,
      change the accent and screen tint below, data-project, the content and
      the Next up block. Order of next projects: 024. -->
-<body class="case" data-project="restock" style="--accent:#E8C547; --on-accent:#0B0B0B">
+<!-- Accent (050): light terracotta, 9.5:1 on ink; ReStock's own #B24E2E
+     is too dark on the page. Charcoal on it for the In progress tag. -->
+<body class="case" data-project="restock" style="--accent:#E8A67E; --on-accent:#2B2620">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- header: keep in sync -->
@@ -104,131 +114,111 @@
       <div class="wrap">
       <div class="cs-flow">
         <!-- ========================================================
-             INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
-             ReStock has no old page: a skeleton with visible
-             placeholders until the content exists.
+             INTRO: hero, title (cols 1-4) with the In progress tag,
+             lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
-          <div class="media media--ph ar-wide" id="csHero">[Photo: ReStock in context]</div>
+          <!-- Three phones of the new Kitchen: top, middle and bottom of
+               the list (050) -->
+          <figure class="media ar-wide" id="csHero">
+            <img src="/img/restock/hero.webp" width="2400" height="1350" alt="Three phones showing the new Kitchen screen: Needs attention at the top, then the food grouped by category with status pills" fetchpriority="high">
+          </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
 
         <section class="cs-text cs-intro" aria-label="Introduction">
           <div>
             <h1 class="cs-title head" id="cs-title">ReStock</h1>
+            <p class="cs-tag">In progress</p>
           </div>
           <div class="cs-body">
-            <p class="cs-lead">Wasting less food, one fridge at a time.</p>
-            <p>[Intro: what ReStock is and who it is for]</p>
-            <p>[Intro: the key insight and what the design does about it]</p>
+            <p class="cs-lead">Wasting less food, one fridge at a&nbsp;time.</p>
+            <p>ReStock is a household stock app for the fridge, freezer and pantry. It helps people use food before it goes off, so they waste less food and less&nbsp;money.</p>
+            <p>It's my internship project at Framna: I'm rebuilding an app I made last semester, in Shape Up cycles, testing as I go. This page shows where it stands now; the full case study follows when it's&nbsp;done.</p>
             <dl class="cs-facts">
-              <div><dt>My role</dt><dd>[my role]</dd></div>
-              <div><dt>Team</dt><dd>[team]</dd></div>
-              <div><dt>Discipline</dt><dd>Branding, UI/UX</dd></div>
-              <div><dt>Year</dt><dd>[year]</dd></div>
+              <div><dt>My role</dt><dd>Research, UX/UI design, visual identity</dd></div>
+              <div><dt>Team</dt><dd>Just me, with feedback from Framna colleagues</dd></div>
+              <div><dt>Discipline</dt><dd>UX research &amp; UI design</dd></div>
+              <div><dt>Year</dt><dd>2026, in progress</dd></div>
             </dl>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <div class="media media--ph ar-tall">[Photo: the app in use]</div>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-wide">[Image: the ReStock brand]</div>
-            <div class="media media--ph m-ar-scene">[Photo: a fridge, in context]</div>
-          </div>
-        </div>
-
         <!-- ========================================================
-             01 CONTEXT
+             01 WHERE IT STARTED
              ======================================================== -->
-        <section class="cs-text" id="context" aria-labelledby="h-context">
-          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+        <section class="cs-text" id="start" aria-labelledby="h-start">
+          <h2 class="cs-h2 head" id="h-start"><span class="cs-num">01</span> Where it started</h2>
           <div class="cs-body">
-            <p>[Context: the problem]</p>
-            <p>[Context: the brief, the client and the timeline]</p>
+            <p>The first version listed everything in your kitchen with totals at the top: 24 items, 1 expiring, 2 expired. Useful to count, but counting isn't the point. The app is about waste and&nbsp;money.</p>
+            <p>So the rebuild turns it around: the Kitchen opens on what needs you, and everything else waits&nbsp;below.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
+        <!-- The original Pantry and the new Kitchen, each with its label -->
+        <div class="cs-row">
+          <figure class="media ar-square">
+            <img src="/img/restock/before.webp" width="1600" height="1600" alt="Before: the original Pantry screen, with item totals at the top and a yellow warning banner" loading="lazy" decoding="async">
+          </figure>
+          <figure class="media ar-square">
+            <img src="/img/restock/after.webp" width="1600" height="1600" alt="After: the new Kitchen screen, opening on Needs attention" loading="lazy" decoding="async">
+          </figure>
+        </div>
+
+        <!-- The wicked part (007, 040): between two pairs, so 120px above
+             and below (050).
              TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <div class="wicked wicked--between">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>It doesn't count what you have.</span> <span>It shows what needs&nbsp;you.</span></p>
         </div>
 
-        <div class="media media--ph ar-wide m-ar-portrait">[Video: 10 seconds of the app in use]</div>
-
-        <!-- ========================================================
-             02 RESEARCH
-             No numbers block (035) until there are real numbers.
-             ======================================================== -->
-        <section class="cs-text" id="research" aria-labelledby="h-research">
-          <h2 class="cs-h2 head" id="h-research"><span class="cs-num">02</span> Research</h2>
-          <div class="cs-body">
-            <p>[Research: the methods and what they showed]</p>
-          </div>
-        </section>
-
-        <div class="cs-bento cs-bento--flip">
-          <div class="media media--ph ar-tall m-ar-scene">[Photo: a research session]</div>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-tall">[Photo: research material]</div>
-            <div class="media media--ph m-ar-wide">[Photo: insights]</div>
-          </div>
-        </div>
-
-        <section class="cs-text" aria-labelledby="h-told">
-          <h2 class="cs-label" id="h-told">[What users told us]</h2>
-          <blockquote class="cs-body cs-quote">[A quote from the research]</blockquote>
-        </section>
-
-        <!-- ========================================================
-             03 DESIGN DECISIONS
-             ======================================================== -->
-        <section class="cs-text" id="decisions" aria-labelledby="h-decisions">
-          <h2 class="cs-h2 head" id="h-decisions"><span class="cs-num">03</span> Design decisions</h2>
-          <div class="cs-body">
-            <p><strong>A. [Decision]</strong> [Why]</p>
-            <p><strong>B. [Decision]</strong> [Why]</p>
-            <p><strong>C. [Decision]</strong> [Why]</p>
-          </div>
-        </section>
-
-        <div class="cs-bento">
-          <div class="media media--ph ar-tall">[Screen]</div>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-tall">[Screen]</div>
-            <div class="media media--ph m-ar-tall">[Screen]</div>
-          </div>
+        <!-- ReStock cards (050): js/restock.js fills each figure. To swap a
+             card, change its data-rsc (type, colour, findings, process). -->
+        <div class="cs-row">
+          <figure class="media cs-card rsc" data-rsc="type"></figure>
+          <figure class="media cs-card rsc" data-rsc="colour"></figure>
         </div>
 
         <!-- ========================================================
-             04 WHAT TESTING CHANGED
+             02 WHAT TESTING CHANGED
              ======================================================== -->
         <section class="cs-text" id="testing" aria-labelledby="h-testing">
-          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
+          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">02</span> What testing changed</h2>
           <div class="cs-body">
-            <p>[Testing: who, how and what went wrong]</p>
-            <p>[What changed because of it]</p>
+            <p>I tested the rebuilt Kitchen list with seven people from the target group, thinking aloud. Words I took for granted didn't land: nobody on the full list knew what 'Produce' meant. What did work was a simple 'Use soon'&nbsp;chip.</p>
+            <p>Each finding became a change in the next version. When client work at Framna took over, six designers reviewed the hi-fi screens&nbsp;instead.</p>
           </div>
         </section>
 
-        <div class="media media--ph ar-wide m-ar-scene">[Photo: a test session]</div>
+        <!-- The findings card and the Cycle 1 lo-fi variants -->
+        <div class="cs-row">
+          <figure class="media cs-card rsc" data-rsc="findings"></figure>
+          <figure class="media ar-square">
+            <img src="/img/restock/lofi.webp" width="1800" height="1800" alt="Eight low-fi versions of the Kitchen list from Cycle 1" loading="lazy" decoding="async">
+          </figure>
+        </div>
 
         <!-- ========================================================
-             05 REFLECTION
+             03 WHERE IT IS NOW
              ======================================================== -->
-        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
-          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+        <section class="cs-text" id="now" aria-labelledby="h-now">
+          <h2 class="cs-h2 head" id="h-now"><span class="cs-num">03</span> Where it is now</h2>
           <div class="cs-body">
-            <p><span class="cs-em">[The one thing this project taught me]</span></p>
-            <p>[What worked, and what I'd do next time]</p>
-            <p>[Where it landed]</p>
+            <p>I work in Shape Up cycles: a fixed amount of time for a shaped idea, then a short cooldown. Two cycles are done. The third is about adding food fast, with an honest 'Don't add' when you already have&nbsp;it.</p>
+            <p>After that: an Impact tab with the money a household saved, exporting lists to Bring!, and recipes that start with what needs&nbsp;using.</p>
           </div>
         </section>
+
+        <!-- The cycles: wide 3:2, full width; 4:5 and vertical on phones.
+             Update when Cycle 3 is done (050). -->
+        <div class="cs-row cs-row--1">
+          <figure class="media cs-card rsc" data-rsc="process"></figure>
+        </div>
+
       </div>
       </div>
       <span class="cs-hairline" aria-hidden="true"></span>
@@ -248,13 +238,14 @@
         <a class="next-title" href="/work/health-potion.html">
           <span class="visually-hidden">Next up: </span>
           <span>Health Potion</span>
-          <span class="next-sub">[Health Potion in one line]</span>
+          <span class="next-sub">[Health Potion one-liner]</span>
         </a>
         <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <!-- The brand manual mockup (HealthPotion.webp), no name over it
+             (024) -->
         <a class="next-prev" href="/work/health-potion.html" aria-label="Next project: Health Potion">
           <span class="next-prev-in">
-            <span class="next-prev-ph">[Health Potion preview video]</span>
-            <span class="next-prev-name head" aria-hidden="true">Health Potion</span>
+            <img src="/img/health-potion-guide.webp" width="1800" height="1799" alt="" loading="lazy" decoding="async">
           </span>
         </a>
       </div>
