@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Moving cards in a case study, shared by every project (Op Jezelf 043-045,
+   De Bote 047). Each card is a <figure class="media cs-card"> filled by
+   js/cards.js: the case study frame (white, gloss, square corners) with
+   tape, the card inside it and, on a moving card, its pause button. A
+   project sets the card's colours (--bg, --fg) and its own parts; sizes are
+   in cqw of the card. Small text is never faded (opacity), so it keeps
+   4.5:1.
+   ========================================================================== */
+
+.cs-card {
+  aspect-ratio: 1;
+  overflow: visible; /* the tape sticks out; the card itself clips */
+  /* The frame takes the card's colour, so no dark hairline shows under a
+     light card on sub-pixel heights */
+  background: var(--bg, var(--card));
+}
+/* Tape across the top edge, as the prototypes */
+.cs-card::before {
+  content: '';
+  position: absolute;
+  top: -26px; /* 14px above the frame, which is 12px wide */
+  left: 50%;
+  z-index: 4;
+  width: 120px;
+  height: 30px;
+  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
+  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
+  transform: translateX(-50%) rotate(-3deg);
+  pointer-events: none;
+}
+
+.cs-card-in {
+  position: absolute;
+  inset: 0;
+  z-index: 0; /* its own layer, under the gloss */
+  overflow: hidden;
+  container-type: inline-size;
+  background: var(--bg);
+  color: var(--fg);
+  user-select: none;
+  -webkit-user-select: none;
+}
+/* Widow/orphan rule: no single word alone on a last line */
+.cs-card-in * {
+  text-wrap: pretty;
+}
+
+/* The header line: what the card shows, on some cards a second label on
+   the right. A project sets its type. */
+.cs-card-hd {
+  position: absolute;
+  top: 6%;
+  left: 7%;
+  right: 7%;
+  z-index: 6;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+}
+.cs-card-hd span {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Pause button on every moving card (WCAG 2.2.2): 32px, top right, in the
+   card's own colours (--ctl-bg, --ctl-fg). The focus ring sits inside it in
+   the icon colour, so it shows on every card colour.
+   -------------------------------------------------------------------------- */
+.cs-card-ctl {
+  position: absolute;
+  top: 4.5%;
+  right: 4.5%;
+  z-index: 5; /* over the gloss */
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--ctl-bg);
+  color: var(--ctl-fg);
+  cursor: pointer;
+}
+.cs-card-ctl svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+.cs-card-ctl:focus-visible {
+  outline: 2px solid var(--ctl-fg);
+  outline-offset: -6px;
+}
+
+/* Reduced motion: every card stands still, complete (js/cards.js) */
+@media (prefers-reduced-motion: reduce) {
+  .cs-card-in,
+  .cs-card-in * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Phones: the frame is 8px, so the tape sits 14px above it as well */
+@media (max-width: 759.98px) {
+  .cs-card::before {
+    top: -22px;
+    width: 104px;
+    height: 28px;
+  }
+}

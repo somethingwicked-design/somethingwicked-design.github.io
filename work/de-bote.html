@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>De Bote - Luna Rachmani - Something Wicked</title>
-  <meta name="description" content="De Bote, a newspaper, a logo and a working telephone about the Dutch 06 lines. How feedback took it from a science fair board to a phone you pick up.">
+  <meta name="description" content="De Bote, a newspaper, a flyer and a telephone about the Dutch 06 lines. How I led the concept and research, designed the logo and the paper, and rewired an old phone.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
   <meta name="color-scheme" content="only dark">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Something Wicked">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="De Bote - Luna Rachmani - Something Wicked">
-  <meta property="og:description" content="De Bote, a newspaper, a logo and a working telephone about the Dutch 06 lines. How feedback took it from a science fair board to a phone you pick up.">
+  <meta property="og:description" content="De Bote, a newspaper, a flyer and a telephone about the Dutch 06 lines. How I led the concept and research, designed the logo and the paper, and rewired an old phone.">
   <meta property="og:url" content="https://somethingwicked.design/work/de-bote.html">
   <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
   <meta property="og:image:width" content="1200">
@@ -45,12 +45,21 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
-  <link rel="preload" href="/img/de-bote-papers.webp" as="image" type="image/webp">
+  <!-- Moving cards, shared by the case studies -->
+  <link rel="stylesheet" href="/css/cards.css">
+  <script src="/js/cards.js" defer></script>
+  <!-- De Bote cards (047): Playfair Display and EB Garamond, this page only -->
+  <link rel="stylesheet" href="/css/de-bote.css">
+  <script src="/js/de-bote.js" defer></script>
+  <link rel="preload" href="/img/de-bote/banner.webp" as="image" type="image/webp">
 </head>
 <!-- Case study template (040). For the next case study: copy this file,
      change the accent and screen tint below, data-project, the content and
      the Next up block. Order of next projects: 024. -->
-<body class="case" data-project="de-bote" style="--accent:#E13B44; --on-accent:#0B0B0B">
+<!-- Accent (047): Fire Engine Red for the wicked part and the arrow (3.35:1,
+     large text and graphics); the 13px chapter numbers use a lighter red
+     (4.66:1). Selected text is bone on the red. -->
+<body class="case" data-project="de-bote" style="--accent:#C8102E; --accent-small:#EC2A42; --on-accent:#F2EEE6">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- header: keep in sync -->
@@ -108,8 +117,9 @@
              INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
-          <figure class="media ar-wide" id="csHero">
-            <img src="/img/de-bote-papers.webp" width="1800" height="1440" alt="A stack of De Bote newspapers tied with string" fetchpriority="high">
+          <!-- 3:2 on desktop, whole in the polaroid on phones -->
+          <figure class="media ar-photo" id="csHero">
+            <img src="/img/de-bote/banner.webp" width="1800" height="1200" alt="Copies of the De Bote newspaper on a table" class="is-whole" fetchpriority="high">
           </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
@@ -119,47 +129,42 @@
             <h1 class="cs-title head" id="cs-title">De Bote</h1>
           </div>
           <div class="cs-body">
-            <p class="cs-lead">Newspaper &amp; identity.</p>
-            <p>An editorial design project combining a newspaper layout with an original logo, built around the story of Teleholding, the Skene brothers, and how the Dutch 06 phone lines changed the Netherlands forever.</p>
-            <p>Survey results from the pop-up confirmed the telephone was the standout piece. The interactivity did what static editorial couldn't: it put people inside the experience rather than in front of it. The newspaper added depth for those who wanted it; the flyer handled everyone else.</p>
+            <p class="cs-lead">A newspaper, a flyer and a telephone about the Dutch 06&nbsp;lines.</p>
+            <p>De Bote tells the story of Teleholding: the Skene brothers, who launched the first phone-based adult lines in the Netherlands in the mid-1980s, and how those 06 lines changed Dutch telecom&nbsp;law.</p>
+            <p>The four-week NHL Stenden brief asked for an interactive educational experience. I led the concept, research and engineering, and designed the logo, the newspaper and a TLDR&nbsp;flyer.</p>
+            <!-- Decision 047: the teammate is never named -->
             <dl class="cs-facts">
-              <div><dt>My role</dt><dd>Logo design, editorial layout, TLDR infographic, telephone engineering, research</dd></div>
-              <div><dt>Team</dt><dd>2 people: Stef (poster) and me (design, engineering, research)</dd></div>
-              <div><dt>Discipline</dt><dd>Editorial</dd></div>
+              <div><dt>My role</dt><dd>Concept, research, logo, editorial layout, TLDR infographic, telephone engineering</dd></div>
+              <div><dt>Team</dt><dd>2 people: a teammate and me</dd></div>
+              <div><dt>Discipline</dt><dd>Editorial design &amp; identity</dd></div>
               <div><dt>Year</dt><dd>2024</dd></div>
             </dl>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/de-bote/front-page.webp" width="1128" height="1600" alt="The De Bote front page: 'British Brothers Pioneer Dutch Phone Sex' under the masthead with the Leeuwarden lion" class="obj-top" loading="lazy" decoding="async">
-          </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-wide">
-              <img src="/img/de-bote/banner.webp" width="1600" height="1067" alt="Two open copies of De Bote lying in the sun" loading="lazy" decoding="async">
-            </figure>
-            <figure class="media m-ar-wide">
-              <img src="/img/de-bote/logo.webp" width="2000" height="1125" alt="The De Bote logo: the name in a serif with the Leeuwarden lion between the words" loading="lazy" decoding="async">
-            </figure>
-          </div>
-        </div>
-
         <!-- ========================================================
-             01 CONTEXT
+             01 CONTEXT & CONCEPT
              ======================================================== -->
         <section class="cs-text" id="context" aria-labelledby="h-context">
-          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context &amp; concept</h2>
           <div class="cs-body">
-            <p>I proposed the topic after watching the Netflix series Dirty Lines - a show based on Fred Saueressig's book '06 Cowboys' about the Skene brothers, who pioneered Europe's first phone-based adult entertainment services in the Netherlands in the mid-1980s. The story had everything: entrepreneurial audacity, cultural controversy, a submarine fire, and a lasting impact on Dutch telecommunications law.</p>
-            <p>The team agreed it struck the right balance between historical depth and design challenge - building an editorial experience with a retro aesthetic around a topic most people had never heard of.</p>
-            <p>The four-week NHL Stenden brief asked us to design an interactive educational experience. I led on concept development, proposed and engineered the functioning telephone prototype, edited the newspaper layout inspired by De Telegraaf, and designed the TLDR flyer and timeline infographic.</p>
+            <p>The topic came from the Netflix series <em>Dirty Lines</em>, based on Fred Saueressig's book <em>06 Cowboys</em> about the Skene&nbsp;brothers.</p>
+            <p>The newspaper takes its cue from <em>De Telegraaf</em>. Night Black, Anti-Flash White and Fire Engine Red reflect how provocative the 06 lines were, and Playfair Display with EB Garamond keep it readable with a historical&nbsp;feel.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
+        <!-- De Bote cards (047): js/de-bote.js fills each figure. To swap a
+             card, change its data-dbc (type, colour, phone, logo,
+             newspaper, timeline). -->
+        <div class="cs-row">
+          <figure class="media cs-card dbc" data-dbc="type"></figure>
+          <figure class="media cs-card dbc" data-dbc="colour"></figure>
+        </div>
+
+        <!-- The wicked part (007, 040): 56px under the 01 cards, as the
+             mockup, nothing extra under it.
              TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <div class="wicked wicked--after-media wicked--close">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -167,33 +172,33 @@
           <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>The telephone wasn't</span><br><span>in the brief.</span></p>
         </div>
 
-        <figure class="media ar-wide m-ar-scene">
-          <img src="/img/de-bote/soldering.webp" width="1600" height="900" alt="Soldering wires to a speaker for the telephone, with the red phone in the background" loading="lazy" decoding="async">
-        </figure>
-
         <!-- ========================================================
-             02 THE PIVOT
+             02 PROCESS & PIVOT
              ======================================================== -->
-        <section class="cs-text" id="pivot" aria-labelledby="h-pivot">
-          <h2 class="cs-h2 head" id="h-pivot"><span class="cs-num">02</span> The pivot</h2>
+        <section class="cs-text" id="process" aria-labelledby="h-process">
+          <h2 class="cs-h2 head" id="h-process"><span class="cs-num">02</span> Process &amp; pivot</h2>
           <div class="cs-body">
-            <p>The original concept was a Science Fair board - divided into an introduction, a timeline, and a breakdown of the 06 phone lines. After a feedback session with our mentor Rik, it became clear the board lacked engagement. We pivoted to a combination of a poster, a functioning telephone, and a newspaper - a more immersive and interactive approach.</p>
-            <p>I engineered the telephone to play audio clips mimicking the real 06 lines, making the experience tactile and era-appropriate. The poster was simplified to a silhouette of a woman consistent with the late 80s theme.</p>
+            <p>My first idea, a science fair board, didn't engage anyone. After mentor feedback we pivoted to three pieces: a poster (made by my teammate), a newspaper and a working&nbsp;telephone.</p>
+            <p>I rebuilt an old telephone so it plays audio clips like the real 06 lines. Community feedback showed the newspaper held too much for an exhibition, so I added a compact TLDR flyer with a 1986-2002&nbsp;timeline.</p>
           </div>
         </section>
 
-        <div class="cs-bento cs-bento--flip">
-          <figure class="media ar-tall m-ar-tall">
-            <img src="/img/de-bote/telephone-inside.webp" width="1125" height="2000" alt="The red rotary telephone opened up, its mechanism exposed" class="obj-y40" loading="lazy" decoding="async">
+        <!-- The telephone card and the soldering photo, cropped square -->
+        <div class="cs-row">
+          <figure class="media cs-card dbc" data-dbc="phone"></figure>
+          <figure class="media ar-square">
+            <img src="/img/de-bote/soldering.webp" width="1800" height="3200" alt="Soldering inside the opened telephone" class="obj-y55" loading="lazy" decoding="async">
           </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-tall">
-              <img src="/img/de-bote/circuit-board.webp" width="1125" height="2000" alt="A hand holding the soldered circuit board that plays the audio clips" loading="lazy" decoding="async">
-            </figure>
-            <figure class="media m-ar-tall">
-              <img src="/img/de-bote/poster.webp" width="1415" height="2000" alt="The poster: a silhouette of a woman on a red phone line, 'Teleholding' above and 'Call now' below" class="obj-y40" loading="lazy" decoding="async">
-            </figure>
-          </div>
+        </div>
+
+        <!-- 16:9, 4:5 on phones -->
+        <div class="cs-row">
+          <figure class="media ar-wide m-ar-tall">
+            <img src="/img/de-bote/workbench.webp" width="1800" height="1012" alt="Soldering iron on the workbench" loading="lazy" decoding="async">
+          </figure>
+          <figure class="media ar-wide m-ar-tall">
+            <img src="/img/de-bote/circuit-board.webp" width="1800" height="3200" alt="The small circuit board that plays the audio clips" class="obj-y60" loading="lazy" decoding="async">
+          </figure>
         </div>
 
         <!-- ========================================================
@@ -202,59 +207,38 @@
         <section class="cs-text" id="newspaper" aria-labelledby="h-newspaper">
           <h2 class="cs-h2 head" id="h-newspaper"><span class="cs-num">03</span> The newspaper</h2>
           <div class="cs-body">
-            <p>The logo needed to sit on top of a busy newspaper layout without getting lost - bold enough to read over content but still feeling like it belonged to the publication. I used Leeuwarden's coat of arms as the anchor, vectorising the lion in Illustrator for clean scaling at any size.</p>
-            <p>The colour palette - Night Black, Anti-Flash White, and Fire Engine Red - was chosen to reflect the provocative nature of the 06 lines. Playfair Display and EB Garamond were selected for readability and historical resonance.</p>
-            <p>The newspaper ran to seven pages plus a TLDR insert, covering the Skene brothers, Cora Emens (a voice actress for the lines), Menno Buch's documentary coverage, the De Walrus incident, and media representation through the Netflix series.</p>
+            <p>The logo puts the lion from Leeuwarden's coat of arms between the words, vectorised in Illustrator so it scales&nbsp;cleanly.</p>
+            <p>Seven pages plus a TLDR insert follow the Teleholding story: the Skene brothers' rise, the De Walrus submarine fire, PTT's intervention, Menno Buch's TV coverage and the legal changes that followed. The piece argues the 06 lines shaped Dutch telecom law, emergency services and openness about&nbsp;sexuality.</p>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/de-bote/page-walrus.webp" width="1128" height="1600" alt="Newspaper page on the De Walrus incident: 'Overloaded lines' over a photo of the submarine" class="obj-top" loading="lazy" decoding="async">
-          </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-tall">
-              <img src="/img/de-bote/page-dirty-lines.webp" width="1128" height="1600" alt="Newspaper page on media coverage: 'Dirty Lines' and the book '06 Cowboys'" class="obj-top" loading="lazy" decoding="async">
-            </figure>
-            <figure class="media m-ar-tall">
-              <img src="/img/de-bote/tldr-flyer.webp" width="1128" height="1600" alt="The TLDR flyer: important dates and numbers on a timeline from 1986 to 2002" class="obj-top" loading="lazy" decoding="async">
-            </figure>
-          </div>
+        <div class="cs-row">
+          <figure class="media cs-card dbc" data-dbc="logo"></figure>
+          <figure class="media cs-card dbc" data-dbc="newspaper"></figure>
+        </div>
+
+        <!-- The timeline from the TLDR flyer: wide, 3:2, full width -->
+        <div class="cs-row cs-row--1">
+          <figure class="media cs-card dbc" data-dbc="timeline"></figure>
         </div>
 
         <!-- ========================================================
-             04 WHAT TESTING CHANGED
+             04 OUTCOME & REFLECTION
              ======================================================== -->
-        <section class="cs-text" id="testing" aria-labelledby="h-testing">
-          <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
+        <section class="cs-text" id="outcome" aria-labelledby="h-outcome">
+          <h2 class="cs-h2 head" id="h-outcome"><span class="cs-num">04</span> Outcome &amp; reflection</h2>
           <div class="cs-body">
-            <p>At a community feedback session, it became clear that the newspaper format - while visually strong - was too much content for an exhibition environment. We responded by designing a compact TLDR flyer that compressed the key information into a clear timeline from 1986 to 2002.</p>
-            <p>The flyer used period-appropriate 90s-style advertisements to keep it authentic to the era, and a red phone icon in place of a standard graphic. At the final pop-up stand on October 22nd, over 20 students from the target demographic confirmed the telephone and poster were the most effective pieces - the interactivity and retro aesthetic were what landed.</p>
+            <p>At a pop-up on 22 October, more than 20 students from the target group named the telephone and the poster as the pieces that worked best. The interactivity put people inside the story. The newspaper served readers who wanted depth, the flyer everyone&nbsp;else.</p>
+            <p><span class="cs-em">Good editorial work finds the format that fits the content.</span> The telephone came from asking what would make people engage with the&nbsp;story.</p>
           </div>
         </section>
 
-        <!-- Numbers (035): after the chapter text, before its images -->
-        <ul class="stats" role="list" aria-label="The project in numbers">
-          <li><span class="stat-num head">20+</span><span class="stat-label">students at the final pop-up stand</span></li>
-          <li><span class="stat-num head">7</span><span class="stat-label">newspaper pages, plus a TLDR insert</span></li>
-          <li><span class="stat-num head">4</span><span class="stat-label">week brief</span></li>
-        </ul>
-
-        <figure class="media ar-wide m-ar-scene">
-          <img src="/img/de-bote/pop-up-stand.webp" width="1600" height="1037" alt="The pop-up stand: the red telephone, copies of De Bote and the TLDR flyer on a table, the poster behind" loading="lazy" decoding="async">
+        <!-- The whole set-up, not cropped (Luna's choice, 047). The poster is
+             my teammate's. -->
+        <figure class="media ar-setup">
+          <img src="/img/de-bote/set-up.webp" width="2500" height="1619" alt="The finished set-up on a table: the red telephone, the newspaper, the TLDR flyer and my teammate's poster" loading="lazy" decoding="async">
         </figure>
 
-        <!-- ========================================================
-             05 REFLECTION
-             ======================================================== -->
-        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
-          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
-          <div class="cs-body">
-            <p><span class="cs-em">Designing around a topic this specific taught me that strong editorial work isn't about fitting content into a template - it's about finding the format that fits the content.</span></p>
-            <p>The telephone wasn't in the brief. It came from asking what would actually make someone want to engage with this story.</p>
-            <p>The project was an exercise in iterative working. Moving from a Science Fair board to a telephone, poster, and newspaper - and then adding the TLDR flyer - was driven entirely by feedback at each stage. Every pivot made the end product stronger.</p>
-          </div>
-        </section>
       </div>
       </div>
       <span class="cs-hairline" aria-hidden="true"></span>
@@ -274,12 +258,12 @@
         <a class="next-title" href="/work/something-wicked.html">
           <span class="visually-hidden">Next up: </span>
           <span>Something Wicked</span>
-          <span class="next-sub">[Something Wicked in one line]</span>
+          <span class="next-sub">[one-liner]</span>
         </a>
         <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
         <a class="next-prev" href="/work/something-wicked.html" aria-label="Next project: Something Wicked">
           <span class="next-prev-in">
-            <span class="next-prev-ph">[Something Wicked preview video]</span>
+            <span class="next-prev-ph">[Something Wicked preview]</span>
             <span class="next-prev-name head" aria-hidden="true">Something Wicked</span>
           </span>
         </a>

@@ -3,6 +3,8 @@
    (desktop, 1440) and reference/case-study-mobile.dc.html (phone, 360).
    Each case study sets on <body>:
      --accent     the project colour (chapter numbers, the wicked part)
+     --accent-small  optional: a lighter accent for the 13px chapter
+                  numbers, where the accent itself is under 4.5:1
      --on-accent  text on the accent (selection, buttons): black or white
      --screen-bg  the backdrop behind app screens (a light project tint)
    Logo, nav and footer keep the brand yellow (014).
@@ -92,6 +94,12 @@
 .media > img.obj-y40 {
   object-position: 50% 40%;
 }
+.media > img.obj-y55 {
+  object-position: 50% 55%;
+}
+.media > img.obj-y60 {
+  object-position: 50% 60%;
+}
 /* Printed pages: keep the top (masthead, headings) or the bottom in view */
 .media > img.obj-top {
   object-position: 50% 0;
@@ -136,6 +144,8 @@
 .ar-scene  { aspect-ratio: 4 / 3; }
 .ar-square { aspect-ratio: 1; }
 .ar-banner { aspect-ratio: 2000 / 997; } /* a wide banner, whole */
+.ar-photo  { aspect-ratio: 3 / 2; }      /* a landscape photo, whole */
+.ar-setup  { aspect-ratio: 2500 / 1619; } /* De Bote's set-up photo, whole */
 
 /* A pair of square images (the Op Jezelf cards), side by side. Room above
    each for its tape. */
@@ -261,20 +271,21 @@
   font-weight: 300;
 }
 
-/* Chapter heading: the number sits in front like an annotation (040) */
+/* Chapter heading: the number sits in front like an annotation (040). It
+   scales down so it never runs into the text next to it. */
 .cs-h2 {
   display: flex;
   align-items: flex-start;
   gap: 6px;
-  font-size: var(--fs-h2);
-  line-height: var(--fs-h2);
+  font-size: clamp(40px, 4.4vw, 56px);
+  line-height: 1;
 }
 .cs-num {
   padding-top: 6px;
   font-size: var(--fs-label);
   line-height: 13px;
   letter-spacing: 0.08em;
-  color: var(--accent);
+  color: var(--accent-small, var(--accent));
 }
 
 /* Small heading for a quote block */
@@ -314,6 +325,10 @@
    it (the next chapter brings its own space) */
 .wicked--after-media {
   padding-block: var(--sp-96) 0;
+}
+/* Closer to the images above (the De Bote mockup) */
+.wicked--close {
+  padding-top: var(--sp-56);
 }
 .wicked-note {
   position: relative;
@@ -521,6 +536,24 @@
 /* The footer follows Next up */
 .case .site-footer {
   margin-top: var(--sp-40);
+}
+
+/* Below 1380px a heading sits above its text, full width, instead of
+   beside it: it never overlaps or clips the text */
+.cs-text > * {
+  min-width: 0;
+}
+@media (max-width: 1380px) {
+  .cs-text {
+    row-gap: var(--sp-24);
+  }
+  .cs-text > :first-child,
+  .cs-text > :nth-child(2) {
+    grid-column: 1 / -1;
+  }
+  .cs-body {
+    max-width: 640px;
+  }
 }
 
 /* --------------------------------------------------------------------------

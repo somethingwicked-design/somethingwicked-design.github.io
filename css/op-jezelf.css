@@ -1,12 +1,11 @@
 /* ==========================================================================
    Op Jezelf cards (043, 044, 045) and the app videos, rebuilt from the
    prototypes in the vault (reference/op-jezelf-*.html). Each card is a
-   <figure class="media ojc"> filled by js/op-jezelf.js: the case study frame
-   (white, gloss, square corners) with tape, the card inside it and, on a
-   moving card, its pause button. Motion, timing, colours, layout and text
-   follow the prototypes; sizes are in cqw of the card. Small text is never
-   faded (opacity), so it keeps 4.5:1. Poppins (the app's typeface) is used
-   inside the cards only.
+   <figure class="media cs-card ojc"> filled by js/op-jezelf.js; the frame,
+   tape, header and pause button are shared (css/cards.css). Motion, timing,
+   colours, layout and text follow the prototypes; sizes are in cqw of the
+   card. Small text is never faded (opacity), so it keeps 4.5:1. Poppins
+   (the app's typeface) is used inside the cards only.
    ========================================================================== */
 
 /* Poppins, latin, from Google Fonts (SIL Open Font License) */
@@ -41,62 +40,27 @@
   --forest: #357929;
   --olive: #3D4621;
   --ease-slide: cubic-bezier(.65, 0, .35, 1);
-  aspect-ratio: 1;
-  overflow: visible; /* the tape sticks out; the card itself clips */
-}
-/* Tape across the top edge, as the prototypes */
-.ojc::before {
-  content: '';
-  position: absolute;
-  top: -26px; /* 14px above the frame, which is 12px wide */
-  left: 50%;
-  z-index: 4;
-  width: 120px;
-  height: 30px;
-  background: linear-gradient(180deg, rgba(236, 226, 196, 0.92), rgba(214, 202, 166, 0.88));
-  clip-path: polygon(0 10%, 5% 0, 100% 4%, 96% 22%, 100% 44%, 97% 66%, 100% 90%, 95% 100%, 3% 96%, 0 78%, 4% 56%, 0 34%);
-  transform: translateX(-50%) rotate(-3deg);
-  pointer-events: none;
+  --bg: var(--cream);
+  --fg: var(--olive);
+  --ctl-bg: rgba(255, 251, 230, .92);
+  --ctl-fg: var(--olive);
 }
 
 .ojc-card {
-  position: absolute;
-  inset: 0;
-  z-index: 0; /* its own layer, under the gloss */
-  overflow: hidden;
-  container-type: inline-size;
-  background: var(--bg, var(--cream));
-  color: var(--fg, var(--olive));
   font-family: 'Poppins', var(--font-body);
   font-weight: 400;
   line-height: 1.5;
-  user-select: none;
-  -webkit-user-select: none;
-}
-/* Widow/orphan rule: no single word alone on a last line */
-.ojc-card * {
-  text-wrap: pretty;
 }
 
 /* --------------------------------------------------------------------------
-   Shared parts: header, title, source line, slide-over panels, rolling word
+   Parts several cards use: header type, title, source line, slide-over
+   panels, rolling word
    -------------------------------------------------------------------------- */
-.ojc-hd {
-  position: absolute;
-  top: 6%;
-  left: 7%;
-  right: 7%;
-  z-index: 6;
-  display: flex;
-  justify-content: space-between;
+.ojc-card .cs-card-hd {
   font-size: max(9px, 2.2cqw);
   line-height: 1.5;
   font-weight: 600;
   letter-spacing: .14em;
-  text-transform: uppercase;
-}
-.ojc-hd span {
-  white-space: nowrap;
 }
 
 .ojc-t {
@@ -743,7 +707,7 @@
   --em: var(--leaf);
   aspect-ratio: 16 / 9;
 }
-.ojc--testing .ojc-hd {
+.ojc--testing .cs-card-hd {
   top: 5.5%;
   left: 5%;
   right: 5%;
@@ -821,7 +785,7 @@
   .ojc--testing {
     aspect-ratio: 4 / 5;
   }
-  .ojc--testing .ojc-hd,
+  .ojc--testing .cs-card-hd,
   .ojc--testing .ojc-src {
     font-size: max(9px, 2.4cqw);
   }
@@ -849,35 +813,8 @@
 }
 
 /* --------------------------------------------------------------------------
-   Pause button on every moving card (WCAG 2.2.2): 32px, top right, in the
-   card's own colours. The focus ring sits inside it in the icon colour, so
-   it shows on every card colour.
+   Pause button colours, per card (the button itself: css/cards.css)
    -------------------------------------------------------------------------- */
-.ojc-ctl {
-  position: absolute;
-  top: 4.5%;
-  right: 4.5%;
-  z-index: 5; /* over the gloss */
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: var(--ctl-bg, rgba(255, 251, 230, .92));
-  color: var(--ctl-fg, var(--olive));
-  cursor: pointer;
-}
-.ojc-ctl svg {
-  width: 14px;
-  height: 14px;
-  fill: currentColor;
-}
-.ojc-ctl:focus-visible {
-  outline: 2px solid var(--ctl-fg, var(--olive));
-  outline-offset: -6px;
-}
 .ojc--type,
 .ojc--characters {
   --ctl-bg: rgba(255, 251, 230, .92);
@@ -979,20 +916,3 @@
   }
 }
 
-/* Reduced motion: every card stands still, complete (js/op-jezelf.js) */
-@media (prefers-reduced-motion: reduce) {
-  .ojc-card,
-  .ojc-card * {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-/* Phones: the frame is 8px, so the tape sits 14px above it as well */
-@media (max-width: 759.98px) {
-  .ojc::before {
-    top: -22px;
-    width: 104px;
-    height: 28px;
-  }
-}

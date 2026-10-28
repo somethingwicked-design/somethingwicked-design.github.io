@@ -1,0 +1,892 @@
+/* ==========================================================================
+   De Bote cards (047), rebuilt from the prototypes in the vault
+   (reference/de-bote-*.html). Each card is a <figure class="media cs-card
+   dbc"> filled by js/de-bote.js; the frame, tape, header and pause button
+   are shared (css/cards.css). Motion, timing, colours, layout and text
+   follow the prototypes; sizes are in cqw of the card. The cards use De
+   Bote's own style: Anti-Flash White, Night Black and Fire Engine Red,
+   Playfair Display and EB Garamond (this page only).
+   ========================================================================== */
+
+/* Playfair Display and EB Garamond, latin, variable, from Google Fonts (SIL
+   Open Font License) */
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: normal;
+  font-weight: 400 900;
+  src: url('/fonts/PlayfairDisplay.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-weight: 400 900;
+  src: url('/fonts/PlayfairDisplay-Italic.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: normal;
+  font-weight: 400 800;
+  src: url('/fonts/EBGaramond.woff2') format('woff2');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'EB Garamond';
+  font-style: italic;
+  font-weight: 400 800;
+  src: url('/fonts/EBGaramond-Italic.woff2') format('woff2');
+  font-display: swap;
+}
+
+.dbc {
+  --white: #F2F3F4;
+  --black: #141414;
+  --red: #C8102E;
+  --pencil: #4A4A48;
+  --e: cubic-bezier(.65, 0, .35, 1);
+  --serif: 'EB Garamond', Georgia, serif;
+  --display: 'Playfair Display', Georgia, serif;
+  --bg: var(--white);
+  --fg: var(--black);
+  --ctl-bg: var(--black);
+  --ctl-fg: var(--white);
+}
+
+.dbc-card {
+  font-family: var(--serif);
+  font-weight: 400;
+  line-height: normal;
+}
+.dbc-card .cs-card-hd {
+  right: calc(7% + 40px); /* room for the pause button */
+  padding-bottom: 1.4cqw;
+  border-bottom: .2cqw solid var(--black);
+  font-size: max(10px, 2.4cqw);
+  font-weight: 600;
+  letter-spacing: .16em;
+}
+
+/* The source line at the bottom, under a rule */
+.dbc-src {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 5.5%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 3cqw;
+  padding-top: 1.4cqw;
+  border-top: .15cqw solid var(--black);
+  font-size: max(10px, 2.2cqw);
+}
+.dbc-src span {
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Typography: the two 'Aa' specimens, then the front-page headline types on
+   and the opening reveals in two justified columns with a red drop cap
+   -------------------------------------------------------------------------- */
+.dbc-spec {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 15%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 4cqw;
+}
+.dbc-sp {
+  padding-bottom: 1.6cqw;
+  border-bottom: .15cqw solid var(--black);
+}
+.dbc-aa {
+  display: block;
+  height: 1.05em;
+  overflow: hidden;
+  font-size: 21cqw;
+  line-height: 1;
+}
+.dbc-aa span {
+  display: block;
+  transform: translateY(100%);
+  transition: transform 1.1s cubic-bezier(.6, 0, .25, 1);
+}
+.dbc-pf .dbc-aa {
+  font-family: var(--display);
+  font-weight: 900;
+}
+.dbc-gm .dbc-aa {
+  font-weight: 500;
+}
+.dbc-gm .dbc-aa span {
+  transition-delay: .25s;
+}
+.dbc-nm {
+  margin-top: .6cqw;
+  font-size: max(11px, 2.6cqw);
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity .8s .5s;
+}
+.dbc-role {
+  font-style: italic;
+  font-size: max(10px, 2.2cqw);
+  color: var(--red);
+  opacity: 0;
+  transition: opacity .8s .7s;
+}
+.is-on .dbc-aa span {
+  transform: none;
+}
+.is-on .dbc-nm,
+.is-on .dbc-role {
+  opacity: 1;
+}
+.dbc-use {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 50%;
+  transition: opacity .8s;
+}
+.dbc-use.is-fade {
+  opacity: 0;
+}
+.dbc-hl {
+  min-height: 1.1em;
+  font-family: var(--display);
+  font-size: 5.4cqw;
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -.005em;
+}
+.dbc-hl span {
+  opacity: 0;
+}
+.dbc-hl .is-v {
+  opacity: 1;
+}
+.dbc-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 3.2cqw;
+  margin-top: 2cqw;
+  padding-top: 1.8cqw;
+  border-top: .15cqw solid var(--black);
+  font-size: max(10px, 2.4cqw);
+  line-height: 1.38;
+  text-align: justify;
+  hyphens: auto;
+}
+.dbc-cols p {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.6s cubic-bezier(.6, 0, .3, 1);
+}
+.dbc-cols p:nth-child(2) {
+  transition-delay: .5s;
+}
+.is-set .dbc-cols p {
+  clip-path: inset(0 0 0 0);
+}
+.dbc-dc {
+  float: left;
+  margin: .08em .08em 0 0;
+  font-family: var(--display);
+  font-size: 3.2em;
+  font-weight: 700;
+  line-height: .82;
+  color: var(--red);
+}
+
+/* --------------------------------------------------------------------------
+   Colour: two printer's crosshairs draw in, then the white, black and red
+   circles slide in and overlap like print plates
+   -------------------------------------------------------------------------- */
+.dbc--colour,
+.dbc--timeline {
+  --bg: #FAFAF9;
+}
+.dbc-reg {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 15%;
+  height: 48%;
+}
+.dbc-dot {
+  position: absolute;
+  top: 50%;
+  width: 32cqw;
+  height: 32cqw;
+  border-radius: 50%;
+  background: var(--c);
+  opacity: 0;
+  transform: translate(var(--x0), -50%);
+  transition: transform 1.3s var(--e), opacity .6s;
+}
+.dbc-dot.is-paper {
+  box-shadow: inset 0 0 0 .18cqw #C9CACB;
+}
+.dbc-dot.is-v {
+  opacity: 1;
+  transform: translate(var(--x), -50%);
+}
+.dbc-cross {
+  position: absolute;
+  width: 7cqw;
+  height: 7cqw;
+  opacity: 0;
+  transition: opacity .8s;
+}
+.dbc-cross svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.dbc-cross circle,
+.dbc-cross line {
+  fill: none;
+  stroke: var(--black);
+  stroke-width: 1;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 1.2s var(--e);
+}
+.dbc-cross.is-v {
+  opacity: 1;
+}
+.dbc-cross.is-v circle,
+.dbc-cross.is-v line {
+  stroke-dashoffset: 0;
+}
+.dbc-labs {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 67%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 4cqw;
+  text-align: center;
+}
+.dbc-lab {
+  opacity: 0;
+  transition: opacity .8s;
+}
+.dbc-lab.is-v {
+  opacity: 1;
+}
+.dbc-lab b {
+  display: block;
+  font-family: var(--display);
+  font-size: max(11px, 3.1cqw);
+  font-weight: 700;
+  line-height: 1.1;
+}
+.dbc-lab span {
+  display: block;
+  margin-top: .5cqw;
+  font-size: max(10px, 2.4cqw);
+  font-variant-numeric: lining-nums;
+}
+.dbc-lab i {
+  display: block;
+  margin-top: .1cqw;
+  font-size: max(10px, 2.3cqw);
+}
+
+/* --------------------------------------------------------------------------
+   Telephone: the red rotary phone rings, the handset lifts, the dial turns
+   for each digit of an 06 number, the line connects and a silent sound
+   wave plays. No audio.
+   -------------------------------------------------------------------------- */
+.dbc-stage {
+  transition: opacity .8s;
+}
+.dbc-stage.is-fade {
+  opacity: 0;
+}
+.dbc-num {
+  position: absolute;
+  left: 7%;
+  top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--display);
+  font-size: 16cqw;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+.dbc-pair {
+  display: flex;
+}
+.dbc-digit {
+  opacity: 0;
+  transform: translateY(12%);
+  transition: opacity .35s, transform .35s cubic-bezier(.3, 0, .2, 1);
+}
+.dbc-dots {
+  display: flex;
+  gap: 1.5cqw;
+  margin-top: 3cqw;
+}
+.dbc-dots span {
+  width: 2.6cqw;
+  height: 2.6cqw;
+  border-radius: 50%;
+  background: var(--black);
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .25s, transform .25s cubic-bezier(.3, 0, .2, 1);
+}
+.dbc-num .is-v {
+  opacity: 1;
+  transform: none;
+}
+.dbc-phone {
+  position: absolute;
+  right: 5%;
+  top: 13%;
+  width: 52%;
+  overflow: visible;
+}
+.dbc-phone.is-ring {
+  animation: dbcRing .5s 2;
+}
+@keyframes dbcRing {
+  0%, 100% { transform: none; }
+  20% { transform: rotate(-2deg); }
+  40% { transform: rotate(2deg); }
+  60% { transform: rotate(-1.5deg); }
+  80% { transform: rotate(1.5deg); }
+}
+.dbc-hs {
+  transform-box: view-box;
+  transform-origin: 30px 46px;
+  transition: transform .7s cubic-bezier(.3, 0, .2, 1);
+}
+.dbc-phone.is-off .dbc-hs {
+  transform: translate(-2px, -16px) rotate(-9deg);
+}
+.dbc-fw {
+  transform-box: view-box;
+  transform-origin: 110px 118px;
+}
+.dbc-status {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 56%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1.4cqw;
+  border-bottom: .15cqw solid var(--black);
+  font-size: max(10px, 2.4cqw);
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.dbc-status span {
+  white-space: nowrap;
+}
+.dbc-status b {
+  font-weight: 600;
+  color: var(--red);
+}
+.dbc-wave {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 63.5%;
+  height: 11%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dbc-wave i {
+  display: block;
+  width: 1.3cqw;
+  height: 8%;
+  border-radius: 1cqw;
+  background: var(--red);
+  opacity: .25;
+  transition: height .18s ease-out, opacity .4s;
+}
+.dbc-wave.is-live i {
+  opacity: 1;
+}
+.dbc-cap {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 77.5%;
+  font-family: var(--display);
+  font-size: 4cqw;
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+  opacity: 0;
+  transform: translateY(8%);
+  transition: opacity 1s, transform 1s cubic-bezier(.3, 0, .2, 1);
+}
+.dbc-cap.is-v {
+  opacity: 1;
+  transform: none;
+}
+
+/* --------------------------------------------------------------------------
+   Logo construction: first the lion alone, then the full logo in the same
+   spot. Each scene: pencil guides draw in, outlines, hand hatching inside
+   the shapes, ink; rest, fade, loop.
+   -------------------------------------------------------------------------- */
+.dbc-grp {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+.dbc-grp.is-vis {
+  opacity: 1;
+}
+.dbc-lstage,
+.dbc-lnotes {
+  position: absolute;
+  left: 50%;
+  top: 27%;
+  width: 46%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+}
+.dbc-mstage,
+.dbc-notes {
+  position: absolute;
+  left: 17%;
+  right: 17%;
+  top: 45%;
+  aspect-ratio: 242.07 / 43.81;
+}
+.dbc-lstage svg,
+.dbc-mstage svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  overflow: visible;
+}
+/* Pencil guides, measured from the vector */
+.dbc-ln {
+  fill: none;
+  stroke: var(--pencil);
+  stroke-width: .3;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: .75;
+  transition: stroke-dashoffset 1.1s cubic-bezier(.6, 0, .3, 1), opacity .8s;
+  transition-delay: var(--d);
+}
+.is-on .dbc-ln {
+  stroke-dashoffset: 0;
+}
+.is-settled .dbc-ln {
+  opacity: .28;
+  transition-delay: 0s;
+}
+/* The logo itself: outlines draw in, then hatching, then solid ink */
+.dbc-gl {
+  fill: transparent;
+  fill-rule: evenodd;
+  stroke: var(--black);
+  stroke-width: .4;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.4s cubic-bezier(.6, 0, .3, 1), fill .8s;
+  transition-delay: var(--d);
+}
+.is-on .dbc-gl {
+  stroke-dashoffset: 0;
+}
+.is-hatched .dbc-gl {
+  transition-delay: 0s;
+}
+.is-settled .dbc-gl {
+  fill: var(--black);
+}
+/* Hand hatching (Schraffur): rough strokes sweep across the shapes,
+   clipped to the outlines */
+.dbc-sc {
+  fill: none;
+  stroke: var(--black);
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset .5s ease-out;
+  transition-delay: var(--d);
+}
+.is-hatched .dbc-sc {
+  stroke-dashoffset: 0;
+}
+.is-settled .dbc-sc {
+  transition-delay: 0s;
+}
+.dbc-scribble {
+  transition: opacity .9s;
+}
+.is-settled .dbc-scribble {
+  opacity: 0;
+  transition-delay: .4s;
+}
+.dbc-lstage .dbc-ln {
+  stroke-width: .09;
+}
+.dbc-lstage .dbc-gl {
+  stroke-width: .18;
+}
+.dbc-lstage .dbc-sc {
+  stroke-width: .2;
+}
+/* Notes along the guides, in red pencil */
+.dbc-notes,
+.dbc-lnotes {
+  font-style: italic;
+  font-size: max(10px, 2cqw);
+  color: var(--red);
+  pointer-events: none;
+}
+.dbc-notes span,
+.dbc-lnotes span {
+  position: absolute;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity .6s;
+}
+.dbc-notes span {
+  right: -2.5%;
+  transform: translate(100%, -50%);
+}
+.dbc-notes .is-l {
+  right: auto;
+  left: -2.5%;
+  transform: translate(-100%, -50%);
+}
+.dbc-lnotes span {
+  right: -4%;
+  transform: translate(100%, -50%);
+}
+.dbc-lnotes .is-l {
+  right: auto;
+  left: -4%;
+  transform: translate(-100%, -50%);
+}
+.is-on .dbc-notes span {
+  opacity: 1;
+  transition-delay: 1.6s;
+}
+.is-on .dbc-lnotes span {
+  opacity: 1;
+  transition-delay: 1.8s;
+}
+
+/* --------------------------------------------------------------------------
+   Newspaper: the front page alone, then it opens into spreads, leaves
+   turning over from right to left like a real paper
+   -------------------------------------------------------------------------- */
+.dbc--newspaper {
+  --bg: #E4E3DF;
+}
+.dbc-book {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 17%;
+  aspect-ratio: 3496 / 2480;
+  perspective: 3000px;
+  transition: transform 1.2s cubic-bezier(.6, 0, .3, 1);
+}
+.dbc-book.is-closed {
+  transform: translateX(-25%);
+}
+.dbc-base,
+.dbc-leaf {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+}
+.dbc-leaf {
+  transform-origin: 0 50%;
+  transform-style: preserve-3d;
+  transition: transform 1.4s cubic-bezier(.6, 0, .3, 1);
+}
+.dbc-leaf.is-turned {
+  transform: rotateY(-180deg);
+}
+.dbc-book.is-reset .dbc-leaf,
+.dbc-book.is-reset::before {
+  transition: none;
+}
+.dbc-base,
+.dbc-face {
+  background: #FFFFFF;
+}
+/* The shadow sits on parts that never turn: the right-hand page underneath
+   and, once the paper is open, the left-hand side. On the turning faces
+   (backface hidden) it would blink out halfway through each turn. */
+.dbc-base,
+.dbc-book::before {
+  box-shadow: 0 1cqw 2.6cqw rgba(0, 0, 0, .2);
+}
+.dbc-book::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  transition: opacity .7s .7s;
+}
+.dbc-book.is-closed::before {
+  opacity: 0;
+  transition-delay: 0s;
+}
+.dbc-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.dbc-face.is-back {
+  transform: rotateY(180deg);
+}
+.dbc-base img,
+.dbc-face img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+/* A soft shadow along the fold */
+.dbc-face::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .12), rgba(0, 0, 0, 0) 8%);
+}
+.dbc-face.is-back::after {
+  background: linear-gradient(270deg, rgba(0, 0, 0, .12), rgba(0, 0, 0, 0) 8%);
+}
+.dbc-count {
+  position: absolute;
+  left: 7%;
+  bottom: 5.5%;
+  display: flex;
+  align-items: baseline;
+  gap: .6em;
+  font-size: max(10px, 2.2cqw);
+}
+.dbc-count b {
+  display: grid;
+  align-items: center;
+  height: 1.45em;
+  overflow: hidden;
+  font-family: var(--display);
+  font-size: max(14px, 4cqw);
+  font-weight: 700;
+  line-height: 1.45em;
+  font-variant-numeric: lining-nums;
+  color: var(--red);
+}
+.dbc-count b span {
+  grid-area: 1 / 1;
+  transition: transform .9s cubic-bezier(.6, 0, .25, 1), opacity .7s;
+}
+.dbc-count b .is-out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.dbc-count b .is-down {
+  opacity: 0;
+  transform: translateY(100%);
+  transition: none;
+}
+.dbc--newspaper .dbc-src {
+  left: auto;
+  padding-top: 0;
+  border-top: 0;
+  text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   Timeline, from the TLDR flyer: wide, 3:2, full width. A red line runs
+   along the years and each comes up large with its event. The years are
+   buttons. Sizes in cqw of the width (the card is 66.7cqw tall).
+   -------------------------------------------------------------------------- */
+.dbc--timeline {
+  aspect-ratio: 3 / 2;
+}
+.dbc--timeline .cs-card-hd {
+  top: 4.5cqw;
+  left: 5cqw;
+  right: calc(5cqw + 44px);
+  padding-bottom: 1cqw;
+  border-bottom-width: .15cqw;
+  font-size: max(10px, 1.6cqw);
+}
+.dbc--timeline .cs-card-ctl {
+  top: 3.3cqw;
+  right: 3.5cqw;
+}
+.dbc-ttl {
+  position: absolute;
+  left: 5cqw;
+  top: 11.5cqw;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: max(13px, 2.8cqw);
+  font-weight: 700;
+}
+/* The axis, like the flyer: a line with a dot per year */
+.dbc-axis {
+  position: absolute;
+  left: 5cqw;
+  right: 5cqw;
+  top: 21cqw;
+  height: 7cqw;
+}
+.dbc-line,
+.dbc-prog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 2cqw;
+  height: .25cqw;
+  background: var(--black);
+}
+.dbc-line::before,
+.dbc-line::after {
+  content: '';
+  position: absolute;
+  top: -.9cqw;
+  width: .25cqw;
+  height: 2cqw;
+  background: var(--black);
+}
+.dbc-line::before {
+  left: 0;
+}
+.dbc-line::after {
+  right: 0;
+}
+.dbc-prog {
+  right: auto;
+  top: 1.9cqw;
+  width: var(--p, 0%);
+  height: .45cqw;
+  background: var(--red);
+  transition: width 1s var(--e);
+}
+.dbc-yr {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8cqw;
+  min-width: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--black);
+  font: inherit;
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+.dbc-yr i {
+  display: block;
+  width: 2.2cqw;
+  height: 2.2cqw;
+  min-width: 14px;
+  min-height: 14px;
+  margin-top: .9cqw;
+  border: .3cqw solid var(--black);
+  border-radius: 50%;
+  background: #FAFAF9;
+  transition: background .5s, border-color .5s, transform .5s var(--e);
+}
+.dbc-yr b {
+  font-size: max(10px, 1.6cqw);
+  font-weight: 600;
+  font-variant-numeric: lining-nums;
+}
+.dbc-yr.is-past i {
+  background: var(--black);
+}
+.dbc-yr.is-on i {
+  border-color: var(--red);
+  background: var(--red);
+  transform: scale(1.25);
+}
+.dbc-yr:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+}
+/* The year on show, large, with its line of text */
+.dbc-big {
+  position: absolute;
+  left: 5cqw;
+  top: 32cqw;
+  height: 15cqw;
+  overflow: hidden;
+  font-family: var(--display);
+  font-size: 15cqw;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+.dbc-big span {
+  display: block;
+  transition: transform .8s var(--e), opacity .8s;
+}
+.dbc-big .is-old {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.dbc-big .is-in {
+  opacity: 0;
+  transform: translateY(100%);
+}
+.dbc-big .is-out {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+.dbc-txt {
+  position: absolute;
+  left: 46cqw;
+  right: 5cqw;
+  top: 35cqw;
+  font-size: max(12px, 2.7cqw);
+  line-height: 1.3;
+  text-wrap: balance;
+  transition: opacity .5s, transform .6s var(--e);
+}
+.dbc-txt.is-hide {
+  opacity: 0;
+  transform: translateY(.8cqw);
+}
+.dbc--timeline .dbc-src {
+  left: 5cqw;
+  right: 5cqw;
+  bottom: 4cqw;
+  padding-top: 1cqw;
+  font-size: max(10px, 1.6cqw);
+}

@@ -1,19 +1,19 @@
 // Op Jezelf cards (043, 044, 045) and the app videos, rebuilt from the
 // prototypes in the vault (reference/op-jezelf-*.html). Every <figure
-// class="media ojc" data-ojc="…"> in the case study becomes one card, so
-// swapping a card is changing that attribute. Motion, timing, colours,
-// layout and text follow the prototypes. Styles: css/op-jezelf.css.
-//
-// Each card exposes cardPlay() and cardVisible(bool) on its figure. A card
-// starts when half of it is in view (the second card in a row 0.7s later),
-// plays its run, rests, then plays again. It holds while out of view or
-// paused: every moving card has a pause button (WCAG 2.2.2). With reduced
-// motion every card shows its end state and nothing loops.
+// class="media cs-card ojc" data-ojc="…"> in the case study becomes one
+// card, so swapping a card is changing that attribute. Motion, timing,
+// colours, layout and text follow the prototypes. Styles: css/op-jezelf.css.
+// Frame, header, pause button, clock and when a card plays are shared with
+// the other case studies: js/cards.js.
 
 (function () {
   'use strict';
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var C = window.SWCards;
+  var ease = C.ease;
+  var lerp = C.lerp;
+  var reflow = C.reflow;
+  var hd = C.hd;
   var IMG = '/img/op-jezelf/cards/';
 
   // Poppins A and a, Regular to Bold, made point-compatible (043): per
@@ -22,79 +22,9 @@
 
   var NS = 'http://www.w3.org/2000/svg';
 
-  function ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-  function lerp(a, b, t) { return a + (b - a) * t; }
-  function reflow(el) { return el.offsetWidth; }
-
-  // A card's own clock. Timers, frames and drop animations only run while
-  // the clock runs; when it holds (paused, out of view) they freeze and
-  // carry on from where they were. now() is the card's own time, which
-  // stands still while it holds.
-  function clock() {
-    var running = false;
-    var heldAt = performance.now();
-    var heldFor = 0;
-    var tasks = [];
-    var frames = [];
-    var anims = [];
-    function arm(k) {
-      k.t0 = performance.now();
-      k.id = setTimeout(function () {
-        tasks.splice(tasks.indexOf(k), 1);
-        k.f();
-      }, k.left);
-    }
-    var t = {
-      now: function () { return (running ? performance.now() : heldAt) - heldFor; },
-      at: function (ms, f) {
-        var k = { f: f, left: ms };
-        tasks.push(k);
-        if (running) arm(k);
-      },
-      frame: function (f) {
-        if (!running) { frames.push(f); return; }
-        requestAnimationFrame(function () {
-          if (running) f(t.now());
-          else frames.push(f);
-        });
-      },
-      anim: function (a) {
-        anims.push(a);
-        a.addEventListener('finish', function () { anims.splice(anims.indexOf(a), 1); });
-        if (!running) a.pause();
-      },
-      clear: function () {
-        tasks.forEach(function (k) { clearTimeout(k.id); });
-        tasks = [];
-        frames = [];
-      },
-      run: function (on) {
-        if (on === running) return;
-        running = on;
-        if (on) {
-          heldFor += performance.now() - heldAt;
-          tasks.forEach(arm);
-          frames.splice(0).forEach(t.frame);
-          anims.forEach(function (a) { a.play(); });
-        } else {
-          heldAt = performance.now();
-          tasks.forEach(function (k) {
-            clearTimeout(k.id);
-            k.left = Math.max(0, k.left - (heldAt - k.t0));
-          });
-          anims.forEach(function (a) { a.pause(); });
-        }
-      }
-    };
-    return t;
-  }
-
   // ---------------------------------------------------------------------
-  // Shared parts
+  // Parts several Op Jezelf cards use
   // ---------------------------------------------------------------------
-  function hd(left) {
-    return '<div class="ojc-hd"><span>' + left + '</span></div>';
-  }
   function src(a, b) {
     return '<div class="ojc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
   }
@@ -147,33 +77,8 @@
     box.appendChild(s);
   }
 
-  // The pause button on a moving card: 32px, top right. Its name stays the
-  // same; aria-pressed says whether the motion is paused.
-  var ICON_PAUSE = '<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><rect x="2" y="1" width="3.5" height="12"/><rect x="8.5" y="1" width="3.5" height="12"/></svg>';
-  var ICON_PLAY = '<svg viewBox="0 0 14 14" aria-hidden="true" focusable="false"><path d="M3 1 L13 7 L3 13 Z"/></svg>';
-  function control(fig, label, paused, onToggle) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'ojc-ctl';
-    b.setAttribute('aria-label', 'Pause the ' + label);
-    function set() {
-      b.innerHTML = paused ? ICON_PLAY : ICON_PAUSE;
-      b.setAttribute('aria-pressed', String(paused));
-    }
-    b.addEventListener('click', function () {
-      paused = !paused;
-      set();
-      onToggle(paused);
-    });
-    set();
-    fig.appendChild(b);
-  }
-
   // ---------------------------------------------------------------------
-  // The cards. build(card, t) fills the card and returns:
-  //   play()   start the loop (on the card's clock t)
-  //   still()  the complete end state, for reduced motion
-  // ctl names the pause button; static cards have none.
+  // The cards (see SWCards.mount in js/cards.js for what a card defines)
   // ---------------------------------------------------------------------
   var CARDS = {};
 
@@ -550,7 +455,7 @@
     ctl: 'persona slideshow',
     interactive: true,
     label: 'The three Op Jezelf personas: the Cautious Planner, the Winging-it Warrior and the Overwhelmed Optimist',
-    build: function (card, t, hold) {
+    build: function (card, t, ctx) {
       // Traits written from the report's findings, approved by Luna (045)
       var P = [
         { img: 'alice', w: 524, h: 760, name: 'The Cautious Planner', bg: '#C1EBA6', fg: '#3D4621',
@@ -565,7 +470,7 @@
         var d = document.createElement('div');
         d.className = 'ojc-panel';
         d.style.cssText = '--bg:' + p.bg + ';--fg:' + p.fg;
-        d.innerHTML = '<div class="ojc-hd" aria-hidden="true"><span>Research</span></div>' +
+        d.innerHTML = '<div class="cs-card-hd" aria-hidden="true"><span>Research</span></div>' +
           '<div class="ojc-k">Persona 0' + (i + 1) + ' / 03</div>' +
           '<h3 class="ojc-nm">' + p.name + '</h3>' +
           '<ul class="ojc-tr">' + p.traits.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' +
@@ -591,19 +496,9 @@
 
       // Hover or focus holds the slideshow; leaving gives the persona on
       // show its full time again
-      var fig = card.parentNode;
-      function over(on) {
-        hold(on);
+      C.holdOnHover(card.parentNode, function (on) {
+        ctx.hold(on);
         if (!on) schedule();
-      }
-      fig.addEventListener('mouseenter', function () { over(true); });
-      fig.addEventListener('mouseleave', function () { over(false); });
-      // Focus on the pause button itself doesn't hold it: Play must play
-      fig.addEventListener('focusin', function (e) {
-        if (!e.target.classList.contains('ojc-ctl')) over(true);
-      });
-      fig.addEventListener('focusout', function (e) {
-        if (!fig.contains(e.relatedTarget)) over(false);
       });
       card.addEventListener('click', function (e) {
         var dot = e.target.closest('.ojc-dot');
@@ -704,75 +599,7 @@
     }
   };
 
-  // ---------------------------------------------------------------------
-  // Build every card
-  // ---------------------------------------------------------------------
-  var figs = [];
-  document.querySelectorAll('.ojc[data-ojc]').forEach(function (fig) {
-    var def = CARDS[fig.dataset.ojc];
-    if (!def) return;
-    var card = document.createElement('div');
-    card.className = 'ojc-card';
-    fig.classList.add('ojc--' + fig.dataset.ojc);
-    fig.textContent = '';
-    fig.appendChild(card);
-    // The personas can be used (dots, pause), so the figure is named and
-    // its parts are read; every other card reads as one image
-    if (def.interactive) {
-      fig.setAttribute('aria-label', def.label);
-    } else {
-      card.setAttribute('role', 'img');
-      card.setAttribute('aria-label', def.label);
-    }
-
-    var t = clock();
-    var played = false;
-    var visible = false;
-    var paused = reduce;
-    var held = false;
-    function sync() { t.run(played && visible && !paused && !held); }
-    var api = def.build(card, t, function (on) { held = on; sync(); });
-
-    // Static, or still with reduced motion: the complete end state
-    if (!def.ctl || (reduce && !def.interactive)) {
-      if (api.still) api.still();
-      fig.cardPlay = fig.cardVisible = function () {};
-      return;
-    }
-    // The personas only move on Play with reduced motion
-    control(fig, def.ctl, paused, function (p) { paused = p; sync(); });
-    fig.cardPlay = function () {
-      if (played) return;
-      played = true;
-      api.play();
-      sync();
-    };
-    fig.cardVisible = function (v) {
-      visible = v;
-      sync();
-    };
-    figs.push(fig);
-  });
-
-  // A card starts when half of it is in view; the second card in a row
-  // 0.7s after the first. It holds while out of view.
-  if (figs.length) {
-    if (!('IntersectionObserver' in window)) {
-      figs.forEach(function (f) { f.cardVisible(true); f.cardPlay(); });
-    } else {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var fig = e.target;
-          fig.cardVisible(e.isIntersecting);
-          if (e.intersectionRatio < .5 || fig.dataset.queued) return;
-          fig.dataset.queued = '1';
-          var prev = fig.previousElementSibling;
-          setTimeout(fig.cardPlay, prev && prev.classList.contains('ojc') ? 700 : 0);
-        });
-      }, { threshold: [0, .5] });
-      figs.forEach(function (f) { io.observe(f); });
-    }
-  }
+  C.mount('ojc', CARDS);
 
   // ---------------------------------------------------------------------
   // The app videos (05): no autoplay. Each phone has its own play/pause
