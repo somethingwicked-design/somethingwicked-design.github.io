@@ -137,8 +137,8 @@
 .ar-square { aspect-ratio: 1; }
 .ar-banner { aspect-ratio: 2000 / 997; } /* a wide banner, whole */
 
-/* A row of square images (the Op Jezelf cards): two side by side, three
-   from 1100px. Room above each for its tape. */
+/* A pair of square images (the Op Jezelf cards), side by side. Room above
+   each for its tape. */
 .cs-row {
   display: flex;
   flex-wrap: wrap;
@@ -149,10 +149,9 @@
 .cs-row > * {
   flex: 0 0 calc((100% - var(--gutter)) / 2);
 }
-@media (min-width: 1100px) {
-  .cs-row--3 > * {
-    flex-basis: calc((100% - 2 * var(--gutter)) / 3);
-  }
+/* One wide card on its own (Op Jezelf testing) */
+.cs-row--1 > * {
+  flex-basis: 100%;
 }
 
 /* Bento: one tall image and a stack of two, 32px apart (8px vertically) */
@@ -287,14 +286,11 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-/* A list of short themes, each led by its name */
-.cs-themes {
-  margin: 0;
-  padding: 0;
-}
-.cs-themes li {
-  font-weight: 300;
-  color: var(--bone-muted);
+/* A small note under a block, e.g. where a summary comes from */
+.cs-body .cs-note {
+  font-size: var(--fs-small);
+  line-height: var(--lh-small);
+  color: var(--muted);
 }
 .cs-quote {
   margin: 0;
@@ -313,6 +309,11 @@
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--gutter);
   padding-block: var(--sp-56) 72px;
+}
+/* Under a row of images: the chapter-heading rhythm above, nothing under
+   it (the next chapter brings its own space) */
+.wicked--after-media {
+  padding-block: var(--sp-96) 0;
 }
 .wicked-note {
   position: relative;
@@ -606,9 +607,10 @@
     aspect-ratio: 4 / 5;
     background: var(--card);
   }
-  /* A wide banner: keep the screens and characters in the polaroid */
-  .cs-hero .media > img.obj-x68 {
-    object-position: 68% 50%;
+  /* A wide banner, whole in the polaroid: never cropped */
+  .cs-hero .media > img.is-whole {
+    aspect-ratio: auto;
+    height: auto;
   }
   /* A hero still waiting for its photo keeps the polaroid's shape */
   .cs-hero .media--ph {
@@ -681,6 +683,9 @@
   }
   .wicked-line {
     margin-top: var(--sp-16);
+  }
+  .wicked--after-media {
+    padding-block: var(--sp-64) 0;
   }
 
   .stats {

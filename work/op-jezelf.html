@@ -45,7 +45,7 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
-  <!-- Op Jezelf cards (043, 044, 045) -->
+  <!-- Op Jezelf cards (043, 044, 045) and the app videos -->
   <link rel="stylesheet" href="/css/op-jezelf.css">
   <script src="/js/op-jezelf.js" defer></script>
   <link rel="preload" href="/img/op-jezelf/campaign-banner.webp" as="image" type="image/webp">
@@ -112,8 +112,9 @@
              INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
+          <!-- The banner is shown whole on every screen, never cropped -->
           <figure class="media ar-banner" id="csHero">
-            <img src="/img/op-jezelf/campaign-banner.webp" width="2000" height="997" alt="Op Jezelf campaign banner: the app name, a line about getting teens of 14 to 17 ready to live on their own, and app screens with the illustrated characters" class="obj-x68" fetchpriority="high">
+            <img src="/img/op-jezelf/campaign-banner.webp" width="2000" height="997" alt="Op Jezelf campaign banner: the app name, a line about getting teens of 14 to 17 ready to live on their own, and app screens with the illustrated characters" class="is-whole" fetchpriority="high">
           </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
@@ -124,9 +125,9 @@
           </div>
           <div class="cs-body">
             <p class="cs-lead">Getting teens ready to live on their own.</p>
-            <p>A gamified app for teenagers in Friesland aged 14 to 17, building the practical and emotional skills for independent living, from budgeting and chores to the anxiety of growing up.</p>
-            <p>Research showed the money problem was really an anxiety problem. So instead of more information, teens got a safe place to practise: real costs with zero risk, small wins and stories from peers.</p>
-            <p>I led the research and the team, and drew the illustrations. Our two designers designed the screens; based on the research, I made the design decisions together with&nbsp;them.</p>
+            <p>A gamified app for teenagers in Friesland aged 14 to 17, building the practical and emotional skills for independent living, from budgeting and chores to the anxiety of growing&nbsp;up.</p>
+            <p>Research showed the money problem was really an anxiety problem. So instead of more information, teens got a safe place to practise: real costs with zero risk, small wins and stories from&nbsp;peers.</p>
+            <!-- Decision 046: lead researcher, team lead and illustrator, not the UI/UX designer -->
             <dl class="cs-facts">
               <div><dt>My role</dt><dd>Lead researcher, team lead, illustrator</dd></div>
               <div><dt>Team</dt><dd>4 people: a programmer, two designers and me</dd></div>
@@ -143,28 +144,27 @@
         <section class="cs-text" id="context" aria-labelledby="h-context">
           <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
           <div class="cs-body">
-            <p>Many teenagers in Friesland lack practical preparation for living on their own. They underestimate real costs, feel overwhelmed by chores and routines, and are anxious about growing up.</p>
+            <p>Many teenagers in Friesland lack practical preparation for living on their own. They underestimate real costs, feel overwhelmed by chores and routines, and are anxious about growing&nbsp;up.</p>
             <p>The brief, through NHL Stenden, asked for a concept, visual design and working prototype in seven weeks. After delivery, we were hired for five more months to build the full&nbsp;version.</p>
-            <p>I drew the app's illustrations: the job characters, the food in the shop, the furniture and the&nbsp;flat.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
-             TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <!-- Op Jezelf cards (043-045): js/op-jezelf.js fills each figure.
+             To swap a card, change its data-ojc (type, colour, feelings,
+             quiz, personas, characters, shop, flat, testing). -->
+        <div class="cs-row">
+          <figure class="media ojc" data-ojc="characters"></figure>
+          <figure class="media ojc" data-ojc="shop"></figure>
+        </div>
+
+        <!-- The wicked part (007, 040): 96px under the 01 cards, nothing
+             extra under it. TODO: replace the note with Luna's handwriting SVG -->
+        <div class="wicked wicked--after-media">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
           <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>We made adulting feel like</span><br><span>a game, not a lecture.</span></p>
-        </div>
-
-        <!-- Op Jezelf cards (043-045): js/op-jezelf.js fills each figure.
-             To swap a card, change its data-ojc (type, colour, feelings,
-             quiz, personas, characters, shop, flat). -->
-        <div class="cs-row">
-          <figure class="media ojc" data-ojc="characters"></figure>
-          <figure class="media ojc" data-ojc="shop"></figure>
         </div>
 
         <!-- ========================================================
@@ -173,7 +173,7 @@
         <section class="cs-text" id="research" aria-labelledby="h-research">
           <h2 class="cs-h2 head" id="h-research"><span class="cs-num">02</span> Research</h2>
           <div class="cs-body">
-            <p>Financial literacy and emotional readiness turned out to be tangled together, so one method would have missed half the picture. I planned and ran the research: interviews, a diary study, a quiz, an art-based session and card sorting, next to desk research. From there I mapped what teens felt and needed, and turned it into three&nbsp;personas.</p>
+            <p>Financial literacy and emotional readiness turned out to be tangled together, so one method would have missed half the picture. As lead researcher I combined interviews, a seven-day diary study, a quiz, card sorting, co-creation and desk&nbsp;research.</p>
           </div>
         </section>
 
@@ -184,25 +184,24 @@
           <li><span class="stat-num head">9/10</span><span class="stat-label">asked for budgeting tools</span></li>
         </ul>
 
-        <div class="cs-row cs-row--3">
+        <div class="cs-row">
           <figure class="media ojc" data-ojc="feelings"></figure>
           <figure class="media ojc" data-ojc="quiz"></figure>
-          <figure class="media ojc" data-ojc="personas"></figure>
         </div>
 
-        <!-- My summaries of what teens said, not their words: themes, no
-             quotation marks (045) -->
+        <!-- A theme in my words, not a quote: no quotation marks (045, 046) -->
         <section class="cs-text" aria-labelledby="h-told">
-          <h2 class="cs-label" id="h-told">Six themes from 10 interviews and a diary study</h2>
-          <ul class="cs-body cs-themes" role="list">
-            <li><strong>Costs are higher than expected.</strong> Rent, furniture and bills add up fast, and nobody had told&nbsp;them.</li>
-            <li><strong>Daily tasks take real time.</strong> Cleaning and cooking on top of work is&nbsp;exhausting.</li>
-            <li><strong>Taxes and benefits are confusing.</strong> School doesn't explain toeslagen or income&nbsp;tax.</li>
-            <li><strong>It's okay to ask for help.</strong> Being independent doesn't mean doing everything&nbsp;alone.</li>
-            <li><strong>Problem-solving builds confidence.</strong> Fixing things yourself is hard, but&nbsp;rewarding.</li>
-            <li><strong>Your space affects your mood.</strong> Making it feel like home helps with the&nbsp;stress.</li>
-          </ul>
+          <h2 class="cs-label" id="h-told">What teens told us, in short</h2>
+          <div class="cs-body">
+            <p class="cs-lead">Rent, furniture, bills: it adds up fast and nobody tells&nbsp;you.</p>
+            <p class="cs-note">One of six themes from 10 interviews and a diary study. My summary, not a&nbsp;quote.</p>
+          </div>
         </section>
+
+        <div class="cs-row">
+          <figure class="media ojc" data-ojc="personas"></figure>
+          <figure class="media ojc" data-ojc="flat"></figure>
+        </div>
 
         <!-- ========================================================
              03 DESIGN DECISIONS
@@ -210,19 +209,16 @@
         <section class="cs-text" id="decisions" aria-labelledby="h-decisions">
           <h2 class="cs-h2 head" id="h-decisions"><span class="cs-num">03</span> Design decisions</h2>
           <div class="cs-body">
-            <p>Based on the research, I made the design decisions together with our two designers. They designed the screens, and I advised them from the&nbsp;research.</p>
-            <p><strong>A. Real costs, zero risk.</strong> The budgeting feature uses real expenses like rent, utilities and insurance, so teens can practise planning without real consequences.</p>
-            <p><strong>B. Micro-tasks, not a to-do list.</strong> A full list of adult chores causes paralysis. Small daily tasks with visible progress keep motivation going.</p>
+            <p>Based on the research, I made the design decisions together with our two designers, and guided the type and colour as team&nbsp;lead.</p>
+            <p><strong>A. Real costs, zero risk.</strong> The budgeting feature uses real expenses like rent, utilities and insurance, so teens can practise planning without real&nbsp;consequences.</p>
+            <p><strong>B. Micro-tasks, not a to-do list.</strong> A full list of adult chores causes paralysis. Small daily tasks with visible progress keep motivation&nbsp;going.</p>
             <p><strong>C. Peer stories over lectures.</strong> Because anxiety kept coming up, the app leans on relatable stories and humour instead of&nbsp;instructions.</p>
-            <p>Type and colour were team choices that I guided: one typeface, Poppins, in four weights, and a palette of four colours from the&nbsp;app.</p>
           </div>
         </section>
 
-        <div class="cs-row cs-row--3">
+        <div class="cs-row">
           <figure class="media ojc" data-ojc="type"></figure>
           <figure class="media ojc" data-ojc="colour"></figure>
-          <!-- TODO (todo.md): card sorting photo from the research PDF (Notion, 20 May 2025) -->
-          <div class="media media--ph ar-square m-ar-scene">[Photo: card sorting session]</div>
         </div>
 
         <!-- ========================================================
@@ -231,14 +227,15 @@
         <section class="cs-text" id="testing" aria-labelledby="h-testing">
           <h2 class="cs-h2 head" id="h-testing"><span class="cs-num">04</span> What testing changed</h2>
           <div class="cs-body">
-            <p>We tested the Figma prototype with 14 to 17 year olds in usability sessions and a classroom pilot. Teens got lost in the guidance, missed next steps, and asked how to manage expenses without any income.</p>
-            <p>Together with the designers, we turned that into clearer onboarding, a tighter task structure and more honest feedback in the decision&nbsp;flow.</p>
+            <p>We tested the Figma prototype with 14 to 17 year olds in usability sessions and a classroom pilot. Teens got lost in the guidance, missed next steps, and asked how to manage expenses without any&nbsp;income.</p>
+            <p>That led to clearer onboarding, a tighter task structure and more honest feedback in the decision&nbsp;flow.</p>
           </div>
         </section>
 
-        <!-- TODO (todo.md): export the 'Testing 1' findings cards from the uni
-             Figma file. They are signed 'patrycja': credit her. -->
-        <div class="media media--ph ar-wide m-ar-scene">[Image: findings cards from testing round 1]</div>
+        <!-- Static: no animation -->
+        <div class="cs-row cs-row--1">
+          <figure class="media ojc" data-ojc="testing"></figure>
+        </div>
 
         <!-- ========================================================
              05 REFLECTION
@@ -246,17 +243,39 @@
         <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
           <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
           <div class="cs-body">
-            <p><span class="cs-em">Good research isn't just finding what people need. It's understanding the feeling those needs live in.</span></p>
+            <p><span class="cs-em">Good research isn't just finding what people need. It's understanding the feeling those needs live&nbsp;in.</span></p>
             <p>What worked: putting research straight into design, relatable scenarios, and humour to take the edge off. Next time: test with a bigger, more diverse group of&nbsp;teens.</p>
-            <!-- TODO (todo.md): 'The result', where it landed after launch -->
-            <p>The full app launched in March 2026. [Where it landed: users, what the client&nbsp;said]</p>
+            <!-- TODO (todo.md): where it landed after launch (users, what the
+                 client said). Nothing in the vault yet: don't invent it. -->
+            <p>The full version launched in March&nbsp;2026.</p>
           </div>
         </section>
 
-        <!-- The phone mockup (045). The flat card can replace it: swap this
-             figure for <figure class="media ojc" data-ojc="flat"></figure> -->
-        <figure class="media ar-scene">
-          <img src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="Two phones showing the Op Jezelf welcome screen and a profile" loading="lazy" decoding="async">
+        <!-- The app in use: Work, Groceries, Household, 10s each. Nothing
+             plays on its own; each phone has its own play/pause button.
+             Phones show the middle one only. -->
+        <figure class="media oj-vids ar-wide m-ar-tall" aria-label="Three short recordings of the app">
+          <div class="oj-vid">
+            <video muted loop playsinline preload="none" poster="/img/op-jezelf/video/Commute-poster.jpg" width="426" height="560">
+              <source src="/img/op-jezelf/video/Commute-10s.webm" type="video/webm">
+              <source src="/img/op-jezelf/video/Commute-10s.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="oj-vid-btn" aria-pressed="false" aria-label="Play: The work screen in the app"><span class="oj-vid-icon" aria-hidden="true"></span></button>
+          </div>
+          <div class="oj-vid">
+            <video muted loop playsinline preload="none" poster="/img/op-jezelf/video/Groceries-poster.jpg" width="426" height="560">
+              <source src="/img/op-jezelf/video/Groceries-10s.webm" type="video/webm">
+              <source src="/img/op-jezelf/video/Groceries-10s.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="oj-vid-btn" aria-pressed="false" aria-label="Play: Doing the weekly shop in the app"><span class="oj-vid-icon" aria-hidden="true"></span></button>
+          </div>
+          <div class="oj-vid">
+            <video muted loop playsinline preload="none" poster="/img/op-jezelf/video/broken-poster.jpg" width="426" height="560">
+              <source src="/img/op-jezelf/video/broken-10s.webm" type="video/webm">
+              <source src="/img/op-jezelf/video/broken-10s.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="oj-vid-btn" aria-pressed="false" aria-label="Play: A household chore decision in the app"><span class="oj-vid-icon" aria-hidden="true"></span></button>
+          </div>
         </figure>
 
       </div>

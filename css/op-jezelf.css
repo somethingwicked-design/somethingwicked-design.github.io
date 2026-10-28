@@ -1,10 +1,12 @@
 /* ==========================================================================
-   Op Jezelf cards (043, 044, 045), rebuilt from the prototypes in the vault
-   (reference/op-jezelf-*.html). Each card is a <figure class="media ojc">
-   filled by js/op-jezelf.js: the case study frame (white, gloss, square
-   corners) with tape, and the card inside it. Motion, timing, colours,
-   layout and text follow the prototypes; sizes are in cqw of the card.
-   Poppins (the app's typeface) is used inside the cards only.
+   Op Jezelf cards (043, 044, 045) and the app videos, rebuilt from the
+   prototypes in the vault (reference/op-jezelf-*.html). Each card is a
+   <figure class="media ojc"> filled by js/op-jezelf.js: the case study frame
+   (white, gloss, square corners) with tape, the card inside it and, on a
+   moving card, its pause button. Motion, timing, colours, layout and text
+   follow the prototypes; sizes are in cqw of the card. Small text is never
+   faded (opacity), so it keeps 4.5:1. Poppins (the app's typeface) is used
+   inside the cards only.
    ========================================================================== */
 
 /* Poppins, latin, from Google Fonts (SIL Open Font License) */
@@ -146,7 +148,6 @@
   line-height: 1.5;
 }
 .ojc-src span {
-  opacity: var(--src-o, .6);
   white-space: nowrap;
 }
 
@@ -163,7 +164,7 @@
   clip-path: inset(0 0 0 0);
 }
 .ojc-panel.is-slide {
-  transition: clip-path 1.6s var(--ease-slide);
+  transition: clip-path var(--slide, 1.6s) var(--ease-slide);
 }
 
 /* A word that changes in place: the old one rises and fades out, the new
@@ -202,7 +203,7 @@
   --bg: var(--forest);
   --fg: var(--cream);
 }
-.ojc--type svg {
+.ojc--type .ojc-card > svg {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -232,8 +233,11 @@
 }
 
 /* --------------------------------------------------------------------------
-   Colour (044)
+   Colour (044): a 1.2s slide
    -------------------------------------------------------------------------- */
+.ojc--colour {
+  --slide: 1.2s;
+}
 .ojc-chips {
   position: absolute;
   left: 7%;
@@ -258,7 +262,7 @@
   outline: .35cqw solid var(--m, var(--olive));
   outline-offset: .5cqw;
   transform: translateX(calc(var(--i, 0) * 6.8cqw));
-  transition: transform 1.6s var(--ease-slide), outline-color 1.6s var(--ease-slide);
+  transition: transform var(--slide) var(--ease-slide), outline-color var(--slide) var(--ease-slide);
   pointer-events: none;
 }
 .ojc-specs {
@@ -273,7 +277,6 @@
   font-weight: 500;
 }
 .ojc-specs dt {
-  opacity: .6;
   font-weight: 400;
 }
 .ojc-specs dd {
@@ -338,7 +341,7 @@
 }
 .ojc-band b {
   font-size: var(--fs);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: -.02em;
 }
@@ -347,7 +350,6 @@
   font-size: max(10px, 2.4cqw);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  opacity: .85;
 }
 
 /* --------------------------------------------------------------------------
@@ -368,9 +370,6 @@
   font-weight: 600;
   letter-spacing: .14em;
   text-transform: uppercase;
-  opacity: 0;
-  transition: opacity 1s;
-  transition-delay: var(--d);
 }
 .ojc-grp.is-gap {
   margin-top: 3.2cqw;
@@ -433,9 +432,6 @@
 .is-on .ojc-txt {
   opacity: 1;
 }
-.is-on .ojc-grp {
-  opacity: .6;
-}
 .is-on .ojc-meter i {
   width: var(--w);
 }
@@ -455,7 +451,6 @@
   --bg: var(--forest);
   --fg: var(--cream);
   --em: var(--leaf);
-  --src-o: .7;
 }
 .ojc-cast {
   position: absolute;
@@ -540,11 +535,10 @@
   bottom: 6%;
   display: block;
   max-width: 40%;
-  opacity: .6;
 }
 
 /* --------------------------------------------------------------------------
-   The personas (045): one panel each, Pause/Play and dots on the card
+   The personas (045): one panel each, the pause button and dots on the card
    -------------------------------------------------------------------------- */
 .ojc-k {
   position: absolute;
@@ -554,7 +548,6 @@
   line-height: 1.5;
   font-weight: 500;
   font-variant-numeric: tabular-nums;
-  opacity: .7;
 }
 .ojc-nm {
   position: absolute;
@@ -607,80 +600,47 @@
   bottom: 10%;
   display: block;
   font-size: max(9px, 2.1cqw);
-  opacity: .6;
   white-space: nowrap;
 }
+/* The dots: each is a 24px target (WCAG 2.5.8) with the small square drawn
+   in its middle, so the squares still line up with the text at 7% */
 .ojc-dots {
+  --dot: 1.6cqw;
+  --hit: max(24px, 3cqw);
   position: absolute;
-  left: 7%;
-  bottom: 6%;
+  left: calc(7% - (var(--hit) - var(--dot)) / 2);
+  bottom: calc(6% - (24px - var(--dot)) / 2);
   display: flex;
-  gap: 1.4cqw;
 }
 .ojc-dot {
   position: relative;
-  width: 1.6cqw;
-  height: 1.6cqw;
+  width: var(--hit);
+  height: 24px;
   padding: 0;
-  border: .3cqw solid currentColor;
+  border: 0;
   border-radius: 0;
   background: transparent;
   color: inherit;
-  opacity: .5;
   cursor: pointer;
 }
-/* A bigger tap area than the square itself */
 .ojc-dot::before {
   content: '';
   position: absolute;
-  inset: -12px -.7cqw;
+  top: 50%;
+  left: 50%;
+  width: var(--dot);
+  height: var(--dot);
+  border: .3cqw solid currentColor;
+  opacity: .5;
+  transform: translate(-50%, -50%);
 }
-.ojc-dot.is-on {
+.ojc-dot.is-on::before {
   background: currentColor;
   opacity: 1;
 }
 .ojc-dot:focus-visible {
   outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-/* Pause/Play, styled like the site's labels and outlined buttons. It
-   follows the colour of the persona on show. */
-.ojc-pause {
-  position: absolute;
-  top: calc(14% - 6px);
-  right: 7%;
-  z-index: 10;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 28px;
-  padding: 0 12px;
-  border: 1.5px solid currentColor;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--pfg, var(--olive));
-  font-family: var(--font-body);
-  font-size: max(10px, 2.2cqw);
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color 1.6s var(--ease-slide);
-}
-.ojc-pause::before {
-  content: '';
-  position: absolute;
-  inset: -8px -4px;
-}
-.ojc-pause svg {
-  width: 8px;
-  height: 9px;
-  fill: currentColor;
-}
-.ojc-pause:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
+  outline-offset: -2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -709,7 +669,7 @@
 }
 .ojc-plan .ojc-room {
   clip-path: inset(var(--t) var(--r) var(--b) var(--x2));
-  transition: clip-path 1.5s var(--ease-slide);
+  transition: clip-path 1s var(--ease-slide);
 }
 .ojc-plan .ojc-room.is-on {
   clip-path: inset(var(--t) var(--r) var(--b) var(--l));
@@ -735,8 +695,6 @@
   gap: 1.4cqw;
   list-style: none;
   white-space: nowrap;
-  opacity: .55;
-  transition: opacity .8s;
 }
 .ojc-list i {
   display: grid;
@@ -754,9 +712,6 @@
   border-bottom: .3cqw solid var(--cream);
   transform: translateY(-.2cqw) rotate(-45deg) scale(0);
   transition: transform .5s cubic-bezier(.3, 1.6, .5, 1) .2s;
-}
-.ojc-list li.is-done {
-  opacity: 1;
 }
 .ojc-list li.is-done i {
   background: var(--forest);
@@ -776,6 +731,252 @@
   line-height: 1.5;
   font-weight: 600;
   text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   What testing changed: what we saw, what we changed. Static. 16:9, 4:5 on
+   phones.
+   -------------------------------------------------------------------------- */
+.ojc--testing {
+  --bg: var(--forest);
+  --fg: var(--cream);
+  --em: var(--leaf);
+  aspect-ratio: 16 / 9;
+}
+.ojc--testing .ojc-hd {
+  top: 5.5%;
+  left: 5%;
+  right: 5%;
+  font-size: max(9px, 1.3cqw);
+}
+.ojc--testing .ojc-t {
+  left: 5%;
+  top: 14%;
+  font-size: 3.6cqw;
+}
+.ojc-cols,
+.ojc-row {
+  display: grid;
+  grid-template-columns: 1fr 6cqw 1fr;
+  column-gap: 2cqw;
+}
+.ojc-cols {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 31%;
+  font-size: max(9px, 1.25cqw);
+  line-height: 1.5;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.ojc-cols span:last-child {
+  grid-column: 3;
+}
+.ojc-rows {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 37%;
+  display: flex;
+  flex-direction: column;
+}
+.ojc-row {
+  align-items: center;
+  padding: 2.1cqw 0;
+  border-top: .12cqw solid rgba(255, 251, 230, .25);
+}
+.ojc-saw,
+.ojc-did {
+  font-size: max(11px, 1.9cqw);
+  line-height: 1.3;
+}
+.ojc-saw {
+  font-weight: 500;
+}
+.ojc-did {
+  font-weight: 600;
+}
+.ojc-arrow {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.ojc-arrow path {
+  fill: none;
+  stroke: var(--leaf);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.ojc--testing .ojc-src {
+  left: 5%;
+  right: 5%;
+  font-size: max(9px, 1.2cqw);
+}
+@media (max-width: 759.98px) {
+  .ojc--testing {
+    aspect-ratio: 4 / 5;
+  }
+  .ojc--testing .ojc-hd,
+  .ojc--testing .ojc-src {
+    font-size: max(9px, 2.4cqw);
+  }
+  .ojc--testing .ojc-t {
+    font-size: 6.4cqw;
+  }
+  .ojc-cols,
+  .ojc-row {
+    grid-template-columns: 1fr 8cqw 1fr;
+  }
+  .ojc-cols {
+    top: 27%;
+    font-size: max(9px, 2.4cqw);
+  }
+  .ojc-rows {
+    top: 32%;
+  }
+  .ojc-row {
+    padding: 3.6cqw 0;
+  }
+  .ojc-saw,
+  .ojc-did {
+    font-size: max(11px, 3.4cqw);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Pause button on every moving card (WCAG 2.2.2): 32px, top right, in the
+   card's own colours. The focus ring sits inside it in the icon colour, so
+   it shows on every card colour.
+   -------------------------------------------------------------------------- */
+.ojc-ctl {
+  position: absolute;
+  top: 4.5%;
+  right: 4.5%;
+  z-index: 5; /* over the gloss */
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--ctl-bg, rgba(255, 251, 230, .92));
+  color: var(--ctl-fg, var(--olive));
+  cursor: pointer;
+}
+.ojc-ctl svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+.ojc-ctl:focus-visible {
+  outline: 2px solid var(--ctl-fg, var(--olive));
+  outline-offset: -6px;
+}
+.ojc--type,
+.ojc--characters {
+  --ctl-bg: rgba(255, 251, 230, .92);
+  --ctl-fg: var(--forest);
+}
+.ojc--colour {
+  --ctl-bg: rgba(23, 32, 13, .85);
+  --ctl-fg: var(--cream);
+}
+.ojc--feelings,
+.ojc--quiz,
+.ojc--shop,
+.ojc--flat {
+  --ctl-bg: var(--olive);
+  --ctl-fg: var(--cream);
+}
+
+/* --------------------------------------------------------------------------
+   The app videos (05): three phones side by side, one on phones. Each has
+   its own play/pause button over it; nothing plays on its own.
+   -------------------------------------------------------------------------- */
+.oj-vids {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2%;
+  background: #131313;
+}
+.oj-vid {
+  position: relative;
+  width: 32%;
+  aspect-ratio: 426 / 560;
+}
+.oj-vid video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.oj-vid-btn {
+  position: absolute;
+  inset: 0;
+  z-index: 4; /* over the gloss */
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.oj-vid-btn:focus-visible {
+  outline-offset: -3px;
+}
+/* Play (a triangle) on a grey disc; while playing it hides, and shows
+   Pause (two bars) on hover or focus */
+.oj-vid-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: rgba(80, 80, 80, .85);
+  transition: opacity .2s;
+}
+.oj-vid-icon::after {
+  content: '';
+  position: absolute;
+  top: 17px;
+  left: 22px;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 16px solid #FFFFFF;
+}
+.is-playing .oj-vid-icon {
+  opacity: 0;
+}
+.is-playing .oj-vid-btn:hover .oj-vid-icon,
+.is-playing .oj-vid-btn:focus-visible .oj-vid-icon {
+  opacity: 1;
+}
+.is-playing .oj-vid-icon::after {
+  top: 18px;
+  left: 19px;
+  width: 6px;
+  height: 20px;
+  border: 0;
+  border-left: 6px solid #FFFFFF;
+  border-right: 6px solid #FFFFFF;
+  box-sizing: content-box;
+}
+@media (max-width: 759.98px) {
+  .oj-vid {
+    width: auto;
+    height: 94%;
+  }
+  .oj-vid:not(:nth-child(2)) {
+    display: none;
+  }
 }
 
 /* Reduced motion: every card stands still, complete (js/op-jezelf.js) */
