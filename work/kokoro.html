@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Kokoro - Luna Rachmani - Something Wicked</title>
-  <meta name="description" content="Kokoro, a music label named after the Japanese kanji for 'heart'. A festival poster, a logo and a redesign of Koko, the label's lucky cat mascot.">
+  <meta name="description" content="A logo, a redrawn lucky cat and rock posters for a music label that only existed in a GTA 5 roleplay server.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
   <meta name="color-scheme" content="only dark">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Something Wicked">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Kokoro - Luna Rachmani - Something Wicked">
-  <meta property="og:description" content="Kokoro, a music label named after the Japanese kanji for 'heart'. A festival poster, a logo and a redesign of Koko, the label's lucky cat mascot.">
+  <meta property="og:description" content="A logo, a redrawn lucky cat and rock posters for a music label that only existed in a GTA 5 roleplay server.">
   <meta property="og:url" content="https://somethingwicked.design/work/kokoro.html">
   <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
   <meta property="og:image:width" content="1200">
@@ -45,12 +45,20 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
-  <link rel="preload" href="/img/kokoro-poster.webp" as="image" type="image/webp">
+  <!-- Moving cards, shared by the case studies -->
+  <link rel="stylesheet" href="/css/cards.css">
+  <script src="/js/cards.js" defer></script>
+  <!-- Kokoro cards (052) -->
+  <link rel="stylesheet" href="/css/kokoro.css">
+  <script src="/js/kokoro.js" defer></script>
+  <link rel="preload" href="/img/kokoro/hero.webp" as="image" type="image/webp">
 </head>
 <!-- Case study template (040). For the next case study: copy this file,
      change the accent and screen tint below, data-project, the content and
      the Next up block. Order of next projects: 024. -->
-<body class="case" data-project="kokoro" style="--accent:#D1574B; --on-accent:#0B0B0B">
+<!-- Accent (052): the poster's cream, 15.4:1 on ink, for the wicked part,
+     arrow and chapter numbers -->
+<body class="case" data-project="kokoro" style="--accent:#F0E4AC; --on-accent:#0B0B0B">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- header: keep in sync -->
@@ -108,8 +116,9 @@
              INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
+          <!-- The poster on a wall (MU_KOKORO.webp), 16:9, centred -->
           <figure class="media ar-wide" id="csHero">
-            <img src="/img/kokoro-poster.webp" width="1800" height="1202" alt="The Rockaholics poster for Kokoro hanging on a wall" fetchpriority="high">
+            <img src="/img/kokoro/hero.webp" width="2400" height="1350" alt="The Rockaholics poster for Kokoro hanging from two clips on a grey wall" fetchpriority="high">
           </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
@@ -119,114 +128,90 @@
             <h1 class="cs-title head" id="cs-title">Kokoro</h1>
           </div>
           <div class="cs-body">
-            <p class="cs-lead">A lucky cat with cattitude.</p>
-            <p>Multi-year work for Kokoro, a music label whose name comes from the Japanese kanji for 'heart'.</p>
-            <p>Projects included a logo, festival posters, and a full redesign of the label's mascot Koko, one of my favourite long-term creative collaborations.</p>
+            <p class="cs-lead">A logo, a mascot and posters for a music label in a GTA&nbsp;5 roleplay&nbsp;server.</p>
+            <p>Kokoro was a music label on a GTA 5 roleplay server, where players live out characters in a shared city. My character was the label&rsquo;s designer. So the label was fictional, but the work was real: a logo, a redrawn mascot and posters for events that other players actually&nbsp;came&nbsp;to.</p>
+            <p>The label ran for a long time, and the design work grew with&nbsp;it.</p>
             <dl class="cs-facts">
-              <div><dt>My role</dt><dd>Logo, poster design, mascot illustration</dd></div>
-              <div><dt>Team</dt><dd>[team]</dd></div>
-              <div><dt>Discipline</dt><dd>Poster</dd></div>
+              <div><dt>My role</dt><dd>Logo, mascot redraw, posters</dd></div>
+              <div><dt>Team</dt><dd>Just me</dd></div>
+              <div><dt>Discipline</dt><dd>Brand identity &amp; illustration</dd></div>
               <div><dt>Year</dt><dd>2023</dd></div>
             </dl>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <div class="media media--ph ar-tall">[Photo: Koko in use]</div>
-          <div class="cs-stack">
-            <figure class="media m-ar-wide">
-              <img src="/img/kokoro/logo.webp" width="2000" height="1125" alt="The Kokoro logo in black on white" loading="lazy" decoding="async">
-            </figure>
-            <div class="media media--ph m-ar-scene">[Photo: a release on the label]</div>
-          </div>
-        </div>
-
         <!-- ========================================================
-             01 CONTEXT
+             01 THE LABEL
              ======================================================== -->
-        <section class="cs-text" id="context" aria-labelledby="h-context">
-          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+        <section class="cs-text" id="label" aria-labelledby="h-label">
+          <h2 class="cs-h2 head" id="h-label"><span class="cs-num">01</span> The label</h2>
           <div class="cs-body">
-            <p>Kokoro is a label built around artists from every genre making music from the heart - hence the Japanese kanji for 'heart' as both name and visual anchor. Over multiple years of collaboration I worked across the full brand: logo design, event posters, and illustration.</p>
+            <p>Roleplay servers run on their own economy. Players open businesses, put on events and work for each other, all in character. Kokoro was one of those businesses: a music label with its own artists, and my character was its&nbsp;designer.</p>
+            <p>That made Kokoro a real client. The names on the posters were other players&rsquo; characters, and the nights on the posters happened, in a city that only exists inside the&nbsp;game.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
-             TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <!-- The wicked part (007, 040): right after 01, as on every case
+             study (052). One line, so it sits level with the arrowhead
+             (051). -->
+        <div class="wicked wicked--one">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>Real label, fake&nbsp;city.</span></p>
         </div>
 
-        <div class="media media--ph ar-wide m-ar-scene">[Photo: a Kokoro event]</div>
-
         <!-- ========================================================
-             02 THE POSTER
+             02 THE HEART AND THE CAT
              ======================================================== -->
-        <section class="cs-text" id="poster" aria-labelledby="h-poster">
-          <h2 class="cs-h2 head" id="h-poster"><span class="cs-num">02</span> The poster</h2>
+        <section class="cs-text" id="mark" aria-labelledby="h-mark">
+          <h2 class="cs-h2 head" id="h-mark"><span class="cs-num">02</span> The heart and the cat</h2>
           <div class="cs-body">
-            <p>The Rockaholics festival poster is a highlight from this period. Designing for a rock event meant working with high-contrast, bold typography and a dark, flame-lit palette - a deliberate departure from the warmer Kokoro brand baseline to suit the specific event.</p>
+            <p>Kokoro is Japanese for heart, so the logo is the kanji 心, painted with a dry brush. Its two dots are&nbsp;hearts.</p>
+            <p>Koko is the label&rsquo;s maneki-neko, the beckoning lucky cat. The first Koko was drawn by another artist. I redrew her to match the label: tattoos, piercings, a black collar and new proportions, and the same&nbsp;smile.</p>
           </div>
         </section>
 
-        <div class="cs-bento cs-bento--flip">
-          <figure class="media ar-tall m-ar-tall">
-            <img src="/img/kokoro/rockaholics-poster.webp" width="1500" height="2000" alt="The Rockaholics poster: Koko between red flames under the festival name, with the line-up, dates and skulls" class="obj-top" loading="lazy" decoding="async">
+        <!-- Kokoro cards (052): js/kokoro.js fills each figure. To swap a
+             card, change its data-koc (logo, koko, rockaholics). The
+             original Koko only ever shows inside the Koko card, credited:
+             she isn't my drawing. -->
+        <div class="cs-row">
+          <figure class="media cs-card koc" data-koc="logo"></figure>
+          <figure class="media cs-card koc" data-koc="koko"></figure>
+        </div>
+
+        <!-- ========================================================
+             03 ROCKAHOLICS
+             ======================================================== -->
+        <section class="cs-text" id="rockaholics" aria-labelledby="h-rockaholics">
+          <h2 class="cs-h2 head" id="h-rockaholics"><span class="cs-num">03</span> Rockaholics</h2>
+          <div class="cs-body">
+            <p>Rockaholics was a rock night the label put on in the city, with players&rsquo; characters on the bill. Koko headlines the&nbsp;poster.</p>
+            <p>It&rsquo;s printed in three inks, red, cream and black: darker and louder than Koko&rsquo;s usual warm colours, because it&rsquo;s a rock&nbsp;night.</p>
+          </div>
+        </section>
+
+        <!-- The print card and the whole poster on light grey -->
+        <div class="cs-row">
+          <figure class="media cs-card koc" data-koc="rockaholics"></figure>
+          <figure class="media ar-square ko-sheet">
+            <img class="ko-poster" src="/img/kokoro/poster.webp" width="1200" height="1600" alt="The full Rockaholics poster: Koko with tattoos in front of red flames and skulls, the date, the time and the line-up" loading="lazy" decoding="async">
           </figure>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-scene">[Photo: poster drafts]</div>
-            <div class="media media--ph m-ar-scene">[Photo: the poster at the festival]</div>
-          </div>
         </div>
 
         <!-- ========================================================
-             03 REDESIGNING KOKO
+             04 LOOKING BACK
              ======================================================== -->
-        <section class="cs-text" id="koko" aria-labelledby="h-koko">
-          <h2 class="cs-h2 head" id="h-koko"><span class="cs-num">03</span> Redesigning Koko</h2>
+        <section class="cs-text" id="looking-back" aria-labelledby="h-looking-back">
+          <h2 class="cs-h2 head" id="h-looking-back"><span class="cs-num">04</span> Looking back</h2>
           <div class="cs-body">
-            <p>The mascot redesign was one of the more demanding illustration briefs - Koko is a maneki-neko (lucky cat) who needed to feel both recognisable to the original and meaningfully updated. The redesigned version adds tattoo detail, a collar, and adjusted proportions that give Koko more personality without losing the warmth of the original.</p>
+            <p>Designing for a label that only existed in a game was a lot of fun: as Kokoro&rsquo;s designer I had almost complete creative freedom. Most design on the server is amateur work, so when players were impressed by the posters and the new Koko, that made me really happy.</p>
+            <p>I still think Koko looks sick. If I drew her again, I&rsquo;d give her Japanese-style tattoos, to match where she comes from.</p>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/kokoro/koko-redesign.webp" width="568" height="719" alt="After: the redesigned Koko, a cream lucky cat with tattoos on one arm and a black collar with a bell" loading="lazy" decoding="async">
-          </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-wide">
-              <img src="/img/kokoro/koko-original.webp" width="2000" height="1250" alt="Before: the original Koko, a white lucky cat with a red collar holding a gold coin" loading="lazy" decoding="async">
-            </figure>
-            <div class="media media--ph m-ar-scene">[Photo: Koko sketches]</div>
-          </div>
-        </div>
-
-        <!-- ========================================================
-             04 OVER THE YEARS
-             ======================================================== -->
-        <section class="cs-text" id="years" aria-labelledby="h-years">
-          <h2 class="cs-h2 head" id="h-years"><span class="cs-num">04</span> Over the years</h2>
-          <div class="cs-body">
-            <p>[What else I made for Kokoro over the years, and how the brand grew]</p>
-          </div>
-        </section>
-
-        <div class="media media--ph ar-wide m-ar-scene">[Photo: the brand over the years]</div>
-
-        <!-- ========================================================
-             05 REFLECTION
-             ======================================================== -->
-        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
-          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
-          <div class="cs-body">
-            <p><span class="cs-em">Working with a client over multiple years on a brand that evolves is a different discipline from one-off design work.</span></p>
-            <p>It requires maintaining consistency while still making space for the identity to grow.</p>
-          </div>
-        </section>
       </div>
       </div>
       <span class="cs-hairline" aria-hidden="true"></span>
@@ -243,16 +228,17 @@
     <section class="next grain" id="csNext" aria-label="Next up">
       <div class="next-inner wrap">
         <p class="next-label" aria-hidden="true">Next up</p>
-        <a class="next-title" href="/work/emma.html">
+        <a class="next-title" href="/work/de-bote.html">
           <span class="visually-hidden">Next up: </span>
-          <span>Emma</span>
-          <span class="next-sub">Supporting dementia caregivers</span>
+          <span>De Bote</span>
+          <span class="next-sub">[De Bote in one line]</span>
         </a>
-        <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
-        <a class="next-prev" href="/work/emma.html" aria-label="Next project: Emma">
+        <p class="next-all"><a href="/#all-work" aria-label="All work, 6 projects">All work</a><span aria-hidden="true">(6)</span></p>
+        <!-- The newspaper stack (DeBote-preview.webp), no name over it
+             (024). Emma is out at launch, so De Bote follows Kokoro. -->
+        <a class="next-prev" href="/work/de-bote.html" aria-label="Next project: De Bote">
           <span class="next-prev-in">
-            <span class="next-prev-ph">[Emma preview video]</span>
-            <span class="next-prev-name head" aria-hidden="true">Emma</span>
+            <img src="/img/de-bote/preview.webp" width="1600" height="1536" alt="" loading="lazy" decoding="async">
           </span>
         </a>
       </div>
