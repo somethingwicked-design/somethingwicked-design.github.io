@@ -159,7 +159,7 @@
 .nf-scrap:nth-child(9)  { left: calc(61% - 16px); top: calc(18% - 16px); width: 32px; height: 19px; --dx: 93px;   --dy: -149px; --r: -155deg; clip-path: polygon(95% 33%, 63% 98%, 13% 81%, 17% 19%, 69% 15%); }
 .nf-scrap:nth-child(10) { left: calc(74% - 14px); top: calc(26% - 14px); width: 29px; height: 17px; --dx: 216px;  --dy: -66px;  --r: 44deg;   clip-path: polygon(96% 56%, 59% 95%, 15% 75%, 25% 25%, 80% 11%); }
 
-/* 'it was her.' with an arrow to the sheet. Stand-in handwriting (027). */
+/* 'it was her.' with an arrow to the sheet. Handwriting (053). */
 .nf-note {
   position: absolute;
   left: -120px;

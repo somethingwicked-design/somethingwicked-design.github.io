@@ -18,6 +18,15 @@
        url('/fonts/Heartless.ttf') format('truetype');
   font-display: swap;
 }
+/* Handwriting (053): Reenie Beanie, latin (SIL Open Font License,
+   fonts/ReenieBeanie-OFL.txt) */
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/ReenieBeanie.woff2') format('woff2');
+  font-display: swap;
+}
 
 :root {
   /* Colour */
@@ -42,7 +51,7 @@
   /* Fonts */
   --font-head: 'Archivo', 'Arial Narrow', sans-serif;
   --font-body: 'Outfit', system-ui, sans-serif;
-  --font-hand: 'Reenie Beanie', cursive; /* stand-in for Luna's handwriting (027) */
+  --font-hand: 'Reenie Beanie', cursive; /* the handwriting (053) */
   --font-something: 'Quinthero', serif;
   --font-wicked: 'Heartless', serif;
   --head-weight: 900;
