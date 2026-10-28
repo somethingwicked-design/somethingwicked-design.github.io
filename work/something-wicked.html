@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Something Wicked - Luna Rachmani - Something Wicked</title>
-  <meta name="description" content="Something Wicked, the logo for my own brand: a planchette with skeleton hands and an eye, balancing the occult with the professional.">
+  <meta name="description" content="Something Wicked, a logo from 2024 that grew into this website. How I designed the mark and turned it into a system: three logo sizes, two pairs of fonts and one loud colour.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
   <meta name="color-scheme" content="only dark">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Something Wicked">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Something Wicked - Luna Rachmani - Something Wicked">
-  <meta property="og:description" content="Something Wicked, the logo for my own brand: a planchette with skeleton hands and an eye, balancing the occult with the professional.">
+  <meta property="og:description" content="Something Wicked, a logo from 2024 that grew into this website. How I designed the mark and turned it into a system: three logo sizes, two pairs of fonts and one loud colour.">
   <meta property="og:url" content="https://somethingwicked.design/work/something-wicked.html">
   <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
   <meta property="og:image:width" content="1200">
@@ -45,7 +45,13 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
-  <link rel="preload" href="/img/something-wicked-cards.webp" as="image" type="image/webp">
+  <!-- Moving cards, shared by the case studies -->
+  <link rel="stylesheet" href="/css/cards.css">
+  <script src="/js/cards.js" defer></script>
+  <!-- Something Wicked cards (049) -->
+  <link rel="stylesheet" href="/css/something-wicked.css">
+  <script src="/js/something-wicked.js" defer></script>
+  <link rel="preload" href="/img/something-wicked/glitch-poster.jpg" as="image" type="image/jpeg">
 </head>
 <!-- Case study template (040). For the next case study: copy this file,
      change the accent and screen tint below, data-project, the content and
@@ -108,8 +114,14 @@
              INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
+          <!-- The glitch (049): plays once when half in view and stays on
+               the logo, no loop; under 5s, so no pause button. The poster
+               is the logo, also the still with reduced motion. -->
           <figure class="media ar-wide" id="csHero">
-            <img src="/img/something-wicked-cards.webp" width="1800" height="1350" alt="A stack of black Something Wicked business cards with the logo in white" fetchpriority="high">
+            <video muted playsinline disablepictureinpicture preload="auto" poster="/img/something-wicked/glitch-poster.jpg" width="1280" height="720" data-once aria-label="The Something Wicked logo glitching in">
+              <source src="/img/something-wicked/glitch.webm" type="video/webm">
+              <source src="/img/something-wicked/glitch.mp4" type="video/mp4">
+            </video>
           </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
@@ -119,115 +131,111 @@
             <h1 class="cs-title cs-title--long head" id="cs-title">Something Wicked</h1>
           </div>
           <div class="cs-body">
-            <p class="cs-lead">[Something Wicked in one line]</p>
-            <p>A personal logo built from the inside out, taking the traits that define me most and turning them into a mark I'd actually want to put on client work.</p>
-            <p>The result is a planchette-based emblem that balances the occult with the professional.</p>
+            <p class="cs-lead">A logo from 2024 that grew into this&nbsp;website.</p>
+            <p>Something Wicked is the name I've worked under since 2021, but it had no identity until 2024, when I designed the logo. In 2026 I rebuilt my portfolio around it, after feedback that the old site looked like an&nbsp;agency.</p>
+            <p>This is how one mark became a system: three logo sizes, two pairs of fonts, one loud colour, and the patterns I borrowed from other studios and made my&nbsp;own.</p>
+            <!-- Decision 049: the 2024 logo was a first design, never a
+                 redesign -->
             <dl class="cs-facts">
-              <div><dt>My role</dt><dd>Concept, design, vectorisation</dd></div>
-              <div><dt>Team</dt><dd>Solo</dd></div>
-              <div><dt>Discipline</dt><dd>Branding</dd></div>
-              <div><dt>Year</dt><dd>2024</dd></div>
+              <div><dt>My role</dt><dd>Concept, logo, identity, UI/UX design</dd></div>
+              <div><dt>Team</dt><dd>Just me</dd></div>
+              <div><dt>Discipline</dt><dd>Brand identity &amp; UI/UX</dd></div>
+              <div><dt>Year</dt><dd>2024-2026</dd></div>
             </dl>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <div class="media media--ph ar-tall">[Photo: the logo on client work]</div>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-wide">[Photo: the business cards in hand]</div>
-            <div class="media media--ph m-ar-scene">[Photo: the 2021 logo]</div>
-          </div>
-        </div>
-
         <!-- ========================================================
-             01 CONTEXT
+             01 THE MARK
              ======================================================== -->
-        <section class="cs-text" id="context" aria-labelledby="h-context">
-          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+        <section class="cs-text" id="mark" aria-labelledby="h-mark">
+          <h2 class="cs-h2 head" id="h-mark"><span class="cs-num">01</span> The mark</h2>
           <div class="cs-body">
-            <p>Something Wicked has been my operational brand since 2021. The 2024 logo redesign brought the visual identity in line with where my design practice had actually developed.</p>
+            <p>The logo is built around a planchette, the pointer from a talking board. To me it stands for the mix of mystery and purpose in my&nbsp;work.</p>
+            <p>Skeleton hands frame an eye in the middle, so the symbol still reads when it's small. When I vectorised it in Illustrator, I kept the embellishments on top of the planchette: they give it&nbsp;character.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
+        <!-- Something Wicked cards (049): js/something-wicked.js fills each
+             figure. To swap a card, change its data-swc (logo, contrast,
+             levels, type, colour, before-after, refs). -->
+        <div class="cs-row">
+          <figure class="media cs-card swc" data-swc="logo"></figure>
+          <figure class="media cs-card swc" data-swc="contrast"></figure>
+        </div>
+
+        <!-- The wicked part (007, 040): 56px under the 01 cards, as the
+             mockup, nothing extra under it.
              TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <div class="wicked wicked--after-media wicked--close">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
-        </div>
-
-        <figure class="media ar-wide m-ar-wide">
-          <video src="/img/something-wicked/logo-glitch.mp4" poster="/img/something-wicked/logo-glitch.jpg" muted loop playsinline disablepictureinpicture preload="metadata" aria-label="The Something Wicked logo glitching on black"></video>
-        </figure>
-
-        <!-- ========================================================
-             02 CONCEPT
-             ======================================================== -->
-        <section class="cs-text" id="concept" aria-labelledby="h-concept">
-          <h2 class="cs-h2 head" id="h-concept"><span class="cs-num">02</span> Concept</h2>
-          <div class="cs-body">
-            <p>I needed a logo for Something Wicked - my freelance multimedia agency - that felt genuinely mine rather than generically professional. The starting point was a planchette, a shape that captures the intersection of the mysterious and the purposeful that runs through a lot of my work.</p>
-          </div>
-        </section>
-
-        <div class="cs-bento cs-bento--flip">
-          <div class="media media--ph ar-tall m-ar-scene">[Photo: planchette sketches]</div>
-          <div class="cs-stack">
-            <div class="media media--ph m-ar-tall">[Image: the traits I started from]</div>
-            <div class="media media--ph m-ar-wide">[Image: with and without the embellishments]</div>
-          </div>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>Wicked means brilliant, not&nbsp;dark.</span></p>
         </div>
 
         <!-- ========================================================
-             03 THE MARK
+             02 ONE MARK, THREE SIZES
              ======================================================== -->
-        <section class="cs-text" id="mark" aria-labelledby="h-mark">
-          <h2 class="cs-h2 head" id="h-mark"><span class="cs-num">03</span> The mark</h2>
+        <section class="cs-text" id="sizes" aria-labelledby="h-sizes">
+          <h2 class="cs-h2 head" id="h-sizes"><span class="cs-num">02</span> One mark, three sizes</h2>
           <div class="cs-body">
-            <p>The key decision point came during vectorisation: whether to keep the embellishments on top of the planchette. I preferred it with them. The extra detail adds weight and character without tipping into chaos.</p>
-            <p>The final logo works in both dark and light contexts, which matters for a freelance brand that appears across digital and print deliverables. The skeleton hands framing the central eye create a symbol that's immediately legible at small sizes but rewards closer inspection.</p>
+            <p>The full illustration is too detailed for a header or a browser tab, so the logo drops a level at a time. L1, the illustration, is for big moments like the About cards. L2, the wordmark, sits in the header. L3, SW, takes over on phones and as the&nbsp;favicon.</p>
+            <p>I set SW in Quinthero, the font of 'SOMETHING', so even at 16px it still belongs to the&nbsp;wordmark.</p>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/something-wicked/logo-dark.webp" width="1600" height="2000" alt="The Something Wicked logo in white on black: a triangle with rays, the name, an eye and two skeleton hands" loading="lazy" decoding="async">
+        <!-- The levels card and the business cards, cropped square. Never
+             BC_SW.webp: it shows Luna's phone number (049). -->
+        <div class="cs-row">
+          <figure class="media cs-card swc" data-swc="levels"></figure>
+          <figure class="media ar-square">
+            <img src="/img/something-wicked/business-cards.webp" width="3000" height="2250" alt="Something Wicked business cards, black with the white logo" loading="lazy" decoding="async">
           </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-wide">
-              <img src="/img/something-wicked/logo-light.webp" width="2000" height="1250" alt="The same logo in black on white" loading="lazy" decoding="async">
-            </figure>
-            <div class="media media--ph m-ar-scene">[Image: the logo at small sizes]</div>
-          </div>
         </div>
 
         <!-- ========================================================
-             04 KOTO AND FRAMNA (note 2026-10-22: what I studied in
-             each and what I took from it, in my own words)
+             03 THE SITE AS THE IDENTITY
              ======================================================== -->
-        <section class="cs-text" id="borrowing" aria-labelledby="h-borrowing">
-          <h2 class="cs-h2 head" id="h-borrowing"><span class="cs-num">04</span> Koto and Framna</h2>
+        <section class="cs-text" id="site" aria-labelledby="h-site">
+          <h2 class="cs-h2 head" id="h-site"><span class="cs-num">03</span> The site as the identity</h2>
           <div class="cs-body">
-            <p>[What I studied in Koto's and Framna's sites for this website, and what I took from each]</p>
-            <p>[How I made the borrowed parts my own]</p>
+            <p>Feedback on my old portfolio was that it looked like an agency. But nobody visits my site to hire an agency; they're looking for me as a designer, and I was missing from it. So the new site is clearly mine: first person, my photo, handwritten notes, torn paper and caution&nbsp;tape.</p>
+            <p>It's loud at the top and calm where the work is. Quinthero and Heartless only appear in the logo and the hero; Archivo and Outfit do everything else. Yellow is an accent, not a fill, and each project brings its own colour to its case&nbsp;study.</p>
           </div>
         </section>
 
-        <div class="media media--ph ar-wide m-ar-scene">[Screenshot: this site]</div>
+        <div class="cs-row">
+          <figure class="media cs-card swc" data-swc="type"></figure>
+          <figure class="media cs-card swc" data-swc="colour"></figure>
+        </div>
+
+        <!-- The old homepage against the new one: wide, 1920:1000, full
+             width. Wipes in once on first view, then it's yours to drag. -->
+        <div class="cs-row cs-row--1">
+          <figure class="media cs-card swc" data-swc="before-after"></figure>
+        </div>
 
         <!-- ========================================================
-             05 REFLECTION
+             04 BORROWED, THEN MADE MINE
              ======================================================== -->
-        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
-          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
+        <section class="cs-text" id="borrowed" aria-labelledby="h-borrowed">
+          <h2 class="cs-h2 head" id="h-borrowed"><span class="cs-num">04</span> Borrowed, then made mine</h2>
           <div class="cs-body">
-            <p><span class="cs-em">[The one thing this project taught me]</span></p>
-            <p>[What worked, and what I'd do next time]</p>
+            <p>Strong visual elements are a shared language across digital agencies. I studied Koto, Framna and G2K, took specific patterns rather than looks, and gave each one a twist of my&nbsp;own.</p>
+            <p>Looking closely at studios I like taught me where the line is: borrow how something works, never how it looks, and then commit to my own&nbsp;accent.</p>
           </div>
         </section>
+
+        <!-- The references card and the About page, square -->
+        <div class="cs-row">
+          <figure class="media cs-card swc" data-swc="refs"></figure>
+          <figure class="media ar-square">
+            <img src="/img/something-wicked/site-about.webp" width="1600" height="1600" alt="My About page: five face-down cards with the Something Wicked logo on the back, under the handwritten line pick a card, any card" loading="lazy" decoding="async">
+          </figure>
+        </div>
+
       </div>
       </div>
       <span class="cs-hairline" aria-hidden="true"></span>
@@ -247,13 +255,13 @@
         <a class="next-title" href="/work/op-jezelf.html">
           <span class="visually-hidden">Next up: </span>
           <span>Op Jezelf</span>
-          <span class="next-sub">Getting teens ready to live on their own</span>
+          <span class="next-sub">Getting teens ready to live on their own.</span>
         </a>
         <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <!-- The homepage card image (MU_OpJezelf), no name over it (024) -->
         <a class="next-prev" href="/work/op-jezelf.html" aria-label="Next project: Op Jezelf">
           <span class="next-prev-in">
-            <span class="next-prev-ph">[Op Jezelf preview video]</span>
-            <span class="next-prev-name head" aria-hidden="true">Op Jezelf</span>
+            <img src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="" loading="lazy" decoding="async">
           </span>
         </a>
       </div>

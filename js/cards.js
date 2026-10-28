@@ -1,5 +1,5 @@
 // Moving cards in a case study, shared by every project (Op Jezelf 043-045,
-// De Bote 047). A project script hands its cards to SWCards.mount(); each
+// De Bote 047, Something Wicked 049). A project script hands its cards to SWCards.mount(); each
 // <figure class="media cs-card" data-<key>="name"> then becomes one card.
 // Styles: css/cards.css, plus the project's own card styles.
 //
@@ -81,6 +81,20 @@
     return t;
   }
 
+  // Run [wait ms, fn] steps in order on the clock, then start again (the
+  // prototypes' seq)
+  function seq(t, steps) {
+    var i = 0;
+    (function next() {
+      var s = steps[i];
+      i = (i + 1) % steps.length;
+      t.at(s[0], function () {
+        s[1]();
+        next();
+      });
+    })();
+  }
+
   // The header line at the top of a card: what it shows, and on some cards
   // a second label on the right
   function hd(left, right) {
@@ -138,6 +152,8 @@
   //   label        what the card shows, for screen readers
   //   interactive  the card has its own controls (dots, years): the figure
   //                is named and its parts are read
+  //   once         plays once on first view, under 5s, so no pause button
+  //                (before/after); with reduced motion it shows still()
   //   build(card, t, ctx)  fills the card and returns
   //     play()   start the loop (on the card's clock t)
   //     still()  the complete end state, for reduced motion
@@ -174,13 +190,13 @@
       });
 
       // Static, or still with reduced motion: the complete end state
-      if (!def.ctl || (reduce && !def.interactive)) {
+      if (def.once ? reduce : !def.ctl || (reduce && !def.interactive)) {
         if (api.still) api.still();
         fig.cardPlay = fig.cardVisible = function () {};
         return;
       }
       // An interactive card only moves on Play with reduced motion
-      ctl = control(fig, def.ctl, paused, function (p) { paused = p; sync(); });
+      if (def.ctl) ctl = control(fig, def.ctl, paused, function (p) { paused = p; sync(); });
       fig.cardPlay = function () {
         if (played) return;
         played = true;
@@ -220,6 +236,7 @@
     lerp: lerp,
     reflow: reflow,
     clock: clock,
+    seq: seq,
     hd: hd,
     holdOnHover: holdOnHover,
     mount: mount

@@ -24,6 +24,10 @@
   var prevIn = panel.querySelector('.next-prev-in');
   var fx = panel.querySelectorAll('.next-label, .next-title');
   var all = panel.querySelector('.next-all');
+  // A preview video (Something Wicked's glitch, 049) plays once when the
+  // preview is half grown (desktop) or half in view (phone), then stays on
+  // its last frame. Reduced motion keeps the poster.
+  var prevVid = panel.querySelector('.next-prev video');
 
   var desktopMq = window.matchMedia('(min-width: 760px)');
   var reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -80,10 +84,21 @@
     dim.style.opacity = String(MAX_DIM * clamp((vh - top) / (vh * 0.6)));
   }
 
+  function playPrev() {
+    if (!prevVid || prevVid.dataset.played || reduceMq.matches) return;
+    var r = prevVid.getBoundingClientRect();
+    var shown = mode === 'live' ? progress() >= 0.5 : r.top + r.height / 2 <= window.innerHeight && r.bottom - r.height / 2 >= 0;
+    if (!shown) return;
+    prevVid.dataset.played = '1';
+    var p = prevVid.play();
+    if (p && p.catch) p.catch(function () { /* autoplay blocked: the poster shows */ });
+  }
+
   function tick() {
     queued = false;
     if (mode === 'live') tickLive();
     else if (mode === 'phone') tickPhone();
+    playPrev();
   }
 
   function onScroll() {
@@ -118,11 +133,25 @@
   desktopMq.addEventListener('change', setMode);
   reduceMq.addEventListener('change', setMode);
   // Videos in the case study loop without sound; reduced motion keeps
-  // them on their poster
-  document.querySelectorAll('.cs-main video').forEach(function (video) {
-    if (reduceMq.matches) return;
+  // them on their poster. A video marked data-once (the Something Wicked
+  // glitch, 049) plays once when half of it is in view and stays on its
+  // last frame: under 5s, so no pause button.
+  function play(video) {
     var p = video.play();
     if (p && p.catch) p.catch(function () { /* autoplay blocked: the poster shows */ });
+  }
+  document.querySelectorAll('.cs-main video').forEach(function (video) {
+    if (reduceMq.matches) return;
+    if (!video.hasAttribute('data-once') || !('IntersectionObserver' in window)) {
+      play(video);
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].intersectionRatio < .5) return;
+      io.disconnect();
+      play(video);
+    }, { threshold: .5 });
+    io.observe(video);
   });
 
   // Images and fonts change the case study's height

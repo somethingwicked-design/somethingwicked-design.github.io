@@ -1,6 +1,6 @@
 /* ==========================================================================
    Moving cards in a case study, shared by every project (Op Jezelf 043-045,
-   De Bote 047). Each card is a <figure class="media cs-card"> filled by
+   De Bote 047, Something Wicked 049). Each card is a <figure class="media cs-card"> filled by
    js/cards.js: the case study frame (white, gloss, square corners) with
    tape, the card inside it and, on a moving card, its pause button. A
    project sets the card's colours (--bg, --fg) and its own parts; sizes are
