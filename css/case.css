@@ -387,6 +387,11 @@
 .wicked-line span {
   white-space: nowrap;
 }
+/* A line that fits on one line sits level with the arrowhead (051) */
+.wicked--one .wicked-line {
+  align-self: end;
+  margin-bottom: 6px;
+}
 
 /* --------------------------------------------------------------------------
    Numbers (035): a row of three, no boxes
@@ -753,6 +758,10 @@
   }
   .wicked-line {
     margin-top: var(--sp-16);
+  }
+  .wicked--one .wicked-line {
+    align-self: flex-start;
+    margin-bottom: 0;
   }
   .wicked--after-media {
     padding-block: var(--sp-64) 0;

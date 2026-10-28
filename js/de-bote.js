@@ -21,18 +21,8 @@
   }
   function each(list, f) { Array.prototype.forEach.call(list, f); }
 
-  // A fixed random sequence, so the hand-drawn lines look the same on every
-  // visit
-  function rng(seed) {
-    return function () {
-      seed |= 0;
-      seed = seed + 0x6D2B79F5 | 0;
-      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
-      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-      return ((t ^ t >>> 14) >>> 0) / 4294967296;
-    };
-  }
-  function f2(v) { return v.toFixed(2); }
+  var rng = C.rng;
+  var f2 = C.f2;
 
   var CARDS = {};
 
@@ -368,33 +358,6 @@
     var e = p[p.length - 1];
     return d + ' L' + f2(e[0]) + ' ' + f2(e[1]);
   }
-  // Hand hatching: rough parallel strokes (about 62deg) over the box, a
-  // little uneven in spacing, weight and pressure. The mask keeps them
-  // inside the shapes.
-  function hatching(r, box, o) {
-    var k = 1.88; // dy/dx of a stroke
-    var c0 = box.x1 + box.y1 / k;
-    var c1 = box.x2 + box.y2 / k;
-    var gap = (c1 - c0) / o.n;
-    var out = '';
-    for (var i = 0; i < o.n; i++) {
-      // Each stroke is x = c - y / k, from the bottom (or left) edge up
-      var c = c0 + (i + .5 + (r() - .5) * .3) * gap;
-      var yA = Math.min(box.y2, (c - box.x1) * k);
-      var yB = Math.max(box.y1, (c - box.x2) * k);
-      if (yA <= yB) continue;
-      var n = Math.max(3, Math.round((yA - yB) / o.seg));
-      var p = [];
-      for (var j = 0; j <= n; j++) {
-        var y = yA - (yA - yB) * j / n;
-        var jit = j && j < n ? (r() - .5) * 2 * o.jit : 0;
-        p.push(f2(c - y / k + jit) + ' ' + f2(y));
-      }
-      out += '<path class="dbc-sc" pathLength="1" style="--d:' + f2(i / o.n * o.dur) + 's;stroke-width:' + f2(o.w[0] + r() * (o.w[1] - o.w[0])) + ';opacity:' + f2(.6 + r() * .4) + '" d="M' + p.join(' L') + '"/>';
-    }
-    return out;
-  }
-
   CARDS.logo = {
     ctl: 'logo animation',
     label: 'The De Bote lion on its own, then the full logo, with its construction lines: a shared cap height and baseline, the lion from Leeuwarden\'s coat of arms on its own axis, overshooting both lines, and the round O overshooting slightly',
@@ -450,7 +413,7 @@
           '<svg viewBox="64.05 -4.1 52 52" focusable="false">' +
             '<defs><mask id="dbcLionMask" maskUnits="userSpaceOnUse" x="64.05" y="-4.1" width="52" height="52"><rect x="64.05" y="-4.1" width="52" height="52" fill="#000"/><path fill="#fff" fill-rule="evenodd" d="' + lion + '"/></mask></defs>' +
             '<g>' + guides(LION_LINES, .4, .08, .05, 7) + '</g>' +
-            '<g class="dbc-scribble" mask="url(#dbcLionMask)">' + hatching(rng(11), { x1: 70, y1: -1, x2: 110, y2: 45 }, { n: 105, seg: 2.25, jit: .1, w: [.16, .26], dur: 1.4 }) + '</g>' +
+            '<g class="dbc-scribble" mask="url(#dbcLionMask)">' + C.hatching(rng(11), { x1: 70, y1: -1, x2: 110, y2: 45 }, { cls: 'dbc-sc', n: 105, seg: 2.25, jit: .1, w: [.16, .26], dur: 1.4 }) + '</g>' +
             '<g><path class="dbc-gl" pathLength="1" style="--d:.9s" d="' + lion + '"/></g>' +
           '</svg>';
         gM.querySelector('.dbc-mstage').innerHTML =
@@ -458,7 +421,7 @@
             '<defs><mask id="dbcMarkMask" maskUnits="userSpaceOnUse" x="-20" y="-20" width="290" height="90"><rect x="-20" y="-20" width="290" height="90" fill="#000"/>' +
               shapes.map(function (s) { return '<path fill="#fff" fill-rule="evenodd" d="' + s.d + '"/>'; }).join('') + '</mask></defs>' +
             '<g>' + guides(MARK_LINES, 0, .06, .12, 3) + '</g>' +
-            '<g class="dbc-scribble" mask="url(#dbcMarkMask)">' + hatching(rng(5), { x1: -2, y1: -2, x2: 244.07, y2: 45.81 }, { n: 217, seg: 4.8, jit: .25, w: [.32, .5], dur: 1.6 }) + '</g>' +
+            '<g class="dbc-scribble" mask="url(#dbcMarkMask)">' + C.hatching(rng(5), { x1: -2, y1: -2, x2: 244.07, y2: 45.81 }, { cls: 'dbc-sc', n: 217, seg: 4.8, jit: .25, w: [.32, .5], dur: 1.6 }) + '</g>' +
             '<g>' + shapes.map(function (s, i) { return '<path class="dbc-gl" pathLength="1" style="--d:' + f2(i * .12) + 's" d="' + s.d + '"/>'; }).join('') + '</g>' +
           '</svg>';
       });

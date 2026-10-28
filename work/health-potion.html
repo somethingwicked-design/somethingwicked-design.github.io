@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Health Potion - Luna Rachmani - Something Wicked</title>
-  <meta name="description" content="Health Potion, a brand identity and design manual for a fictional game studio. I made it in 2022 and revisited it in 2024 to see how far I'd come.">
+  <meta name="description" content="My first brand identity, a manual for a fictional game studio, and how I rebuilt it two years later.">
   <meta name="theme-color" content="#0B0B0B">
   <!-- The site is already dark: browsers (Samsung Internet) must not recolour it -->
   <meta name="color-scheme" content="only dark">
@@ -14,7 +14,7 @@
   <meta property="og:site_name" content="Something Wicked">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Health Potion - Luna Rachmani - Something Wicked">
-  <meta property="og:description" content="Health Potion, a brand identity and design manual for a fictional game studio. I made it in 2022 and revisited it in 2024 to see how far I'd come.">
+  <meta property="og:description" content="My first brand identity, a manual for a fictional game studio, and how I rebuilt it two years later.">
   <meta property="og:url" content="https://somethingwicked.design/work/health-potion.html">
   <meta property="og:image" content="https://somethingwicked.design/img/share.jpg">
   <meta property="og:image:width" content="1200">
@@ -45,12 +45,22 @@
   <!-- Case study only -->
   <link rel="stylesheet" href="/css/case.css">
   <script src="/js/case.js" defer></script>
-  <link rel="preload" href="/img/health-potion-guide.webp" as="image" type="image/webp">
+  <!-- Moving cards, shared by the case studies -->
+  <link rel="stylesheet" href="/css/cards.css">
+  <script src="/js/cards.js" defer></script>
+  <!-- Health Potion cards (051): URW Gothic stands in for Century Gothic,
+       this page only -->
+  <link rel="stylesheet" href="/css/health-potion.css">
+  <script src="/js/health-potion.js" defer></script>
+  <link rel="preload" href="/img/health-potion/hero.webp" as="image" type="image/webp">
 </head>
 <!-- Case study template (040). For the next case study: copy this file,
      change the accent and screen tint below, data-project, the content and
      the Next up block. Order of next projects: 024. -->
-<body class="case" data-project="health-potion" style="--accent:#6893B5; --on-accent:#0B0B0B">
+<!-- Accent (051): mauve, 4.2:1 on ink, for the wicked part and arrow
+     (large); its 80% tint (6.0:1) for the 13px chapter numbers. Navy fails
+     on the dark page. -->
+<body class="case" data-project="health-potion" style="--accent:#8A6B7D; --accent-small:#A08894; --on-accent:#FFFFFF">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- header: keep in sync -->
@@ -108,8 +118,10 @@
              INTRO: hero, title (cols 1-4), lead, two paragraphs, facts
              ======================================================== -->
         <div class="cs-hero">
+          <!-- The open 2024 manual (HealthPotion.webp), 16:9, centred.
+               No covers anywhere: their game art isn't mine (051). -->
           <figure class="media ar-wide" id="csHero">
-            <img src="/img/health-potion-guide.webp" width="1800" height="1799" alt="The Health Potion brand manual lying open on its typography and colour pages" fetchpriority="high">
+            <img src="/img/health-potion/hero.webp" width="2400" height="1350" alt="The Health Potion brand manual lying open on the spread with the corporate fonts and the colour system" fetchpriority="high">
           </figure>
           <span class="tape" aria-hidden="true"></span>
         </div>
@@ -119,121 +131,102 @@
             <h1 class="cs-title head" id="cs-title">Health Potion</h1>
           </div>
           <div class="cs-body">
-            <p class="cs-lead">[Health Potion in one line]</p>
-            <p>A brand identity and corporate design manual for a fictional video game studio, started in 2022 at vocational college and revisited in 2024 to see how far the work had developed.</p>
-            <p>The brief: take the iconic MMORPG health potion and build a studio identity around it.</p>
+            <p class="cs-lead">A brand manual for a game studio, made in 2022 and rebuilt two years&nbsp;later.</p>
+            <p>Health Potion is a fictional video game studio, and my first brand identity. I gave it a full identity, from the logo to the type and colours, and wrote the manual that holds it together: a set of guidelines a studio could hand to a printer or a&nbsp;developer.</p>
+            <p>In 2024 I went back to it. The first version was built around one red. The new one swaps it for navy, blue and mauve, lets the name stand on its own as the logo, and sets every page with a clearer&nbsp;hierarchy.</p>
             <dl class="cs-facts">
-              <div><dt>My role</dt><dd>Concept, typography, colour system, layout</dd></div>
-              <div><dt>Team</dt><dd>Solo</dd></div>
-              <div><dt>Discipline</dt><dd>Branding</dd></div>
-              <div><dt>Year</dt><dd>2022 (original), 2024 (revisited)</dd></div>
+              <div><dt>My role</dt><dd>Concept, logo, typography, colour, layout</dd></div>
+              <div><dt>Team</dt><dd>Just me</dd></div>
+              <div><dt>Discipline</dt><dd>Brand identity</dd></div>
+              <div><dt>Year</dt><dd>2022-2024</dd></div>
             </dl>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/health-potion/cover-2024.webp" width="1414" height="2000" alt="The 2024 cover of the Health Potion brand manual: a dark fantasy character under the Health Potion wordmark" loading="lazy" decoding="async">
-          </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-wide">
-              <img src="/img/health-potion/banner-2024.webp" width="2000" height="1298" alt="The 2024 Health Potion banner: the same character with the wordmark bottom right" loading="lazy" decoding="async">
-            </figure>
-            <div class="media media--ph m-ar-scene">[Photo: the printed manual]</div>
-          </div>
-        </div>
-
         <!-- ========================================================
-             01 CONTEXT
+             01 THE IDEA
              ======================================================== -->
-        <section class="cs-text" id="context" aria-labelledby="h-context">
-          <h2 class="cs-h2 head" id="h-context"><span class="cs-num">01</span> Context</h2>
+        <section class="cs-text" id="idea" aria-labelledby="h-idea">
+          <h2 class="cs-h2 head" id="h-idea"><span class="cs-num">01</span> The idea</h2>
           <div class="cs-body">
-            <p>[Context: the brief at vocational college, who it was for and what it asked]</p>
+            <p>In MMORPGs the health potion has been the most important item for decades. It keeps your character alive, and the relief when one appears on screen is what I wanted the studio to stand for: a company that makes games with&nbsp;heart.</p>
+            <p>It started as an assignment at my Berufskolleg: design your own corporate identity and manual. I went a bit above and beyond. So far, in fact, that I handed it in late: full marks for the work, and a B instead of an A for the&nbsp;deadline.</p>
           </div>
         </section>
 
-        <!-- The wicked part (007, 040): right after 01 Context.
+        <!-- The wicked part (007, 040): right after 01, as on every case
+             study (051). One line, so it sits level with the arrowhead.
              TODO: replace the note with Luna's handwriting SVG -->
-        <div class="wicked">
+        <div class="wicked wicked--one">
           <span class="wicked-note" aria-hidden="true">
             <span class="hand">the wicked part</span>
             <svg viewBox="0 0 72 40" focusable="false"><path d="M64 36 C56 14, 34 4, 4 10" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M14 2 L3 10 L13 18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </span>
-          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>[the wicked part]</span></p>
+          <p class="wicked-line"><span class="visually-hidden">The wicked part: </span><span>I fired my own&nbsp;logo.</span></p>
         </div>
 
-        <div class="media media--ph ar-wide m-ar-scene">[Photo: sketches from 2022]</div>
-
         <!-- ========================================================
-             02 CONCEPT
+             02 THE MARK
              ======================================================== -->
-        <section class="cs-text" id="concept" aria-labelledby="h-concept">
-          <h2 class="cs-h2 head" id="h-concept"><span class="cs-num">02</span> Concept</h2>
+        <section class="cs-text" id="mark" aria-labelledby="h-mark">
+          <h2 class="cs-h2 head" id="h-mark"><span class="cs-num">02</span> The mark</h2>
           <div class="cs-body">
-            <p>The concept borrows from MMORPG culture - specifically the health potion, one of the most universally recognised game items. The studio identity needed to balance playfulness with professionalism: a brand that could sit in the gaming industry without looking like it was trying too hard.</p>
+            <p>The 2022 logo puts the name either side of a heart-shaped potion flask, on one baseline, with the flask as the heart of the&nbsp;name.</p>
+            <p>In 2024 I let the name do the work: HEALTH over POTION, with a full&nbsp;stop.</p>
           </div>
         </section>
 
-        <div class="cs-bento cs-bento--flip">
-          <figure class="media ar-tall m-ar-tall">
-            <img src="/img/health-potion/cover-2022.webp" width="1414" height="2000" alt="The 2022 cover of the manual: a red-haired character on a red page with the potion logo" loading="lazy" decoding="async">
+        <!-- Health Potion cards (051): js/health-potion.js fills each
+             figure. To swap a card, change its data-hpc (logo, colour,
+             type). Manual pages whole on light grey; every 2022 page gets
+             its label in the strip under it. -->
+        <div class="cs-row">
+          <figure class="media cs-card hpc" data-hpc="logo"></figure>
+          <figure class="media ar-square hp-pages">
+            <img class="hp-page" src="/img/health-potion/letter-2022.webp" width="782" height="1107" alt="The 2022 Health Potion letterhead: a red and black band across the top with the flask logo in white" loading="lazy" decoding="async">
+            <figcaption class="hp-tag">2022 version</figcaption>
           </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-tall">
-              <img src="/img/health-potion/logo-variants-2022.webp" width="782" height="1107" alt="2022 manual page with the three logo variants: the potion bottle between Health and Potion, in red, black and reversed" class="obj-bottom" loading="lazy" decoding="async">
-            </figure>
-            <figure class="media m-ar-tall">
-              <img src="/img/health-potion/letter-2022.webp" width="782" height="1107" alt="The 2022 Health Potion letterhead" class="obj-top" loading="lazy" decoding="async">
-            </figure>
-          </div>
         </div>
 
         <!-- ========================================================
-             03 DESIGN SYSTEM
+             03 THE SYSTEM
              ======================================================== -->
         <section class="cs-text" id="system" aria-labelledby="h-system">
-          <h2 class="cs-h2 head" id="h-system"><span class="cs-num">03</span> Design system</h2>
+          <h2 class="cs-h2 head" id="h-system"><span class="cs-num">03</span> The system</h2>
           <div class="cs-body">
-            <p>The primary typeface is Century Gothic Bold - a modern grotesque with geometry that references both digital culture and corporate credibility. It's paired across the manual with HKS and Pantone shades to ensure consistency across print and digital applications.</p>
-            <p>The manual demonstrates hierarchy, spacing, and brand application through the cover and internal spread design - a complete set of guidelines a real studio could hand to a printer or developer.</p>
+            <p>The type is Century Gothic Bold, used from bold down to regular. Every colour is defined for print in HKS, Pantone and CMYK, and for screens in RGB and hex, so it looks the same&nbsp;everywhere.</p>
+            <p>The 2024 colours are navy, blue and mauve, each with tints at 80, 60 and 30%, so the three always work&nbsp;together.</p>
           </div>
         </section>
 
-        <div class="cs-bento">
-          <figure class="media ar-tall">
-            <img src="/img/health-potion/typography-2024.webp" width="1414" height="2000" alt="Manual page: corporate fonts and typographic rules, Century Gothic in bold, bold italic, italic and regular" loading="lazy" decoding="async">
-          </figure>
-          <div class="cs-stack">
-            <figure class="media m-ar-tall">
-              <img src="/img/health-potion/colours-2024.webp" width="1414" height="2000" alt="Manual page: the secondary colour system, three colours in navy, steel blue and mauve with their tints" class="obj-bottom" loading="lazy" decoding="async">
-            </figure>
-            <div class="media media--ph m-ar-scene">[Photo: the identity applied]</div>
-          </div>
+        <div class="cs-row">
+          <figure class="media cs-card hpc" data-hpc="colour"></figure>
+          <figure class="media cs-card hpc" data-hpc="type"></figure>
         </div>
 
         <!-- ========================================================
-             04 THE 2024 REVISIT
+             04 TWO YEARS LATER
              ======================================================== -->
-        <section class="cs-text" id="revisit" aria-labelledby="h-revisit">
-          <h2 class="cs-h2 head" id="h-revisit"><span class="cs-num">04</span> The 2024 revisit</h2>
+        <section class="cs-text" id="later" aria-labelledby="h-later">
+          <h2 class="cs-h2 head" id="h-later"><span class="cs-num">04</span> Two years later</h2>
           <div class="cs-body">
-            <p>Returning to this project two years later was a deliberate exercise in measuring growth. The decisions I'd made in 2022 - the font choice, the secondary colour system, the layout approach - held up better than expected, but the 2024 version shows tighter colour harmony, more considered typographic hierarchy, and better application consistency.</p>
+            <p>In 2024 I put together a portfolio for my bachelor&rsquo;s application, and looking at Health Potion again, I could see how much I&rsquo;d grown since. I get that with old work: two months into my internship I felt the same about my old portfolio, and about ReStock. To me that&rsquo;s a good sign, and I always push my work to look better. So I redesigned Health Potion to see how much better I could make&nbsp;it.</p>
+            <p>The 2024 version is tighter: a colour system instead of a single red, a clearer hierarchy on every page, and the same layout and footer&nbsp;throughout.</p>
+            <p>The covers of both versions used game art that isn&rsquo;t mine, so they&rsquo;re not shown&nbsp;here.</p>
           </div>
         </section>
 
-        <div class="media media--ph ar-wide m-ar-scene">[Before and after: the 2022 and 2024 manuals side by side]</div>
+        <!-- The 2022 logo page and the 2024 colour page side by side, each
+             labelled under the page (16:9, square on phones) -->
+        <div class="cs-row cs-row--1">
+          <figure class="media ar-wide hp-pages" role="group" aria-label="The 2022 version and the 2024 version side by side">
+            <img class="hp-page hp-page--l" src="/img/health-potion/logo-variants-2022.webp" width="782" height="1107" alt="2022 version: a manual page in red, why the logo is a heart-shaped potion, and the three logo variants" loading="lazy" decoding="async">
+            <span class="hp-tag hp-tag--l" aria-hidden="true">2022 version</span>
+            <img class="hp-page hp-page--r" src="/img/health-potion/colours-2024.webp" width="1414" height="2000" alt="2024 version: the secondary colour system page, navy, blue and mauve, each with three tints" loading="lazy" decoding="async">
+            <span class="hp-tag hp-tag--r" aria-hidden="true">2024 version</span>
+          </figure>
+        </div>
 
-        <!-- ========================================================
-             05 REFLECTION
-             ======================================================== -->
-        <section class="cs-text" id="reflection" aria-labelledby="h-reflection">
-          <h2 class="cs-h2 head" id="h-reflection"><span class="cs-num">05</span> Reflection</h2>
-          <div class="cs-body">
-            <p><span class="cs-em">[The one thing this project taught me]</span></p>
-            <p>[What worked, and what I'd do next time]</p>
-          </div>
-        </section>
       </div>
       </div>
       <span class="cs-hairline" aria-hidden="true"></span>
@@ -253,13 +246,14 @@
         <a class="next-title" href="/work/kokoro.html">
           <span class="visually-hidden">Next up: </span>
           <span>Kokoro</span>
-          <span class="next-sub">A lucky cat with cattitude</span>
+          <span class="next-sub">A music label, a lucky cat and a lot of&nbsp;attitude.</span>
         </a>
         <p class="next-all"><a href="/#all-work" aria-label="All work, 7 projects">All work</a><span aria-hidden="true">(7)</span></p>
+        <!-- The Kokoro merch mockup (MU_KOKORO.webp), no name over it
+             (024) -->
         <a class="next-prev" href="/work/kokoro.html" aria-label="Next project: Kokoro">
           <span class="next-prev-in">
-            <span class="next-prev-ph">[Kokoro preview video]</span>
-            <span class="next-prev-name head" aria-hidden="true">Kokoro</span>
+            <img src="/img/kokoro/preview.webp" width="1600" height="1068" alt="" loading="lazy" decoding="async">
           </span>
         </a>
       </div>

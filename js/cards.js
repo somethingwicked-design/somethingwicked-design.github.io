@@ -1,5 +1,5 @@
 // Moving cards in a case study, shared by every project (Op Jezelf 043-045,
-// De Bote 047, Something Wicked 049). A project script hands its cards to SWCards.mount(); each
+// De Bote 047, Something Wicked 049, ReStock 050, Health Potion 051). A project script hands its cards to SWCards.mount(); each
 // <figure class="media cs-card" data-<key>="name"> then becomes one card.
 // Styles: css/cards.css, plus the project's own card styles.
 //
@@ -93,6 +93,54 @@
         next();
       });
     })();
+  }
+
+  // A fixed random sequence, so the hand-drawn lines look the same on every
+  // visit
+  function rng(seed) {
+    return function () {
+      seed |= 0;
+      seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function f2(v) { return v.toFixed(2); }
+
+  // Hand hatching (De Bote 047, Health Potion 051): rough parallel strokes
+  // over the box, a little uneven in spacing, weight and pressure. A mask
+  // in the card keeps them inside the shapes. Options:
+  //   cls     the class of each stroke
+  //   n       how many strokes across the box
+  //   seg     length of one bend; without it every stroke has three
+  //   jit     how far a bend wanders sideways
+  //   w, op   stroke width and opacity, [min, max]
+  //   dur     how long the hatching takes, first stroke to last
+  //   k       dy/dx of a stroke (1.88, about 62deg)
+  function hatching(r, box, o) {
+    var k = o.k || 1.88;
+    var op = o.op || [.6, 1];
+    var c0 = box.x1 + box.y1 / k;
+    var c1 = box.x2 + box.y2 / k;
+    var gap = (c1 - c0) / o.n;
+    var out = '';
+    for (var i = 0; i < o.n; i++) {
+      // Each stroke is x = c - y / k, from the bottom (or left) edge up
+      var c = c0 + (i + .5 + (r() - .5) * .3) * gap;
+      var yA = Math.min(box.y2, (c - box.x1) * k);
+      var yB = Math.max(box.y1, (c - box.x2) * k);
+      if (yA <= yB) continue;
+      var n = o.seg ? Math.max(3, Math.round((yA - yB) / o.seg)) : 3;
+      var p = [];
+      for (var j = 0; j <= n; j++) {
+        var y = yA - (yA - yB) * j / n;
+        var jit = j && j < n ? (r() - .5) * 2 * o.jit : 0;
+        p.push(f2(c - y / k + jit) + ' ' + f2(y));
+      }
+      out += '<path class="' + o.cls + '" pathLength="1" style="--d:' + f2(i / o.n * o.dur) + 's;stroke-width:' + f2(o.w[0] + r() * (o.w[1] - o.w[0])) + ';opacity:' + f2(op[0] + r() * (op[1] - op[0])) + '" d="M' + p.join(' L') + '"/>';
+    }
+    return out;
   }
 
   // The header line at the top of a card: what it shows, and on some cards
@@ -237,6 +285,9 @@
     reflow: reflow,
     clock: clock,
     seq: seq,
+    rng: rng,
+    f2: f2,
+    hatching: hatching,
     hd: hd,
     holdOnHover: holdOnHover,
     mount: mount
