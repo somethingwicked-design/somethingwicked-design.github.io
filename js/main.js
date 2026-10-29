@@ -118,12 +118,11 @@
   // that work first, the rest behind Load more, for the rest of the visit
   // (sessionStorage); Load more, '?focus=all' or an unknown value end it.
   // It never hides a page: case studies open normally from any link. To move a
-  // project, change its focus here: the order always follows the work
-  // order (057).
+  // project, change its focus here; each focus lists its projects in its
+  // own order, which the homepage and Next up follow (066, 067).
   // ---------------------------------------------------------------------
-  var WORK_ORDER = ['op-jezelf', 'restock', 'health-potion', 'de-bote', 'something-wicked', 'kokoro'];
   var FOCUS = {
-    branding: { label: 'Branding', slugs: ['health-potion', 'de-bote', 'something-wicked', 'kokoro'] },
+    branding: { label: 'Branding', slugs: ['de-bote', 'kokoro', 'something-wicked', 'health-potion'] },
     uiux: { label: 'UI/UX', slugs: ['op-jezelf', 'restock', 'something-wicked'] }
   };
   var FOCUS_KEY = 'sw-focus';
@@ -141,12 +140,12 @@
     try { focusKey = sessionStorage.getItem(FOCUS_KEY); } catch (e) { focusKey = null; }
     if (!Object.prototype.hasOwnProperty.call(FOCUS, focusKey)) focusKey = null;
   }
-  // The focus for this page: null, or its label and its projects in the
-  // work order
+  // The focus for this page: null, or its label and its projects in
+  // order
   window.SWFocus = focusKey ? {
     key: focusKey,
     label: FOCUS[focusKey].label,
-    slugs: WORK_ORDER.filter(function (s) { return FOCUS[focusKey].slugs.indexOf(s) !== -1; })
+    slugs: FOCUS[focusKey].slugs
   } : null;
   function clearFocus() {
     window.SWFocus = null;
@@ -168,22 +167,25 @@
       if (badge) badge.hidden = false;
     });
 
-    // Focus (048, 066): the focus's projects first, in the same big,
-    // small, small rhythm as the full list, the others moved behind them
-    // for Load more
+    // Focus (048, 066, 067): the focus's projects first, in its own order
+    // and the same big, small, small rhythm as the full list, the others
+    // behind them, in the work order, for Load more
     var outside = [];
     if (window.SWFocus) {
       var grid = work.querySelector('.wgrid');
       var order = [];
-      cards.forEach(function (card) {
-        if (window.SWFocus.slugs.indexOf(card.getAttribute('data-slug')) !== -1) order.push(card);
-        else outside.push(card);
+      window.SWFocus.slugs.forEach(function (slug) {
+        var card = work.querySelector('.card[data-slug="' + slug + '"]');
+        if (card) order.push(card);
       });
-      outside.forEach(function (card) {
-        card.classList.add('is-out');
-        grid.appendChild(card);
+      cards.forEach(function (card) {
+        if (order.indexOf(card) === -1) {
+          card.classList.add('is-out');
+          outside.push(card);
+        }
       });
       order.concat(outside).forEach(function (card, i) {
+        grid.appendChild(card);
         var big = i % 3 === 0;
         card.classList.add('is-shown');
         card.classList.remove('card--big', 'card--small');
