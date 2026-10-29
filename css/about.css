@@ -1096,3 +1096,10 @@
     display: none;
   }
 }
+
+/* Phones: only the hero has tape, so the photos have none */
+@media (max-width: 759.98px) {
+  .ph-tape {
+    display: none;
+  }
+}

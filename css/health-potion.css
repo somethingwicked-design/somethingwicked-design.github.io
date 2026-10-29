@@ -141,6 +141,10 @@
   .hpc-src span:last-child {
     display: none;
   }
+  /* ...except a note on the stand-in font, under the source */
+  .hpc-src span.is-font:last-child {
+    display: block;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -331,6 +335,9 @@
 .hpc-main {
   position: relative;
   height: 28cqw;
+  /* Reach 1px under the next block: no light seam between the three
+     while they're one red */
+  margin-right: -1px;
   background: #A31C19;
   transition: background 1s var(--e);
 }
@@ -579,24 +586,41 @@
 .hp-tag--l {
   left: 30%;
 }
+/* Phones: the label is a tag in the top left corner, and the two versions
+   stack, one above the other, so each page is big enough to read */
 @media (max-width: 759.98px) {
+  .hp-tag {
+    top: 4%;
+    bottom: auto;
+    left: 5%;
+    transform: none;
+  }
+  .media > img.hp-page {
+    top: 14%;
+    height: 78%;
+  }
   .hp-pages.ar-wide {
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 2.4;
   }
   .media > img.hp-page--l,
   .media > img.hp-page--r {
-    top: 9%;
-    height: 62%;
-    left: 26%;
+    left: 50%;
+    height: 40%;
   }
-  .media > img.hp-page--r,
+  .media > img.hp-page--l {
+    top: 7%;
+  }
+  .media > img.hp-page--r {
+    top: 57%;
+  }
+  .hp-tag--l,
   .hp-tag--r {
-    left: 74%;
+    left: 5%;
   }
   .hp-tag--l {
-    left: 26%;
+    top: 2%;
   }
-  .hp-tag {
-    bottom: 8%;
+  .hp-tag--r {
+    top: 52%;
   }
 }

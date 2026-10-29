@@ -28,7 +28,8 @@
     return '<div class="hpc-foot">' +
       '<div class="hpc-dots" aria-hidden="true">' + dots + '</div>' +
       '<div class="hpc-meta" aria-hidden="true"><div class="hpc-lvl"></div><div class="hpc-rule"></div></div>' +
-      '<div class="hpc-src"><span>' + a + '</span><span>' + b + '</span></div>' +
+      // A note on the stand-in font stays on phones too (is-font)
+      '<div class="hpc-src"><span>' + a + '</span><span' + (/URW Gothic/.test(b) ? ' class="is-font"' : '') + '>' + b + '</span></div>' +
     '</div>';
   }
   // The level and rule fade out, change, and fade back in; now() sets them

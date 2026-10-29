@@ -2,7 +2,9 @@
 // (reference/restock-*.html). Every <figure class="media cs-card rsc"
 // data-rsc="…"> in the case study becomes one card, so swapping a card is
 // changing that attribute. Motion, timing, layout and text follow the
-// prototypes. Styles: css/restock.css. Frame, header, pause button, clock,
+// prototypes. New Spirit Bold is licensed, so Fraunces Black Soft stands in
+// for it, and every card that shows it says so in its source line.
+// Styles: css/restock.css. Frame, header, pause button, clock,
 // the loop and when a card plays are shared with the other case studies:
 // js/cards.js.
 
@@ -14,7 +16,8 @@
   var seq = C.seq;
 
   function src(a, b) {
-    return '<div class="rsc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
+    // A note on a stand-in font stays on phones too (is-font)
+    return '<div class="rsc-src"><span>' + a + '</span>' + (b ? '<span' + (/^Shown in/.test(b) ? ' class="is-font"' : '') + '>' + b + '</span>' : '') + '</div>';
   }
   function each(list, f) { Array.prototype.forEach.call(list, f); }
 
@@ -26,7 +29,7 @@
   // ---------------------------------------------------------------------
   CARDS.type = {
     ctl: 'typography animation',
-    label: 'ReStock typography: New Spirit Bold for the wordmark and headlines, Figtree for the interface and body text, shown together in the Kitchen screen',
+    label: 'ReStock typography: New Spirit Bold for the wordmark and headlines, Figtree for the interface and body text, shown together in the Kitchen screen. New Spirit is shown in Fraunces, a close match',
     build: function (card, t) {
       card.innerHTML = hd('Typography', 'Two typefaces') +
         '<div aria-hidden="true">' +
@@ -39,7 +42,7 @@
             '<div class="rsc-row"><span class="rsc-av"><i></i></span><span class="rsc-it"><b>Strawberries</b><span>1× box</span></span><span class="rsc-pill">Worth a look</span></div>' +
           '</div>' +
         '</div>' +
-        src('Chunky and grounded, like the icons', 'ReStock');
+        src('Chunky and grounded, like the icons', 'Shown in Fraunces, a close match');
       function add(c) { return function () { card.classList.add(c); }; }
       return {
         still: function () { card.classList.add('is-v', 'is-u'); },
@@ -178,7 +181,7 @@
             '<div class="rsc-ch"><span class="rsc-ar">&rarr;</span><p>' + f[2] + '</p></div>' +
           '</div>';
         }).join('') + '</div>' +
-        src('7 think-aloud sessions, 28-29 Sept 2026', 'ReStock');
+        src('7 think-aloud sessions, 28-29 Sept 2026', 'Shown in Fraunces, a close match');
       var S = card.querySelectorAll('.rsc-sl');
       var Dt = card.querySelectorAll('.rsc-dots i');
       var cur = -1;
@@ -237,7 +240,7 @@
               '<p>' + s[3] + '</p></div>';
           }).join('') +
         '</div>' +
-        src('Worked on between client projects at Framna', 'ReStock, 2026');
+        src('Worked on between client projects at Framna', 'Shown in Fraunces, a close match');
       var S = card.querySelectorAll('.rsc-st');
       function show(i) { return function () { S[i].classList.add('is-v'); }; }
       return {

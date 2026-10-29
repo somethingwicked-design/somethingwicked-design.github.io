@@ -102,11 +102,9 @@
   }
 }
 
-/* Phones: the frame is 8px, so the tape sits 14px above it as well */
+/* Phones: only the hero has tape, so the cards have none */
 @media (max-width: 759.98px) {
   .cs-card::before {
-    top: -22px;
-    width: 104px;
-    height: 28px;
+    display: none;
   }
 }

@@ -191,6 +191,21 @@
 .is-set .dbc-cols p {
   clip-path: inset(0 0 0 0);
 }
+/* Small cards (phones): the 10px minimum made the two columns run into
+   the source line. One column, cut off with a fade, like a page that
+   carries on */
+@container (max-width: 440px) {
+  .dbc-cols {
+    grid-template-columns: 1fr;
+    max-height: 19cqw;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(#000 60%, transparent);
+    mask-image: linear-gradient(#000 60%, transparent);
+  }
+  .dbc-cols p:nth-child(2) {
+    display: none;
+  }
+}
 .dbc-dc {
   float: left;
   margin: .08em .08em 0 0;
@@ -593,6 +608,18 @@
 .is-on .dbc-lnotes span {
   opacity: 1;
   transition-delay: 1.8s;
+}
+/* Small cards (phones): the notes beside the word ran off the card at the
+   10px minimum, so they wrap onto two lines */
+@container (max-width: 440px) {
+  .dbc-notes span {
+    width: 14cqw;
+    white-space: normal;
+    line-height: 1.1;
+  }
+  .dbc-notes .is-l {
+    text-align: right;
+  }
 }
 
 /* --------------------------------------------------------------------------

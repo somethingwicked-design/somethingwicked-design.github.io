@@ -662,6 +662,13 @@
     aspect-ratio: auto;
     height: auto;
   }
+  /* A very wide banner is too small whole: show its left part at 4:3
+     (Op Jezelf: the name and the line) */
+  .cs-hero .media > img.is-whole.is-focus-left {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    object-position: left center;
+  }
   /* A hero video, whole in the polaroid (Something Wicked, 16:9) */
   .cs-hero .media > video {
     position: static;
@@ -745,6 +752,10 @@
   .wicked--one .wicked-line {
     align-self: flex-start;
     margin-bottom: 0;
+  }
+  /* Narrow phones: a long line wraps instead of running off the screen */
+  .wicked-line span {
+    white-space: normal;
   }
   .wicked--after-media {
     padding-block: var(--sp-64) 0;
