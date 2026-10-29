@@ -54,6 +54,26 @@ img {
   height: auto;
 }
 
+/* Images, drawings and videos can't be dragged out or selected, and a long
+   press on an iPhone doesn't offer 'Save to Photos'. An image inside a
+   link keeps the link's own long-press menu (open, copy link). The
+   right-click menu: js/main.js. */
+img,
+svg,
+video {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+img,
+video {
+  -webkit-touch-callout: none;
+}
+a img,
+a video {
+  -webkit-touch-callout: default;
+}
+
 /* No widows or orphans (DESIGN.md, Type). Where a short ending still drops
    onto its own line at 390 or 360px, glue the last words with &nbsp;. */
 h1, h2, h3, .head {

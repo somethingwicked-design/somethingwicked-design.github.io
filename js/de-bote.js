@@ -468,7 +468,7 @@
     label: 'De Bote, a seven-page newspaper about Teleholding, the Skene brothers and censorship, shown page by page',
     build: function (card, t, ctx) {
       function page(n) {
-        return '<img src="' + IMG + 'pages/page-' + n + '.webp" width="776" height="1100" alt="" loading="lazy" decoding="async">';
+        return '<img draggable="false" src="' + IMG + 'pages/page-' + n + '.webp" width="776" height="1100" alt="" loading="lazy" decoding="async">';
       }
       // Leaves: front page | 2, 3 | 4, 5 | 6, with page 7 underneath
       var PAIRS = [[1, 2], [3, 4], [5, 6]];

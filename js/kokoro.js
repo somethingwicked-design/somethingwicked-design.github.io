@@ -120,8 +120,8 @@
     build: function (card, t) {
       card.innerHTML = hd('Mascot', 'Koko, redrawn') +
         '<div class="koc-kstage" aria-hidden="true"><div class="koc-cat">' +
-          '<img class="koc-old" src="' + IMG + 'koko-before.webp" width="984" height="1218" alt="" decoding="async">' +
-          '<img class="koc-new" src="' + IMG + 'koko-after.webp" width="485" height="609" alt="" decoding="async">' +
+          '<img draggable="false" class="koc-old" src="' + IMG + 'koko-before.webp" width="984" height="1218" alt="" decoding="async">' +
+          '<img draggable="false" class="koc-new" src="' + IMG + 'koko-after.webp" width="485" height="609" alt="" decoding="async">' +
         '</div></div>' +
         foot(2, 'Original Koko by Aiko, redrawn by me', 'Kokoro');
       var meta = metaOf(card, t);
@@ -170,7 +170,7 @@
       card.innerHTML = hd('Poster', 'Three inks') +
         '<div class="koc-pstage" aria-hidden="true">' +
           INKS.map(function (k) {
-            return '<img class="koc-pl" src="' + IMG + 'ink-' + k[2] + '.webp" width="900" height="1200" alt="" decoding="async">';
+            return '<img draggable="false" class="koc-pl" src="' + IMG + 'ink-' + k[2] + '.webp" width="900" height="1200" alt="" decoding="async">';
           }).join('') +
         '</div>' +
         '<div class="koc-inks" aria-hidden="true"><p class="koc-h">Rockaholics</p>' +

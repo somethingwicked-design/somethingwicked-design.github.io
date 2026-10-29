@@ -1,6 +1,6 @@
 // Small things only: nav state, header on scroll, phone menu, marquee pause,
-// the work list (Load more, #all-work, Just seen, View case ticket) and the
-// dev grid overlay.
+// the work list (Load more, #all-work, Just seen, View case ticket), no
+// right-click menu on images and the dev grid overlay.
 
 (function () {
   'use strict';
@@ -196,6 +196,20 @@
       push.style.animation = '';
     });
   }
+
+  // ---------------------------------------------------------------------
+  // No 'Save image as': no right-click menu on images, videos and the
+  // case study cards. Text, links and controls (pause buttons, the
+  // before/after slider, timeline years) keep theirs; an image inside a
+  // link keeps the link's menu, an image inside a button (Ilio on the
+  // 404) doesn't. Dragging and long press: base.css.
+  // ---------------------------------------------------------------------
+  document.addEventListener('contextmenu', function (e) {
+    var t = e.target;
+    if (!t.closest || t.closest('a, input, select, textarea')) return;
+    if (t.closest('button') && !t.closest('img, video')) return;
+    if (t.closest('img, video, .cs-card-in')) e.preventDefault();
+  });
 
   // ---------------------------------------------------------------------
   // Dev-only grid overlay: add ?grid to the URL or press G.

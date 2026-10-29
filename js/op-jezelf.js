@@ -393,7 +393,7 @@
           slot.className = 'ojc-slot';
           // Rise in from the middle outwards, row by row
           var d = (Math.abs(c - mid) * .12 + r * .25).toFixed(2);
-          slot.innerHTML = '<div class="ojc-face" style="--d:' + d + 's"><img src="' + IMG + 'character-' + NAMES[m] + '.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>';
+          slot.innerHTML = '<div class="ojc-face" style="--d:' + d + 's"><img draggable="false" src="' + IMG + 'character-' + NAMES[m] + '.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>';
           line.appendChild(slot);
           faces.push(slot.firstChild);
         });
@@ -432,7 +432,7 @@
       card.innerHTML = hd('Illustration') +
         '<div class="ojc-t">The weekly<br><em>shop</em></div>' +
         '<div class="ojc-shadow"></div>' +
-        '<img class="ojc-bag" src="' + IMG + 'groceries-bag.webp" width="520" height="718" alt="" loading="lazy" decoding="async">' +
+        '<img draggable="false" class="ojc-bag" src="' + IMG + 'groceries-bag.webp" width="520" height="718" alt="" loading="lazy" decoding="async">' +
         '<div class="ojc-src">Groceries, from the app’s shop</div>';
       var bag = card.querySelector('.ojc-bag');
       var k = 0;
@@ -440,6 +440,7 @@
         var it = ITEMS[k++ % ITEMS.length];
         var size = card.clientWidth * .15 * it.s;
         var img = document.createElement('img');
+        img.draggable = false;
         img.className = 'ojc-drop';
         img.src = IMG + 'food-' + it.n + '.webp';
         img.alt = '';
@@ -507,7 +508,7 @@
           '<div class="ojc-dots">' + P.map(function (q, k) {
             return '<button type="button" class="ojc-dot' + (k === i ? ' is-on' : '') + '" aria-label="Show persona ' + (k + 1) + ', ' + q.name.replace('‑', '-') + '"' + (k === i ? ' aria-current="true"' : '') + '></button>';
           }).join('') + '</div>' +
-          '<img class="ojc-pic" src="' + IMG + 'persona-' + p.img + '.webp" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async">';
+          '<img draggable="false" class="ojc-pic" src="' + IMG + 'persona-' + p.img + '.webp" width="' + p.w + '" height="' + p.h + '" alt="" loading="lazy" decoding="async">';
         if (i) d.inert = true;
         card.appendChild(d);
         return d;
@@ -553,7 +554,7 @@
       ];
       card.innerHTML = hd('Illustration') +
         '<div class="ojc-t">Your first flat,<br><em>before and after</em></div>' +
-        '<div class="ojc-plan"><img src="' + IMG + 'flat-before.webp" width="1100" height="1100" alt="" loading="lazy" decoding="async"></div>' +
+        '<div class="ojc-plan"><img draggable="false" src="' + IMG + 'flat-before.webp" width="1100" height="1100" alt="" loading="lazy" decoding="async"></div>' +
         '<ul class="ojc-list"></ul>' +
         '<div class="ojc-roll"></div>';
       var plan = card.querySelector('.ojc-plan');
@@ -562,6 +563,7 @@
       function pc(v) { return v.toFixed(2) + '%'; }
       var rooms = R.map(function (r) {
         var im = document.createElement('img');
+        im.draggable = false;
         im.className = 'ojc-room';
         im.src = IMG + 'flat-after.webp';
         im.alt = '';

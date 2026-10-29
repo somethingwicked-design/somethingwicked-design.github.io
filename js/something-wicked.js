@@ -19,7 +19,7 @@
   var each = C.each;
   function src(a, b) { return C.src('swc', a, b); }
   function img(file, cls) {
-    return '<img src="' + IMG + file + '" alt=""' + (cls ? ' class="' + cls + '"' : '') + ' decoding="async">';
+    return '<img draggable="false" src="' + IMG + file + '" alt=""' + (cls ? ' class="' + cls + '"' : '') + ' decoding="async">';
   }
 
   var CARDS = {};
@@ -382,8 +382,8 @@
     label: 'Before and after of the Something Wicked homepage',
     build: function (card, t) {
       card.innerHTML =
-        '<img src="' + IMG + 'site-old.webp" width="1920" height="1000" alt="Before: the old homepage, a neutral editorial layout with the line \'Designing with people in mind.\' and no photo" decoding="async">' +
-        '<img class="swc-after" src="' + IMG + 'site-new.webp" width="1920" height="1000" alt="After: the new homepage, \'Useful design with something wicked in it.\' in big type, my halftone photo on torn yellow paper and the caution tape" decoding="async">' +
+        '<img draggable="false" src="' + IMG + 'site-old.webp" width="1920" height="1000" alt="Before: the old homepage, a neutral editorial layout with the line \'Designing with people in mind.\' and no photo" decoding="async">' +
+        '<img draggable="false" class="swc-after" src="' + IMG + 'site-new.webp" width="1920" height="1000" alt="After: the new homepage, \'Useful design with something wicked in it.\' in big type, my halftone photo on torn yellow paper and the caution tape" decoding="async">' +
         '<div class="swc-lay swc-lay--before" aria-hidden="true"><span class="swc-tag">Before</span></div>' +
         '<div class="swc-lay swc-after" aria-hidden="true"><span class="swc-tag swc-tag--after">After</span></div>' +
         '<input type="range" min="0" max="100" value="100" step="1" aria-label="Compare the old and new homepage: lower shows more of the new site">' +
