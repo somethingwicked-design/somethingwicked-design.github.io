@@ -67,8 +67,10 @@
   function tickLive() {
     var p = progress();
     var w = main.clientWidth;
-    // Keep the same columns showing on screens wider than the 1440 page
-    var strip = STRIP + Math.max(0, (w - 1440) / 2);
+    // Keep the same columns showing on screens wider than the 1440 page;
+    // narrower screens (760-1439) keep the same share of the width, so the
+    // strip never covers Next up's text
+    var strip = Math.min(STRIP, w * STRIP / 1440) + Math.max(0, (w - 1440) / 2);
     main.style.transform = 'translate3d(' + (-(w - strip) * p).toFixed(1) + 'px, 0, 0)';
     dim.style.opacity = String(MAX_DIM * p);
     fx.forEach(function (el) { el.style.opacity = String(seg(p, 0.4, 0.9)); });
