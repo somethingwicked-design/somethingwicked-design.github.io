@@ -309,7 +309,7 @@
 .cf-layer {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: var(--z-catfetti);
   overflow: hidden;
   pointer-events: none;
 }
@@ -361,7 +361,7 @@
   .ab-deck {
     --cw: 208px;
     position: relative;
-    z-index: 60;
+    z-index: var(--z-deck);
     width: 0;
     height: 380px;
     margin-inline: auto;

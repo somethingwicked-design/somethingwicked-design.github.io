@@ -195,7 +195,7 @@
 .vt-rip {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: var(--z-transition);
   pointer-events: none;
   animation: tpUp .6s linear both;
 }

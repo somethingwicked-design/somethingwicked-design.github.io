@@ -30,7 +30,7 @@
 .dev-grid {
   position: absolute;
   inset: 0;
-  z-index: 100;
+  z-index: var(--z-dev-grid);
   pointer-events: none;
   background-image: linear-gradient(rgba(255, 80, 80, 0.18) 1px, transparent 1px);
   background-size: 100% 8px;

@@ -27,7 +27,7 @@
 .cs-dim {
   position: absolute;
   inset: 0;
-  z-index: 90;
+  z-index: var(--z-cs-dim);
   background: var(--ink);
   opacity: 0;
   pointer-events: none;

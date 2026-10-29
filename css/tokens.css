@@ -121,6 +121,13 @@
   --z-footer: 60;
   --z-header: 80;
   --z-skip: 200;
+  --z-catfetti: 90;     /* About: cats over the page and the header */
+  --z-dev-grid: 100;    /* the ?grid overlay, over everything but the skip link */
+  --z-transition: 1000; /* the phone rip paper, over everything */
+  /* Inside their own stacking context */
+  --z-ticket: 60;       /* View case, over the card image and its gloss */
+  --z-cs-dim: 90;       /* the Next up darkening, over the whole case study */
+  --z-deck: 60;         /* About's hand of five cards (desktop) */
 }
 
 /* Below 760px everything stacks. Phones use a 4-column grid with 16px

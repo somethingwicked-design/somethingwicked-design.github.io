@@ -971,7 +971,7 @@
    already says where it goes. */
 .ticket {
   position: absolute;
-  z-index: 60;
+  z-index: var(--z-ticket);
   display: none;
   width: 104px;
   height: 22px;
