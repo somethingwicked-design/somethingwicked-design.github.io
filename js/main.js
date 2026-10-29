@@ -184,9 +184,18 @@
         grid.appendChild(card);
       });
       order.concat(outside).forEach(function (card, i) {
+        var big = i % 3 === 0;
         card.classList.add('is-shown');
         card.classList.remove('card--big', 'card--small');
-        card.classList.add(i % 3 === 0 ? 'card--big' : 'card--small');
+        card.classList.add(big ? 'card--big' : 'card--small');
+        // Each size has its own crop (2:1 big, 4:3 small), so the frame
+        // never cuts the subject; phones always show the 4:3 one (<source>)
+        var img = card.querySelector('.card-img img');
+        if (img && img.dataset.big) {
+          img.src = big ? img.dataset.big : img.dataset.small;
+          img.width = big ? 2400 : 1800;
+          img.height = big ? 1200 : 1350;
+        }
       });
     }
     var newCards = outside.length ? outside : moreCards;

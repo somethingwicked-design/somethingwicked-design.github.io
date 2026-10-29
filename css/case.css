@@ -431,7 +431,7 @@
   transform-origin: 100% 100%;
 }
 /* The next project's homepage image or video, never cut off (024) */
-.next-prev-in > img,
+.next-prev-in img,
 .next-prev-in > video {
   position: absolute;
   inset: 0;
