@@ -544,6 +544,11 @@
   object-fit: contain;
   filter: drop-shadow(0 10px 22px rgba(20, 25, 40, .25));
 }
+/* The letterhead file is only 782px wide: never show it wider than 390px
+   (552px tall), so it stays sharp, a sheet on the table */
+.media > img.hp-letter {
+  max-height: 552px;
+}
 .hp-tag {
   position: absolute;
   bottom: 5%;
