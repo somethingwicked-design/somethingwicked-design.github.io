@@ -24,6 +24,51 @@
   var prevIn = panel.querySelector('.next-prev-in');
   var fx = panel.querySelectorAll('.next-label, .next-title');
   var all = panel.querySelector('.next-all');
+
+  // Focus links (048, 066; the focus comes from js/main.js): Next up goes
+  // to the next project in the same focus, looping, with that project's
+  // name, line and preview as on the page before it in the work order. A
+  // page outside the focus keeps its own Next up. All work goes back to
+  // the focus, with its count. The rip paper follows the link
+  // (js/transition.js).
+  var NEXT = {
+    'op-jezelf': ['Op Jezelf', 'Getting teens ready to live on their own.',
+      '<img draggable="false" src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="" loading="lazy" decoding="async">'],
+    'restock': ['ReStock', 'Wasting less food, one fridge at a time',
+      '<img draggable="false" src="/img/restock/preview.webp" width="2400" height="1500" alt="" loading="lazy" decoding="async">'],
+    'health-potion': ['Health Potion', 'My first brand identity, rebuilt two years&nbsp;later.',
+      '<img draggable="false" src="/img/health-potion-guide.webp" width="1800" height="1799" alt="" loading="lazy" decoding="async">'],
+    'de-bote': ['De Bote', 'Hold the line: a newspaper about the 06&nbsp;numbers.',
+      '<img draggable="false" src="/img/de-bote/banner.webp" width="2400" height="1600" alt="" loading="lazy" decoding="async">'],
+    'something-wicked': ['Something Wicked', 'My own brand, and the site you’re on right&nbsp;now.',
+      '<video controlsList="nodownload" muted playsinline disablepictureinpicture preload="metadata" poster="/img/something-wicked/glitch-poster.jpg" width="1920" height="1080" aria-hidden="true"><source src="/img/something-wicked/glitch.mp4" type="video/mp4"></video>'],
+    'kokoro': ['Kokoro', 'A music label, a lucky cat and a lot of&nbsp;attitude.',
+      '<img draggable="false" src="/img/kokoro/preview.webp" width="1600" height="1068" alt="" loading="lazy" decoding="async">']
+  };
+  var focus = window.SWFocus;
+  var here = focus ? focus.slugs.indexOf(body.getAttribute('data-project')) : -1;
+  if (here !== -1) {
+    var to = focus.slugs[(here + 1) % focus.slugs.length];
+    var title = panel.querySelector('.next-title');
+    var href = '/work/' + to + '.html';
+    if (title.getAttribute('href') !== href && NEXT[to]) {
+      title.href = href;
+      title.children[1].textContent = NEXT[to][0];
+      title.querySelector('.next-sub').innerHTML = NEXT[to][1];
+      prev.href = href;
+      prev.setAttribute('aria-label', 'Next project: ' + NEXT[to][0]);
+      prevIn.innerHTML = NEXT[to][2];
+    }
+  }
+  if (focus && all) {
+    var allLink = all.querySelector('a');
+    var n = focus.slugs.length;
+    allLink.href = '/?focus=' + focus.key + '#all-work';
+    allLink.textContent = focus.label + ' work';
+    allLink.setAttribute('aria-label', focus.label + ' work, ' + n + ' projects');
+    all.querySelector('span').textContent = '(' + n + ')';
+  }
+
   // A preview video (Something Wicked's glitch, 049) plays once when the
   // preview is half grown (desktop) or half in view (phone), then stays on
   // its last frame. Reduced motion keeps the poster.
