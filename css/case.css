@@ -295,11 +295,17 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-/* A small note under a block, e.g. where a summary comes from */
-.cs-body .cs-note {
+/* A small note under a block, e.g. where a summary comes from, or under
+   a figure */
+.cs-body .cs-note,
+.cs-fig-note {
   font-size: var(--fs-small);
   line-height: var(--lh-small);
   color: var(--muted);
+}
+/* Lined up with the inside of the figure's frame */
+.cs-fig-note {
+  margin: 12px 8px 0;
 }
 .cs-quote {
   margin: 0;
