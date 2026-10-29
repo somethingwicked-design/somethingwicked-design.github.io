@@ -34,7 +34,7 @@
   var NEXT = {
     'op-jezelf': ['Op Jezelf', 'Getting teens ready to live on their own.',
       '<img draggable="false" src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="" loading="lazy" decoding="async">'],
-    'restock': ['ReStock', 'Wasting less food, one fridge at a time',
+    'restock': ['ReStock', 'Wasting less food, one fridge at a&nbsp;time.',
       '<img draggable="false" src="/img/restock/preview.webp" width="2400" height="1500" alt="" loading="lazy" decoding="async">'],
     'health-potion': ['Health Potion', 'My first brand identity, rebuilt two years&nbsp;later.',
       '<img draggable="false" src="/img/health-potion-guide.webp" width="1800" height="1799" alt="" loading="lazy" decoding="async">'],
