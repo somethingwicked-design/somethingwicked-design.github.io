@@ -371,7 +371,7 @@
   // saying hi. Rows of 5, 4 and 5 like the welcome screen.
   CARDS.characters = {
     ctl: 'characters animation',
-    label: 'Fourteen of the Op Jezelf job characters, illustrated by Luna',
+    label: 'Fourteen of the Op Jezelf job characters, illustrated by me',
     build: function (card, t) {
       card.innerHTML = hd('Illustration') +
         '<div class="ojc-t">The characters,<br><em>illustrated by me</em></div>' +

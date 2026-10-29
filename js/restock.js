@@ -79,7 +79,7 @@
   ];
   CARDS.colour = {
     ctl: 'colour animation',
-    label: 'ReStock palette: four colour families, each from deep to pale: terracotta for the wordmark, sage for vegetables and fruit, buttery yellow for grains and pulses and Use soon, plum for snacks and drinks and Today; plus seafoam, dusty blue, mustard gold, moss, coral, stone, warm gray and soft white for illustrations',
+    label: 'ReStock palette: five colour families, each from deep to pale: terracotta for the wordmark, sage for vegetables and fruit, buttery yellow for grains and pulses and Use soon, plum for snacks and drinks and Today, and neutrals for text, lines and cards; plus seafoam, dusty blue, mustard gold, moss, coral, stone, warm grey and soft white for illustrations',
     build: function (card, t) {
       var rings = RINGS.map(function (r, ri) {
         var n = r[3].length;
