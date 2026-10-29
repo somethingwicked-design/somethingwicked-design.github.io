@@ -115,17 +115,32 @@
 
   // ---------------------------------------------------------------------
   // Focus links (048, 066): '/?focus=branding' or '/?focus=uiux' shows
-  // only that work; '?focus=all' or an unknown value shows everything.
-  // To move a project, change its focus here: the order always follows
-  // the work order (057).
+  // only that work, for the rest of the visit (sessionStorage);
+  // '?focus=all' or an unknown value shows everything again. It never
+  // hides a page: case studies open normally from any link. To move a
+  // project, change its focus here: the order always follows the work
+  // order (057).
   // ---------------------------------------------------------------------
   var WORK_ORDER = ['op-jezelf', 'restock', 'health-potion', 'de-bote', 'something-wicked', 'kokoro'];
   var FOCUS = {
     branding: { label: 'Branding', inText: 'branding', slugs: ['health-potion', 'de-bote', 'something-wicked', 'kokoro'] },
     uiux: { label: 'UI/UX', inText: 'UI/UX', slugs: ['op-jezelf', 'restock', 'something-wicked'] }
   };
+  var FOCUS_KEY = 'sw-focus';
+  var focusKey = null;
   var focusParam = new URLSearchParams(window.location.search).get('focus');
-  var focusKey = Object.prototype.hasOwnProperty.call(FOCUS, focusParam) ? focusParam : null;
+  if (focusParam !== null) {
+    // A link with a focus (or ?focus=all) sets this visit's focus. If
+    // storage fails the focus still holds on this page.
+    focusKey = Object.prototype.hasOwnProperty.call(FOCUS, focusParam) ? focusParam : null;
+    try {
+      if (focusKey) sessionStorage.setItem(FOCUS_KEY, focusKey);
+      else sessionStorage.removeItem(FOCUS_KEY);
+    } catch (e) { /* private mode: not remembered */ }
+  } else {
+    try { focusKey = sessionStorage.getItem(FOCUS_KEY); } catch (e) { focusKey = null; }
+    if (!Object.prototype.hasOwnProperty.call(FOCUS, focusKey)) focusKey = null;
+  }
   // The focus for this page: null, or its label and its projects in the
   // work order
   window.SWFocus = focusKey ? {
@@ -136,6 +151,7 @@
   } : null;
   function clearFocus() {
     window.SWFocus = null;
+    try { sessionStorage.removeItem(FOCUS_KEY); } catch (e) { /* private mode */ }
   }
 
   // ---------------------------------------------------------------------
