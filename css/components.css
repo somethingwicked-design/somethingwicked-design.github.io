@@ -839,32 +839,8 @@
   align-items: start;
 }
 
-/* Focus links (048, 066): the note above the work, only with a focus
-   (js/main.js), in the small label style; cards outside the focus hide */
-.work-focus {
-  color: var(--muted);
-  font-size: var(--fs-label);
-  line-height: var(--lh-label);
-  font-weight: 600;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-}
-.work.is-focus .work-head {
-  margin-bottom: var(--sp-32);
-}
-.work.is-focus .work-focus {
-  margin-bottom: var(--sp-24);
-}
-/* A 48px tap target without moving the line */
-.work-focus a {
-  display: inline-block;
-  padding-block: var(--sp-16);
-  margin-block: calc(-1 * var(--sp-16));
-}
-/* It only takes focus to hand it on after 'Show everything' */
-.work-focus:focus {
-  outline: none;
-}
+/* Focus links (048, 066): projects outside the focus wait for Load more
+   (js/main.js) */
 .work .card.is-out {
   display: none;
 }

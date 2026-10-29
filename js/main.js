@@ -115,16 +115,16 @@
 
   // ---------------------------------------------------------------------
   // Focus links (048, 066): '/?focus=branding' or '/?focus=uiux' shows
-  // only that work, for the rest of the visit (sessionStorage);
-  // '?focus=all' or an unknown value shows everything again. It never
-  // hides a page: case studies open normally from any link. To move a
+  // that work first, the rest behind Load more, for the rest of the visit
+  // (sessionStorage); Load more, '?focus=all' or an unknown value end it.
+  // It never hides a page: case studies open normally from any link. To move a
   // project, change its focus here: the order always follows the work
   // order (057).
   // ---------------------------------------------------------------------
   var WORK_ORDER = ['op-jezelf', 'restock', 'health-potion', 'de-bote', 'something-wicked', 'kokoro'];
   var FOCUS = {
-    branding: { label: 'Branding', inText: 'branding', slugs: ['health-potion', 'de-bote', 'something-wicked', 'kokoro'] },
-    uiux: { label: 'UI/UX', inText: 'UI/UX', slugs: ['op-jezelf', 'restock', 'something-wicked'] }
+    branding: { label: 'Branding', slugs: ['health-potion', 'de-bote', 'something-wicked', 'kokoro'] },
+    uiux: { label: 'UI/UX', slugs: ['op-jezelf', 'restock', 'something-wicked'] }
   };
   var FOCUS_KEY = 'sw-focus';
   var focusKey = null;
@@ -146,7 +146,6 @@
   window.SWFocus = focusKey ? {
     key: focusKey,
     label: FOCUS[focusKey].label,
-    inText: FOCUS[focusKey].inText,
     slugs: WORK_ORDER.filter(function (s) { return FOCUS[focusKey].slugs.indexOf(s) !== -1; })
   } : null;
   function clearFocus() {
@@ -169,58 +168,50 @@
       if (badge) badge.hidden = false;
     });
 
+    // Focus (048, 066): the focus's projects first, in the same big,
+    // small, small rhythm as the full list, the others moved behind them
+    // for Load more
+    var outside = [];
+    if (window.SWFocus) {
+      var grid = work.querySelector('.wgrid');
+      var order = [];
+      cards.forEach(function (card) {
+        if (window.SWFocus.slugs.indexOf(card.getAttribute('data-slug')) !== -1) order.push(card);
+        else outside.push(card);
+      });
+      outside.forEach(function (card) {
+        card.classList.add('is-out');
+        grid.appendChild(card);
+      });
+      order.concat(outside).forEach(function (card, i) {
+        card.classList.add('is-shown');
+        card.classList.remove('card--big', 'card--small');
+        card.classList.add(i % 3 === 0 ? 'card--big' : 'card--small');
+      });
+    }
+    var newCards = outside.length ? outside : moreCards;
+
     function showAll() {
       moreCards.forEach(function (card) { card.classList.add('is-shown'); });
-      if (more) more.hidden = true;
+      if (more && !outside.length) more.hidden = true;
     }
 
     // Load more: reveal the rest, move focus to the first new card. The
     // extra cards are only hidden from here on (.has-more), so they never
-    // disappear without a working button.
-    if (more && moreCards.length) {
+    // disappear without a working button. With a focus it brings in the
+    // other projects the same way and ends the focus for the visit.
+    if (more && newCards.length) {
       work.classList.add('has-more');
       more.hidden = false;
       moreBtn.addEventListener('click', function () {
+        if (outside.length) {
+          outside.forEach(function (card) { card.classList.remove('is-out'); });
+          outside = [];
+          clearFocus();
+          history.replaceState(null, '', window.location.pathname + window.location.hash);
+        }
         showAll();
-        moreCards[0].focus();
-      });
-    }
-
-    // Focus (048, 066): only the focus's projects, all at once, in the
-    // same big, small, small rhythm as the full list. The note above the
-    // work says so; 'Show everything' (a real link to '/?focus=all')
-    // brings the rest back in place and the note announces it.
-    var note = work.querySelector('.work-focus');
-    var sizes = [];
-    cards.forEach(function (card, i) {
-      sizes[i] = card.classList.contains('card--big') ? 'card--big' : 'card--small';
-    });
-    function size(card, cls) {
-      card.classList.remove('card--big', 'card--small');
-      card.classList.add(cls);
-    }
-    if (window.SWFocus && note) {
-      var shown = 0;
-      showAll();
-      cards.forEach(function (card) {
-        var on = window.SWFocus.slugs.indexOf(card.getAttribute('data-slug')) !== -1;
-        card.classList.toggle('is-out', !on);
-        if (on) size(card, shown++ % 3 === 0 ? 'card--big' : 'card--small');
-      });
-      work.classList.add('is-focus');
-      note.innerHTML = 'Showing ' + window.SWFocus.inText + ' work <span aria-hidden="true">·</span> <a href="/?focus=all">Show everything</a>';
-      note.querySelector('a').addEventListener('click', function (e) {
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
-        e.preventDefault();
-        clearFocus();
-        history.replaceState(null, '', '/?focus=all' + window.location.hash);
-        cards.forEach(function (card, i) {
-          card.classList.remove('is-out');
-          size(card, sizes[i]);
-        });
-        note.textContent = 'Showing all work';
-        note.tabIndex = -1;
-        note.focus();
+        newCards[0].focus();
       });
     }
 
