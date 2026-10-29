@@ -408,8 +408,8 @@
 }
 
 /* --------------------------------------------------------------------------
-   The characters (045): each face rises out of its own slot, once, then
-   they take turns saying hi
+   The characters (045): all fourteen in rows of 5, 4 and 5. Each face
+   rises out of its own slot, once, then they take turns saying hi
    -------------------------------------------------------------------------- */
 .ojc--characters {
   --bg: var(--forest);
@@ -420,16 +420,22 @@
   position: absolute;
   left: 7%;
   right: 7%;
-  top: 44%;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 4.4cqw 2.4cqw;
+  top: 39%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4cqw;
+}
+.ojc-line {
+  display: flex;
+  gap: 3cqw;
 }
 .ojc-slot {
+  width: 13.6cqw;
   aspect-ratio: 1;
   overflow: hidden;
   border-radius: 50%;
-  background: #F5F5F5;
+  background: #F7F7F7;
 }
 .ojc-face {
   width: 100%;
@@ -444,14 +450,14 @@
   height: 100%;
   object-fit: contain;
   transform-origin: 50% 100%;
-  transform: scale(1.12);
+  transform: scale(1.03);
   transition: transform 1s cubic-bezier(.3, 1.4, .5, 1);
 }
 .is-on .ojc-face {
   transform: none;
 }
 .ojc-face.is-hi img {
-  transform: translateY(-6%) rotate(-4deg) scale(1.12);
+  transform: translateY(-6%) rotate(-4deg) scale(1.03);
 }
 
 /* --------------------------------------------------------------------------

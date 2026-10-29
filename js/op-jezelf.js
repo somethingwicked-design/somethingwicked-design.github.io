@@ -346,30 +346,38 @@
     }
   };
 
-  // The characters (045): they rise in once, stay, and take turns saying hi
+  // The characters (045): all fourteen rise in once, stay, and take turns
+  // saying hi. Rows of 5, 4 and 5 like the welcome screen.
   CARDS.characters = {
     ctl: 'characters animation',
-    label: 'Ten of the job characters I illustrated for Op Jezelf, each in a white circle on forest green, taking turns to say hi',
+    label: 'Fourteen of the Op Jezelf job characters, illustrated by Luna',
     build: function (card, t) {
       card.innerHTML = hd('Illustration') +
         '<div class="ojc-t">The characters,<br><em>illustrated by me</em></div>' +
         '<div class="ojc-cast"></div>' +
         src('The job characters from the app', 'Flat vector illustration');
       var cast = card.querySelector('.ojc-cast');
-      // Rise in from the middle outwards, row by row
-      var order = [2, 1, 3, 0, 4];
-      // Mixed so similar haircuts, hard hats and glasses never sit side by side
-      var MIX = [0, 5, 2, 4, 6, 1, 9, 7, 3, 8];
-      var faces = MIX.map(function (m, i) {
-        var slot = document.createElement('div');
-        slot.className = 'ojc-slot';
-        var d = (order.indexOf(i % 5) * .12 + Math.floor(i / 5) * .25).toFixed(2);
-        var n = m + 1 < 10 ? '0' + (m + 1) : String(m + 1);
-        slot.innerHTML = '<div class="ojc-face" style="--d:' + d + 's"><img src="' + IMG + 'character-' + n + '.webp" width="320" height="320" alt="" loading="lazy" decoding="async"></div>';
-        cast.appendChild(slot);
-        return slot.firstChild;
+      var NAMES = ['kapster', 'logistiek', 'timmerperson', 'kok', 'green-hair', 'blonde-short', 'curly-brown',
+        'grey-beard', 'blonde-glasses', 'goatee', 'ponytail', 'mask', 'curly-orange', 'moustache'];
+      // Mixed so hard hats, glasses and long hair never sit side by side
+      var ROWS = [[1, 4, 3, 12, 9], [0, 13, 6, 11], [5, 2, 8, 10, 7]];
+      var faces = [];
+      ROWS.forEach(function (row, r) {
+        var line = document.createElement('div');
+        line.className = 'ojc-line';
+        cast.appendChild(line);
+        var mid = (row.length - 1) / 2;
+        row.forEach(function (m, c) {
+          var slot = document.createElement('div');
+          slot.className = 'ojc-slot';
+          // Rise in from the middle outwards, row by row
+          var d = (Math.abs(c - mid) * .12 + r * .25).toFixed(2);
+          slot.innerHTML = '<div class="ojc-face" style="--d:' + d + 's"><img src="' + IMG + 'character-' + NAMES[m] + '.webp" width="240" height="240" alt="" loading="lazy" decoding="async"></div>';
+          line.appendChild(slot);
+          faces.push(slot.firstChild);
+        });
       });
-      var SEQ = [0, 6, 3, 8, 1, 9, 4, 5, 2, 7];
+      var SEQ = [0, 7, 3, 10, 5, 12, 1, 8, 13, 4, 9, 2, 11, 6];
       var j = 0;
       function hi() {
         var k = SEQ[j++ % SEQ.length];
