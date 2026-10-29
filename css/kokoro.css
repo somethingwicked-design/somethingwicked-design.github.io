@@ -30,77 +30,30 @@
 
 /* --------------------------------------------------------------------------
    The bottom of every card: progress dots, level and rule, source line
+   (shared: css/cards.css). Kokoro's colours and level type.
    -------------------------------------------------------------------------- */
-.koc-foot {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 5%;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  gap: 2.4cqw;
-}
-.koc-dots {
-  display: flex;
-  gap: 1.2cqw;
-}
-.koc-dots i {
-  width: 1.6cqw;
-  height: 1.6cqw;
-  min-width: 8px;
-  min-height: 8px;
-  border: 1px solid var(--muted);
-  border-radius: 50%;
-}
 .koc-dots i.is-on {
   background: var(--cream);
   border-color: var(--cream);
 }
 .koc-meta {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  column-gap: 4cqw;
-  min-height: calc(2 * 1.35 * max(11px, 2.6cqw) + 2.4cqw);
-  padding-top: 2.4cqw;
-  border-top: 1px solid #333333;
+  border-top-color: #333333;
 }
 .koc-lvl {
   font-family: 'Archivo', sans-serif;
   font-weight: 900;
   font-stretch: 70%;
   font-size: max(18px, 7cqw);
-  line-height: .9;
   text-transform: uppercase;
-  transition: opacity .4s;
 }
 .koc-rule {
-  font-size: max(11px, 2.6cqw);
-  line-height: 1.35;
   color: var(--bone-muted);
-  transition: opacity .4s;
-}
-.koc-meta.is-hide .koc-lvl,
-.koc-meta.is-hide .koc-rule {
-  opacity: 0;
-}
-.koc-src {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 3cqw;
-  font-size: max(10px, 2.1cqw);
-  color: var(--muted);
-}
-.koc-src span {
-  white-space: nowrap;
 }
 
-/* Small cards (phones, under 440px): one label per header and source line */
+/* Small cards (phones, under 440px): one label in the header, as on the
+   source line */
 @container (max-width: 440px) {
-  .koc-card .cs-card-hd span:last-child,
-  .koc-src span:last-child {
+  .koc-card .cs-card-hd span:last-child {
     display: none;
   }
 }

@@ -157,6 +157,46 @@
     return '<div class="' + key + '-src"><span>' + a + '</span>' + (b ? '<span' + (font ? ' class="is-font"' : '') + '>' + b + '</span>' : '') + '</div>';
   }
 
+  // The bottom of a card (Health Potion, Kokoro): n progress dots, the
+  // level and its rule, the source line (a, b). font marks b as a note on
+  // a stand-in font, which stays on phones too (is-font). Shared classes
+  // (css/cards.css) next to the project's own (key: 'koc' gives .koc-foot).
+  function foot(key, n, a, b, font) {
+    var dots = '';
+    for (var i = 0; i < n; i++) dots += '<i></i>';
+    return '<div class="cs-card-foot ' + key + '-foot">' +
+      '<div class="cs-card-dots ' + key + '-dots" aria-hidden="true">' + dots + '</div>' +
+      '<div class="cs-card-meta ' + key + '-meta" aria-hidden="true"><div class="cs-card-lvl ' + key + '-lvl"></div><div class="cs-card-rule ' + key + '-rule"></div></div>' +
+      '<div class="cs-card-src ' + key + '-src"><span>' + a + '</span><span' + (font ? ' class="is-font"' : '') + '>' + b + '</span></div>' +
+    '</div>';
+  }
+  // The level and rule of a foot() fade out, change and fade back in on
+  // the card's clock t; now() sets them straight away (the still end
+  // state), hide() leaves them out
+  function metaOf(card, t) {
+    var meta = card.querySelector('.cs-card-meta');
+    var lvl = card.querySelector('.cs-card-lvl');
+    var rule = card.querySelector('.cs-card-rule');
+    var dots = card.querySelectorAll('.cs-card-dots i');
+    function set(m, i) {
+      lvl.textContent = m[0];
+      rule.textContent = m[1];
+      each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
+    }
+    return {
+      to: function (m, i) {
+        meta.classList.add('is-hide');
+        each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
+        t.at(350, function () {
+          set(m, i);
+          meta.classList.remove('is-hide');
+        });
+      },
+      now: set,
+      hide: function () { meta.classList.add('is-hide'); }
+    };
+  }
+
   // The pause button on a moving card: 32px, top right. Its name stays the
   // same; aria-pressed says whether the motion is paused. set(p) changes it
   // from the card itself (a timeline year that was picked pauses it).
@@ -299,6 +339,8 @@
     hatching: hatching,
     hd: hd,
     src: src,
+    foot: foot,
+    metaOf: metaOf,
     holdOnHover: holdOnHover,
     mount: mount
   };

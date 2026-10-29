@@ -63,6 +63,77 @@
 }
 
 /* --------------------------------------------------------------------------
+   The bottom of a card (foot() in js/cards.js: Health Potion, Kokoro; the
+   foot and dots of Something Wicked): progress dots, the level and its
+   rule, the source line. A project sets the colours and the level's type.
+   -------------------------------------------------------------------------- */
+.cs-card-foot {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 5%;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4cqw;
+}
+.cs-card-dots {
+  display: flex;
+  gap: 1.2cqw;
+}
+.cs-card-dots i {
+  width: 1.6cqw;
+  height: 1.6cqw;
+  min-width: 8px;
+  min-height: 8px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.cs-card-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 4cqw;
+  min-height: calc(2 * 1.35 * max(11px, 2.6cqw) + 2.4cqw);
+  padding-top: 2.4cqw;
+  border-top: 1px solid; /* a project sets its colour */
+}
+.cs-card-lvl {
+  line-height: .9;
+  transition: opacity .4s;
+}
+.cs-card-rule {
+  font-size: max(11px, 2.6cqw);
+  line-height: 1.35;
+  transition: opacity .4s;
+}
+.cs-card-meta.is-hide .cs-card-lvl,
+.cs-card-meta.is-hide .cs-card-rule {
+  opacity: 0;
+}
+.cs-card-src {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 3cqw;
+  font-size: max(10px, 2.1cqw);
+  color: var(--muted);
+}
+.cs-card-src span {
+  white-space: nowrap;
+}
+/* Small cards (phones, under 440px): one label on the source line, except
+   a note on a stand-in font */
+@container (max-width: 440px) {
+  .cs-card-src span:last-child {
+    display: none;
+  }
+  .cs-card-src span.is-font:last-child {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Pause button on every moving card (WCAG 2.2.2): 32px, top right, in the
    card's own colours (--ctl-bg, --ctl-fg). The focus ring sits inside it in
    the icon colour, so it shows on every card colour.

@@ -20,42 +20,10 @@
 
   var each = C.each;
 
-  // The bottom of every card: progress dots, the level and its rule, the
-  // source line
-  function foot(n, a, b) {
-    var dots = '';
-    for (var i = 0; i < n; i++) dots += '<i></i>';
-    return '<div class="hpc-foot">' +
-      '<div class="hpc-dots" aria-hidden="true">' + dots + '</div>' +
-      '<div class="hpc-meta" aria-hidden="true"><div class="hpc-lvl"></div><div class="hpc-rule"></div></div>' +
-      // A note on the stand-in font stays on phones too (is-font)
-      '<div class="hpc-src"><span>' + a + '</span><span' + (/URW Gothic/.test(b) ? ' class="is-font"' : '') + '>' + b + '</span></div>' +
-    '</div>';
-  }
-  // The level and rule fade out, change, and fade back in; now() sets them
-  // straight away (the still end state)
-  function metaOf(card, t) {
-    var meta = card.querySelector('.hpc-meta');
-    var lvl = card.querySelector('.hpc-lvl');
-    var rule = card.querySelector('.hpc-rule');
-    var dots = card.querySelectorAll('.hpc-dots i');
-    function set(m, i) {
-      lvl.textContent = m[0];
-      rule.textContent = m[1];
-      each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
-    }
-    return {
-      to: function (m, i) {
-        meta.classList.add('is-hide');
-        each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
-        t.at(350, function () {
-          set(m, i);
-          meta.classList.remove('is-hide');
-        });
-      },
-      now: set
-    };
-  }
+  // The bottom of every card (js/cards.js): a note on the stand-in
+  // font stays on phones too
+  function foot(n, a, b) { return C.foot('hpc', n, a, b, /URW Gothic/.test(b)); }
+  var metaOf = C.metaOf;
 
   var CARDS = {};
 

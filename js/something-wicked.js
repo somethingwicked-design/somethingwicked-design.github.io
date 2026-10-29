@@ -168,8 +168,8 @@
             '<div class="swc-tab"><span class="swc-ico" style="width:16px;height:16px;font-size:10px;border-radius:2px">SW</span>16px</div>' +
           '</div></div>' +
         '</div>' +
-        '<div class="swc-foot">' +
-          '<div class="swc-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
+        '<div class="cs-card-foot swc-foot">' +
+          '<div class="cs-card-dots swc-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>' +
           '<div class="swc-meta"><div class="swc-lvl"></div><div class="swc-rule"></div></div>' +
           src('The less room there is, the more it drops', 'Something Wicked, 2026') +
         '</div>';
@@ -290,7 +290,7 @@
           '<div class="swc-caution"></div>' +
           '<span class="swc-note swc-note--colour">an accent, not a fill</span>' +
         '</div>' +
-        '<div class="swc-foot">' +
+        '<div class="cs-card-foot swc-foot">' +
           '<div class="swc-keys">' + K.map(function (k) {
             return '<div class="swc-k" style="--c:' + k[0] + '"><i></i><b>' + k[1] + '</b><span>' + k[0] + '<br>' + k[2] + '</span></div>';
           }).join('') + '</div>' +
@@ -326,7 +326,7 @@
     label: 'What I took from Koto (opening a project like an app, and a Just seen state; mine tears open like yellow paper), Framna (key numbers in a row of their own; mine are set in my own Archivo, not their serif) and G2K (showing type as something that moves; mine is a moving type card for every project)',
     build: function (card, t) {
       card.innerHTML = hd('References', 'Borrowed, then made mine') +
-        '<div class="swc-dots swc-dots--refs" aria-hidden="true"><i></i><i></i><i></i></div>' +
+        '<div class="cs-card-dots swc-dots swc-dots--refs" aria-hidden="true"><i></i><i></i><i></i></div>' +
         '<div aria-hidden="true">' + REFS.map(function (r) {
           return '<div class="swc-sl">' +
             '<div class="swc-from">Borrowed from</div>' +

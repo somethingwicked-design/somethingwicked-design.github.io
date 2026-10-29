@@ -18,42 +18,9 @@
 
   var each = C.each;
 
-  // The bottom of every card: progress dots, the level and its rule, the
-  // source line
-  function foot(n, a, b) {
-    var dots = '';
-    for (var i = 0; i < n; i++) dots += '<i></i>';
-    return '<div class="koc-foot">' +
-      '<div class="koc-dots" aria-hidden="true">' + dots + '</div>' +
-      '<div class="koc-meta" aria-hidden="true"><div class="koc-lvl"></div><div class="koc-rule"></div></div>' +
-      '<div class="koc-src"><span>' + a + '</span><span>' + b + '</span></div>' +
-    '</div>';
-  }
-  // The level and rule fade out, change, and fade back in; now() sets them
-  // straight away (the still end state), hide() leaves them out
-  function metaOf(card, t) {
-    var meta = card.querySelector('.koc-meta');
-    var lvl = card.querySelector('.koc-lvl');
-    var rule = card.querySelector('.koc-rule');
-    var dots = card.querySelectorAll('.koc-dots i');
-    function set(m, i) {
-      lvl.textContent = m[0];
-      rule.textContent = m[1];
-      each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
-    }
-    return {
-      to: function (m, i) {
-        meta.classList.add('is-hide');
-        each(dots, function (d, k) { d.classList.toggle('is-on', k === i); });
-        t.at(350, function () {
-          set(m, i);
-          meta.classList.remove('is-hide');
-        });
-      },
-      now: set,
-      hide: function () { meta.classList.add('is-hide'); }
-    };
-  }
+  // The bottom of every card (js/cards.js)
+  function foot(n, a, b) { return C.foot('koc', n, a, b); }
+  var metaOf = C.metaOf;
 
   var CARDS = {};
 

@@ -67,83 +67,38 @@
 
 /* --------------------------------------------------------------------------
    The bottom of every card: progress dots, level and rule, source line
+   (shared: css/cards.css). Health Potion's colours and type.
    -------------------------------------------------------------------------- */
-.hpc-foot {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 5%;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  gap: 2.4cqw;
-}
-.hpc-dots {
-  display: flex;
-  gap: 1.2cqw;
-}
 .hpc-dots i {
-  width: 1.6cqw;
-  height: 1.6cqw;
-  min-width: 8px;
-  min-height: 8px;
-  border: 1px solid #9AA3B2;
-  border-radius: 50%;
+  border-color: #9AA3B2;
 }
 .hpc-dots i.is-on {
   background: var(--navy);
   border-color: var(--navy);
 }
 .hpc-meta {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  column-gap: 4cqw;
-  min-height: calc(2 * 1.35 * max(11px, 2.6cqw) + 2.4cqw);
-  padding-top: 2.4cqw;
-  border-top: 1px solid #DCDFE5;
+  border-top-color: #DCDFE5;
 }
 .hpc-lvl {
   font-family: 'URW Gothic', 'Outfit', sans-serif;
   font-weight: 700;
   font-size: max(18px, 5.6cqw);
-  line-height: .9;
   color: var(--navy);
-  transition: opacity .4s;
 }
 .hpc-rule {
   font-family: 'URW Gothic', 'Outfit', sans-serif;
   font-weight: 400;
-  font-size: max(11px, 2.6cqw);
-  line-height: 1.35;
   color: #4A5468;
-  transition: opacity .4s;
-}
-.hpc-meta.is-hide .hpc-lvl,
-.hpc-meta.is-hide .hpc-rule {
-  opacity: 0;
 }
 .hpc-src {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  column-gap: 3cqw;
-  font-size: max(10px, 2.1cqw);
   color: var(--label);
 }
-.hpc-src span {
-  white-space: nowrap;
-}
 
-/* Small cards (phones, under 440px): one label per header and source line */
+/* Small cards (phones, under 440px): one label in the header, as on the
+   source line */
 @container (max-width: 440px) {
-  .hpc-card .cs-card-hd span:last-child,
-  .hpc-src span:last-child {
+  .hpc-card .cs-card-hd span:last-child {
     display: none;
-  }
-  /* ...except a note on the stand-in font, under the source */
-  .hpc-src span.is-font:last-child {
-    display: block;
   }
 }
 
