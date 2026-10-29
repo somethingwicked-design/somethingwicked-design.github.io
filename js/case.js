@@ -33,17 +33,17 @@
   // (js/transition.js).
   var NEXT = {
     'op-jezelf': ['Op Jezelf', 'Getting teens ready to live on their own.',
-      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-op-jezelf-small.webp" width="1800" height="1350"><img draggable="false" src="/img/op-jezelf-phones.webp" width="2000" height="1486" alt="" loading="lazy" decoding="async"></picture>'],
+      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-op-jezelf-small.webp" width="1800" height="1350"><img draggable="false" src="/img/cards/card-op-jezelf-next.webp" width="1920" height="1200" alt="" loading="lazy" decoding="async"></picture>'],
     'restock': ['ReStock', 'Wasting less food, one fridge at a&nbsp;time.',
-      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-restock-small.webp" width="1800" height="1350"><img draggable="false" src="/img/restock/preview.webp" width="2400" height="1500" alt="" loading="lazy" decoding="async"></picture>'],
+      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-restock-small.webp" width="1800" height="1350"><img draggable="false" src="/img/cards/card-restock-next.webp" width="1920" height="1200" alt="" loading="lazy" decoding="async"></picture>'],
     'health-potion': ['Health Potion', 'My first brand identity, rebuilt two years&nbsp;later.',
-      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-health-potion-small.webp" width="1800" height="1350"><img draggable="false" src="/img/health-potion-guide.webp" width="1800" height="1799" alt="" loading="lazy" decoding="async"></picture>'],
+      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-health-potion-small.webp" width="1800" height="1350"><img draggable="false" src="/img/cards/card-health-potion-next.webp" width="1920" height="1200" alt="" loading="lazy" decoding="async"></picture>'],
     'de-bote': ['De Bote', 'Hold the line: a newspaper about the 06&nbsp;numbers.',
-      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-de-bote-small.webp" width="1800" height="1350"><img draggable="false" src="/img/de-bote/banner.webp" width="2400" height="1600" alt="" loading="lazy" decoding="async"></picture>'],
+      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-de-bote-small.webp" width="1800" height="1350"><img draggable="false" src="/img/cards/card-de-bote-next.webp" width="1920" height="1200" alt="" loading="lazy" decoding="async"></picture>'],
     'something-wicked': ['Something Wicked', 'My own brand, and the site you’re on right&nbsp;now.',
       '<video controlsList="nodownload" muted playsinline disablepictureinpicture preload="metadata" poster="/img/something-wicked/glitch-poster.jpg" width="1920" height="1080" aria-hidden="true"><source src="/img/something-wicked/glitch.mp4" type="video/mp4"></video>'],
     'kokoro': ['Kokoro', 'A music label, a lucky cat and a lot of&nbsp;attitude.',
-      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-kokoro-small.webp" width="1800" height="1350"><img draggable="false" src="/img/kokoro/preview.webp" width="1600" height="1068" alt="" loading="lazy" decoding="async"></picture>']
+      '<picture><source media="(max-width: 759.98px)" srcset="/img/cards/card-kokoro-small.webp" width="1800" height="1350"><img draggable="false" src="/img/cards/card-kokoro-next.webp" width="1920" height="1200" alt="" loading="lazy" decoding="async"></picture>']
   };
   var focus = window.SWFocus;
   var here = focus ? focus.slugs.indexOf(body.getAttribute('data-project')) : -1;
