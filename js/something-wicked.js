@@ -16,13 +16,11 @@
   var seq = C.seq;
   var IMG = '/img/something-wicked/';
 
-  function src(a, b) {
-    return '<div class="swc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
-  }
+  var each = C.each;
+  function src(a, b) { return C.src('swc', a, b); }
   function img(file, cls) {
     return '<img src="' + IMG + file + '" alt=""' + (cls ? ' class="' + cls + '"' : '') + ' decoding="async">';
   }
-  function each(list, f) { Array.prototype.forEach.call(list, f); }
 
   var CARDS = {};
 

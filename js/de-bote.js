@@ -16,10 +16,8 @@
   var NS = 'http://www.w3.org/2000/svg';
   var IMG = '/img/de-bote/';
 
-  function src(a, b) {
-    return '<div class="dbc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
-  }
-  function each(list, f) { Array.prototype.forEach.call(list, f); }
+  var each = C.each;
+  function src(a, b) { return C.src('dbc', a, b); }
 
   var rng = C.rng;
   var f2 = C.f2;

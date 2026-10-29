@@ -15,11 +15,9 @@
   var hd = C.hd;
   var seq = C.seq;
 
-  function src(a, b) {
-    // A note on a stand-in font stays on phones too (is-font)
-    return '<div class="rsc-src"><span>' + a + '</span>' + (b ? '<span' + (/^Shown in/.test(b) ? ' class="is-font"' : '') + '>' + b + '</span>' : '') + '</div>';
-  }
-  function each(list, f) { Array.prototype.forEach.call(list, f); }
+  var each = C.each;
+  // A note on a stand-in font ('Shown in …') stays on phones too
+  function src(a, b) { return C.src('rsc', a, b, /^Shown in/.test(b)); }
 
   var CARDS = {};
 

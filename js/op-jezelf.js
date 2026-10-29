@@ -25,9 +25,7 @@
   // ---------------------------------------------------------------------
   // Parts several Op Jezelf cards use
   // ---------------------------------------------------------------------
-  function src(a, b) {
-    return '<div class="ojc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
-  }
+  function src(a, b) { return C.src('ojc', a, b); }
 
   // Panels that slide over each other from the right (colour, personas).
   // A hidden panel is fully clipped, so the browser doesn't load or decode

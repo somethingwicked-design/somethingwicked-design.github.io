@@ -16,7 +16,7 @@
   var seq = C.seq;
   var IMG = '/img/kokoro/';
 
-  function each(list, f) { Array.prototype.forEach.call(list, f); }
+  var each = C.each;
 
   // The bottom of every card: progress dots, the level and its rule, the
   // source line

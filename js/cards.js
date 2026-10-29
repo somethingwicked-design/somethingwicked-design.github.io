@@ -107,6 +107,7 @@
     };
   }
   function f2(v) { return v.toFixed(2); }
+  function each(list, f) { Array.prototype.forEach.call(list, f); }
 
   // Hand hatching (De Bote 047, Health Potion 051): rough parallel strokes
   // over the box, a little uneven in spacing, weight and pressure. A mask
@@ -147,6 +148,13 @@
   // a second label on the right
   function hd(left, right) {
     return '<div class="cs-card-hd"><span>' + left + '</span>' + (right ? '<span>' + right + '</span>' : '') + '</div>';
+  }
+
+  // The source line at the bottom of a card, in the project's class (key:
+  // 'ojc' gives .ojc-src). font marks a note on a stand-in font, which
+  // stays on phones too (is-font).
+  function src(key, a, b, font) {
+    return '<div class="' + key + '-src"><span>' + a + '</span>' + (b ? '<span' + (font ? ' class="is-font"' : '') + '>' + b + '</span>' : '') + '</div>';
   }
 
   // The pause button on a moving card: 32px, top right. Its name stays the
@@ -287,8 +295,10 @@
     seq: seq,
     rng: rng,
     f2: f2,
+    each: each,
     hatching: hatching,
     hd: hd,
+    src: src,
     holdOnHover: holdOnHover,
     mount: mount
   };
