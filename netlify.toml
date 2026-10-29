@@ -51,14 +51,6 @@
   to = "/work/kokoro.html"
   status = 301
 [[redirects]]
-  from = "/pages/emma"
-  to = "/work/emma.html"
-  status = 301
-[[redirects]]
-  from = "/pages/emma.html"
-  to = "/work/emma.html"
-  status = 301
-[[redirects]]
   from = "/pages/de-bote"
   to = "/work/de-bote.html"
   status = 301
@@ -74,3 +66,22 @@
   from = "/pages/something-wicked.html"
   to = "/work/something-wicked.html"
   status = 301
+
+# Emma is out at launch and comes back later as a redesign: her old URLs
+# go home for now, with a temporary 302 so they can point at her again
+[[redirects]]
+  from = "/pages/emma"
+  to = "/"
+  status = 302
+[[redirects]]
+  from = "/pages/emma.html"
+  to = "/"
+  status = 302
+[[redirects]]
+  from = "/work/emma"
+  to = "/"
+  status = 302
+[[redirects]]
+  from = "/work/emma.html"
+  to = "/"
+  status = 302
