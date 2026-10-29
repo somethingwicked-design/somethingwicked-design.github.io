@@ -163,12 +163,12 @@
   // ---------------------------------------------------------------------
   var FINDINGS = [
     ['4 of 4', 'didn’t know what <b>Produce</b> meant on the full list', 'So the category became <b>Vegetables &amp; fruit</b>.'],
-    ['5 of 6', 'found what to use first with the <b>Use soon</b> chip', 'So the Kitchen now opens on <b>Needs attention</b>.'],
+    ['5 of 6', 'found what to use first with the <b>Use soon</b> chip (of the 6 who reached that task)', 'So the Kitchen now opens on <b>Needs attention</b>.'],
     ['1 of 7', 'tapped a category chip without being asked', 'So search, sort and filter became <b>one calm bar</b>.']
   ];
   CARDS.findings = {
     ctl: 'findings animation',
-    label: 'What the first ReStock test changed: 4 of 4 people did not know what Produce meant, so the category became Vegetables and fruit; 5 of 6 found what to use first with the Use soon chip, so the Kitchen opens on Needs attention; 1 of 7 tapped a category chip, so search, sort and filter became one bar',
+    label: 'What the first ReStock test changed: 4 of 4 people on the full list did not know what Produce meant, so the category became Vegetables and fruit; 5 of 6 found what to use first with the Use soon chip (of the 6 who reached that task), so the Kitchen opens on Needs attention; 1 of 7 tapped a category chip, so search, sort and filter became one bar',
     build: function (card, t) {
       card.innerHTML = hd('Research', 'What the first test changed') +
         '<div class="rsc-dots" aria-hidden="true"><i></i><i></i><i></i></div>' +
