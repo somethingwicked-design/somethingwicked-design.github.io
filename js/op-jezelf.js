@@ -29,12 +29,29 @@
     return '<div class="ojc-src"><span>' + a + '</span>' + (b ? '<span>' + b + '</span>' : '') + '</div>';
   }
 
-  // Panels that slide over each other from the right (colour, personas)
+  // Panels that slide over each other from the right (colour, personas).
+  // A hidden panel is fully clipped, so the browser doesn't load or decode
+  // its images (even lazy ones near the screen) until the slide starts,
+  // and they pop in late. Once the first panel's images are in, load and
+  // decode the rest; each slide also waits for its panel's images.
+  function decoded(p) {
+    var imgs = Array.prototype.slice.call(p.querySelectorAll('img'));
+    if (!imgs.length) return null;
+    return Promise.all(imgs.map(function (im) {
+      im.loading = 'eager';
+      return im.decode ? im.decode().catch(function () {}) : null;
+    }));
+  }
   function slider(panels, onGo, ms) {
     var z = 1;
     var i = 0;
     panels[0].style.zIndex = z;
     panels[0].classList.add('is-show');
+    var first = panels[0].querySelector('img');
+    if (first && first.decode) {
+      // decode() on the first, still lazy, image waits until it's near the screen
+      first.decode().catch(function () {}).then(function () { panels.forEach(decoded); });
+    }
     return {
       index: function () { return i; },
       go: function (n) {
@@ -42,14 +59,20 @@
         var prev = panels[i];
         i = n;
         var p = panels[n];
-        p.classList.remove('is-slide', 'is-show');
-        p.style.zIndex = ++z;
-        reflow(p);
-        p.classList.add('is-slide', 'is-show');
-        setTimeout(function () {
-          if (prev !== panels[i]) prev.classList.remove('is-slide', 'is-show');
-        }, ms + 100);
-        if (onGo) onGo(n);
+        function start() {
+          if (panels[i] !== p) return;
+          p.classList.remove('is-slide', 'is-show');
+          p.style.zIndex = ++z;
+          reflow(p);
+          p.classList.add('is-slide', 'is-show');
+          setTimeout(function () {
+            if (prev !== panels[i]) prev.classList.remove('is-slide', 'is-show');
+          }, ms + 100);
+          if (onGo) onGo(n);
+        }
+        var ready = decoded(p);
+        if (ready) ready.then(start);
+        else start();
       }
     };
   }
