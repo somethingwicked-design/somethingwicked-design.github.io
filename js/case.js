@@ -134,17 +134,18 @@
   window.addEventListener('resize', setMode);
   desktopMq.addEventListener('change', setMode);
   reduceMq.addEventListener('change', setMode);
-  // Videos in the case study loop without sound; reduced motion keeps
-  // them on their poster. A video marked data-once (the Something Wicked
-  // glitch, 049) plays once when half of it is in view and stays on its
-  // last frame: under 5s, so no pause button.
+  // Only a video marked data-once (the Something Wicked glitch, 049) plays
+  // by itself: once, when half of it is in view, then it stays on its last
+  // frame. Under 5s, so no pause button. Reduced motion keeps the poster.
+  // Every other video waits for its own play button and shows its poster
+  // until then (the Op Jezelf phones, 05).
   function play(video) {
     var p = video.play();
     if (p && p.catch) p.catch(function () { /* autoplay blocked: the poster shows */ });
   }
-  document.querySelectorAll('.cs-main video').forEach(function (video) {
+  document.querySelectorAll('.cs-main video[data-once]').forEach(function (video) {
     if (reduceMq.matches) return;
-    if (!video.hasAttribute('data-once') || !('IntersectionObserver' in window)) {
+    if (!('IntersectionObserver' in window)) {
       play(video);
       return;
     }
