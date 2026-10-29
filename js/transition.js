@@ -10,10 +10,11 @@
 //   A cross-document View Transition: where the browser has none (Firefox
 //   for now), a plain page load.
 // Phone ('rip', reference/transition-mobile.dc.html): the image lifts, the
-//   yellow paper tears up from the bottom (0.6s), then on the new page the
+//   paper tears up from the bottom (0.6s), then on the new page the
 //   paper shows how far the case study's first screen has loaded and only
 //   tears off at 100% (0.5s). No View Transition: plain CSS and a little
-//   script on both pages, so it works in every browser.
+//   script on both pages, so it works in every browser. The paper is the
+//   project you're going to (056): its accent, with its --on-accent text.
 // Only project openings animate: every other navigation skips the
 // transition. Reduced motion: a plain page load.
 // The styles and keyframes are in css/motion.css.
@@ -50,11 +51,36 @@
   var type = takeMark(); // always consumed, also when nothing animates
   if (reduce.matches || html.getAttribute('data-page') === '404') type = null;
 
-  // The yellow paper, with 'Loading' and the percentage on it (021)
-  function paper() {
+  // The paper takes the destination project's colour (056): its accent and
+  // --on-accent, as on its <body>. Each colour has a paint tile in
+  // img/paper/ like the yellow, so Samsung Internet's forced dark mode
+  // (which recolours colours, not images) leaves it alone. Anything that
+  // isn't a project keeps the yellow, as does Something Wicked (its accent
+  // is the yellow).
+  var PAPER = {
+    'op-jezelf': ['#C4DCA4', '#0B0B0B'],
+    'restock': ['#E8A67E', '#2B2620'],
+    'health-potion': ['#8A6B7D', '#FFFFFF'],
+    'de-bote': ['#C8102E', '#F2EEE6'],
+    'kokoro': ['#F0E4AC', '#0B0B0B']
+  };
+  function slugOf(path) {
+    var m = /^\/work\/([a-z-]+)(\.html)?$/.exec(path);
+    return m ? m[1] : null;
+  }
+
+  // The paper, with 'Loading' and the percentage on it (021)
+  function paper(path) {
     var el = document.createElement('div');
     el.className = 'vt-rip';
     el.setAttribute('aria-hidden', 'true');
+    var slug = slugOf(path);
+    var c = PAPER[slug];
+    if (c) {
+      el.style.setProperty('--rip-bg', c[0]);
+      el.style.setProperty('--rip-fg', c[1]);
+      el.style.setProperty('--rip-paint', "url('/img/paper/" + slug + ".webp')");
+    }
     el.innerHTML = '<span class="vt-rip-fibre"></span><span class="vt-rip-paper"></span>' +
       '<span class="vt-rip-load"><span class="vt-rip-label">Loading</span><span class="vt-rip-pct">0%</span></span>';
     return el;
@@ -70,7 +96,7 @@
   if (type === 'rip') ripIn();
 
   function ripIn() {
-    var el = paper();
+    var el = paper(window.location.pathname);
     el.classList.add('is-in');
     html.appendChild(el);
     var pctEl = el.querySelector('.vt-rip-pct');
@@ -196,13 +222,13 @@
   }
 
   // Phone: lift, tear the paper up over the page, then leave. The paper is
-  // always the brand yellow (021), also from Next up on a case study.
+  // the colour of the project it opens (056), from a card or Next up.
   // Paths from reference/transition-mobile.dc.html.
   function rip(link, url) {
     var lift = link.classList.contains('card') ? link.querySelector('.card-img') : document.querySelector('.next-prev');
     if (lift) lift.classList.add('is-lift');
     setTimeout(function () {
-      var el = paper(); // shows 0% while it tears up
+      var el = paper(new URL(url).pathname); // shows 0% while it tears up
       document.body.appendChild(el);
       var left = false;
       function leave() {
