@@ -145,18 +145,18 @@
   // ---------------------------------------------------------------------
   // Koko redrawn: the original Koko, then a soft crossfade (with a slight
   // blur) into the redraw, both in exactly the same place. The original
-  // is another artist's drawing: it only ever shows here, credited.
+  // is Aiko's drawing: it only ever shows here, credited.
   // ---------------------------------------------------------------------
   CARDS.koko = {
     ctl: 'Koko redesign animation',
-    label: 'Koko, Kokoro\'s lucky cat, before and after the redesign. Before: a white maneki-neko with a koi on her head, a red collar and a gold coin, drawn by another artist. After, redrawn by me: a cream cat with a dark tuft of hair, ear piercings, red eyeshadow, a black collar with a red bell, a rose tattoo and a tattoo sleeve, still smiling',
+    label: 'Koko, Kokoro\'s lucky cat, before and after the redesign. Before: a white maneki-neko with a koi on her head, a red collar and a gold coin: original Koko by Aiko. After, redrawn by me: a cream cat with a dark tuft of hair, ear piercings, red eyeshadow, a black collar with a red bell, a rose tattoo and a tattoo sleeve, still smiling',
     build: function (card, t) {
       card.innerHTML = hd('Mascot', 'Koko, redrawn') +
         '<div class="koc-kstage" aria-hidden="true"><div class="koc-cat">' +
           '<img class="koc-old" src="' + IMG + 'koko-before.webp" width="984" height="1218" alt="" decoding="async">' +
           '<img class="koc-new" src="' + IMG + 'koko-after.webp" width="485" height="609" alt="" decoding="async">' +
         '</div></div>' +
-        foot(2, 'Original Koko by another artist, redrawn by me', 'Kokoro');
+        foot(2, 'Original Koko by Aiko, redrawn by me', 'Kokoro');
       var meta = metaOf(card, t);
       var M = [
         ['Before', 'A white lucky cat with a koi on her head, a red collar and a gold coin.'],
