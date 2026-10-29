@@ -56,7 +56,7 @@
   // img/paper/ like the yellow, so Samsung Internet's forced dark mode
   // (which recolours colours, not images) leaves it alone. Anything that
   // isn't a project keeps the yellow, as does Something Wicked (its accent
-  // is the yellow).
+  // is the yellow). scripts/check-shared.js checks these against the pages.
   var PAPER = {
     'op-jezelf': ['#C4DCA4', '#0B0B0B'],
     'restock': ['#E8A67E', '#2B2620'],
