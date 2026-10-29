@@ -4,8 +4,8 @@
 // Styles: css/cards.css, plus the project's own card styles.
 //
 // Each card exposes cardPlay() and cardVisible(bool) on its figure. A card
-// starts when half of it is in view (the second card in a row 0.7s later),
-// plays its run, rests, then plays again. It holds while out of view or
+// starts just before it scrolls into view (the second card in a row 0.7s
+// later), plays its run, rests, then plays again. It holds while out of view or
 // paused: every moving card has a pause button (WCAG 2.2.2). With reduced
 // motion every card shows its end state and nothing loops.
 
@@ -306,8 +306,10 @@
       figs.push(fig);
     });
 
-    // A card starts when half of it is in view; the second card in a row
-    // 0.7s after the first. It holds while out of view.
+    // A card starts once it is within 20% of the screen height of the
+    // screen, so it's already moving when it scrolls in and never shows an
+    // empty frame first (067); the second card in a row 0.7s after the
+    // first. It holds once it's further out than that.
     if (!figs.length) return;
     if (!('IntersectionObserver' in window)) {
       figs.forEach(function (f) { f.cardVisible(true); f.cardPlay(); });
@@ -317,12 +319,12 @@
       entries.forEach(function (e) {
         var fig = e.target;
         fig.cardVisible(e.isIntersecting);
-        if (e.intersectionRatio < .5 || fig.dataset.queued) return;
+        if (!e.isIntersecting || fig.dataset.queued) return;
         fig.dataset.queued = '1';
         var prev = fig.previousElementSibling;
         setTimeout(fig.cardPlay, prev && prev.cardPlay ? 700 : 0);
       });
-    }, { threshold: [0, .5] });
+    }, { rootMargin: '20% 0px', threshold: 0 });
     figs.forEach(function (f) { io.observe(f); });
   }
 
