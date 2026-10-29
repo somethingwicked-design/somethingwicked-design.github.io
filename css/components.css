@@ -887,19 +887,6 @@
   height: 100%;
   object-fit: cover;
 }
-.card-ph {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--sp-16);
-  color: var(--muted);
-  font-size: var(--fs-small);
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
-}
 .card-gloss {
   position: absolute;
   inset: 0;
@@ -1126,9 +1113,6 @@
     aspect-ratio: 4 / 3;
     border-width: var(--sp-8);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
-  }
-  .card-ph {
-    font-size: var(--fs-label);
   }
   .pill {
     top: var(--sp-16);

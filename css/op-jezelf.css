@@ -154,12 +154,6 @@
   transition: none;
 }
 
-/* Back to the start without moving (only while off screen) */
-.ojc-card.is-snap,
-.ojc-card.is-snap * {
-  transition: none !important;
-}
-
 /* --------------------------------------------------------------------------
    Typeface (043)
    -------------------------------------------------------------------------- */

@@ -6,7 +6,6 @@
      --accent-small  optional: a lighter accent for the 13px chapter
                   numbers, where the accent itself is under 4.5:1
      --on-accent  text on the accent (selection, buttons): black or white
-     --screen-bg  the backdrop behind app screens (a light project tint)
    Logo, nav and footer keep the brand yellow (014).
    ========================================================================== */
 
@@ -75,57 +74,14 @@
   height: 100%;
   object-fit: cover;
 }
-.media > img.obj-y40 {
-  object-position: 50% 40%;
-}
 .media > img.obj-y55 {
   object-position: 50% 55%;
 }
 .media > img.obj-y60 {
   object-position: 50% 60%;
 }
-/* Printed pages: keep the top (masthead, headings) or the bottom in view */
-.media > img.obj-top {
-  object-position: 50% 0;
-}
-.media > img.obj-bottom {
-  object-position: 50% 100%;
-}
-
-/* Placeholder: visible until the real image exists (see todo) */
-.media--ph {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--sp-24);
-  color: var(--muted);
-  font-size: var(--fs-label);
-  line-height: var(--lh-label);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/* App screen on a light project tint, standing on the bottom edge */
-.media--screen {
-  background: var(--screen-bg, var(--card));
-}
-.media--screen > img {
-  inset: auto auto 0 50%;
-  width: auto;
-  height: 88%;
-  max-width: 70%;
-  object-fit: contain;
-  object-position: bottom;
-  border-radius: 12px 12px 0 0; /* the phone screen's own corners, as the export */
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
-  transform: translateX(-50%);
-}
 
 .ar-wide   { aspect-ratio: 16 / 9; }
-.ar-tall   { aspect-ratio: 4 / 5; }
-.ar-scene  { aspect-ratio: 4 / 3; }
 .ar-square { aspect-ratio: 1; }
 .ar-banner { aspect-ratio: 2000 / 997; } /* a wide banner, whole */
 .ar-photo  { aspect-ratio: 3 / 2; }      /* a landscape photo, whole */
@@ -146,22 +102,6 @@
 /* One wide card on its own (Op Jezelf testing) */
 .cs-row--1 > * {
   flex-basis: 100%;
-}
-
-/* Bento: one tall image and a stack of two, 32px apart (8px vertically) */
-.cs-bento {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--gutter);
-  row-gap: var(--sp-8);
-}
-.cs-stack {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: var(--sp-8);
-}
-.cs-bento--flip > .ar-tall {
-  order: 2;
 }
 
 /* --------------------------------------------------------------------------
@@ -306,13 +246,6 @@
 /* Lined up with the inside of the figure's frame */
 .cs-fig-note {
   margin: 12px 8px 0;
-}
-.cs-quote {
-  margin: 0;
-  font-size: var(--fs-lead);
-  line-height: var(--lh-lead);
-  font-weight: 300;
-  color: var(--bone);
 }
 
 /* --------------------------------------------------------------------------
@@ -507,25 +440,6 @@
   object-fit: cover;
   object-position: center;
 }
-.next-prev-ph {
-  position: absolute;
-  top: var(--sp-16);
-  left: var(--sp-16);
-  color: var(--muted);
-  font-size: var(--fs-label);
-  line-height: var(--lh-label);
-  font-weight: 600;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-}
-.next-prev-name {
-  position: absolute;
-  left: var(--sp-16);
-  bottom: var(--sp-8);
-  color: var(--bone);
-  font-size: var(--fs-h1);
-  line-height: var(--lh-h1);
-}
 
 /* Live (desktop, motion allowed). Stage = case study (height H), Next up,
    spacer (1200). Next up is one screen tall and pulled up by one screen, so
@@ -605,30 +519,9 @@
     border-width: var(--sp-8);
     box-shadow: 0 14px 32px rgba(0, 0, 0, 0.5);
   }
-  .media--ph {
-    padding: var(--sp-16);
-  }
-  .media--screen > img {
-    max-width: 76%;
-    border-radius: 8px 8px 0 0;
-    box-shadow: none;
-  }
 
-  /* Phone ratios (034): 4:5 screens, 4:3 scenes, 16:9 wide, 9:16 video */
-  .m-ar-wide     { aspect-ratio: 16 / 9; }
-  .m-ar-tall     { aspect-ratio: 4 / 5; }
-  .m-ar-scene    { aspect-ratio: 4 / 3; }
-  .m-ar-portrait { aspect-ratio: 9 / 16; }
-
-  .cs-bento,
-  .cs-stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-16);
-  }
-  .cs-bento--flip > .ar-tall {
-    order: 0;
-  }
+  /* Phone ratio (034): 4:5 */
+  .m-ar-tall { aspect-ratio: 4 / 5; }
 
   .cs-row {
     display: grid;
@@ -677,11 +570,6 @@
     aspect-ratio: 16 / 9;
     background: var(--ink);
   }
-  /* A hero still waiting for its photo keeps the polaroid's shape */
-  .cs-hero .media--ph {
-    aspect-ratio: 4 / 5;
-    color: var(--paper-ink);
-  }
   .cs-hero .tape {
     display: block;
     top: 18px; /* 32px padding - 14px */
@@ -711,9 +599,6 @@
   }
   .cs-num {
     padding-top: 3px;
-  }
-  .cs-quote {
-    line-height: 1.3;
   }
 
   .wicked {
@@ -815,10 +700,6 @@
     grid-row: 3;
     margin-top: var(--sp-24);
     aspect-ratio: 4 / 3;
-  }
-  .next-prev-name {
-    font-size: 48px;
-    line-height: 48px;
   }
 
   .case .site-footer {
