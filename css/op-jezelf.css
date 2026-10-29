@@ -840,13 +840,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2%;
+  gap: 6%;
   background: #131313;
 }
+/* The phones (059, 572 x 1164 with the frame baked in) stand 94% of the
+   figure's height, as reference/op-jezelf-case-study-mockup.html */
 .oj-vid {
   position: relative;
-  width: 32%;
-  aspect-ratio: 426 / 560;
+  height: 94%;
+  max-width: 28%;
+  aspect-ratio: 572 / 1164;
 }
 .oj-vid video {
   display: block;
@@ -910,6 +913,7 @@
   .oj-vid {
     width: auto;
     height: 94%;
+    max-width: none;
   }
   .oj-vid:not(:nth-child(2)) {
     display: none;
