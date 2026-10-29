@@ -911,3 +911,144 @@
   outline: 2px solid var(--yellow);
   outline-offset: 3px;
 }
+
+/* --------------------------------------------------------------------------
+   Easter egg (058): Ilio under the footer paper, only on this page. In the
+   footer's own stack she lies under the paper (z -2, the paper is -1), so
+   only her tail shows above the torn edge. She rises while still under it,
+   then comes in front (.is-front) with her front paws on the edge, wiggles
+   and says 'boo!' (always in front), then slides back under. The button is
+   the hit area over the tail; it can't hold her, or she couldn't go under
+   the paper. Positions are from the footer's top: desktop x from
+   'trouble.' (js/something-wicked.js), phones 24px from the right.
+   Values measured on the torn edge (img/paper/footer-edge.webp).
+   -------------------------------------------------------------------------- */
+.ilio,
+.ilio-boo,
+.ilio-btn {
+  display: none;
+}
+.js .ilio,
+.js .ilio-boo,
+.js .ilio-btn {
+  display: block;
+}
+.site-footer {
+  --ilio-x: 692px;     /* 40px right of 'trouble.', set by the script */
+  --ilio-w: 130px;
+  --ilio-top: -161px;  /* out: paws on the edge (16px above the footer) */
+  --ilio-hide: 90px;   /* under: only the tail above the edge */
+}
+.ilio {
+  position: absolute;
+  top: var(--ilio-top);
+  left: var(--ilio-x);
+  z-index: -2;
+  width: var(--ilio-w);
+  pointer-events: none;
+  translate: 0 var(--ilio-hide);
+  transition: translate .45s cubic-bezier(.55, 0, .8, .3);
+}
+.ilio svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: 50% 100%;
+}
+.ilio.is-up {
+  translate: 0 0;
+  transition: translate .35s cubic-bezier(.2, .7, .2, 1);
+}
+.ilio.is-front {
+  z-index: 1;
+}
+@keyframes ilioWiggle {
+  0%, 100% { rotate: 0deg; }
+  20%      { rotate: -6deg; }
+  45%      { rotate: 5deg; }
+  70%      { rotate: -3deg; }
+  85%      { rotate: 2deg; }
+}
+.ilio.is-wiggle svg {
+  animation: ilioWiggle .6s ease-in-out;
+}
+/* 'boo!' in Reenie Beanie: up and to the left of her on the dark page */
+.ilio-boo {
+  position: absolute;
+  top: -150px;
+  left: calc(var(--ilio-x) - 72px);
+  z-index: 2;
+  color: var(--bone);
+  font-size: 36px;
+  line-height: 1;
+  pointer-events: none;
+  opacity: 0;
+  rotate: -8deg;
+  scale: .6;
+  transition: opacity .15s, scale .2s cubic-bezier(.2, .7, .2, 1.4);
+}
+.ilio-boo.is-on {
+  opacity: 1;
+  scale: 1;
+}
+.ilio-btn {
+  position: absolute;
+  top: -79px;
+  left: var(--ilio-x);
+  z-index: 3;
+  width: var(--ilio-w);
+  height: 67px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Phones: 72px wide at the right margin. Out, she fits the dark gap under
+   Next up (96px): tail tip 2px below the image, paws just over the edge.
+   'boo!' sits on the paper under the edge, left of her, in ink. */
+@media (max-width: 759.98px) {
+  .site-footer {
+    --ilio-w: 72px;
+    --ilio-top: -94px;
+    --ilio-hide: 37px;
+  }
+  .ilio,
+  .ilio-btn {
+    left: auto;
+    right: 24px;
+  }
+  .ilio-btn {
+    top: -65px;
+    height: 47px;
+  }
+  .ilio-boo {
+    top: 2px;
+    left: auto;
+    right: 100px;
+    color: var(--ink);
+    font-size: 28px;
+  }
+}
+
+/* Reduced motion: she's simply out, no wiggle; 'boo!' appears on click */
+@media (prefers-reduced-motion: reduce) {
+  .ilio {
+    z-index: 1;
+    translate: 0 0;
+    transition: none;
+  }
+  .ilio-boo {
+    scale: 1;
+    transition: none;
+  }
+  .ilio-btn {
+    top: var(--ilio-top);
+    height: 153px;
+  }
+}
+@media (prefers-reduced-motion: reduce) and (max-width: 759.98px) {
+  .ilio-btn {
+    height: 85px;
+  }
+}

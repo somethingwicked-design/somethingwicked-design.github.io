@@ -414,3 +414,62 @@
 
   C.mount('swc', CARDS);
 })();
+
+// ---------------------------------------------------------------------
+// Easter egg (058): Ilio under the footer. Hover, keyboard focus or tap:
+// she rises under the paper (0.35s), comes in front of it, wiggles and
+// says 'boo!' for 1.5s, then slides back under. Reduced motion: she's
+// already out (css/something-wicked.css); a click only says 'boo!'.
+// ---------------------------------------------------------------------
+(function () {
+  'use strict';
+
+  var foot = document.querySelector('.site-footer');
+  var cat = foot && foot.querySelector('.ilio');
+  if (!cat) return;
+  var btn = foot.querySelector('.ilio-btn');
+  var boo = foot.querySelector('.ilio-boo');
+  var trouble = foot.querySelector('.footer-title span:last-child');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var desktop = window.matchMedia('(min-width: 760px)');
+
+  // Desktop: 40px right of 'trouble.'
+  function place() {
+    if (!desktop.matches) return;
+    var x = trouble.getBoundingClientRect().right - foot.getBoundingClientRect().left + 40;
+    foot.style.setProperty('--ilio-x', Math.round(x) + 'px');
+  }
+  place();
+  window.addEventListener('resize', place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+
+  var busy = false;
+  function sayBoo() {
+    boo.classList.add('is-on');
+    setTimeout(function () { boo.classList.remove('is-on'); }, 1500);
+  }
+  function peek() {
+    if (busy) return;
+    busy = true;
+    if (reduce.matches) {
+      sayBoo();
+      setTimeout(function () { busy = false; }, 1500);
+      return;
+    }
+    cat.classList.add('is-up');
+    setTimeout(function () {
+      cat.classList.add('is-front', 'is-wiggle');
+      sayBoo();
+    }, 350);
+    setTimeout(function () { cat.classList.remove('is-front', 'is-wiggle', 'is-up'); }, 1850);
+    setTimeout(function () { busy = false; }, 2300);
+  }
+
+  btn.addEventListener('click', peek);
+  btn.addEventListener('pointerenter', function (e) {
+    if (e.pointerType === 'mouse' && !reduce.matches) peek();
+  });
+  btn.addEventListener('focus', function () {
+    if (!reduce.matches && btn.matches(':focus-visible')) peek();
+  });
+})();
