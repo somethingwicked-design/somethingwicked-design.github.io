@@ -126,7 +126,6 @@
 .nf-grain {
   position: absolute;
   inset: 0;
-  opacity: 0.4;
   background-image: var(--grain-tile);
   background-size: 256px 256px;
   pointer-events: none;

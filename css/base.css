@@ -20,10 +20,10 @@ html {
 }
 
 body {
-  position: relative; /* anchors the grain and the dev grid overlay */
+  position: relative; /* anchors the dev grid overlay */
   margin: 0;
   min-height: 100vh;
-  background: var(--ink);
+  background: var(--grain-tile) 0 0 / 256px 256px, var(--ink);
   color: var(--bone);
   font-family: var(--font-body);
   font-size: var(--fs-body);
@@ -131,24 +131,13 @@ a:hover {
 
 /* Page grain
    Same filter as the canvas (#pageGrain), drawn as a repeating tile so it
-   stays cheap on long pages. It lies on the page background only, under
-   all content: text, paper, photos and cards never get grain.
+   stays cheap on long pages. It is a background image on body, never an
+   overlay, so nothing can sit under it: text, paper, photos, videos and
+   cards never get grain, in any browser or stacking order (DESIGN.md).
    .grain gives an opaque ink panel (the case study that slides over Next
-   up) the same grain on its own background. */
+   up, Next up itself) the same grain on its own background. */
 .grain {
-  isolation: isolate;
-  background: var(--ink);
-}
-body::before,
-.grain::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: var(--z-grain);
-  pointer-events: none;
-  opacity: 0.4;
-  background-image: var(--grain-tile);
-  background-size: 256px 256px;
+  background: var(--grain-tile) 0 0 / 256px 256px, var(--ink);
 }
 
 /* Text selection: the accent with ink text (a case study's own accent);

@@ -33,22 +33,6 @@
   opacity: 0;
   pointer-events: none;
 }
-/* Hairline 48px above the bottom of the case study */
-.cs-hairline {
-  position: absolute;
-  bottom: var(--sp-48);
-  left: 50%;
-  width: min(100%, var(--page-max));
-  padding-inline: var(--margin);
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-.cs-hairline::before {
-  content: '';
-  display: block;
-  height: 1px;
-  background: rgba(242, 238, 230, 0.12);
-}
 .cs-spacer {
   display: none; /* only when the Next up slide runs (.next-live) */
   height: 1200px;
@@ -592,19 +576,12 @@
 
 /* --------------------------------------------------------------------------
    Phones (below 760px, 022/028/040): everything stacks; images run 8px
-   from the screen edge, text 16px; Next up scrolls in under a hairline
-   while the case study darkens (js/case.js).
+   from the screen edge, text 16px; Next up scrolls in straight under the
+   case while the case study darkens (js/case.js).
    -------------------------------------------------------------------------- */
 @media (max-width: 759.98px) {
   .cs-main {
-    padding-block: 0;
-  }
-  .cs-hairline {
-    position: static;
-    width: auto;
-    margin: var(--sp-48) 0 0;
-    padding-inline: 0;
-    transform: none;
+    padding-block: 0 var(--sp-48); /* no divider above Next up (054) */
   }
 
   .cs-flow {

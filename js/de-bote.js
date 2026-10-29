@@ -477,10 +477,12 @@
       var LABEL = ['Front page', '02-03', '04-05', '06-07'];
       card.innerHTML = hd('Newspaper', 'Seven pages, as spreads') +
         '<div class="dbc-book is-closed">' +
+          '<div class="dbc-shade"></div>' +
           '<div class="dbc-base">' + page(7) + '</div>' +
           PAIRS.map(function (p, k) {
             return '<div class="dbc-leaf" style="z-index:' + (10 - k) + '"><div class="dbc-face">' + page(p[0]) + '</div><div class="dbc-face is-back">' + page(p[1]) + '</div></div>';
           }).join('') +
+          '<div class="dbc-spine"></div>' +
         '</div>' +
         '<div class="dbc-count"><b></b><span>/ 07</span></div>' +
         '<div class="dbc-src">Edited and laid out in InDesign</div>';

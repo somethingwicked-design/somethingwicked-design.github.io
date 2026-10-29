@@ -504,8 +504,10 @@
   fill-rule: evenodd;
   stroke: var(--black);
   stroke-width: .4;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
+  /* 1.05, not 1: the browser's length estimate for pathLength="1" falls
+     short and left the end of the path (the lower-left paw) undrawn */
+  stroke-dasharray: 1.05;
+  stroke-dashoffset: 1.05;
   transition: stroke-dashoffset 1.4s cubic-bezier(.6, 0, .3, 1), fill .8s;
   transition-delay: var(--d);
 }
@@ -629,30 +631,40 @@
   transform: rotateY(-180deg);
 }
 .dbc-book.is-reset .dbc-leaf,
-.dbc-book.is-reset::before {
+.dbc-book.is-reset .dbc-shade {
   transition: none;
 }
 .dbc-base,
 .dbc-face {
   background: #FFFFFF;
 }
-/* The shadow sits on parts that never turn: the right-hand page underneath
-   and, once the paper is open, the left-hand side. On the turning faces
-   (backface hidden) it would blink out halfway through each turn. */
-.dbc-base,
-.dbc-book::before {
-  box-shadow: 0 1cqw 2.6cqw rgba(0, 0, 0, .2);
-}
-.dbc-book::before {
-  content: '';
+/* One shadow under the whole paper and one fixed gutter shade, so neither
+   flips sides when a leaf turns. The shade covers the right-hand page while
+   closed and the full spread once open. */
+.dbc-shade {
   position: absolute;
-  left: 0;
   top: 0;
-  width: 50%;
-  height: 100%;
-  transition: opacity .7s .7s;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0 1cqw 2.6cqw rgba(0, 0, 0, .2);
+  transition: left 1.2s cubic-bezier(.6, 0, .3, 1);
 }
-.dbc-book.is-closed::before {
+.dbc-book.is-closed .dbc-shade {
+  left: 50%;
+}
+.dbc-spine {
+  position: absolute;
+  left: 44%;
+  top: 0;
+  width: 12%;
+  height: 100%;
+  z-index: 40;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, .05) 38%, rgba(0, 0, 0, .14) 50%, rgba(0, 0, 0, .05) 62%, rgba(0, 0, 0, 0));
+  transition: opacity .6s .7s;
+}
+.dbc-book.is-closed .dbc-spine {
   opacity: 0;
   transition-delay: 0s;
 }
@@ -672,17 +684,6 @@
   height: 100%;
   max-width: none;
   object-fit: cover;
-}
-/* A soft shadow along the fold */
-.dbc-face::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, rgba(0, 0, 0, .12), rgba(0, 0, 0, 0) 8%);
-}
-.dbc-face.is-back::after {
-  background: linear-gradient(270deg, rgba(0, 0, 0, .12), rgba(0, 0, 0, 0) 8%);
 }
 .dbc-count {
   position: absolute;
