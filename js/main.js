@@ -114,6 +114,31 @@
   }
 
   // ---------------------------------------------------------------------
+  // Focus links (048, 066): '/?focus=branding' or '/?focus=uiux' shows
+  // only that work; '?focus=all' or an unknown value shows everything.
+  // To move a project, change its focus here: the order always follows
+  // the work order (057).
+  // ---------------------------------------------------------------------
+  var WORK_ORDER = ['op-jezelf', 'restock', 'health-potion', 'de-bote', 'something-wicked', 'kokoro'];
+  var FOCUS = {
+    branding: { label: 'Branding', inText: 'branding', slugs: ['health-potion', 'de-bote', 'something-wicked', 'kokoro'] },
+    uiux: { label: 'UI/UX', inText: 'UI/UX', slugs: ['op-jezelf', 'restock', 'something-wicked'] }
+  };
+  var focusParam = new URLSearchParams(window.location.search).get('focus');
+  var focusKey = Object.prototype.hasOwnProperty.call(FOCUS, focusParam) ? focusParam : null;
+  // The focus for this page: null, or its label and its projects in the
+  // work order
+  window.SWFocus = focusKey ? {
+    key: focusKey,
+    label: FOCUS[focusKey].label,
+    inText: FOCUS[focusKey].inText,
+    slugs: WORK_ORDER.filter(function (s) { return FOCUS[focusKey].slugs.indexOf(s) !== -1; })
+  } : null;
+  function clearFocus() {
+    window.SWFocus = null;
+  }
+
+  // ---------------------------------------------------------------------
   // Selected work (019, 036, 040)
   // ---------------------------------------------------------------------
   var work = document.getElementById('work');
@@ -142,6 +167,44 @@
       moreBtn.addEventListener('click', function () {
         showAll();
         moreCards[0].focus();
+      });
+    }
+
+    // Focus (048, 066): only the focus's projects, all at once, in the
+    // same big, small, small rhythm as the full list. The note above the
+    // work says so; 'Show everything' (a real link to '/?focus=all')
+    // brings the rest back in place and the note announces it.
+    var note = work.querySelector('.work-focus');
+    var sizes = [];
+    cards.forEach(function (card, i) {
+      sizes[i] = card.classList.contains('card--big') ? 'card--big' : 'card--small';
+    });
+    function size(card, cls) {
+      card.classList.remove('card--big', 'card--small');
+      card.classList.add(cls);
+    }
+    if (window.SWFocus && note) {
+      var shown = 0;
+      showAll();
+      cards.forEach(function (card) {
+        var on = window.SWFocus.slugs.indexOf(card.getAttribute('data-slug')) !== -1;
+        card.classList.toggle('is-out', !on);
+        if (on) size(card, shown++ % 3 === 0 ? 'card--big' : 'card--small');
+      });
+      work.classList.add('is-focus');
+      note.innerHTML = 'Showing ' + window.SWFocus.inText + ' work <span aria-hidden="true">·</span> <a href="/?focus=all">Show everything</a>';
+      note.querySelector('a').addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+        e.preventDefault();
+        clearFocus();
+        history.replaceState(null, '', '/?focus=all' + window.location.hash);
+        cards.forEach(function (card, i) {
+          card.classList.remove('is-out');
+          size(card, sizes[i]);
+        });
+        note.textContent = 'Showing all work';
+        note.tabIndex = -1;
+        note.focus();
       });
     }
 
